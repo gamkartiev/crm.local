@@ -1,0 +1,149 @@
+body{
+	font-size: 16px;
+}
+
+
+.bold{
+	font-weight: 700;
+}
+
+
+header{
+	width: 1080px;
+	margin: 40px auto;
+	margin-bottom: 0px;
+	background: #ccc;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+header ul{
+	display: flex;
+	flex-direction: row;
+}
+
+header ul li{
+	list-style: none;
+}
+
+header ul li a{
+	display: flex;
+	justify-content: flex-end;
+	padding: 15px 5px;
+	font-family: 'Times New Roman';
+	font-size: 18px;
+	text-decoration: none;
+}
+
+header ul li a:link{
+	color: #000;
+}
+
+header ul li a:hover{
+	box-shadow: 0 2px 0 black;
+}
+
+header ul li a:active{
+	color: #000;
+	box-shadow: 0 3px 0 #000;
+}
+
+header ul li a:visited{
+	color: #000;
+}
+
+
+
+main{
+	width: 90%;
+	height: 800px;
+	padding: 10px;
+	margin: 10px auto;
+	background: #ccc;
+}
+
+tr .firstRow{
+	padding: 10px 20px;
+}
+
+main th{
+	display: table-cell;
+	font-weight: 700;
+	padding: 0px 10px;
+}
+
+main td{
+	padding-top: 10px;
+	font-weight: 400;
+	/*width: 10%;*/
+	padding: 0px 10px;
+}
+
+/* .blackoutLayer{
+	width: 1000px;
+	height: 1000px;
+	background: rgba(0,0,0,0.4);
+	position: absolute;
+	left: -1000px;
+	z-index: 1;
+} */
+
+.form{
+	background: #000;
+	height: 100px;
+	width: 300px;
+	position:	absolute;
+	left: -300px;
+	/* z-index: 2; */
+}
+
+.left_panel{
+	width: 70%;
+	float: left;
+	padding: 10px;
+
+}
+
+/* Список машин, водителей, компаний*/
+.to_list{
+	/* width: 20%; */
+	min-width: 300px;
+	float: right;
+	display: flex;
+	flex-direction: column;
+}
+
+.to_list a{
+	text-decoration: none;
+	margin: 1px 0px;
+	padding: 5px;
+	background: rgba(255,255,255,0.4);
+}
+
+.to_list a:hover{
+	margin: 1px 0px 1px -10px;
+}
+
+.to_list a:link{
+	color: #000;
+}
+
+.to_list a:active{
+	color: #000;
+	background: #93a368;
+}
+
+.to_list a:visited{
+	color: #000;
+}
+
+
+/*Страница Оперативка*/
+.actual_car_id{
+	padding: 10px;
+	background: rgba(255,111,111,0.4);
+	width: 35%;
+	float: left;
+	margin: 5px;
+}
