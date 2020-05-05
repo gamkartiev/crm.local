@@ -27,11 +27,10 @@
 		<!-- <th> Логист </th> -->
 
 		<th> Груз</th>
-		<th> План. вес </th>
-		<th> План. цена </th>
 		<th> Объем </th>
 		<th> Вес</th>
-		<th> Ставка </th>
+		<th> Цена </th>
+		<th> Форма оплаты <th>
 
 		<th> Водитель</th>
 		<th> Машина </th>
@@ -53,11 +52,10 @@
 		<td> <?=$a['short_name']?> </td>
 
 		<td> <?=$a['freight']?> </td>
-		<td> <?=$a['planner_weight']?> </td>
-		<td> <?=$a['planner_cost']?></td>
 		<td> <?=$a['volume']?> </td>
 		<td> <?=$a['weight']?> </td>
 		<td> <?=$a['cost']?> </td>
+		<td> <?=$a['form_of_payment']?> </td>
 
 		<td> <?=$a['surname']?> </td>
 		<td> <?=$a['model_cars']?> </td>

@@ -38,15 +38,22 @@ class base extends dbConnect
 	}
 
 	public function getOneString($id) {
-
 		$sql = $this->sqlGetOneString($id);
-		$result = $this->connect()->query($sql);
 
+		$result = $this->connect()->query($sql);
 		$getOneString[] = $result->fetch_assoc();
 
 		return $getOneString;
 	}
 
+	public function createString($place_1) {
+
+		$sql = $this->sqlCreateString($place_1);
+
+		$result = $this->connect()->query($sql);
+
+		return $sql;
+	}
 }
 
 class cars extends base
@@ -97,7 +104,6 @@ class flights extends base
 	protected function sqlGetAllString() {
 		$sql = "SELECT 	`flights`.`id`,	`flights`.`date_1`, `flights`.`date_2`,
 										`flights`.`place_1`,	`flights`.`place_2`, `flights`.`freight`,
-										`flights`.`planner_weight`,	`flights`.`planner_cost`,
 										`flights`.`weight`,	`flights`.`cost`,	`flights`.`volume`,
 										`flights`.`proxy`,	`flights`.`request`,	`flights`.`note`,
 										`flights`.`id_customers`,	`flights`.`id_drivers`,	`drivers`.`id`,
@@ -113,24 +119,20 @@ class flights extends base
 										ORDER BY `flights`.`id` DESC";
 		return $sql;
 	}
+
+	protected function sqlCreateString($place_1) {
+
+		$sql = "INSERT INTO `flights`(`place_1`) VALUES ($place_1)";
+		return $sql;
+	}
 }
 
 
+// $sql = "INSERT INTO `flights`(`date_1`, `date_2`, `place_1`,
+// 										`place_2`, `freight`, `weight`, `cost`, `form_of_payment`, `volume`, `proxy`, `request`, `note`)
+// 	 						VALUES '$date_1', '$date_2', '$place_1', '$place_2', '$freight',
+// 										'$weight', '$cost', '$formOfPayment', '$volume', '$proxy', '$request', '$note'";
 
-//getCar()
-//getCustomer()
-// function getDriver(){
-// $query = "SELECT  drivers.id_drivers,
-// 									drivers.surname,
-// 									drivers.first_name,
-// 									drivers.patronymic,
-// 									drivers.date_of_birth,
-// 									drivers.place_of_birth,
-// 									drivers.passport,
-// 									drivers.registration,
-// 									drivers.drivers_license,
-// 									drivers.phone FROM drivers ORDER BY surname";
-// }
 
 // createFlight() {}
 // createDriver()
@@ -148,5 +150,3 @@ class flights extends base
 //deleteDriver()
 //deleteCar()
 //deleteCustomer()
-
-?>
