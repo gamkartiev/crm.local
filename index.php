@@ -18,7 +18,7 @@ $allFlights = $flights->getAllString();
 
 
 // ------------------------------- //
-$action = $_GET['action'] ?? $action = "";
+$action = $_GET['action'] ?? "";
 
 if ($action == 'addNewFlight') {
   //не работает добавление на mysqli!!!
@@ -53,8 +53,8 @@ if ($action == 'addNewFlight') {
 
 
 //если задан переход по странице(selectedPage), иначе selectedPage - пустое
-$selectedPage = $_GET['selectedPage'] ?? $selectedPage="";
-$id = $_GET['id'] ?? $id = 1; //убрать тут единицу и поставить функцию вывода последнего добавленного
+$selectedPage = $_GET['selectedPage'] ?? "";
+$id = $_GET['id'] ?? 1; //убрать тут единицу и поставить функцию вывода последнего добавленного
 
 //	------------------------ //
 if ($selectedPage == 'actual') {

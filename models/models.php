@@ -123,6 +123,7 @@ class flights extends base
 	protected function sqlCreateString($place_1) {
 
 		$sql = "INSERT INTO `flights`(`place_1`) VALUES ($place_1)";
+
 		return $sql;
 	}
 }
