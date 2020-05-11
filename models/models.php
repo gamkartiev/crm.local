@@ -16,8 +16,7 @@ class DbConnect
 
 		$connect = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
 		return $connect;
-		var_dump($connect);
-	}
+		}
 }
 
 class Base extends DbConnect
@@ -50,7 +49,7 @@ class Base extends DbConnect
 
 		$sql = $this->sqlCreateString($place_1);
 		$result = $this->connect()->query($sql);
-		return $sql;
+		return true;
 	}
 }
 

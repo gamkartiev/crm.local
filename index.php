@@ -21,7 +21,6 @@ $allFlights = $flights->getAllString();
 $action = $_GET['action'] ?? "";
 
 if ($action == 'addNewFlight') {
-  //не работает добавление на mysqli!!!
   if (!empty($_POST)) {
       $flights->createString($_POST['place_1']);
       header("Location: index.php");
