@@ -1,7 +1,7 @@
 <?php
 // include ("../db.php");
 
-class dbConnect
+class DbConnect
 {
 	private $serverName;
 	private $userName;
@@ -20,7 +20,7 @@ class dbConnect
 	}
 }
 
-class base extends dbConnect
+class Base extends DbConnect
 {
 	//вывод всего
 	public function getAllString() {
@@ -49,14 +49,12 @@ class base extends dbConnect
 	public function createString($place_1) {
 
 		$sql = $this->sqlCreateString($place_1);
-
 		$result = $this->connect()->query($sql);
-
 		return $sql;
 	}
 }
 
-class cars extends base
+class Cars extends Base
 {
 	protected function sqlGetAllString() {
 		$sql = "SELECT `id`, `state_sign_cars` FROM `cars` ORDER BY `state_sign_cars`";
@@ -70,7 +68,7 @@ class cars extends base
 }
 
 
-class drivers extends base
+class Drivers extends Base
 {
 	protected function sqlGetAllString() {
 		$sql = "SELECT  `id`, `surname`, `first_name`, `patronymic` FROM `drivers` ORDER BY `surname`";
@@ -85,7 +83,7 @@ class drivers extends base
 }
 
 
-class customers extends base
+class Customers extends Base
 {
 	protected function sqlGetAllString() {
 		$sql = "SELECT  `id`, `short_name` FROM `Customers` ORDER BY `short_name`";
@@ -99,7 +97,7 @@ class customers extends base
 }
 
 
-class flights extends base
+class Flights extends Base
 {
 	protected function sqlGetAllString() {
 		$sql = "SELECT 	`flights`.`id`,	`flights`.`date_1`, `flights`.`date_2`,
@@ -122,8 +120,7 @@ class flights extends base
 
 	protected function sqlCreateString($place_1) {
 
-		$sql = "INSERT INTO `flights`(`place_1`) VALUES ($place_1)";
-
+		$sql = "INSERT INTO `flights`(`place_1`) VALUES ('$place_1')";
 		return $sql;
 	}
 }

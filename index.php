@@ -4,16 +4,16 @@ include ("models/models.php");
 
 $link = db_connect();
 
-$cars = new cars();
+$cars = new Cars();
 $allCarsName = $cars->getAllString();
 
-$drivers = new drivers();
+$drivers = new Drivers();
 $allDriversName = $drivers->getAllString();
 
-$customers = new customers();
+$customers = new Customers();
 $allCustomers = $customers->getAllString();
 
-$flights = new flights();
+$flights = new Flights();
 $allFlights = $flights->getAllString();
 
 
@@ -23,11 +23,12 @@ $action = $_GET['action'] ?? "";
 if ($action == 'addNewFlight') {
   //не работает добавление на mysqli!!!
   if (!empty($_POST)) {
-  $flights->createString($_POST['place_1']);
-  header("Location: index.php");
+      $flights->createString($_POST['place_1']);
+      header("Location: index.php");
+  } else {
+      include("views/flightForm.php");
+      exit();
   }
-  include("views/flightForm.php");
-  exit();
 
 } elseif ($action == "edit") {
     if(!isset($_GET['id'])) {
@@ -45,10 +46,8 @@ if ($action == 'addNewFlight') {
     $id = $_GET['id'];
     deleteFlight($link, $id);
     header("Location: index.php");
-
-} else {
-    include("views/flights_all.php");
 }
+
 // ------------------------------------ //
 
 
@@ -59,6 +58,7 @@ $id = $_GET['id'] ?? 1; //убрать тут единицу и поставит
 //	------------------------ //
 if ($selectedPage == 'actual') {
     include ("views/actual.php");
+
 } elseif ($selectedPage == 'drivers') {
     $oneDriversName = $drivers->getOneString($id);
     include ("views/drivers.php");
@@ -67,7 +67,6 @@ if ($selectedPage == 'actual') {
     $oneCarsName = $cars->getOneString($id);
     include ("views/cars.php");
 
-
 } elseif ($selectedPage == 'customers') {
     $oneCustomersName = $customers->getOneString($id);
     include ("views/customers.php");
@@ -75,6 +74,7 @@ if ($selectedPage == 'actual') {
 } elseif ($selectedPage == 'financePlan') {
     include ('views/404.php');
     exit();
+
 } else {
     include ("views/flights_all.php");
 }
@@ -94,5 +94,3 @@ if ($selectedPage == 'actual') {
 // $proxy = $_POST['proxy'];
 // $request = $_POST['request'];
 // $note = $_POST['note'];
-
-?>
