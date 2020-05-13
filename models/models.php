@@ -119,7 +119,7 @@ class Flights extends Base
 
 	protected function sqlCreateString($place_1) {
 
-		$sql = "INSERT INTO `flights`(`place_1`) VALUES ('$place_1')";
+		$sql = "INSERT INTO `flights` (`place_1`) VALUES ('$place_1')";
 		return $sql;
 	}
 }
@@ -130,6 +130,20 @@ class Flights extends Base
 // 	 						VALUES '$date_1', '$date_2', '$place_1', '$place_2', '$freight',
 // 										'$weight', '$cost', '$formOfPayment', '$volume', '$proxy', '$request', '$note'";
 
+
+// public function createString($date_1, $date_2, $place_1, $place_2, $freight,
+// 					$weight, $cost, $formOfPayment, $volume, $proxy, $request, $note) {
+// 	$sql = $this->sqlCreateString($date_1, $date_2, $place_1, $place_2, $freight,
+// 						$weight, $cost, $formOfPayment, $volume, $proxy, $request, $note);
+// 	$result = $this->connect()->query($sql);
+// 	return true;
+// }
+
+// protected function sqlCreateString($date_1, $date_2, $place_1, $place_2, $freight,
+// 					$weight, $cost, $formOfPayment, $volume, $proxy, $request, $note) {
+// $sql = "INSERT INTO `flights`(`date_1`, `date_2`, `place_1`, `place_2`, `freight`,
+// 					`weight`, `cost`, `formOfPayment`, `volume`, `proxy`, `request`, `note`, `id_customers`, `id_drivers`, `id_cars`) VALUES ('$date_1', '$date_2', '$place_1', '$place_2', '$freight',
+// 					'$weight', '$cost', '$formOfPayment', '$volume', '$proxy', '$request', '$note', '1', '1', '1')";
 
 // createFlight() {}
 // createDriver()

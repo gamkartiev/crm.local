@@ -6,15 +6,15 @@
   </head>
   <body>
 
-<form class="" action="index.php" method="post" enctype="multipart/form-data">
+<form class="" action="/index.php?action=addNewFlight" method="post" enctype="multipart/form-data">
 
   <label for="place_1"> Откуда: </label>
     <input type="text" name="place_1" placeholder="откуда" id="place_1"> <br />
 
   <!-- <label for="place_2"> Куда: </label>
-    <input type="text" name="place_2" value="" id="place_2"> <br /> -->
+    <input type="text" name="place_2" value="" id="place_2"> <br />
 
-  <!-- <label for="date_1"> Дата загрузки: </label>
+  <label for="date_1"> Дата загрузки: </label>
     <input type="date" name="date_1" value="" id="date_1"> <br />
 
   <label for="date_2"> Дата выгрузки: </label>
@@ -39,16 +39,19 @@
     <input type="text" name="" value="" id=""> -->
 
   <!-- <label for=""> Компания: </label>
-    <input type="text" name="" value="" id=""> <br />
-
-  <label for=""> Логист: </label>
-    <input type="text" name="" value="" id=""> <br />
-
-  <label for=""> Заявка: </label>
-    <input type="text" name="" value="" id=""> <br />
-
-  <label for=""> Доверенность: </label>
     <input type="text" name="" value="" id=""> <br /> -->
+
+  <!-- <label for=""> Логист: </label>
+    <input type="text" name="" value="" id=""> <br /> -->
+
+  <!-- <label for=""> Доверенность: </label>
+    <input type="text" name="proxy" value="" id=""> <br />
+
+  <label for="request"> Заявка: </label>
+    <input type="text" name="request" value="" id=""> <br />
+
+  <label for=""> Примечание: </label>
+    <input type="text" name="note" value="" id=""> <br /> -->
 
   <button type="submit" name="button"> Добавить </button>
 

@@ -41,7 +41,7 @@
 		<th> Примечание</th>
 	</tr>
 	<?php
-	var_dump($a);
+
 	foreach($allFlights as $a): ?>
 	<tr class="row">
 		<td> <?=$a['date_1']?> </td>

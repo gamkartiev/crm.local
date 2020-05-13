@@ -22,8 +22,11 @@ $action = $_GET['action'] ?? "";
 
 if ($action == 'addNewFlight') {
   if (!empty($_POST)) {
+    $place_1 = $_POST['place_1'];
+
       $flights->createString($_POST['place_1']);
       header("Location: index.php");
+
   } else {
       include("views/flightForm.php");
       exit();
@@ -93,3 +96,6 @@ if ($selectedPage == 'actual') {
 // $proxy = $_POST['proxy'];
 // $request = $_POST['request'];
 // $note = $_POST['note'];
+// $flights->createString($date_1, $date_2, $place_1, $place_2, $freight,
+//         $weight, $cost, $formOfPayment, $volume, $proxy, $request, $note);
+// header("Location: index.php");
