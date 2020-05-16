@@ -2,8 +2,6 @@
 include ("db.php");
 include ("models/models.php");
 
-$link = db_connect();
-
 $cars = new Cars();
 $allCarsName = $cars->getAllString();
 
@@ -23,8 +21,15 @@ $action = $_GET['action'] ?? "";
 if ($action == 'addNewFlight') {
   if (!empty($_POST)) {
     $place_1 = $_POST['place_1'];
-
-      $flights->createString($_POST['place_1']);
+    $place_2 = $_POST['place_2'];
+    $date_1 = $_POST['date_1'];
+    $date_2 = $_POST['date_2'];
+    $freight = $_POST['freight'];
+    $weight = $_POST['weight'];
+    $volume = $_POST['volume'];
+    $cost = $_POST['cost'];
+  // var_dump($action );
+      $flights->createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost);
       header("Location: index.php");
 
   } else {
@@ -38,10 +43,10 @@ if ($action == 'addNewFlight') {
     }
     $id = (int)$_GET['id'];
     if (!empty($_POST) && $id > 0) {
-      editflight($link, $id, $_POST['']);
+      editflight($id, $_POST['']);
       header("Location: index.php");
     }
-    $flight = getFlight($link, $id);  //Зачем этот пункт?
+    $flight = getFlight($id);
     include("/views/flightForm.php");
 
 } elseif ($action == "delete") {

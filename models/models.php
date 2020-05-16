@@ -45,9 +45,9 @@ class Base extends DbConnect
 		return $getOneString;
 	}
 
-	public function createString($place_1) {
+	public function createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost) {
 
-		$sql = $this->sqlCreateString($place_1);
+		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost);
 		$result = $this->connect()->query($sql);
 		return true;
 	}
@@ -99,27 +99,16 @@ class Customers extends Base
 class Flights extends Base
 {
 	protected function sqlGetAllString() {
-		$sql = "SELECT 	`flights`.`id`,	`flights`.`date_1`, `flights`.`date_2`,
-										`flights`.`place_1`,	`flights`.`place_2`, `flights`.`freight`,
-										`flights`.`weight`,	`flights`.`cost`,	`flights`.`volume`,
-										`flights`.`proxy`,	`flights`.`request`,	`flights`.`note`,
-										`flights`.`id_customers`,	`flights`.`id_drivers`,	`drivers`.`id`,
-										`drivers`.`surname`, `cars`.`model_cars`, `cars`.`attached_trailer`,
-										`Customers`.`id`,	`Customers`.`short_name`
-										FROM `flights`
-											INNER JOIN `Customers`
-												ON `flights`.`id_customers` = `Customers`.`id`
-											INNER JOIN `drivers`
-												ON `flights`.`id_drivers` = `drivers`.`id`
-											INNER JOIN `cars`
-												ON `flights`.`id_cars` = `cars`.`id`
-										ORDER BY `flights`.`id` DESC";
+		$sql = "SELECT 	`id`,	`date_1`, `date_2`,	`place_1`,	`place_2`, `freight`,
+										`weight`,	`cost`,	`volume` FROM `flights`
+										ORDER BY `id` DESC";
 		return $sql;
 	}
 
-	protected function sqlCreateString($place_1) {
+	protected function sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost) {
 
-		$sql = "INSERT INTO `flights` (`place_1`) VALUES ('$place_1')";
+		$sql = "INSERT INTO `flights` (`place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`)
+							VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost')";
 		return $sql;
 	}
 }

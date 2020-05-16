@@ -6,12 +6,12 @@
   </head>
   <body>
 
-<form class="" action="/index.php?action=addNewFlight" method="post" enctype="multipart/form-data">
-
+<form action="/index.php?action=addNewFlight" method="post">
+<input type="hidden" name="action" value="addNewFlight">
   <label for="place_1"> Откуда: </label>
     <input type="text" name="place_1" placeholder="откуда" id="place_1"> <br />
 
-  <!-- <label for="place_2"> Куда: </label>
+  <label for="place_2"> Куда: </label>
     <input type="text" name="place_2" value="" id="place_2"> <br />
 
   <label for="date_1"> Дата загрузки: </label>
@@ -32,7 +32,7 @@
   <label for="cost"> Сумма: </label>
     <input type="text" name="cost" value="" id="cost"> <br />
 
-  <label for="formOfPayment"> Форма оплаты: </label>
+  <!-- <label for="formOfPayment"> Форма оплаты: </label>
     <input type="text" name="formOfPayment" value="" id="formOfPayment"> <br /> -->
 
   <!-- <label for=""> Условия оплаты </label>
