@@ -3,10 +3,20 @@
 
 class DbConnect
 {
+	private $connection;
 	private $serverName;
 	private $userName;
 	private $password;
 	private $dbName;
+
+	protected function getConnection() {
+		if($this->connection !==null) {
+			return $this->connection;
+		}
+
+		$this->connection = $this->connect();
+		return $this->connection;
+	}
 
 	protected function connect() {
 		$this->serverName = 'localhost';
@@ -24,7 +34,7 @@ class Base extends DbConnect
 	//вывод всего
 	public function getAllString() {
 		$sql = $this->sqlGetAllString();
-		$result = $this->connect()->query($sql);
+		$result = $this->getConnection()->query($sql);
 
 		$numRows = $result->num_rows;
 		$string = array();
@@ -39,7 +49,7 @@ class Base extends DbConnect
 	public function getOneString($id) {
 		$sql = $this->sqlGetOneString($id);
 
-		$result = $this->connect()->query($sql);
+		$result = $this->getConnection()->query($sql);
 		$getOneString[] = $result->fetch_assoc();
 
 		return $getOneString;
@@ -48,7 +58,7 @@ class Base extends DbConnect
 	public function createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost) {
 
 		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost);
-		$result = $this->connect()->query($sql);
+		$result = $this->getConnection()->query($sql);
 		return true;
 	}
 }

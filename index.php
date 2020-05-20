@@ -1,5 +1,4 @@
 <?php
-include ("db.php");
 include ("models/models.php");
 
 $cars = new Cars();
