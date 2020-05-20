@@ -27,7 +27,6 @@ if ($action == 'addNewFlight') {
     $weight = $_POST['weight'];
     $volume = $_POST['volume'];
     $cost = $_POST['cost'];
-  // var_dump($action );
       $flights->createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost);
       header("Location: index.php");
 
@@ -85,21 +84,3 @@ if ($selectedPage == 'actual') {
     include ("views/flights_all.php");
 }
 // ------------------------------- //
-
-
-
-// $date_1 = $_POST['date_1'];
-// $date_2 = $_POST['date_2'];
-// $place_1 = $_POST['place_1'];
-// $place_2 = $_POST['place_2'];
-// $freight = $_POST['freight'];
-// $weight = $_POST['weight'];
-// $cost = $_POST['cost'];
-// $formOfPayment = $_POST['formOfPayment'];
-// $volume = $_POST['volume'];
-// $proxy = $_POST['proxy'];
-// $request = $_POST['request'];
-// $note = $_POST['note'];
-// $flights->createString($date_1, $date_2, $place_1, $place_2, $freight,
-//         $weight, $cost, $formOfPayment, $volume, $proxy, $request, $note);
-// header("Location: index.php");
