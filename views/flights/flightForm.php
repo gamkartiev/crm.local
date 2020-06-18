@@ -6,7 +6,7 @@
   </head>
   <body>
 
-<form action="/add" method="post">
+<form action="/flights/add" method="post">
   <input type="hidden" name="action" value="addNewFlight">
   <label for="place_1"> Откуда: </label>
     <input type="text" name="place_1" placeholder="откуда" id="place_1"> <br />

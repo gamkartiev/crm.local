@@ -59,6 +59,11 @@ class Base extends DbConnect
 
 		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost);
 		$result = $this->getConnection()->query($sql);
+		if(!$result){
+			echo "Ошибка: ".mysqli_errno($result);
+		}
+		var_dump($result);
+
 		return true;
 	}
 }
@@ -117,8 +122,8 @@ class Flights extends Base
 
 	protected function sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost) {
 
-		$sql = "INSERT INTO `flights` (`place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`)
-							VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost')";
+		$sql = "INSERT INTO flights (place_1, place_2, date_1, date_2, freight, weight, volume, cost, id_customers, id_drivers, id_cars)
+							VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost', '1', '1', '1')";
 		return $sql;
 	}
 }
