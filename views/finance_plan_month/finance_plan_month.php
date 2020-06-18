@@ -9,7 +9,7 @@
 
 
 <header> <!-- Сделать отдельной страничкой -->
-  <?php include ("header.php"); ?>
+  <?php include ("views/header.php"); ?>
 </header>
 
 <main>

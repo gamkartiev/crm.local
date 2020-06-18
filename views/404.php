@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <title>404 - Страница не найдена</title>
-  <link rel="stylesheet" href="views/css/404.css">
-  <link rel="stylesheet" href="views/css/main.css">
+  <link rel="stylesheet" href="/views/css/404.css">
+  <link rel="stylesheet" href="/views/css/main.css">
 </head>
 <body>
 <header>
-  <?php include "header.php"?>
+  <?php require("views/header.php"); ?>
 </header>
 
 </body>
