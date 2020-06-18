@@ -20,12 +20,6 @@ class Route
       //Добавляем префиксы, а также первая буква контролера в верхнем регистре.
       $controller_name = ucfirst($controller_name).'Controller';
 
-      //Подключаем файл с классом модели
-      // require("models/models.php");
-
-      //Подключаем файл с классом контролера
-      // require("controllers/controllers.php");
-
       //Создаем контролер
       $controller = new $controller_name;
       $action = $action_name;

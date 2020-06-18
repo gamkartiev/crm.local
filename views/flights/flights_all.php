@@ -14,7 +14,7 @@
 
 <main>
 
-<a href="index.php?action=addNewFlight"> Добавить новую статью </a>
+<a href="/flights/add"> Добавить новую статью </a>
 
 <table>
 	<tr class="firstRow">

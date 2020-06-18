@@ -6,8 +6,8 @@
   </head>
   <body>
 
-<form action="/index.php?action=addNewFlight" method="post">
-<input type="hidden" name="action" value="addNewFlight">
+<form action="/add" method="post">
+  <input type="hidden" name="action" value="addNewFlight">
   <label for="place_1"> Откуда: </label>
     <input type="text" name="place_1" placeholder="откуда" id="place_1"> <br />
 
@@ -52,8 +52,7 @@
 
   <label for=""> Примечание: </label>
     <input type="text" name="note" value="" id=""> <br /> -->
-
-  <button type="submit" name="button"> Добавить </button>
+<button type="submit" name="button"> Добавить </button>
 
 </form>
 

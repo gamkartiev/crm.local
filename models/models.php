@@ -21,7 +21,7 @@ class DbConnect
 	protected function connect() {
 		$this->serverName = 'localhost';
 		$this->userName = 'root';
-		$this->password = '';
+		$this->password = 'root';
 		$this->dbName = 'crmTransport';
 
 		$connect = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
