@@ -21,25 +21,21 @@ class Route
       if(!empty($routes[3])){
         $id = $routes[3];
       }else{
-        $id = "1"; /*тут поменять на автомат. выбор по первой букве алфавита*/ 
+        $id = "1"; /*тут поменять на автомат. выбор по первой букве алфавита*/
       }
 
-      //Добавляем префиксы
-      //первая буква контроллера в верхнем регистре - рекомендация PSR
-      $model_name = $controller_name.'models';
-      $controller_name = ucfirst($controller_name).'Controller';
-
       //Подключаем файл с моделями
-      $model_file = $model_name.'php';
+      $model_file = $controller_name.'models.php';
       $model_path = "models/".$model_file;
       if(file_exists($model_path)){
         include "models/".$model_file;
        }
-      //  если включаю этот код, то ErrorPage404() открывается сам. Почему?
-      // else {
-      //   $error = "Не найден файл с моделями ".$model_file;
-      //   Route::ErrorPage404();
-      // }
+
+
+      //Добавляем префиксы
+      //первая буква контроллера в верхнем регистре - рекомендация PSR
+      $controller_name = ucfirst($controller_name).'Controller';
+
 
       //Подключаем файл с классом контроллера
       $controller_file = strtolower($controller_name).'.php';
