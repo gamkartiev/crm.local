@@ -1,5 +1,4 @@
 <?php
-
 /* ------------------- */
 class ActualController extends Controller
 {

@@ -14,7 +14,7 @@
 <main>
 <section class="to_list">
 	<?php foreach($allCustomers as $a): ?>
-		  <a href="index.php?selectedPage=customers&id=<?=$a['id']?>"> <?php echo $a['short_name']; ?> </a>
+		<a href="/customers/view/<?=$a['id']?>"> <?php echo $a['short_name']; ?> </a>
 	<?php endforeach ?>
 </section>
 

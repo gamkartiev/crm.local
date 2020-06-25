@@ -17,17 +17,35 @@ class Route
         $action_name = $routes[2];
       }
 
+      //Получаем, если есть $id
+      if(!empty($routes[3])){
+        $id = $routes[3];
+      }
+
       //Добавляем префиксы, а также первая буква контроллера в верхнем регистре.
+      $model_name = $controller_name.'models';
       $controller_name = ucfirst($controller_name).'Controller';
+
+      //Подключаем файл с моделями
+      $model_file = $model_name.'php';
+      $model_path = "models/".$model_file;
+      if(file_exists($model_path)){
+        include "models/".$model_file;
+       }
+      //   else {
+      //   $error = "Не найден файл с моделями ".$model_file;
+      //   Route::ErrorPage404();
+      // }
 
       //Подключаем файл с классом контроллера
       $controller_file = strtolower($controller_name).'.php';
       $controller_path = "controllers/".$controller_file;
       if(file_exists($controller_path)) {
         include "controllers/".$controller_file;
-      } else {
+       } else {
         /*Сюда нужно кинуть исключение, но пока оставляем так - упрощение */
-        Route::ErrorPage404();
+          $error = "Не найден файл с контроллером ".$controller_file;
+          Route::ErrorPage404();
       }
 
       //Создаем контролер
@@ -37,17 +55,19 @@ class Route
 
       //вызываем действие контроллера(метод)
       if(method_exists($controller, $action)) {
-        $controller->$action();
+        $controller->$action($id);
       } else {
         //
+        $error = "Нет метода контроллера ".$controller;
         Route::ErrorPage404();
       }
   }
 
-  function ErrorPage404() {
+  static function ErrorPage404() {
       $routes = explode('/', $_SERVER['REQUEST_URI']);
-      var_dump($routes[1]);
-      var_dump($routes[2]);
+        var_dump($routes[1]);
+        var_dump($routes[2]);
+      echo $error;
     // $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
     // header('HTTP/1.1 404 Not Found');
     //       header("Status: 404 Not Found");

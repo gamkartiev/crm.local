@@ -15,7 +15,7 @@
 <section class="to_list">
 	<?php
 	foreach($allCarsName as $a): ?>
-		  <a href="index.php?selectedPage=cars&id=<?=$a['id']?>"> <?php echo $a['state_sign_cars']; ?> </a>
+			<a href="/cars/view/<?=$a['id']?>"> <?php echo $a['state_sign_cars']; ?> </a>
 	<?php endforeach ?>
 
 </section>

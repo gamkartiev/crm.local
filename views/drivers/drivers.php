@@ -16,7 +16,7 @@
 
 <section class="to_list">
 	 <?php foreach($allDriversName as $a): ?>
-	   	 <a href="index.php?selectedPage=drivers&id=<?=$a['id']?>"> <?php echo $a['surname'].' '.$a['first_name'].' '.$a['patronymic']; ?> </a>
+		 <a href="/drivers/view/<?=$a['id']?>"> <?php echo $a['surname'].' '.$a['first_name'].' '.$a['patronymic']; ?> </a>
 	 <?php endforeach ?>
 </section>
 

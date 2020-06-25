@@ -3,8 +3,9 @@
 class Controller
 {
 
+//метод, который должен загружать файл из views
 public function refender() {}
-  //метод, который загружает файл из views
+
 
 
 }
