@@ -79,63 +79,16 @@ class Base extends DbConnect
 	}
 }
 
-class Cars extends Base
-{
-	protected function sqlGetAllString() {
-		$sql = "SELECT `id`, `state_sign_cars` FROM `cars` ORDER BY `state_sign_cars`";
-		return $sql;
-	}
-
-	protected function sqlGetOneString($id) {
-		$sql = "SELECT * FROM `cars` WHERE `id`=".(int)$id;
-		return $sql;
-	}
-}
 
 
-class Drivers extends Base
-{
-	protected function sqlGetAllString() {
-		$sql = "SELECT  `id`, `surname`, `first_name`, `patronymic` FROM `drivers` ORDER BY `surname`";
-		return $sql;
-	}
-
-	protected function sqlGetOneString($id) {
-		$sql = "SELECT * FROM `drivers` WHERE `id`=".(int)$id;
-		return $sql;
-	}
-
-}
 
 
-class Customers extends Base
-{
-	protected function sqlGetAllString() {
-		$sql = "SELECT  `id`, `short_name` FROM `Customers` ORDER BY `short_name`";
-		return $sql;
-	}
-
-	protected function sqlGetOneString($id) {
-		$sql = "SELECT * FROM `Customers` WHERE `id`=".(int)$id;
-		return $sql;
-	}
-}
 
 
-class Flights extends Base
-{
-	protected function sqlGetAllString() {
-		$sql = "SELECT 	* FROM `flights` ORDER BY `id` DESC";
-		return $sql;
-	}
 
-	protected function sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note) {
 
-		$sql = "INSERT INTO `flights`(`place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`, `form_of_payment`, `proxy`, `request`, `note`, `id_customers`, `id_drivers`, `id_cars`)
-												VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost', '$form_of_payment', '$proxy', '$request',	 '$note', '1', '1', '1')";
-		return $sql;
-	}
-}
+
+
 
 
 
