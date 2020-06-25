@@ -9,7 +9,7 @@ class DriversController extends Controller
     $drivers = new Drivers();
     $allDriversName = $drivers->getAllString();
     $oneDriversName = $drivers->getOneString($id);
-  
-    include("views/drivers/drivers.php");
+
+    include("views/drivers/drivers.php"); 
   }
 }
