@@ -55,7 +55,7 @@
 		<td> <?=$a['volume']?> </td>
 		<td> <?=$a['weight']?> </td>
 		<td> <?=$a['cost']?> </td>
-		<td> <?=$a['form_of_payment']?> </td>
+		<td> <?=$a['form_of_p	ayment']?> </td>
 
 		<td> <?=$a['surname']?> </td>
 		<td> <?=$a['model_cars']?> </td>

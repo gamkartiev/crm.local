@@ -7,7 +7,7 @@
   <body>
 
 <form action="/flights/add" method="post">
-  <input type="hidden" name="action" value="addNewFlight">
+  <input type="hidden" name="action" value="addNewFlight"> <!--Этот пункт можно убрать -->
   <label for="place_1"> Откуда: </label>
     <input type="text" name="place_1" placeholder="откуда" id="place_1"> <br />
 
@@ -32,8 +32,8 @@
   <label for="cost"> Сумма: </label>
     <input type="text" name="cost" value="" id="cost"> <br />
 
-  <!-- <label for="formOfPayment"> Форма оплаты: </label>
-    <input type="text" name="formOfPayment" value="" id="formOfPayment"> <br /> -->
+  <label for="formOfPayment"> Форма оплаты: </label>
+    <input type="text" name="form_of_payment" value="с НДС" id="formOfPayment"> <br />
 
   <!-- <label for=""> Условия оплаты </label>
     <input type="text" name="" value="" id=""> -->
@@ -44,14 +44,15 @@
   <!-- <label for=""> Логист: </label>
     <input type="text" name="" value="" id=""> <br /> -->
 
-  <!-- <label for=""> Доверенность: </label>
-    <input type="text" name="proxy" value="" id=""> <br />
+  <label for=""> Доверенность: </label>
+    <input type="text" name="proxy" value="Тестовая запись" id="proxy"> <br />
 
   <label for="request"> Заявка: </label>
-    <input type="text" name="request" value="" id=""> <br />
+    <input type="text" name="request" value="222" id="request"> <br />
 
   <label for=""> Примечание: </label>
-    <input type="text" name="note" value="" id=""> <br /> -->
+    <input type="text" name="note" value="Тестовое примечанеи" id="note"> <br />
+
 <button type="submit" name="button"> Добавить </button>
 
 </form>

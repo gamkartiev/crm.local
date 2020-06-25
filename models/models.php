@@ -55,14 +55,25 @@ class Base extends DbConnect
 		return $getOneString;
 	}
 
-	public function createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost) {
+	public function createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note) {
+		$mysqli = $this->getConnection();
 
-		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost);
-		$result = $this->getConnection()->query($sql);
-		if(!$result){
-			echo "Ошибка: ".mysqli_errno($result);
+		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
+		$mysqli->query($sql);
+
+		/*проверяем соединение*/
+		if($mysqli->connect_errno) {
+			printf("Соединение не удалось: %s\n",$mysqli->connect_error);
+			exit();
 		}
-		var_dump($result);
+
+		if (!$mysqli->query($sql)) {
+    	printf("Сообщение ошибки: %s\n", $mysqli->error);
+			printf("Номер ошибки: %s\n", $mysqli->errno);
+		}
+
+		/* Закрыть соединение */
+		$mysqli->close();
 
 		return true;
 	}
@@ -114,16 +125,14 @@ class Customers extends Base
 class Flights extends Base
 {
 	protected function sqlGetAllString() {
-		$sql = "SELECT 	`id`,	`date_1`, `date_2`,	`place_1`,	`place_2`, `freight`,
-										`weight`,	`cost`,	`volume` FROM `flights`
-										ORDER BY `id` DESC";
+		$sql = "SELECT 	* FROM `flights` ORDER BY `id` DESC";
 		return $sql;
 	}
 
-	protected function sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost) {
+	protected function sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note) {
 
-		$sql = "INSERT INTO flights (place_1, place_2, date_1, date_2, freight, weight, volume, cost, id_customers, id_drivers, id_cars)
-							VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost', '1', '1', '1')";
+		$sql = "INSERT INTO `flights`(`place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`, `form_of_payment`, `proxy`, `request`, `note`, `id_customers`, `id_drivers`, `id_cars`)
+												VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost', '$form_of_payment', '$proxy', '$request',	 '$note', '1', '1', '1')";
 		return $sql;
 	}
 }

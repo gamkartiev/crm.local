@@ -3,8 +3,8 @@ class Route
 {
   static function start() {
       //Контроллер и действие по умолчанию
-      $controller_name = 'flights'; //controller по умолчанию
-      $action_name = 'view';  //action по умолчанию
+      $controller_name = 'flights';
+      $action_name = 'view';
       $routes = explode('/', $_SERVER['REQUEST_URI']); //смотрим на путь
 
       //получаем имя контролера
@@ -17,15 +17,25 @@ class Route
         $action_name = $routes[2];
       }
 
-      //Добавляем префиксы, а также первая буква контролера в верхнем регистре.
+      //Добавляем префиксы, а также первая буква контроллера в верхнем регистре.
       $controller_name = ucfirst($controller_name).'Controller';
+
+      //Подключаем файл с классом контроллера
+      $controller_file = strtolower($controller_name).'.php';
+      $controller_path = "controllers/".$controller_file;
+      if(file_exists($controller_path)) {
+        include "controllers/".$controller_file;
+      } else {
+        /*Сюда нужно кинуть исключение, но пока оставляем так - упрощение */
+        Route::ErrorPage404();
+      }
 
       //Создаем контролер
       $controller = new $controller_name;
       $action = $action_name;
 
 
-      //вызываем действие контролера(метод)
+      //вызываем действие контроллера(метод)
       if(method_exists($controller, $action)) {
         $controller->$action();
       } else {
