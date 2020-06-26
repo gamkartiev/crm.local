@@ -32,8 +32,7 @@ class Route
        }
 
 
-      //Добавляем префиксы
-      //первая буква контроллера в верхнем регистре - рекомендация PSR
+      //Добавляем префиксы и первая буква контроллера в верхнем регистре - рекомендация PSR
       $controller_name = ucfirst($controller_name).'Controller';
 
 
@@ -42,23 +41,23 @@ class Route
       $controller_path = "controllers/".$controller_file;
       if(file_exists($controller_path)) {
         include "controllers/".$controller_file;
-       } else {
-        /*Сюда нужно кинуть исключение, но пока оставляем так - упрощение */
-          $error = "Не найден файл с контроллером ".$controller_file;
-          Route::ErrorPage404();
-      }
+       }
+      //  else {
+      //   /*Сюда нужно кинуть исключение, но пока оставляем так - упрощение */
+      //     $error = "Не найден файл с контроллером ".$controller_file;
+      //     Route::ErrorPage404();
+      // }
 
       //Создаем контролер
       $controller = new $controller_name;
       $action = $action_name;
-
 
       //вызываем действие контроллера(метод)
       if(method_exists($controller, $action)) {
         $controller->$action($id);
       } else {
         //
-        $error = "Нет метода контроллера ".$controller;
+        // $error = "Нет метода контроллера ".$controller_name;
         Route::ErrorPage404();
       }
   }
@@ -67,7 +66,7 @@ class Route
       $routes = explode('/', $_SERVER['REQUEST_URI']);
         var_dump($routes[1]);
         var_dump($routes[2]);
-      echo $error;
+      // echo $error;
     // $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
     // header('HTTP/1.1 404 Not Found');
     //       header("Status: 404 Not Found");

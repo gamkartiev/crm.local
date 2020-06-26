@@ -12,4 +12,22 @@ class DriversController extends Controller
 
     include("views/drivers/drivers.php");
   }
+
+  public function add() {
+      if (!empty($_POST)) {
+        $drivers = new Drivers();
+
+        $surname = $_POST['surname'];
+        $first_name = $_POST['first_name'];
+        $patronymic = $_POST['patronymic'];
+
+        $drivers->createString();
+
+        header("Location: /");
+      } else {
+          include("views/drivers/driversForm.php");
+      }
+    }
+
+public function edit() {}
 }

@@ -12,6 +12,9 @@
 </header>
 
 <main>
+
+<a href="/cars/add"> Добавить новую машину </a>
+
 <section class="to_list">
 	<?php
 	foreach($allCarsName as $a): ?>

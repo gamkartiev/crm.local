@@ -25,13 +25,13 @@ class FlightsController extends Controller
           $proxy = $_POST['proxy'];
           $request = $_POST['request'];
           $note = $_POST['note'];
-            $flights->createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
 
-          header("Location: /flights");
+          $flights->createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
+
+          header("Location: /");
           exit();
         } else {
-            include("views/flights/flightForm.php");
-            exit();
+            include("views/flights/flightsForm.php");
         }
       }
 
