@@ -67,16 +67,32 @@ class Base extends DbConnect
 			exit();
 		}
 
-		if (!$mysqli->query($sql)) {
-    	printf("Сообщение ошибки: %s\n", $mysqli->error);
-			printf("Номер ошибки: %s\n", $mysqli->errno);
-		}
+		// if (!$mysqli->query($sql)) {
+    // 	printf("Сообщение ошибки: %s\n", $mysqli->error);
+		// 	printf("Номер ошибки: %s\n", $mysqli->errno);
+		// }
 
 		/* Закрыть соединение */
 		$mysqli->close();
 
 		return true;
 	}
+
+	public function editString($id) {
+		$mysqli = $this->getConnection();
+
+		$sql = $this->sqlEditString();
+		$mysqli->query($sql);
+
+		// $mysqi->close();
+
+		return $mysqli->affected_rows;
+	}
+
+
+	public function delete($id) {}
+
+
 }
 
 
