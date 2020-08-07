@@ -51,7 +51,7 @@
     <input type="text" name="request" value="222" id="request"> <br />
 
   <label for=""> Примечание: </label>
-    <input type="text" name="note" value="Тестовое примечанеи" id="note"> <br />
+    <input type="text" name="note" value="Тестовое примечание" id="note"> <br />
 
 <button type="submit" name="button"> Добавить </button>
 
