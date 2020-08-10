@@ -4,7 +4,7 @@ class FlightsController extends Controller
 {
     public function view() {
       $flights = new Flights();
-      $allFlights = $flights->getAllString();
+      $allFlights = $flights->sqlGetAllString();
 
       require("views/flights/flights_all.php");
   }

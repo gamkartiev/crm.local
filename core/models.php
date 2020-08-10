@@ -1,10 +1,10 @@
 <?php
-class DataBase
+class Base
 {
-private db_host ="";
-private db_user ="";
-private db_pass ="";
-private db_name ="";
+private $db_host ="localhost";
+private $db_user ="root";
+private $db_pass ="root";
+private $db_name ="crmTransport";
 
 	/*
 	*	Содиеняемся с бд. Разрешено только одно соединение
@@ -45,14 +45,14 @@ private db_name ="";
 		}
 	}
 
-	private $result = array(); //нужно ли
+	public $result = array(); //нужно ли
 
 	/*
 	* Проверяет наличие таблицы при выполнении запроса
 	*
 	*/
 	private function tableExists($table) {
-		$tablesInDb = mysqli_query('SHOW TABLES FROM '.$this->db_name.' LIKE "'.$table.'"');
+		$tablesInDb = mysqli_query('SHOW TABLES FROM '.$this->db_name.' LIKE '.$table.'');
 		if($tableInDb) {
 			if(mysqli_num_rows($tableInDb)==1) {
 				return true; // если таблица существует, то вернет true
@@ -77,6 +77,7 @@ private db_name ="";
 			$q .= ' ORDER BY '.$order;
 		if($this->tableExists($table)) {
 			$query = mysqli_query($q);
+
 			if($query) {
 				$this->numResults = mysqli_num_rows($query);
 				for($i = 0; $i < $this->numResults; $i++) {
@@ -96,11 +97,12 @@ private db_name ="";
 				}
 				return true; // если запрос $query был выполнен
 			}	else {
-					return false; // если запрос $query не был выполнен
+					return print_r('запрос $query был выполненэ'); // если запрос $query не был выполнен
 				}
 		} else {	// если такая таблица не существует
-				return false;
+				return print_r("такая таблица не сущ");
 			}
+
 	}
 
 	/*
@@ -112,133 +114,89 @@ private db_name ="";
 	*										строкой, например, 'title,meta,date')
 	*
 	*/
-	public function insert($table, $values, $rows = null) {}
-	public function update() {}
-	public function delete() {}
+	public function insert($table, $values, $rows = null) {
+		if($this->tableExists($table)) {
+			$insert = 'INSERT INTO '.$table;
+			if($rows != null) {
+				$insert .=' ('.$rows.')';
+			}
+			for($i=0; $i < count($values); $i++) {
+				if(is_string($values[$i]))
+					$values[$i] = '"'.$values[$i].'"';
+			}
+			$values = implode(',', $values);
+			$insert .= ' VALUES ('.$values.')';
+			$ins = mysqli_query($insert);
+			if($ins) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+
+	public function update($table, $rows, $where, $condition) {
+		if($this->tableExists($table)) {
+			//Parse the where VALUES/Parse the where values
+			// even values (including 0) contain the where rows/even values (including 0) contain the where rows
+			// odd values contain the clauses for the row/нечетные значения содержат предложения для строки
+			for($i=0; $i < count($where); $i++) {
+				if($i%2 != 0) {
+					if(is_string($where[$i])) {
+						if(($i+1) != null)
+								$where[$i] = '"'.$where[$i].'"AND';
+						else
+								$where[$i] = '"'.$where[$i].'"';
+					}
+				}
+			}
+			$where = implode($condition, $where);
+			$update = 'UPDATE '.$table.' SET ';
+			$keys = array_keys($rows);
+			for($i=0; $i < count($rows); $i++) {
+				if(is_string($rows[$keys[$i]])) {
+					$update .= $keys[$i].'="'.$rows[$keys[$i]].'"';
+				} else {
+					$update .= $keys[$i].'='.$rows[$keys[$i]];
+				}
+				//Parse to add commas / Разобрать, чтобы добавить запятые
+				if($i != coun($rows)-1) {
+					$update .= ',';
+				}
+			}
+			$update .= ' WHERE '.$where;
+			$query = mysqli_query($update);
+			if($query) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	/*
+	* Удаляем таблицу или записи удовлетворяющие условию
+	* Требуемые: таблица (наименование таблицы)
+	* Опционально: where (условие [column = value]), передаем строкой, например, 'id=4'
+	*/
+	public function delete($table, $where = null) {
+		if($this->tableExists($table)) {
+			if($where == null) {
+				$delete = 'DELETE '.$table;
+			} else {
+				$delete = 'DELETE FROM '.$table.' WHERE '.$where;
+			}
+			$del = mysqli_query($delete);
+			if($del) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 }
-
-
-
-class DbConnect
-{
-	private $connection;
-	private $serverName;
-	private $userName;
-	private $password;
-	private $dbName;
-
-	protected function getConnection() {
-		if($this->connection !==null) {
-			return $this->connection;
-		}
-
-		$this->connection = $this->connect();
-		return $this->connection;
-	}
-
-	protected function connect() {
-		$this->serverName = 'localhost';
-		$this->userName = 'root';
-		$this->password = 'root';
-		$this->dbName = 'crmTransport';
-
-		$connect = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
-		return $connect;
-		}
-}
-
-class Base extends DbConnect
-{
-	//вывод всего
-	public function getAllString() {
-		$sql = $this->sqlGetAllString();
-		$result = $this->getConnection()->query($sql);
-
-		$numRows = $result->num_rows;
-		$string = array();
-
-		for($i=0; $i<$numRows; $i++) {
-			$row = $result->fetch_assoc();
-			$string[] = $row;
-		}
-		return $string;
-	}
-
-	public function getOneString($id) {
-		$sql = $this->sqlGetOneString($id);
-
-		$result = $this->getConnection()->query($sql);
-		$getOneString[] = $result->fetch_assoc();
-
-		return $getOneString;
-	}
-
-	public function createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note) {
-		$mysqli = $this->getConnection();
-
-		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
-		$mysqli->query($sql);
-
-		/*проверяем соединение*/
-		if($mysqli->connect_errno) {
-			printf("Соединение не удалось: %s\n",$mysqli->connect_error);
-			exit();
-		}
-
-		// if (!$mysqli->query($sql)) {
-    // 	printf("Сообщение ошибки: %s\n", $mysqli->error);
-		// 	printf("Номер ошибки: %s\n", $mysqli->errno);
-		// }
-
-		/* Закрыть соединение */
-		$mysqli->close();
-
-		return true;
-	}
-
-	public function editString($id) {
-		$mysqli = $this->getConnection();
-
-		$sql = $this->sqlEditString();
-		$mysqli->query($sql);
-
-		// $mysqi->close();
-
-		return $mysqli->affected_rows;
-	}
-
-
-	public function delete($id) {}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// createFlight() {}
-// createDriver()
-//createCar()
-//createCustomer()
-
-
-//editFlight()
-//editDriver()
-//editCar()
-//editCustomer()
-
-
-// deleteFlight()
-//deleteDriver()
-//deleteCar()
-//deleteCustomer()

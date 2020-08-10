@@ -2,8 +2,15 @@
 
 class Flights extends Base
 {
-	protected function sqlGetAllString() {
-		$sql = "SELECT 	* FROM `flights` ORDER BY `id` DESC";
+	public function sqlGetAllString() {
+
+		$table = 'flights';
+		$order = 'id DESC';
+
+		$base = new Base();
+		$base->select($table = 'flights', $rows, $where, $order);
+
+		$sql = $base->result;
 		return $sql;
 	}
 
@@ -13,4 +20,6 @@ class Flights extends Base
 												VALUES ('$place_1', '$place_2', '$date_1', '$date_2', '$freight', '$weight', '$volume', '$cost', '$form_of_payment', '$proxy', '$request',	 '$note', '1', '1')";
 		return $sql;
 	}
+
+
 }
