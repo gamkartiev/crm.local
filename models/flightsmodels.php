@@ -5,13 +5,15 @@ class Flights extends Base
 	public function sqlGetAllString() {
 
 		$table = 'flights';
+		$rows = '*';
 		$order = 'id DESC';
+		$where = '';
+
 
 		$base = new Base();
-		$base->select($table = 'flights', $rows, $where, $order);
+		$result = $base->select($table, $rows, $where, $order);
 
-		$sql = $base->result;
-		return $sql;
+		return $result;
 	}
 
 	protected function sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note) {

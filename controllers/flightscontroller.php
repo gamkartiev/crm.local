@@ -5,6 +5,8 @@ class FlightsController extends Controller
     public function view() {
       $flights = new Flights();
       $allFlights = $flights->sqlGetAllString();
+      // var_dump($allFlights);
+      var_export($allFlights);
 
       require("views/flights/flights_all.php");
   }
