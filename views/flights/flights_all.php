@@ -16,32 +16,32 @@
 
 <a href="/flights/add"> Добавить новую статью </a>
 
-<table>
+<table border='1'>
 	<tr class="firstRow">
 		<th> Дата загрузки </th>
 		<th> Дата выгрузки </th>
 		<th> Откуда</th>
 		<th> Куда</th>
 
-		<th> Заказчик</th>
+		<!-- <th> Заказчик</th> -->
 		<!-- <th> Логист </th> -->
 
 		<th> Груз</th>
 		<th> Объем </th>
 		<th> Вес</th>
 		<th> Цена </th>
-		<th> Форма оплаты <th>
+		<th> Форма оплаты </th>
 
-		<th> Водитель</th>
+		<!-- <th> Водитель</th>
 		<th> Машина </th>
-		<th> Полуприцеп </th>
+		<th> Полуприцеп </th> -->
 
 		<th> Доверенность </th>
 		<th> Заявка </th>
 		<th> Примечание</th>
 	</tr>
 	<?php
-	var_export($allFlights);
+
 	foreach($allFlights as $a): ?>
 	<tr class="row">
 		<td> <?=$a['date_1']?> </td>
@@ -49,17 +49,11 @@
 		<td> <?=$a['place_1']?> </td>
 		<td> <?=$a['place_2']?> </td>
 
-		<td> <?=$a['short_name']?> </td>
-
 		<td> <?=$a['freight']?> </td>
 		<td> <?=$a['volume']?> </td>
 		<td> <?=$a['weight']?> </td>
 		<td> <?=$a['cost']?> </td>
 		<td> <?=$a['form_of_payment']?> </td>
-
-		<td> <?=$a['surname']?> </td>
-		<td> <?=$a['model_cars']?> </td>
-		<td> <?=$a['attached_trailer']?> </td>
 
 		<td> <?=$a['proxy']?> </td>
 		<td> <?=$a['request']?> </td>

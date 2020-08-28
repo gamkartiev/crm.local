@@ -71,38 +71,19 @@ protected $connection;
 			if($query)
 			{
 				$numRows = $query->num_rows;
+				$result = array();
+
 				for($i=0; $i<$numRows; $i++) {
-					$result = $query->fetch_assoc();
+					$row = $query->fetch_assoc();
+					$result[] = $row;
+
 				}
 			return $result;
-		// 		$numResults = $query->num_rows;
-		// 		for($i = 0; $i < $numResults; $i++)
-		// 		{
-		// 			$r = $query->fetch_array(MYSQLI_NUM);
-		// 			$key = array_keys($r);
-		// 			for($x = 0; $x < count($key); $x++)
-		// 			{
-		// 						// Sanitizes keys so only alphavalues are allowed
-		// 						if(!is_int($key[$x]))
-		// 						{
-		// 							if($query->num_rows > 1)
-		// 									$this->result[$i][$key[$x]] = $r[$key[$x]];
-		// 							else if($query->num_rows < 1)
-		// 									$this->result = null;
-		// 							else
-		// 									$this->result[$key[$x]] = $r[$key[$x]];
-		// 						} //проверят
-		// 			}
-		// 		}
-		// 		return true; // если запрос $query был выполнен
-		// 	}	else {
-		// 						return print_r('запрос $query был выполнен'); // если запрос $query не был выполнен
-		// 					}
-		// } else {	// если такая таблица не существует
-
 			}
-	}	return print_r("такая таблица не существует! models->function select");
+		}	return print_r("такая таблица не существует! models->function select");
 }
+
+
 
 	/*
 	* Вставляем значения в таблицу

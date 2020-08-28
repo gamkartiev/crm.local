@@ -5,8 +5,13 @@ class FlightsController extends Controller
     public function view() {
       $flights = new Flights();
       $allFlights = $flights->sqlGetAllString();
-      // var_dump($allFlights);
+
       var_export($allFlights);
+
+      // for($i=0; $i<15; $i++){
+      //   echo "/ ".key($allFlights);
+      //   next($allFlights);
+      // }
 
       require("views/flights/flights_all.php");
   }
