@@ -19,16 +19,11 @@ protected $connection;
 		return $this->connection;
 	}
 
+
 	protected function connect() {
 		$connect = new mysqli($this->db_host, $this->db_user, $this->db_pass, $this->db_name);
 		return $connect;
 		}
-
-
-
-
-	//Тут результаты запросы от Select()
-	// public $result = array(); //нужно ли
 
 
 
@@ -46,6 +41,8 @@ protected $connection;
 		}
 	}
 
+
+
 	/*
 	* Выборка информации из бд
 	* Требуется: table (наименование таблицы)
@@ -62,9 +59,6 @@ protected $connection;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
 
-			// var_dump($table);
-			// var_dump($q);
-
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 
@@ -76,7 +70,6 @@ protected $connection;
 				for($i=0; $i<$numRows; $i++) {
 					$row = $query->fetch_assoc();
 					$result[] = $row;
-
 				}
 			return $result;
 			}
@@ -94,7 +87,9 @@ protected $connection;
 	*										строкой, например, 'title,meta,date')
 	*
 	*/
-	public function insert($table, $values, $rows = null) {
+	public function insert($table, $values, $rows) {
+		$mysqli = $this->getConnection();
+
 		if($this->tableExists($table)) {
 			$insert = 'INSERT INTO '.$table;
 			if($rows != null) {
@@ -106,7 +101,7 @@ protected $connection;
 			}
 			$values = implode(',', $values);
 			$insert .= ' VALUES ('.$values.')';
-			$ins = mysqli_query($insert);
+			$ins = $mysqli->query($insert);
 			if($ins) {
 				return true;
 			} else {
@@ -157,6 +152,8 @@ protected $connection;
 		}
 	}
 
+
+
 	/*
 	* Удаляем таблицу или записи удовлетворяющие условию
 	* Требуемые: таблица (наименование таблицы)
@@ -180,113 +177,3 @@ protected $connection;
 		}
 	}
 }
-
-
-// class DbConnect
-// {
-// 	private $connection;
-// 	private $serverName;
-// 	private $userName;
-// 	private $password;
-// 	private $dbName;
-//
-	// protected function getConnection() {
-	// 	if($this->connection !==null) {
-	// 		return $this->connection;
-	// 	}
-	//
-	// 	$this->connection = $this->connect();
-	// 	return $this->connection;
-	// }
-	//
-	// protected function connect() {
-	// 	$this->serverName = 'localhost';
-	// 	$this->userName = 'root';
-	// 	$this->password = 'root';
-	// 	$this->dbName = 'crmTransport';
-	//
-	// 	$connect = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
-	// 	return $connect;
-	// 	}
-// }
-
-
-
-/*****************---------------*****************/
-/*****************---------------*****************/
-// class Base extends DbConnect
-// {
-// 	//вывод всего
-// 	public function getAllString() {
-// 		$sql = $this->sqlGetAllString();
-// 		$result = $this->getConnection()->query($sql);
-//
-// 		$numRows = $result->num_rows;
-// 		$string = array();
-//
-// 		for($i=0; $i<$numRows; $i++) {
-// 			$row = $result->fetch_assoc();
-// 			$string[] = $row;
-// 		}
-// 		return $string;
-// 	}
-//
-//
-//
-// 	public function getOneString($id) {
-// 		$sql = $this->sqlGetOneString($id);
-//
-// 		$result = $this->getConnection()->query($sql);
-// 		$getOneString[] = $result->fetch_assoc();
-//
-// 		return $getOneString;
-// 	}
-//
-//
-//
-// 	public function createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note) {
-// 		$mysqli = $this->getConnection();
-//
-// 		$sql = $this->sqlCreateString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
-// 		$mysqli->query($sql);
-//
-// 		/*проверяем соединение*/
-// 		if($mysqli->connect_errno) {
-// 			printf("Соединение не удалось: %s\n",$mysqli->connect_error);
-// 			exit();
-// 		}
-//
-// 		/* Закрыть соединение */
-// 		$mysqli->close();
-// 		return true;
-// 	}
-//
-//
-//
-// 	public function editString($id) {
-// 		$mysqli = $this->getConnection();
-//
-// 		$sql = $this->sqlEditString();
-// 		$mysqli->query($sql);
-//
-// 		return $mysqli->affected_rows;
-// 	}
-//
-//
-//
-// 	public function delete($id) {}
-//
-//
-// }
-
-// /* Проверяет переменную соединения на существования	*/
-// public function disconnect() {
-// 	if($this->con) {
-// 		if(mysqli_close()) {
-// 			$this->con = false;
-// 			return true; //задает переменной $con=false и возвращает true
-// 		} else {
-// 			return false; //возвращает false, если mysqli_close не прошло
-// 		  }
-// 	}
-// }

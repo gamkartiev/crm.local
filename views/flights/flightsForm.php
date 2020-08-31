@@ -9,10 +9,10 @@
 <form action="/flights/add" method="post">
   <input type="hidden" name="action" value="addNewFlight"> <!--Этот пункт можно убрать -->
   <label for="place_1"> Откуда: </label>
-    <input type="text" name="place_1" placeholder="откуда" id="place_1"> <br />
+    <input type="text" name="place_1" placeholder="место загрузки" id="place_1"> <br />
 
   <label for="place_2"> Куда: </label>
-    <input type="text" name="place_2" value="" id="place_2"> <br />
+    <input type="text" name="place_2" placeholder="место выгрузки" id="place_2"> <br />
 
   <label for="date_1"> Дата загрузки: </label>
     <input type="date" name="date_1" value="" id="date_1"> <br />
@@ -21,16 +21,16 @@
     <input type="date" name="date_2" value="" id="date_2"> <br />
 
   <label for="freight"> Название груза: </label>
-    <input type="text" name="freight" value="" id="freight"> <br />
+    <input type="text" name="freight" placeholder="название груза" id="freight"> <br />
 
   <label for="weight"> Вес: </label>
-    <input type="number" name="weight" value="" id="weight"> <br />
+    <input type="number" name="weight" placeholder="Вес" id="weight"> <br />
 
   <label for="volume"> Объем: </label>
-    <input type="number" name="volume" value="" id="volume"> <br />
+    <input type="number" name="volume" placeholder="Объем" id="volume"> <br />
 
   <label for="cost"> Сумма: </label>
-    <input type="text" name="cost" value="" id="cost"> <br />
+    <input type="text" name="cost" placeholder="стоимость перевозки" id="cost"> <br />
 
   <label for="formOfPayment"> Форма оплаты: </label>
     <input type="text" name="form_of_payment" value="с НДС" id="formOfPayment"> <br />
@@ -45,13 +45,13 @@
     <input type="text" name="" value="" id=""> <br /> -->
 
   <label for=""> Доверенность: </label>
-    <input type="text" name="proxy" value="Тестовая запись" id="proxy"> <br />
+    <input type="text" name="proxy" value="Доверенность №" id="proxy"> <br />
 
   <label for="request"> Заявка: </label>
-    <input type="text" name="request" value="222" id="request"> <br />
+    <input type="text" name="request" value="Заявка №" id="request"> <br />
 
   <label for=""> Примечание: </label>
-    <input type="text" name="note" value="Тестовое примечание" id="note"> <br />
+    <input type="text" name="note" value="Без примечания" id="note"> <br />
 
 <button type="submit" name="button"> Добавить </button>
 

@@ -4,14 +4,7 @@ class FlightsController extends Controller
 {
     public function view() {
       $flights = new Flights();
-      $allFlights = $flights->sqlGetAllString();
-
-      var_export($allFlights);
-
-      // for($i=0; $i<15; $i++){
-      //   echo "/ ".key($allFlights);
-      //   next($allFlights);
-      // }
+      $allFlights = $flights->getAllSelect();
 
       require("views/flights/flights_all.php");
   }
@@ -33,7 +26,7 @@ class FlightsController extends Controller
           $request = $_POST['request'];
           $note = $_POST['note'];
 
-          $flights->createString($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
+          $flights->getInsert($place_1, $place_2, $date_1, $date_2, $freight, $weight, $volume, $cost, $form_of_payment, $proxy, $request, $note);
 
           header("Location: /");
           exit();

@@ -4,8 +4,8 @@ class CarsController extends Controller
 {
   public function view($id) {
     $cars = new Cars();
-    $allCarsName = $cars->getAllString();
-    $oneCarsName = $cars->getOneString($id);
+    $allCarsName = $cars->getAllSelect();
+    $oneCarsName = $cars->getOneSelect($id);
 
     include ("views/cars/cars.php");
   }
