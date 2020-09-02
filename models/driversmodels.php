@@ -2,14 +2,28 @@
 
 class Drivers extends Base
 {
-	protected function sqlGetAllString() {
-		$sql = "SELECT  `id`, `surname`, `first_name`, `patronymic` FROM `drivers` ORDER BY `surname`";
-		return $sql;
+	public function getAllSelect() {
+		$table = 'drivers';
+		$rows = 'id, surname, first_name, patronymic';
+		$where = '';
+		$order = 'surname';
+
+		$base = new Base();
+		$result = $base->select($table, $rows, $where, $order);
+
+		return $result;
 	}
 
-	protected function sqlGetOneString($id) {
-		$sql = "SELECT * FROM `drivers` WHERE `id`=".(int)$id;
-		return $sql;
+	public function getOneSelect($id) {
+		$table = 'drivers';
+		$rows = '*';
+		$where = 'id='.(int)$id;
+		$order = '';
+
+		$base = new Base();
+		$result = $base->select($table, $rows, $where, $order);
+
+		return $result;
 	}
 
 }

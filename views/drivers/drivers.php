@@ -26,7 +26,7 @@
 	<div class="firstName"> <span class="bold"> Имя:</span> <?=$b['first_name']?> <br /></div>
 	<div class="middleName"> <span class="bold"> Отчество:</span> <?=$b['patronymic']?> <br /><br /></div>
 
-	<div class="driver_car_model"> <span class="bold"> Машина(Марка): </span> <?=$b['']?> <br /></div>
+	<!-- <div class="driver_car_model"> <span class="bold"> Машина(Марка): </span> <?=$b['']?> <br /></div>
 	<div class="driver_car_state_sign"> <span class="bold"> Машина(гос.знак): </span> <?=$b['']?><br /></div>
 	<div class="driver_trailer_state_sign"> <span class="bold"> Полуприцеп(Марка): </span> <?=$b['']?><br /></div>
 	<div class="driver_trailer_state_sign"> <span class="bold"> Полуприцеп(гос.знак): </span> <?=$b['']?><br /><br /></div>
@@ -38,7 +38,7 @@
 	<div class="registration"> <span class="bold"> Регистрация:</span> <?=$b['registration']?><br /></div>
 	<div class="driver_license"> <span class="bold"> Водительское удостоверение:</span>  <?=$b['drivers_license']?><br /><br /></div>
 
-	<div class="telephone"> <span class="bold"> Телефон:</span> <?=$b['phone']?><br /></div>
+	<div class="telephone"> <span class="bold"> Телефон:</span> <?=$b['phone']?><br /></div> -->
 </section>
 <?php endforeach ?>
 

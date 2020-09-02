@@ -7,8 +7,8 @@ class DriversController extends Controller
     // $id = $_GET['id'] ?? 1; //убрать тут единицу и поставить функцию вывода последнего добавленного
 
     $drivers = new Drivers();
-    $allDriversName = $drivers->getAllString();
-    $oneDriversName = $drivers->getOneString($id);
+    $allDriversName = $drivers->getAllSelect();
+    $oneDriversName = $drivers->getOneSelect($id);
 
     include("views/drivers/drivers.php");
   }

@@ -5,8 +5,8 @@ class CustomersController extends Controller
 {
   public function view($id) {
     $customers = new Customers();
-    $allCustomers = $customers->getAllString();
-    $oneCustomersName = $customers->getOneString($id);
+    $allCustomers = $customers->getAllSelect();
+    $oneCustomersName = $customers->getOneSelect($id);
 
     include ("views/customers/customers.php");
   }

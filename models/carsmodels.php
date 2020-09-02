@@ -2,36 +2,29 @@
 
 class Cars extends Base
 {
-	public function getAllSelect() {
+	public function getAllSelect() { //левая колонка при выводе данных на странице cars
 		$table = 'cars';
-		$rows = '*';
-		$where = 'null';
+		$rows = 'id, state_sign_cars';
+		$where = '';
 		$order = 'state_sign_cars';
 
 		$base = new Base();
-		$base->select($table, $rows, $where, $order);
-		var_dump($result);
+		$result = $base->select($table, $rows, $where, $order);
 
 		return $result;
-
-		// $sql = "SELECT `id`, `state_sign_cars` FROM `cars` ORDER BY `state_sign_cars`";
-		// return $sql;
 	}
+
 
 	public function getOneSelect($id) {
 		$table = 'cars';
-		$rows = 'id';
+		$rows = '*';
 		$where = 'id='.(int)$id;
-		$order = null;
+		$order = '';
 
 		$base = new Base();
-		$base->select($table, $rows, $where, $order);
-		var_dump($result);
+		$result = $base->select($table, $rows, $where, $order);
 
 		return $result;
 
-
-		// $sql = "SELECT * FROM `cars` WHERE `id`=".(int)$id;
-		// return $sql;
 	}
 }
