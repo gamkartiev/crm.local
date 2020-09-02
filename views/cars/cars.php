@@ -29,7 +29,7 @@
 	<div class="car_car_state_sign"> <span class="bold">Тягач(гос.знак):</span> <?= $b['state_sign_cars']?> <br /></div>
 	<div class="car_car_PTS"> <span class="bold">ПТС:</span> <?= $b['PTS_cars']?> <br /></div>
 	<div class="car_car_STS"> <span class="bold">СТС:</span> <?= $b['STS_cars']?>  <br /></div>
-	<div class="car_car_VIN"> <span class="bold">VIN:</span> <?= $b['VIN']?> <br /></div>
+	<div class="car_car_VIN"> <span class="bold">VIN:</span> <?= $b['VIN_cars']?> <br /></div>
 	<!-- <div class="car_car_year"> <span class="bold">Год:</span> <?= $b['year_cars']?> <br /><br /></div> -->
 
 	<!-- <div class="car_trailer_model"> <span class="bold">Полуприцеп(модель):</span> ТОНАР-9989<br /></div> -->

@@ -16,7 +16,7 @@ class Flights extends Base
 
 	public function getInsert($values) {
 		$table = 'flights';
-
+		// $values = ; соответствующий массив передается из контроллера
 		$rows = '	place_1, place_2, date_1, date_2, freight, weight,
 							volume, cost, form_of_payment, proxy,
 							request, note, id_cars, id_customers';

@@ -12,9 +12,6 @@ class Customers extends Base
 		$result = $base->select($table, $rows, $where, $order);
 
 		return $result;
-
-		// $sql = "SELECT  `id`, `short_name` FROM `Customers` ORDER BY `short_name`";
-		// return $sql;
 	}
 
 	public function getOneSelect($id) {
@@ -27,8 +24,17 @@ class Customers extends Base
 		$result = $base->select($table, $rows, $where, $order);
 
 		return $result;
+	}
 
-		// $sql = "SELECT * FROM `Customers` WHERE `id`=".(int)$id;
-		// return $sql;
+	public function getInsert($values) {
+		$table = 'customers';
+		// $values = ; соответствующий массив передается из контроллера
+		$rows = 'name, short_name, INN, OGRN, actual_address, legal_address, mailing_address,
+							KPP, OKPO_code, OKFC_code, OKOPF_code, OKVED_main_code, CEO, bank,
+							payment_account, correspondent_account, BIK, note';
+
+		$base = new Base();
+		$result = $base->insert($table, $values, $rows);
+
 	}
 }

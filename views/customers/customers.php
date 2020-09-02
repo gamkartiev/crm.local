@@ -12,6 +12,9 @@
 </header>
 
 <main>
+
+<a href="/customers/add"> Добавить нового контрагента </a>
+
 <section class="to_list">
 	<?php foreach($allCustomers as $a): ?>
 		<a href="/customers/view/<?=$a['id']?>"> <?php echo $a['short_name']; ?> </a>
@@ -20,7 +23,7 @@
 
 <?php foreach($oneCustomersName as $b):?>
 <section class="left_panel">
-	<div class="title"> <span class="bold">Полное наименование компании:</span> <?=$b['full_name']?> <br /></div>
+	<div class="title"> <span class="bold">Полное наименование компании:</span> <?=$b['name']?> <br /></div>
 	<div class="short_title"> <span class="bold">Краткое наименование компании:</span> <?=$b['short_name']?> <br /><br /></div>
 
 	<div class="INN"> <span class="bold">ИНН:</span> <?=$b['INN']?> <br /></div>
@@ -38,12 +41,12 @@
 
 	<div class="CEO"> <span class="bold">Генеральный директор:</span> <?=$b['CEO']?> <br /><br /></div>
 
-	<div class="bank"> <span class="bold">Наименование банка:</span> <?=$b['bank_name']?> <br /></div>
+	<div class="bank"> <span class="bold">Наименование банка:</span> <?=$b['bank']?> <br /></div>
 	<div class="payment_account"> <span class="bold">Рассчетный счет:</span> <?=$b['payment_account']?> <br /></div>
-	<div class="correspondent_account"> <span class="bold">Корреспондентский счет:</span> <?=$b['corr_account']?> <br /></div>
+	<div class="correspondent_account"> <span class="bold">Корреспондентский счет:</span> <?=$b['correspondent_account']?> <br /></div>
 	<div class="BIK"> <span class="bold">БИК:</span> <?=$b['BIK']?> <br /><br /></div>
 
-	<div class="note"> <span class="bold">Примечание:</span> <?=$b['information']?> <br /><br /></div>
+	<div class="note"> <span class="bold">Примечание:</span> <?=$b['note']?> <br /><br /></div>
 
 	<div class="contact_name"> <span class="bold"> ФИО:</span> <br /> </div>       <!-- 	Контакт в компании -->
 	<div class="contact_position"> <span class="bold"> Должность:</span> <br /> </div>

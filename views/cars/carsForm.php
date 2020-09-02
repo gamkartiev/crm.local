@@ -20,12 +20,14 @@
   <label for="VIN_cars"> VIN: </label>
     <input type="text" name="VIN_cars" value="" id="VIN_cars"> <br />
 
-  <label for="year_cars"> Год машины: </label>
-    <input type="date" name="year_cars" value="" id="year_cars"> <br />
+  <!-- <label for="year_cars"> Год машины: </label>
+    <input type="date" name="year_cars" value="" id="year_cars"> <br /> -->
 
-  <label for="attached_trailer"> Полуприцеп: </label>
+  <!-- <label for="attached_trailer"> Полуприцеп: </label>
     <input type="text" name="attached_trailer" value="" id="attached_trailer"> <br />
 
+  <label for="date_1"> Прицеп прицепили в: </label>
+    <input type="date" name="date_1" value="" id="date_1"> <br /> -->
 
 <button type="submit" name="button"> Добавить </button>
 

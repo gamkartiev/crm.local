@@ -27,4 +27,14 @@ class Cars extends Base
 		return $result;
 
 	}
+
+	public function getInsert($values) {
+		$table = 'cars';
+		// $values = ; соответствующий массив передается из контроллера
+		$rows = 'state_sign_cars, PTS_cars, STS_cars, VIN_cars, id_drivers, id_trailers, date_start';
+
+		$base = new Base();
+		$base->insert($table, $values, $rows);
+
+	}
 }
