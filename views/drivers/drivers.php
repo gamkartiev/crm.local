@@ -13,6 +13,7 @@
 
 <main>
 
+<a href="/drivers/add"> Добавить нового водителя </a>
 
 <section class="to_list">
 	 <?php foreach($allDriversName as $a): ?>

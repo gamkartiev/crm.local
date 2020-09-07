@@ -34,7 +34,7 @@ class Customers extends Base
 							payment_account, correspondent_account, BIK, note';
 
 		$base = new Base();
-		$result = $base->insert($table, $values, $rows);
+		$base->insert($table, $values, $rows);
 
 	}
 }

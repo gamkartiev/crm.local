@@ -26,4 +26,13 @@ class Drivers extends Base
 		return $result;
 	}
 
+	public function getInsert($values) {
+		$table = 'drivers';
+		// $values = ; соответствующий массив передается из контроллера
+		$rows = 'surName, first_name, patronymic';
+
+		$base = new Base();
+		$base->insert($table, $values, $rows);
+
+	}
 }

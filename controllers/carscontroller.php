@@ -33,7 +33,7 @@ class CarsController extends Controller
 
         $cars->getInsert($values);
 
-        header("Location: /");
+        header("Location: /cars");
         exit();
       } else {
           include("views/cars/carsForm.php");

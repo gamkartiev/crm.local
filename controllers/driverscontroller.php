@@ -17,11 +17,13 @@ class DriversController extends Controller
       if (!empty($_POST)) {
         $drivers = new Drivers();
 
-        $surname = $_POST['surname'];
-        $first_name = $_POST['first_name'];
-        $patronymic = $_POST['patronymic'];
+        $values = array(
+          $surname = $_POST['surname'],
+          $first_name = $_POST['first_name'],
+          $patronymic = $_POST['patronymic']
+        );
 
-        $drivers->createString();
+        $drivers->getInsert($values);
 
         header("Location: /");
       } else {

@@ -39,7 +39,7 @@ class CustomersController extends Controller
 
         $customers->getInsert($values); //сюда добавить параметры
 
-        header("Location: /");
+        header("Location: /customers");
         exit();
       } else {
           include("views/customers/customersForm.php");
