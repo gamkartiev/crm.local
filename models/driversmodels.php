@@ -5,6 +5,7 @@ class Drivers extends Base
 	public function getAllSelect() {
 		$table = 'drivers';
 		$rows = 'id, surname, first_name, patronymic';
+		$join =	'';
 		$where = '';
 		$order = 'surname';
 

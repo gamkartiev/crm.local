@@ -5,6 +5,7 @@ class Customers extends Base
 	public function getAllSelect() {
 		$table = 'Customers';
 		$rows = 'id, short_name';
+		$join = '';
 		$where = '';
 		$order = 'short_name';
 

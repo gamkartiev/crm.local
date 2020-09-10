@@ -50,15 +50,18 @@ protected $connection;
 	* 						 where (колонка = значение, передаем строкой)
 	*							 order (сортировка, передаем строкой)
 	*/
-	public function select($table, $rows, $where, $order) {
+	public function select($table, $rows, $join, $where, $order) {
 		$mysqli = $this->getConnection();
 
 		$q = 'SELECT '.$rows.' FROM '.$table;
+		if($join != null)
+			$q .= $join;
 		if($where != null)
-			$q .=' WHERE '.$where;
+			$q .='
+			WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
-
+			var_dump($q);
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 
