@@ -57,11 +57,10 @@ protected $connection;
 		if($join != null)
 			$q .= $join;
 		if($where != null)
-			$q .='
-			WHERE '.$where;
+			$q .=' WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
-			var_dump($q);
+			// var_dump($q);
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 

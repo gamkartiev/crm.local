@@ -10,7 +10,7 @@ class Customers extends Base
 		$order = 'short_name';
 
 		$base = new Base();
-		$result = $base->select($table, $rows, $where, $order);
+		$result = $base->select($table, $rows, $join, $where, $order);
 
 		return $result;
 	}
@@ -18,11 +18,12 @@ class Customers extends Base
 	public function getOneSelect($id) {
 		$table = 'Customers';
 		$rows = '*';
+		$join =	'';
 		$where = 'id='.(int)$id;
 		$order = '';
 
 		$base = new Base();
-		$result = $base->select($table, $rows, $where, $order);
+		$result = $base->select($table, $rows, $join, $where, $order);
 
 		return $result;
 	}

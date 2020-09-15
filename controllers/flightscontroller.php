@@ -26,14 +26,17 @@ class FlightsController extends Controller
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
                 $note = $_POST['note'],
-                1,
-                1
+                6,
+                $id_customers = $_POST['customers']
           );
           $flights->getInsert($values);
 
           header("Location: /");
           exit();
         } else {
+            $flights = new Flights();
+            $customers = $flights->getCustomersSelect();
+
             include("views/flights/flightsForm.php");
         }
       }

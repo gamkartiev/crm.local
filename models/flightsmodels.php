@@ -9,13 +9,42 @@ class Flights extends Base
 						cars.id, state_sign_cars';
 		$join = ' LEFT OUTER JOIN cars ON flights.id_cars = cars.id';
 		$where = '';
-		$order = 'flights.id DESC';
+		$order = 'flights.date_1 DESC';
+
+		$base = new Base();
+		$result_1 = $base->select($table, $rows, $join, $where, $order);
+ // var_export($result);
+
+		$table = 'flights';
+		$rows = 'flights.id, flights.id_customers, customers.id, customers.short_name as customers';
+		$join = ' RIGHT OUTER JOIN customers ON flights.id_customers = customers.id';
+		$where = 'flights.id_customers = customers.id';
+		$order = 'flights.date_1 DESC';
+
+		$result_2 = $base->select($table, $rows, $join, $where, $order);
+
+		$n = count($result_1);
+		for ($row=0; $row < $n; $row++) {
+			$result[] = array_merge($result_1[$row], $result_2[$row]);
+		}
+
+		return $result;
+	}
+
+//фун-я выборки всех клиентов для Формы вставки нового рейса
+	public function getCustomersSelect() {
+		$table = 'Customers';
+		$rows = 'id, short_name';
+		$join = '';
+		$where = '';
+		$order = 'short_name DESC';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
 
 		return $result;
 	}
+
 
 	public function getInsert($values) {
 		$table = 'flights';

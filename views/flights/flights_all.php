@@ -23,7 +23,7 @@
 		<th> Откуда</th>
 		<th> Куда</th>
 
-		<!-- <th> Заказчик</th> -->
+		<th> Заказчик</th>
 		<!-- <th> Логист </th> -->
 
 		<th> Груз</th>
@@ -49,6 +49,8 @@
 		<td> <?=$a['place_1']?> </td>
 		<td> <?=$a['place_2']?> </td>
 
+		<td> <?=$a['customers']?> </td>
+
 		<td> <?=$a['freight']?> </td>
 		<td> <?=$a['volume']?> </td>
 		<td> <?=$a['weight']?> </td>
@@ -70,7 +72,7 @@
 
 <footer></footer>
 <script> document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-код для расширения livereload - автоматического обновления страницы сайта после сохранения кода --> -->
+код для расширения livereload - автоматического обновления страницы сайта после сохранения кода -->
 
 </body>
 </html>

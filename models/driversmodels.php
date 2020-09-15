@@ -10,7 +10,7 @@ class Drivers extends Base
 		$order = 'surname';
 
 		$base = new Base();
-		$result = $base->select($table, $rows, $where, $order);
+		$result = $base->select($table, $rows, $join, $where, $order);
 
 		return $result;
 	}
@@ -18,11 +18,12 @@ class Drivers extends Base
 	public function getOneSelect($id) {
 		$table = 'drivers';
 		$rows = '*';
+		$join =	'';
 		$where = 'id='.(int)$id;
 		$order = '';
 
 		$base = new Base();
-		$result = $base->select($table, $rows, $where, $order);
+		$result = $base->select($table, $rows, $join, $where, $order);
 
 		return $result;
 	}
