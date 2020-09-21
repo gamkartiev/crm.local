@@ -44,8 +44,8 @@
 	foreach($allFlights as $a): ?>
 		<a href="/flights/post/<?=$a['id_flights']?>">
 		<p class="row tr">
-			<p class="td col_1">  <?=$a['date_1']?></p>
-			<p class="td col_2"> <?=$a['date_2']?> </p>
+			<p class="td col_1">  <?=date("j.m.Y",strtotime($a['date_1']))?></p>
+			<p class="td col_2"> <?=date("j.m.Y",strtotime($a['date_2']))?> </p>
 			<p class="td col_3"> <?=$a['place_1']?> </p>
 			<p class="td col_4"> <?=$a['place_2']?> </p>
 
