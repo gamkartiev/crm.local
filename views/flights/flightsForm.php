@@ -38,8 +38,18 @@
   <!-- <label for=""> Условия оплаты </label>
     <input type="text" name="" value="" id=""> -->
 
+  <label for="state_sign_cars"> Тягач: </label>
+    <select class="" name="state_sign_cars">
+      <option disabled>Выберите машину:</option>
+      <?php
+      foreach($cars as $a): ?>
+        <option value="<?=$a['id']?>"> <?=$a['state_sign_cars']?></option>
+      <<?php endforeach; ?>
+    </select>
+
   <label for="customers"> Компания: </label>
     <select class="" name="customers">
+      <option disabled>Выберите Компанию:</option>
       <?php
       foreach($customers as $a): ?>
         <option value="<?=$a['id']?>"> <?=$a['short_name']?></option>

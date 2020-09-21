@@ -26,7 +26,7 @@ class FlightsController extends Controller
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
                 $note = $_POST['note'],
-                6,
+                $id_cars = $_POST['state_sign_cars'],
                 $id_customers = $_POST['customers']
           );
           $flights->getInsert($values);
@@ -36,10 +36,17 @@ class FlightsController extends Controller
         } else {
             $flights = new Flights();
             $customers = $flights->getCustomersSelect();
+            $cars = $flights->getCarsSelect();
 
             include("views/flights/flightsForm.php");
         }
       }
 
-  public function edit() {}
+    public function post($id){
+      $flights = new Flights();
+      $oneFlights = $flights->getOneSelect($id);
+
+      require("views/flights/flights_one.php");
+    }
+    public function edit() {}
 }

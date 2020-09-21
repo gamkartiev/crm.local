@@ -14,55 +14,57 @@
 
 <main>
 
-<a href="/flights/add"> Добавить новую статью </a>
+<a href="/flights/add"> Добавить новый рейс </a>
 
-<table border='1'>
-	<tr class="firstRow">
-		<th> Дата загрузки </th>
-		<th> Дата выгрузки </th>
-		<th> Откуда</th>
-		<th> Куда</th>
+<p class="table" > <!--border='1'-->
+	<p class="firstRow tr">
+		<p class="th col_1"> Дата загрузки </>
+		<p class="th col_2"> Дата выгрузки </p>
+		<p class="th col_3"> Откуда</p>
+		<p class="th col_4"> Куда</p>
 
-		<th> Заказчик</th>
+		<p class="th col_5"> Заказчик</p>
 		<!-- <th> Логист </th> -->
 
-		<th> Груз</th>
-		<th> Объем </th>
-		<th> Вес</th>
-		<th> Цена </th>
-		<th> Форма оплаты </th>
+		<p class="th col_6"> Груз</p>
+		<p class="th col_7"> Объем </p>
+		<p class="th col_8"> Вес</p>
+		<p class="th col_9"> Цена </p>
+		<p class="th col_10"> Форма оплаты </p>
 
 		<!-- <th> Водитель</th> -->
-		<th> Машина </th>
+		<p class="th col_11"> Машина </p>
 		<!-- <th> Полуприцеп </th> -->
 
-		<th> Доверенность </th>
-		<th> Заявка </th>
-		<th> Примечание</th>
-	</tr>
+		<p class="th col_12"> Доверенность </p>
+		<p class="th col_13"> Заявка </p>
+		<p class="th col_14"> Примечание</p>
+	</p>
 	<?php
-
 	foreach($allFlights as $a): ?>
-	<tr class="row">
-		<td> <?=$a['date_1']?> </td>
-		<td> <?=$a['date_2']?> </td>
-		<td> <?=$a['place_1']?> </td>
-		<td> <?=$a['place_2']?> </td>
+		<a href="/flights/post/<?=$a['id_flights']?>">
+		<p class="row tr">
+			<p class="td col_1">  <?=$a['date_1']?></p>
+			<p class="td col_2"> <?=$a['date_2']?> </p>
+			<p class="td col_3"> <?=$a['place_1']?> </p>
+			<p class="td col_4"> <?=$a['place_2']?> </p>
 
-		<td> <?=$a['customers']?> </td>
+			<p class="td col_5"> <?=$a['customers']?> </p>
 
-		<td> <?=$a['freight']?> </td>
-		<td> <?=$a['volume']?> </td>
-		<td> <?=$a['weight']?> </td>
-		<td> <?=$a['cost']?> </td>
-		<td> <?=$a['form_of_payment']?> </td>
+			<p class="td col_6"> <?=$a['freight']?> </p>
+			<p class="td col_7"> <?=$a['volume']?> </p>
+			<p class="td col_8"> <?=$a['weight']?> </p>
+			<p class="td col_9"> <?=$a['cost']?> </p>
+			<p class="td col_10"> <?=$a['form_of_payment']?> </p>
 
-		<td> <?=$a['state_sign_cars']?> </td>
+			<p class="td col_11"> <?=$a['state_sign_cars']?> </p>
 
-		<td> <?=$a['proxy']?> </td>
-		<td> <?=$a['request']?> </td>
-		<td> <?=$a['note']?> </td>
-	</tr>
+			<p class="td col_12"> <?=$a['proxy']?> </p>
+			<p class="td col_13"> <?=$a['request']?> </p>
+			<p class="td col_14"> <?=$a['note']?> </p>
+		</p>
+		</a>
+
 <?php endforeach; ?>
 </table>
 
