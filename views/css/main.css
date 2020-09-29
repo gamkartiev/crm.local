@@ -64,6 +64,30 @@ main{
 	background: #ccc;
 }
 
+.left_panel{
+	background: rgba(255,255,255,0.4);
+}
+
+.bottom-new{
+	display: inline-block;
+	float: left;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.bottom-edit{
+	display: inline-block;
+	float: right;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.bottom-delete{
+	display: inline-block;
+	font-size: 18px;
+	text-decoration: none;
+	color: red;
+}
 
 /* .table{
 	display:table;

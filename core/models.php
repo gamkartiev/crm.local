@@ -60,7 +60,6 @@ protected $connection;
 			$q .=' WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
-			// var_dump($q);
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 
@@ -73,6 +72,7 @@ protected $connection;
 					$row = $query->fetch_assoc();
 					$result[] = $row;
 				}
+				// var_dump($result);
 			return $result;
 			}
 		}	return print_r("такая таблица не существует! models->function select");
@@ -113,37 +113,51 @@ protected $connection;
 	}
 
 
-	public function update($table, $rows, $where, $condition) {
+	public function update($table, $rows, $where, $values) {
+		$mysqli = $this->getConnection();
+
 		if($this->tableExists($table)) {
 			//Parse the where VALUES/Parse the where values
 			// even values (including 0) contain the where rows/even values (including 0) contain the where rows
 			// odd values contain the clauses for the row/нечетные значения содержат предложения для строки
-			for($i=0; $i < count($where); $i++) {
-				if($i%2 != 0) {
-					if(is_string($where[$i])) {
-						if(($i+1) != null)
-								$where[$i] = '"'.$where[$i].'"AND';
-						else
-								$where[$i] = '"'.$where[$i].'"';
-					}
-				}
-			}
-			$where = implode($condition, $where);
+			// for($i=0; $i < count($where); $i++) {
+			// 	if($i%2 != 0) {
+			// 		if(is_string($where[$i])) {
+			// 			if(($i+1) != null)
+			// 					$where[$i] = '"'.$where[$i].'"AND';
+			// 			else
+			// 					$where[$i] = '"'.$where[$i].'"';
+			// 		}
+			// 	}
+			// }
+			// $where = implode($condition, $where);
 			$update = 'UPDATE '.$table.' SET ';
-			$keys = array_keys($rows);
-			for($i=0; $i < count($rows); $i++) {
-				if(is_string($rows[$keys[$i]])) {
-					$update .= $keys[$i].'="'.$rows[$keys[$i]].'"';
-				} else {
-					$update .= $keys[$i].'='.$rows[$keys[$i]];
-				}
-				//Parse to add commas / Разобрать, чтобы добавить запятые
-				if($i != coun($rows)-1) {
-					$update .= ',';
-				}
+			for ($i=0; $i < count($rows); $i++) {
+				if(is_string($values[$i])) {
+					$update .= $rows[$i].'="'.$values[$i].'"';
+			} else {
+					$update .= $rows[$i].'='.$values[$i];
 			}
+				if($i != count($rows)-1) {
+				$update .= ', ';
+			}
+
+			}
+			// var_export($update);
+			// $keys = array_keys($rows);
+			// for($i=0; $i < count($rows); $i++) {
+			// 	if(is_string($rows[$keys[$i]])) {
+			// 		$update .= $keys[$i].'="'.$rows[$keys[$i]].'"';
+			// 	} else {
+			// 		$update .= $keys[$i].'='.$rows[$keys[$i]];
+			// 	}
+			// 	//Parse to add commas / Разобрать, чтобы добавить запятые
+			// 	if($i != count($rows)-1) {
+			// 		$update .= ',';
+			// 	}
+			// }
 			$update .= ' WHERE '.$where;
-			$query = mysqli_query($update);
+			$query = $mysqli->query($update);
 			if($query) {
 				return true;
 			} else {
@@ -161,14 +175,16 @@ protected $connection;
 	* Требуемые: таблица (наименование таблицы)
 	* Опционально: where (условие [column = value]), передаем строкой, например, 'id=4'
 	*/
-	public function delete($table, $where = null) {
+	public function delete($table, $where) {
+		$mysqli = $this->getConnection();
+
 		if($this->tableExists($table)) {
 			if($where == null) {
 				$delete = 'DELETE '.$table;
 			} else {
 				$delete = 'DELETE FROM '.$table.' WHERE '.$where;
 			}
-			$del = mysqli_query($delete);
+			$del = $mysqli->query($delete);
 			if($del) {
 				return true;
 			} else {

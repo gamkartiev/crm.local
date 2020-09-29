@@ -4,10 +4,10 @@ class Cars extends Base
 {
 	public function getAllSelect() { //левая колонка при выводе данных на странице cars
 		$table = 'cars';
-		$rows = 'id, state_sign_cars';
+		$rows = 'id, brand, state_sign_cars';
 		$join = '';
 		$where = '';
-		$order = 'state_sign_cars';
+		$order = 'brand, state_sign_cars';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);

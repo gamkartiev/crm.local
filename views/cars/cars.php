@@ -18,15 +18,17 @@
 <section class="to_list">
 	<?php
 	foreach($allCarsName as $a): ?>
-			<a href="/cars/view/<?=$a['id']?>"> <?php echo $a['state_sign_cars']; ?> </a>
+			<a href="/cars/view/<?=$a['id']?>"> <?php echo ($a['brand']." ".$a['state_sign_cars']); ?> </a>
 	<?php endforeach ?>
 
 </section>
 
 <?php foreach($oneCarsName as $b) : ?>
 <section class="left_panel">
-	<!-- <div class="car_car_model"> <span class="bold">Тягач(модель):</span> <?= $b['model_cars']?> <br /></div> -->
+	<div class="car_car_model"> <span class="bold">Тягач(модель):</span> <?= $b['brand']?> <br /></div>
+	<br />
 	<div class="car_car_state_sign"> <span class="bold">Тягач(гос.знак):</span> <?= $b['state_sign_cars']?> <br /></div>
+	<br />
 	<div class="car_car_PTS"> <span class="bold">ПТС:</span> <?= $b['PTS_cars']?> <br /></div>
 	<div class="car_car_STS"> <span class="bold">СТС:</span> <?= $b['STS_cars']?>  <br /></div>
 	<div class="car_car_VIN"> <span class="bold">VIN:</span> <?= $b['VIN_cars']?> <br /></div>

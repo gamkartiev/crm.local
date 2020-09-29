@@ -3,6 +3,8 @@
 /* ------------------- */
 class DriversController extends Controller
 {
+
+//-----------вывести-----------------//
   public function view($id) {
     // $id = $_GET['id'] ?? 1; //убрать тут единицу и поставить функцию вывода последнего добавленного
 
@@ -13,6 +15,8 @@ class DriversController extends Controller
     include("views/drivers/drivers.php");
   }
 
+
+//-----------создать-----------------//
   public function add() {
       if (!empty($_POST)) {
         $drivers = new Drivers();
@@ -20,16 +24,77 @@ class DriversController extends Controller
         $values = array(
           $surname = $_POST['surname'],
           $first_name = $_POST['first_name'],
-          $patronymic = $_POST['patronymic']
+          $patronymic = $_POST['patronymic'],
+          $surname = $_POST['date_of_birth'],
+          $first_name = $_POST['place_of_birth'],
+          $patronymic = $_POST['passport'],
+          $surname = $_POST['registration'],
+          $first_name = $_POST['drivers_license'],
+          $patronymic = $_POST['phone_1'],
+          $surname = $_POST['phone_2'],
+          $first_name = $_POST['phone_3']
         );
 
         $drivers->getInsert($values);
 
-        header("Location: /");
+        $values = array(
+          $surname = $_POST['surname'],
+          $first_name = $_POST['first_name'],
+          $patronymic = $_POST['patronymic'],
+          $surname = $_POST['date_of_birth'],
+        );
+
+        $id = $drivers->getLastInsertId($values);
+
+        header("Location: /drivers/view/".$id);
       } else {
           include("views/drivers/driversForm.php");
       }
     }
 
-public function edit() {}
+
+//-----------редактирование-----------------//
+  public function edit($id) {
+    if (!empty($_POST)&& $id > 0) {
+      $drivers = new Drivers();
+
+      $values = array(
+         $_POST['surname'],
+         $_POST['first_name'],
+         $_POST['patronymic'],
+         $_POST['date_of_birth'],
+         $_POST['place_of_birth'],
+         $_POST['passport'],
+         $_POST['registration'],
+         $_POST['drivers_license'],
+         $_POST['phone_1'],
+         $_POST['phone_2'],
+         $_POST['phone_3']
+      );
+
+      $drivers->getEdit($id, $values);
+
+      header("Location: /drivers/view/".$id);
+    } else {
+      $drivers = new Drivers();
+      $oneDriversName = $drivers->getOneSelect($id);
+
+      include("views/drivers/driversFormEdit.php");
+    }
+  }
+
+//-----------удаление-----------------//
+  public function delete($id) {
+    if ($id > 0) {
+      $drivers = new Drivers();
+      $drivers->deleteDrivers($id);
+
+      header("Location: /drivers");
+    } else {
+      print_r("Не выбрано, что нужно удалить");
+      time_nanosleep(2,0);
+      header("Location: /drivers");
+    }
+  }
+
 }

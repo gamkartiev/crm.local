@@ -28,13 +28,54 @@ class Drivers extends Base
 		return $result;
 	}
 
+	public function getLastInsertId($values) {
+		$table = 'drivers';
+		$rows = 'id';
+		$join =	'';
+		$where = 'surname='.'"'.$values[0].'"';
+		//.', '.'first_name='.'"'.$values[1].', '.'first_name='.'"'.$values[1].'"'.', '
+							//.'patronymic='.'"'.$values[2].'"'
+							//.'"'.', '.'date_of_birth='.$values[3]
+		$order = '';
+
+		$base = new Base();
+		$result = $base->select($table, $rows, $join, $where, $order);
+
+		$result = $result['0']['id'];
+		// var_export($result);
+
+		return $result;
+	}
+
 	public function getInsert($values) {
 		$table = 'drivers';
 		// $values = ; соответствующий массив передается из контроллера
-		$rows = 'surName, first_name, patronymic';
+		$rows = 'surname, first_name, patronymic, date_of_birth, place_of_birth,
+						passport, registration, drivers_license, phone_1, phone_2, phone_3';
 
 		$base = new Base();
 		$base->insert($table, $values, $rows);
 
+	}
+
+	public function getEdit($id, $values) {
+		$table = 'drivers';
+		// $values = ; соответствующий массив передается из контроллера
+		$rows = ["surName", "first_name", "patronymic", "date_of_birth", "place_of_birth",
+						"passport", "registration", "drivers_license", "phone_1", "phone_2", "phone_3"];
+		$condition = "";
+		$where = 'id='.(int)$id;
+		// var_export($where);
+
+		$base = new Base();
+		$base->update($table, $rows, $where, $values);
+	}
+
+	public function deleteDrivers($id) {
+		$table = 'drivers';
+		$where = 'id='.(int)$id;
+
+		$base = new Base();
+		$base->delete($table, $where);
 	}
 }
