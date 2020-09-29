@@ -23,6 +23,8 @@
 
 <?php foreach($oneCustomersName as $b):?>
 <section class="left_panel">
+	<a href="/customers/edit/<?=$b['id']?>" class="bottom-edit">Редактировать данные компании</a> <br />
+
 	<div class="title"> <span class="bold">Полное наименование компании:</span> <?=$b['name']?> <br /></div>
 	<div class="short_title"> <span class="bold">Краткое наименование компании:</span> <?=$b['short_name']?> <br /><br /></div>
 
@@ -52,7 +54,9 @@
 	<div class="contact_position"> <span class="bold"> Должность:</span> <br /> </div>
 	<div class="contact_mobile_phone"> <span class="bold"> Мобильный телефон:</span>  <br /></div>
 	<div class="contact_e-mail"> <span class="bold"> Электронный адрес:</span>  <br /></div>
-	<div class="contact_note"> <span class="bold"> Примечание:</span>  <br /></div>
+	<div class="contact_note"> <span class="bold"> Примечание:</span>  <br /></div> <br /> <br />
+
+	<a href="/customers/delete/<?=$b['id']?>" class="bottom-delete">Удалить компанию</a>
 </section>
 <?php endforeach ?>
 </main>

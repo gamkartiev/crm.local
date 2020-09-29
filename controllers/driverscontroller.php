@@ -4,7 +4,7 @@
 class DriversController extends Controller
 {
 
-//-----------вывести-----------------//
+  //-----------выведение всех строк-----------------//
   public function view($id) {
     // $id = $_GET['id'] ?? 1; //убрать тут единицу и поставить функцию вывода последнего добавленного
 
@@ -16,7 +16,7 @@ class DriversController extends Controller
   }
 
 
-//-----------создать-----------------//
+//-----------создание-----------------//
   public function add() {
       if (!empty($_POST)) {
         $drivers = new Drivers();

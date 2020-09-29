@@ -9,7 +9,7 @@
 <form action="/customers/add" method="post">
 
   <label for="name"> Название компании: </label>
-  <input type="text" name="name" placeholder="" id="name"> <br />
+  * <input type="text" name="name" placeholder="" id="name" required> <br />
 
   <label for="short_name"> Короткое название: </label>
   <input type="text" name="short_name" placeholder="" id="short_name"> <br />

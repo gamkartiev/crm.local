@@ -60,6 +60,7 @@ protected $connection;
 			$q .=' WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
+			// var_dump($q);
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 
@@ -117,20 +118,6 @@ protected $connection;
 		$mysqli = $this->getConnection();
 
 		if($this->tableExists($table)) {
-			//Parse the where VALUES/Parse the where values
-			// even values (including 0) contain the where rows/even values (including 0) contain the where rows
-			// odd values contain the clauses for the row/нечетные значения содержат предложения для строки
-			// for($i=0; $i < count($where); $i++) {
-			// 	if($i%2 != 0) {
-			// 		if(is_string($where[$i])) {
-			// 			if(($i+1) != null)
-			// 					$where[$i] = '"'.$where[$i].'"AND';
-			// 			else
-			// 					$where[$i] = '"'.$where[$i].'"';
-			// 		}
-			// 	}
-			// }
-			// $where = implode($condition, $where);
 			$update = 'UPDATE '.$table.' SET ';
 			for ($i=0; $i < count($rows); $i++) {
 				if(is_string($values[$i])) {
@@ -140,22 +127,8 @@ protected $connection;
 			}
 				if($i != count($rows)-1) {
 				$update .= ', ';
+				}
 			}
-
-			}
-			// var_export($update);
-			// $keys = array_keys($rows);
-			// for($i=0; $i < count($rows); $i++) {
-			// 	if(is_string($rows[$keys[$i]])) {
-			// 		$update .= $keys[$i].'="'.$rows[$keys[$i]].'"';
-			// 	} else {
-			// 		$update .= $keys[$i].'='.$rows[$keys[$i]];
-			// 	}
-			// 	//Parse to add commas / Разобрать, чтобы добавить запятые
-			// 	if($i != count($rows)-1) {
-			// 		$update .= ',';
-			// 	}
-			// }
 			$update .= ' WHERE '.$where;
 			$query = $mysqli->query($update);
 			if($query) {

@@ -21,7 +21,7 @@ class Drivers extends Base
 		$join =	'';
 		$where = 'id='.(int)$id;
 		$order = '';
-
+		
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
 
@@ -33,16 +33,13 @@ class Drivers extends Base
 		$rows = 'id';
 		$join =	'';
 		$where = 'surname='.'"'.$values[0].'"';
-		//.', '.'first_name='.'"'.$values[1].', '.'first_name='.'"'.$values[1].'"'.', '
-							//.'patronymic='.'"'.$values[2].'"'
-							//.'"'.', '.'date_of_birth='.$values[3]
+
 		$order = '';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
 
 		$result = $result['0']['id'];
-		// var_export($result);
 
 		return $result;
 	}
@@ -61,11 +58,9 @@ class Drivers extends Base
 	public function getEdit($id, $values) {
 		$table = 'drivers';
 		// $values = ; соответствующий массив передается из контроллера
-		$rows = ["surName", "first_name", "patronymic", "date_of_birth", "place_of_birth",
-						"passport", "registration", "drivers_license", "phone_1", "phone_2", "phone_3"];
-		$condition = "";
+		$rows = array("surName", "first_name", "patronymic", "date_of_birth", "place_of_birth",
+						"passport", "registration", "drivers_license", "phone_1", "phone_2", "phone_3");
 		$where = 'id='.(int)$id;
-		// var_export($where);
 
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);
