@@ -77,7 +77,6 @@ class CustomersController extends Controller
         );
 
       $customers->getEdit($id, $values);
-
       header("Location: /customers/view/".$id);
     } else {
       // var_export($id);

@@ -7,6 +7,10 @@ class CarsController extends Controller
 
     $allCarsName = $cars->getAllSelect();
     $oneCarsName = $cars->getOneSelect($id);
+    $oneCarsInfo = $cars->getCarsInfo();
+
+
+    var_export($oneCarsName);
 
     $date_start = date("Y-m-d");
     // var_dump($date_start);

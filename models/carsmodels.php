@@ -24,8 +24,18 @@ class Cars extends Base
 		$order = '';
 
 		$base = new Base();
-		$result = $base->select($table, $rows, $join, $where, $order);
+		$result_1 = $base->select($table, $rows, $join, $where, $order);
 
+		$table = 'history_cars';
+		$rows = '*';
+		$join =	'';
+		$where = 'id_cars'.(int)$id;
+		$order = '';
+
+		$base = new Base();
+		$result_2 = $base->select($table, $rows, $join, $where, $order);
+
+		$result = array_merge($result_1[0], $result_2[0]);
 		return $result;
 
 	}
