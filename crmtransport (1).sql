@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 02 2020 г., 19:32
+-- Время создания: Окт 31 2020 г., 21:50
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -29,24 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cars` (
   `id` int(11) NOT NULL,
+  `brand` varchar(255) NOT NULL,
   `state_sign_cars` varchar(255) NOT NULL,
   `PTS_cars` varchar(255) NOT NULL,
   `STS_cars` varchar(255) NOT NULL,
-  `VIN_cars` varchar(255) NOT NULL,
-  `id_drivers` int(11) NOT NULL,
-  `id_trailers` int(11) NOT NULL,
-  `date_start` date NOT NULL,
-  `date_end` date NOT NULL DEFAULT '9999-01-01'
+  `VIN_cars` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `cars`
 --
 
-INSERT INTO `cars` (`id`, `state_sign_cars`, `PTS_cars`, `STS_cars`, `VIN_cars`, `id_drivers`, `id_trailers`, `date_start`, `date_end`) VALUES
-(1, 'ООО 777 ФФ 755', '1111111111111', '2222222222222', '3333333333333333333333333', 2, 2, '2020-08-04', '9999-01-01'),
-(2, 'УУУ 888 ЕЕ 755', '44444444444444444', '5555555555555555555', '666666666666666666666666666', 4, 1, '2020-08-04', '9999-01-01'),
-(5, 'ААА4445544ЫЫ751', '1111111111', '333333333', '444448484888848848', 2, 1, '2020-09-02', '9999-01-01');
+INSERT INTO `cars` (`id`, `brand`, `state_sign_cars`, `PTS_cars`, `STS_cars`, `VIN_cars`) VALUES
+(1, 'Камаз', 'ООО 777 ФФ 755', '1111111111111', '2222222222222', '3333333333333333333333333'),
+(2, 'Маз', 'УУУ 888 ЕЕ 755', '44444444444444444', '5555555555555555555', '666666666666666666666666666'),
+(5, 'Камаз', 'АА5544751', '1111111111', '333333333', '444448484888848848'),
+(6, 'Камаз', 'СС111АВ773', '111111122222', '3333333334444444', '66666666666666');
 
 -- --------------------------------------------------------
 
@@ -58,8 +56,8 @@ CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `short_name` varchar(255) DEFAULT NULL,
-  `INN` int(11) NOT NULL,
-  `OGRN` int(11) NOT NULL,
+  `INN` varchar(255) NOT NULL,
+  `OGRN` varchar(255) NOT NULL,
   `actual_address` varchar(255) DEFAULT NULL,
   `legal_address` varchar(255) NOT NULL,
   `mailing_address` varchar(255) NOT NULL,
@@ -81,9 +79,11 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `short_name`, `INN`, `OGRN`, `actual_address`, `legal_address`, `mailing_address`, `KPP`, `OKPO_code`, `OKFC_code`, `OKOPF_code`, `OKVED_main_code`, `CEO`, `bank`, `payment_account`, `correspondent_account`, `BIK`, `note`) VALUES
-(1, 'ООО Северсталь', 'ООО Северсталь', 111222333, 111222333, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(2, 'ООО НЛМК', 'ООО НЛМК', 444555666, 444555666, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(3, 'ОМК', 'ОМК', 11111111, 222222222, 'Криворожская', 'Криворожская', 'Криворожская', '111111111', '222222222', '333333333', '33333333', '44', 'Седых Антон михайлович', 'Сбербанк', '1111111111', '2222222222', '53156', 'Тестовое добавление компании ОМК');
+(1, 'ООО Северсталь', 'ООО Северсталь', '111222333', '111222333', '', '', '', '111', '', '', '', '', '', '', '', '', '', ''),
+(2, 'ООО НЛМК', 'ООО НЛМК', '444555666', '444555666', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(3, 'ОМК', 'ОМК', '11111111', '222222222', 'Криворожская', 'Криворожская', 'Криворожская', '111111111', '222222222', '333333333', '33333333', '44', 'Седых Антон михайлович', 'Сбербанк', '1111111111', '2222222222', '53156', 'Тестовое добавление компании ОМК'),
+(4, 'Телеграм', 'Телеграмм', '111111', '2222222', 'Солнечная', 'Солнечная', 'Солнечная', '1111111', '2222222', '3333333', '44444444', '45', 'Бас', 'Сбербанк', '1111111', '222222222', '3333333', 'просто'),
+(5, 'СибирьТранспорт', 'СибирьТранспорт', '111111111', '1111111111', '222222222', '22222222', '22222222', '222222222', '22222222', '22222222', '333333333', '3333', 'Седых Антон михайлович', 'Сбербанк', '11111111', '111111111', '1234321', 'просто');
 
 -- --------------------------------------------------------
 
@@ -95,18 +95,26 @@ CREATE TABLE `drivers` (
   `id` int(11) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `patronymic` varchar(255) NOT NULL
+  `patronymic` varchar(255) NOT NULL,
+  `date_of_birth` date NOT NULL DEFAULT current_timestamp(),
+  `place_of_birth` text NOT NULL,
+  `passport` text NOT NULL,
+  `registration` text NOT NULL,
+  `drivers_license` text NOT NULL,
+  `phone_1` varchar(255) NOT NULL,
+  `phone_2` varchar(255) NOT NULL,
+  `phone_3` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `drivers`
 --
 
-INSERT INTO `drivers` (`id`, `surname`, `first_name`, `patronymic`) VALUES
-(1, 'Иванов', 'Иван', 'Иванович'),
-(2, 'Акушеров', 'Станислав', 'Давидович'),
-(3, 'Иванов', 'Иван', 'Иванович'),
-(4, 'Петров', 'Петр', 'Петрович');
+INSERT INTO `drivers` (`id`, `surname`, `first_name`, `patronymic`, `date_of_birth`, `place_of_birth`, `passport`, `registration`, `drivers_license`, `phone_1`, `phone_2`, `phone_3`) VALUES
+(1, 'Акушеров', 'Станислав', 'Давидович', '2020-09-29', '', '1714 380685 выдан ТП в г. Меленки МРО УФМС России по Владимирской области в г. Муроме  25.12.2014. Код подразделения 330-030', 'Владимирская обл., Меленковский р-н, гор. Меленки , ул. 60 лет Октября дом 11, кв. 1', '', '8 996 442 19 48', '', ''),
+(45, 'Вершинников', 'Иван', 'Иванович', '2018-05-15', 'Москва', '11122233333', 'Москва', '8888877777799999', '89286997788', '', ''),
+(46, 'Иван', 'Сергей', 'Михайлович', '2020-10-07', 'Санкт-Петербург', '445555566666', 'Санкт-Петербург', '555556666444444', '8(925)4798877', '', ''),
+(47, 'Кочерыжкин', 'Алексей', 'Светославович', '2020-10-05', 'Череповец', '112223345677', 'Череповец', '9966655448877', '8(925)7879948', '', '');
 
 -- --------------------------------------------------------
 
@@ -138,21 +146,40 @@ CREATE TABLE `flights` (
 
 INSERT INTO `flights` (`id`, `place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`, `form_of_payment`, `proxy`, `request`, `note`, `id_cars`, `id_customers`) VALUES
 (1, 'Питер', 'Москва', '2020-08-04', '2020-08-05', 'груз', '20', '80', '20000', 'с НДС', 'Тестовая запись', '222', 'Тестовое примечанеи', 1, 1),
-(6, 'Питер', 'Москва', '2020-08-18', '2020-08-20', 'лом', '20', '80', '40000', 'С НДС', 'Примечание без №', 'Примечание без №', 'Примечание без №', 2, 1),
-(7, 'Мытищи', 'Выкса', '2020-08-29', '2020-08-29', 'Лом', '20', '80', '26400', 'без НДС', 'Доверенность №1', 'Заявка 3', 'Нет примечания.', 1, 2),
-(8, 'Нижний Новгород', 'Череповец', '2020-08-31', '2020-09-01', 'гп', '20', '80', '25000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 1, 1),
-(9, 'Череповец', 'Санкт-Петербург', '2020-09-02', '2020-09-03', 'ГП', '22', '76', '23000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 1, 1),
-(10, 'Сантк-Петербург', 'Череповец', '2020-09-04', '2020-09-06', 'лом', '24', '80', '36000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 1, 1),
-(11, 'Москва', 'Череповец', '2020-09-02', '2020-09-03', 'Лом', '24', '76', '43000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 1, 1),
-(12, 'ыыы', '1', '2020-09-02', '2020-09-03', 'груз', '20', '81', '43000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 1, 1);
+(17, 'Сантк-Петербург', 'Москва', '2020-09-15', '2020-09-16', 'груз', '20', '80', '40000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 5, 5);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `trailer`
+-- Структура таблицы `history_car`
 --
 
-CREATE TABLE `trailer` (
+CREATE TABLE `history_car` (
+  `id` int(11) NOT NULL,
+  `id_cars` int(11) NOT NULL,
+  `id_drivers` int(11) NOT NULL,
+  `id_trailers` int(11) NOT NULL,
+  `created_add` date NOT NULL,
+  `updated_add` date NOT NULL DEFAULT '2999-01-01'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `history_car`
+--
+
+INSERT INTO `history_car` (`id`, `id_cars`, `id_drivers`, `id_trailers`, `created_add`, `updated_add`) VALUES
+(3, 1, 1, 1, '2020-10-07', '2999-09-10'),
+(4, 2, 47, 3, '2020-10-04', '2999-09-24'),
+(5, 5, 45, 2, '2020-10-01', '2999-01-01'),
+(6, 6, 46, 4, '2020-09-01', '2999-01-01');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `trailers`
+--
+
+CREATE TABLE `trailers` (
   `id` int(11) NOT NULL,
   `state_sign_trailer` varchar(255) NOT NULL,
   `PTS_trailer` varchar(255) NOT NULL,
@@ -161,12 +188,14 @@ CREATE TABLE `trailer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `trailer`
+-- Дамп данных таблицы `trailers`
 --
 
-INSERT INTO `trailer` (`id`, `state_sign_trailer`, `PTS_trailer`, `STS_trailer`, `VIN`) VALUES
+INSERT INTO `trailers` (`id`, `state_sign_trailer`, `PTS_trailer`, `STS_trailer`, `VIN`) VALUES
 (1, '99999', '111111111111111111', '22222222222222222222', '777777777777777777777777777777'),
-(2, '6666', '3333333333333333333', '444444444444444444', '8888888888888888888888888888');
+(2, '6666', '3333333333333333333', '444444444444444444', '8888888888888888888888888888'),
+(3, 'ВМ4340 799', '1111111222222', '3333344444444', '11122333334445555'),
+(4, 'ЕМ4480 799', '33333322222', '11111155555555', '33332222221111111111');
 
 --
 -- Индексы сохранённых таблиц
@@ -177,8 +206,6 @@ INSERT INTO `trailer` (`id`, `state_sign_trailer`, `PTS_trailer`, `STS_trailer`,
 --
 ALTER TABLE `cars`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_trailer` (`id_trailers`),
-  ADD KEY `id_drivers` (`id_drivers`),
   ADD KEY `id` (`id`);
 
 --
@@ -202,9 +229,18 @@ ALTER TABLE `flights`
   ADD KEY `id_customers` (`id_customers`);
 
 --
--- Индексы таблицы `trailer`
+-- Индексы таблицы `history_car`
 --
-ALTER TABLE `trailer`
+ALTER TABLE `history_car`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_cars` (`id_cars`),
+  ADD KEY `id_drivers` (`id_drivers`),
+  ADD KEY `id_trailers` (`id_trailers`);
+
+--
+-- Индексы таблицы `trailers`
+--
+ALTER TABLE `trailers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id` (`id`);
 
@@ -216,42 +252,41 @@ ALTER TABLE `trailer`
 -- AUTO_INCREMENT для таблицы `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT для таблицы `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT для таблицы `trailer`
+-- AUTO_INCREMENT для таблицы `history_car`
 --
-ALTER TABLE `trailer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `history_car`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT для таблицы `trailers`
+--
+ALTER TABLE `trailers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
-
---
--- Ограничения внешнего ключа таблицы `cars`
---
-ALTER TABLE `cars`
-  ADD CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`id_trailers`) REFERENCES `trailer` (`id`),
-  ADD CONSTRAINT `cars_ibfk_2` FOREIGN KEY (`id_drivers`) REFERENCES `drivers` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `flights`
@@ -259,6 +294,14 @@ ALTER TABLE `cars`
 ALTER TABLE `flights`
   ADD CONSTRAINT `flights_ibfk_1` FOREIGN KEY (`id_cars`) REFERENCES `cars` (`id`),
   ADD CONSTRAINT `flights_ibfk_2` FOREIGN KEY (`id_customers`) REFERENCES `customers` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `history_car`
+--
+ALTER TABLE `history_car`
+  ADD CONSTRAINT `history_car_ibfk_1` FOREIGN KEY (`id_cars`) REFERENCES `cars` (`id`),
+  ADD CONSTRAINT `history_car_ibfk_2` FOREIGN KEY (`id_drivers`) REFERENCES `drivers` (`id`),
+  ADD CONSTRAINT `history_car_ibfk_3` FOREIGN KEY (`id_trailers`) REFERENCES `trailers` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
