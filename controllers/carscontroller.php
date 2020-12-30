@@ -6,33 +6,24 @@ class CarsController extends Controller
     $cars = new Cars();
 
     $allCarsName = $cars->getAllSelect();
-    $oneCarsName = $cars->getOneSelect($id);
-    $oneCarsInfo = $cars->getCarsInfo();
+    $oneCarName = $cars->getOneSelect($id);
 
-
-    var_export($oneCarsName);
-
-    $date_start = date("Y-m-d");
-    // var_dump($date_start);
+    // var_export($oneCarName);
 
     include ("views/cars/cars.php");
   }
 
+  //-----------создание-----------------//
   public function add() {
       if (!empty($_POST)) {
         $cars = new Cars();
-        // $date_start =
 
         $values = array(
+          $brand = $_POST['brand'],
           $state_sign_cars = $_POST['state_sign_cars'],
           $PTS_cars = $_POST['PTS_cars'],
           $STS_cars = $_POST['STS_cars'],
           $VIN_cars = $_POST['VIN_cars'],
-          // $year_cars = $_POST['year_cars'],
-          // $attached_trailer = $_POST['attached_trailer'],
-          2, //$id_drivers
-          1, //id_trailers
-          $date_start = date("Y-m-d")  //дата, когда прицепили/изменили прицеп
         );
 
         $cars->getInsert($values);
@@ -44,6 +35,39 @@ class CarsController extends Controller
       }
     }
 
-  public function edit() {}
+  //-----------редактирование-----------------//
+  public function edit($id) {
+    if(!empty($_POST)&& $id > 0) {
+
+      $values = array(
+        $state_sign_cars = $_POST['state_sign_cars'],
+        $PTS_cars = $_POST['PTS_cars'],
+        $STS_cars = $_POST['STS_cars'],
+        $VIN_cars = $_POST['VIN_cars'],
+      );
+
+      $cars = new Cars();
+      $cars->getEdit($id, $values);
+
+      header("location: /cars/view/".$id);
+    } else {
+      $cars = new Cars();
+      $oneCarsName = $cars->getOneSelect($id);
+
+      include("views/cars/carsFormEdit.php");
+    }
+  }
+
+  //-----------удаление-----------------//
+  public function delete($id) {
+    if ($id > 0){
+      $cars = new Cars();
+      $cars->deleteCar($id);
+
+      header("Location: /cars");
+    } else {
+      header("Location: /cars");
+    }
+  }
 
 }

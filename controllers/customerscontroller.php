@@ -9,7 +9,7 @@ class CustomersController extends Controller
     $customers = new Customers();
 
     $allCustomers = $customers->getAllSelect();
-    $oneCustomersName = $customers->getOneSelect($id);
+    $oneCustomerName = $customers->getOneSelect($id);
 
     include ("views/customers/customers.php");
   }
@@ -53,7 +53,6 @@ class CustomersController extends Controller
 //-----------редактирование-----------------//
   public function edit($id) {
     if (!empty($_POST)&& $id > 0) {
-      $customers = new Customers();
 
       $values = array(
           $name = $_POST['name'],
@@ -76,12 +75,12 @@ class CustomersController extends Controller
           $note = $_POST['note']
         );
 
+      $customers = new Customers();
       $customers->getEdit($id, $values);
       header("Location: /customers/view/".$id);
     } else {
-      // var_export($id);
         $customers = new Customers();
-        $oneCustomersName = $customers->getOneSelect($id);
+        $oneCustomerName = $customers->getOneSelect($id);
 
         include("views/customers/customersFormEdit.php");
     }
@@ -91,12 +90,10 @@ class CustomersController extends Controller
 public function delete($id) {
   if ($id > 0) {
     $customers = new Customers();
-    $customers->deleteCustomers($id);
+    $customers->deleteCustomer($id);
 
     header("Location: /Customers");
   } else {
-    print_r("Не выбрано, что нужно удалить");
-    time_nanosleep(2,0); //по идее должен пару сек паказывать print_r - не работает
     header("Location: /Customers");
   }
 }

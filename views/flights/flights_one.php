@@ -14,7 +14,7 @@
 
 <main>
 
-<a href="/flights/add"> Добавить новую статью </a>
+<a href="/flights/add"> Добавить новый рейс </a>
 
 <table border='1'>
 	<tr class="firstRow">

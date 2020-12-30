@@ -13,7 +13,7 @@
 
 <main>
 
-<a href="/customers/add"> Добавить нового контрагента </a>
+<a href="/customers/add"> Добавить нового контрагента </a> <br /> <br />
 
 <section class="to_list">
 	<?php foreach($allCustomers as $a): ?>
@@ -21,7 +21,7 @@
 	<?php endforeach ?>
 </section>
 
-<?php foreach($oneCustomersName as $b):?>
+<?php foreach($oneCustomerName as $b):?>
 <section class="left_panel">
 	<a href="/customers/edit/<?=$b['id']?>" class="bottom-edit">Редактировать данные компании</a> <br />
 

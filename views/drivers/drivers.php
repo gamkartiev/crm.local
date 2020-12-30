@@ -13,7 +13,7 @@
 
 <main>
 
-<a href="/drivers/add" class="bottom-new"> Добавить нового водителя </a>
+<a href="/drivers/add" class="bottom-new"> Добавить нового водителя </a> <br /> <br />
 
 <section class="to_list">
 	 <?php foreach($allDriversName as $a): ?>
@@ -21,7 +21,7 @@
 	 <?php endforeach ?>
 </section>
 
-<?php foreach($oneDriversName as $b):?>
+<?php foreach($oneDriverName as $b):?>
 <section class="left_panel">
 	<a href="/drivers/edit/<?=$b['id']?>" class="bottom-edit">Редактировать водителя</a> <br />
 

@@ -21,7 +21,7 @@ class Drivers extends Base
 		$join =	'';
 		$where = 'id='.(int)$id;
 		$order = '';
-		
+
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
 
@@ -66,7 +66,7 @@ class Drivers extends Base
 		$base->update($table, $rows, $where, $values);
 	}
 
-	public function deleteDrivers($id) {
+	public function deleteDriver($id) {
 		$table = 'drivers';
 		$where = 'id='.(int)$id;
 

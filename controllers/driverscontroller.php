@@ -10,7 +10,7 @@ class DriversController extends Controller
 
     $drivers = new Drivers();
     $allDriversName = $drivers->getAllSelect();
-    $oneDriversName = $drivers->getOneSelect($id);
+    $oneDriverName = $drivers->getOneSelect($id);
 
     include("views/drivers/drivers.php");
   }
@@ -77,7 +77,7 @@ class DriversController extends Controller
       header("Location: /drivers/view/".$id);
     } else {
       $drivers = new Drivers();
-      $oneDriversName = $drivers->getOneSelect($id);
+      $oneDriverName = $drivers->getOneSelect($id);
 
       include("views/drivers/driversFormEdit.php");
     }
@@ -87,12 +87,10 @@ class DriversController extends Controller
   public function delete($id) {
     if ($id > 0) {
       $drivers = new Drivers();
-      $drivers->deleteDrivers($id);
+      $drivers->deleteDriver($id);
 
       header("Location: /drivers");
     } else {
-      print_r("Не выбрано, что нужно удалить");
-      time_nanosleep(2,0);
       header("Location: /drivers");
     }
   }

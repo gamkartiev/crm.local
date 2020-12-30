@@ -5,9 +5,9 @@ class Flights extends Base
 	public function getAllSelect() {
 		$table = 'flights';
 		$rows = ' flights.id as id_flights, place_1, place_2, date_1, date_2, freight, weight,
-						volume, cost, form_of_payment, proxy, request, note, id_cars,
-						cars.id, state_sign_cars';
-		$join = ' LEFT OUTER JOIN cars ON flights.id_cars = cars.id';
+						volume, cost, form_of_payment, proxy, request, note, id_tractor,
+						tractors.id, state_sign_tractor';
+		$join = ' LEFT OUTER JOIN tractors ON flights.id_tractor = tractors.id';
 		$where = '';
 		$order = 'flights.date_1 DESC';
 
@@ -54,7 +54,7 @@ class Flights extends Base
 		// var_export($result_2);
 
 
-		$result = array_merge($result_1[0], $result_2[0]);
+		$result = ($result_1 + $result_2);
 
 		// var_export($result);
 		return $result;

@@ -52,11 +52,11 @@ class Customers extends Base
 		$base->update($table, $rows, $where, $values);
 	}
 
-	public function deleteCustomers($id) {
+	public function deleteCustomer($id) {
 		$table = 'customers';
 		$where = 'id='.(int)$id;
 
 		$base = new Base();
-		$base->delete($table, $where);
+		$base->deleteCustomer($table, $where);
 	}
 }
