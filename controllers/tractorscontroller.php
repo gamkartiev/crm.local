@@ -34,6 +34,7 @@ class TractorsController extends Controller
       }
     }
 
+
   //-----------редактирование-----------------//
   public function edit($id) {
     if(!empty($_POST)&& $id > 0) {

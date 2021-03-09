@@ -57,6 +57,6 @@ class Customers extends Base
 		$where = 'id='.(int)$id;
 
 		$base = new Base();
-		$base->deleteCustomer($table, $where);
+		$base->delete($table, $where);
 	}
 }
