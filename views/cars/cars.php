@@ -13,36 +13,37 @@
 
 <main>
 
-
+<a href="/cars/add"> Добавить новую машину </a> <br /> <br />
 
 <section class="to_list">
 	Список ТС:
 	<?php	foreach($allCarsName as $a): ?>
-		<a href="/cars/view/<?=$a['id']?>"> <?php echo ($a['id_tractor']." / ".$a['id_trailer']); ?> </a>
+		<a href="/cars/view/<?=$a['id']?>"> <?php echo ($a['brand']." ".$a['state_sign_cars']);?> </a>
 	<?php endforeach ?>  <br />
 </section>
 
 <?php foreach($oneCarName as $b) : ?>
-	<section class="left_panel_car">
+	<section class="left_panel">
+			<a href="/car/edit/<?=$b['id']?>" class="bottom-edit"> Редактировать данные машины </a> <br />
 
-		<div class="car_car_model"> <span class="bold">Модель:</span> <?= $b['id_tractor']?> <br /></div>	<br />
-		<div class="car_car_state_sign"> <span class="bold">Гос.знак:</span> <?= $b['id_driver']?> <br /></div> <br />
-		<div class="car_car_PTS"> <span class="bold">ПТС:</span> <?= $b['id_trailer']?> <br /></div>
-		<div class="car_car_STS"> <span class="bold">СТС:</span> <?= $b['created_add']?>  <br /></div>
-		<div class="car_car_VIN"> <span class="bold">VIN:</span> <?= $b['updated_add']?> <br /></div>
+		<div class="car_car_model"> <span class="bold">Модель:</span> <?= $b['brand']?> <br /></div>	<br />
+		<div class="car_car_state_sign"> <span class="bold">Гос.знак:</span> <?= $b['state_sign_cars']?> <br /></div> <br />
+		<div class="car_car_PTS"> <span class="bold">ПТС:</span> <?= $b['PTS_cars']?> <br /></div>
+		<div class="car_car_STS"> <span class="bold">СТС:</span> <?= $b['STS_cars']?>  <br /></div>
+		<div class="car_car_VIN"> <span class="bold">VIN:</span> <?= $b['VIN_cars']?> <br /></div>
 
+		<br /> <br />
+		<a href="/cars/delete/<?=$b['id']?>" class="bottom-delete">Удалить машину</a>
 	</section>
 <?php endforeach ?>
 
-<?php foreach($oneTrailerName as $b) : ?>
-	<section class="left_panel_tractor">
-	</section>
-<?php endforeach ?>
+<?php // foreach($oneTrailerName as $b) : ?>
+	<!-- <section class="left_panel_tractor">	</section> -->
+<?php //endforeach ?>
 
-<?php foreach($oneDriverName as $b) : ?>
-	<section class="left_panel_trailer">
-	</section>
-<?php endforeach ?>
+<?php //foreach($oneDriverName as $b) : ?>
+	<!-- <section class="left_panel_trailer"> </section> -->
+<?php //endforeach ?>
 
 
 

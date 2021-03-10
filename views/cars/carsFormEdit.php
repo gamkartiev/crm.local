@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title> Добавление нового рейса </title>
+    <title> Изменение даннх машины </title>
   </head>
   <body>
 

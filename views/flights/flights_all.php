@@ -57,7 +57,7 @@
 			<p class="td col_9"> <?=$a['cost']?> </p>
 			<p class="td col_10"> <?=$a['form_of_payment']?> </p>
 
-			<p class="td col_11"> <?=$a['state_sign_tractor']?> </p>
+			<p class="td col_11"> <?=$a['car']?> </p>
 
 			<p class="td col_12"> <?=$a['proxy']?> </p>
 			<p class="td col_13"> <?=$a['request']?> </p>

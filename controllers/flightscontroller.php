@@ -26,7 +26,7 @@ class FlightsController extends Controller
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
                 $note = $_POST['note'],
-                $id_cars = $_POST['state_sign_cars'],
+                $id_cars = $_POST['car'],
                 $id_customers = $_POST['customers']
           );
           $flights->getInsert($values);

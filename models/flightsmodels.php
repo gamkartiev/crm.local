@@ -2,31 +2,19 @@
 
 class Flights extends Base
 {
+
 	public function getAllSelect() {
 		$table = 'flights';
 		$rows = ' flights.id as id_flights, place_1, place_2, date_1, date_2, freight, weight,
-						volume, cost, form_of_payment, proxy, request, note, id_tractor,
-						tractors.id, state_sign_tractor';
-		$join = ' LEFT OUTER JOIN tractors ON flights.id_tractor = tractors.id';
-		$where = '';
-		$order = 'flights.date_1 DESC';
-
-		$base = new Base();
-		$result_1 = $base->select($table, $rows, $join, $where, $order);
- 		// var_export($result_1);
-
-		$table = 'flights';
-		$rows = 'flights.id, flights.id_customers, customers.id, customers.short_name as customers';
-		$join = ' RIGHT OUTER JOIN customers ON flights.id_customers = customers.id';
+						volume, cost, form_of_payment, proxy, request, note, car, flights.id_customers, customers.id,
+						customers.short_name as customers';
+		$join = ' LEFT OUTER JOIN customers ON flights.id_customers = customers.id';
 		$where = 'flights.id_customers = customers.id';
 		$order = 'flights.date_1 DESC';
 
-		$result_2 = $base->select($table, $rows, $join, $where, $order);
-
-		$n = count($result_1);
-		for ($row=0; $row < $n; $row++) {
-			$result[] = array_merge($result_1[$row], $result_2[$row]);
-		}
+		$base = new Base();
+		$result = $base->select($table, $rows, $join, $where, $order);
+ 		// var_export($result);
 
 		return $result;
 	}
@@ -53,12 +41,12 @@ class Flights extends Base
 		$result_2 = $base->select($table, $rows, $join, $where, $order);
 		// var_export($result_2);
 
-
 		$result = ($result_1 + $result_2);
 
 		// var_export($result);
 		return $result;
 	}
+
 
 //фун-я выборки всех клиентов для Формы вставки нового рейса
 	public function getCustomersSelect() {
@@ -74,6 +62,7 @@ class Flights extends Base
 		return $result;
 	}
 
+
 //фун-я выборки всех тягачей для Формы вставки нового рейса
 	public function getCarsSelect() {
 		$table = 'Cars';
@@ -87,6 +76,7 @@ class Flights extends Base
 
 		return $result;
 	}
+
 
 	public function getInsert($values) {
 		$table = 'flights';
