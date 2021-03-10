@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 31 2020 г., 21:50
+-- Время создания: Мар 10 2021 г., 18:59
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -41,10 +41,9 @@ CREATE TABLE `cars` (
 --
 
 INSERT INTO `cars` (`id`, `brand`, `state_sign_cars`, `PTS_cars`, `STS_cars`, `VIN_cars`) VALUES
-(1, 'Камаз', 'ООО 777 ФФ 755', '1111111111111', '2222222222222', '3333333333333333333333333'),
-(2, 'Маз', 'УУУ 888 ЕЕ 755', '44444444444444444', '5555555555555555555', '666666666666666666666666666'),
-(5, 'Камаз', 'АА5544751', '1111111111', '333333333', '444448484888848848'),
-(6, 'Камаз', 'СС111АВ773', '111111122222', '3333333334444444', '66666666666666');
+(1, 'Камаз', 'ООО 777 ФФ 755', '11111111111112', '2222222222222', '77777777777'),
+(2, 'Маз', 'УУУ 888 ЕЕ 755', '444444444444444441', '5555555555555555555', '666666666666666666666666666'),
+(6, 'Камаз', 'СС111АВ773', '1111111222223311111', '3333333334444444', '66666666666666');
 
 -- --------------------------------------------------------
 
@@ -79,10 +78,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `short_name`, `INN`, `OGRN`, `actual_address`, `legal_address`, `mailing_address`, `KPP`, `OKPO_code`, `OKFC_code`, `OKOPF_code`, `OKVED_main_code`, `CEO`, `bank`, `payment_account`, `correspondent_account`, `BIK`, `note`) VALUES
-(1, 'ООО Северсталь', 'ООО Северсталь', '111222333', '111222333', '', '', '', '111', '', '', '', '', '', '', '', '', '', ''),
+(1, 'ООО Северсталь', 'ООО Северсталь', '66111222333', '111222333', '', '', '', '111', '', '', '', '', '', '', '', '', '', ''),
 (2, 'ООО НЛМК', 'ООО НЛМК', '444555666', '444555666', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (3, 'ОМК', 'ОМК', '11111111', '222222222', 'Криворожская', 'Криворожская', 'Криворожская', '111111111', '222222222', '333333333', '33333333', '44', 'Седых Антон михайлович', 'Сбербанк', '1111111111', '2222222222', '53156', 'Тестовое добавление компании ОМК'),
-(4, 'Телеграм', 'Телеграмм', '111111', '2222222', 'Солнечная', 'Солнечная', 'Солнечная', '1111111', '2222222', '3333333', '44444444', '45', 'Бас', 'Сбербанк', '1111111', '222222222', '3333333', 'просто'),
 (5, 'СибирьТранспорт', 'СибирьТранспорт', '111111111', '1111111111', '222222222', '22222222', '22222222', '222222222', '22222222', '22222222', '333333333', '3333', 'Седых Антон михайлович', 'Сбербанк', '11111111', '111111111', '1234321', 'просто');
 
 -- --------------------------------------------------------
@@ -136,7 +134,7 @@ CREATE TABLE `flights` (
   `proxy` varchar(255) NOT NULL,
   `request` varchar(255) NOT NULL,
   `note` text NOT NULL,
-  `id_cars` int(11) NOT NULL,
+  `car` varchar(255) NOT NULL,
   `id_customers` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -144,34 +142,9 @@ CREATE TABLE `flights` (
 -- Дамп данных таблицы `flights`
 --
 
-INSERT INTO `flights` (`id`, `place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`, `form_of_payment`, `proxy`, `request`, `note`, `id_cars`, `id_customers`) VALUES
-(1, 'Питер', 'Москва', '2020-08-04', '2020-08-05', 'груз', '20', '80', '20000', 'с НДС', 'Тестовая запись', '222', 'Тестовое примечанеи', 1, 1),
-(17, 'Сантк-Петербург', 'Москва', '2020-09-15', '2020-09-16', 'груз', '20', '80', '40000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', 5, 5);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `history_car`
---
-
-CREATE TABLE `history_car` (
-  `id` int(11) NOT NULL,
-  `id_cars` int(11) NOT NULL,
-  `id_drivers` int(11) NOT NULL,
-  `id_trailers` int(11) NOT NULL,
-  `created_add` date NOT NULL,
-  `updated_add` date NOT NULL DEFAULT '2999-01-01'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `history_car`
---
-
-INSERT INTO `history_car` (`id`, `id_cars`, `id_drivers`, `id_trailers`, `created_add`, `updated_add`) VALUES
-(3, 1, 1, 1, '2020-10-07', '2999-09-10'),
-(4, 2, 47, 3, '2020-10-04', '2999-09-24'),
-(5, 5, 45, 2, '2020-10-01', '2999-01-01'),
-(6, 6, 46, 4, '2020-09-01', '2999-01-01');
+INSERT INTO `flights` (`id`, `place_1`, `place_2`, `date_1`, `date_2`, `freight`, `weight`, `volume`, `cost`, `form_of_payment`, `proxy`, `request`, `note`, `car`, `id_customers`) VALUES
+(1, 'Питер', 'Москва', '2020-08-04', '2020-08-05', 'груз', '20', '80', '20000', 'с НДС', 'Тестовая запись', '222', 'Тестовое примечанеи', '', 1),
+(17, 'Сантк-Петербург', 'Москва', '2020-09-15', '2020-09-16', 'груз', '20', '80', '40000', 'с НДС', 'Доверенность №', 'Заявка №', 'Без примечания', '5', 5);
 
 -- --------------------------------------------------------
 
@@ -181,21 +154,22 @@ INSERT INTO `history_car` (`id`, `id_cars`, `id_drivers`, `id_trailers`, `create
 
 CREATE TABLE `trailers` (
   `id` int(11) NOT NULL,
+  `brand` varchar(255) NOT NULL,
   `state_sign_trailer` varchar(255) NOT NULL,
   `PTS_trailer` varchar(255) NOT NULL,
   `STS_trailer` varchar(255) NOT NULL,
-  `VIN` varchar(255) NOT NULL
+  `VIN_trailer` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `trailers`
 --
 
-INSERT INTO `trailers` (`id`, `state_sign_trailer`, `PTS_trailer`, `STS_trailer`, `VIN`) VALUES
-(1, '99999', '111111111111111111', '22222222222222222222', '777777777777777777777777777777'),
-(2, '6666', '3333333333333333333', '444444444444444444', '8888888888888888888888888888'),
-(3, 'ВМ4340 799', '1111111222222', '3333344444444', '11122333334445555'),
-(4, 'ЕМ4480 799', '33333322222', '11111155555555', '33332222221111111111');
+INSERT INTO `trailers` (`id`, `brand`, `state_sign_trailer`, `PTS_trailer`, `STS_trailer`, `VIN_trailer`) VALUES
+(1, 'Тонар', '99999', '111111111111111111', '22222222222222222222', '777777777777777777777777777777'),
+(2, 'Тонар', '6666', '3333333333333333333', '444444444444444444', '8888888888888888888888888888'),
+(3, 'Тонар', 'ВМ4340 799', '1111111222222', '3333344444444', '11122333334445555'),
+(4, 'Тонар', 'ЕМ4480 799', '33333322222', '11111155555555', '33332222221111111111');
 
 --
 -- Индексы сохранённых таблиц
@@ -225,17 +199,7 @@ ALTER TABLE `drivers`
 --
 ALTER TABLE `flights`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_cars` (`id_cars`),
   ADD KEY `id_customers` (`id_customers`);
-
---
--- Индексы таблицы `history_car`
---
-ALTER TABLE `history_car`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_cars` (`id_cars`),
-  ADD KEY `id_drivers` (`id_drivers`),
-  ADD KEY `id_trailers` (`id_trailers`);
 
 --
 -- Индексы таблицы `trailers`
@@ -258,7 +222,7 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT для таблицы `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `drivers`
@@ -271,12 +235,6 @@ ALTER TABLE `drivers`
 --
 ALTER TABLE `flights`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT для таблицы `history_car`
---
-ALTER TABLE `history_car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `trailers`
@@ -292,16 +250,7 @@ ALTER TABLE `trailers`
 -- Ограничения внешнего ключа таблицы `flights`
 --
 ALTER TABLE `flights`
-  ADD CONSTRAINT `flights_ibfk_1` FOREIGN KEY (`id_cars`) REFERENCES `cars` (`id`),
   ADD CONSTRAINT `flights_ibfk_2` FOREIGN KEY (`id_customers`) REFERENCES `customers` (`id`);
-
---
--- Ограничения внешнего ключа таблицы `history_car`
---
-ALTER TABLE `history_car`
-  ADD CONSTRAINT `history_car_ibfk_1` FOREIGN KEY (`id_cars`) REFERENCES `cars` (`id`),
-  ADD CONSTRAINT `history_car_ibfk_2` FOREIGN KEY (`id_drivers`) REFERENCES `drivers` (`id`),
-  ADD CONSTRAINT `history_car_ibfk_3` FOREIGN KEY (`id_trailers`) REFERENCES `trailers` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
