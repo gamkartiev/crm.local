@@ -21,29 +21,17 @@ class Flights extends Base
 
 	public function getOneSelect($id){
 		$table = 'flights';
-		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight,
-						volume, cost, form_of_payment, proxy, request, note, id_cars,
-						cars.id, state_sign_cars';
-		$join = ' LEFT OUTER JOIN cars ON flights.id_cars = cars.id';
+		$rows = ' flights.id as id_flights, place_1, place_2, date_1, date_2, freight, weight,
+						volume, cost, form_of_payment, proxy, request, flights.note, car, flights.id_customers, customers.id,
+						customers.short_name as customers';
+		$join = ' LEFT OUTER JOIN customers ON flights.id_customers = customers.id';
 		$where = 'flights.id ='.$id;
 		$order = '';
 
 		$base = new Base();
-		$result_1 = $base->select($table, $rows, $join, $where, $order);
-	 	// var_export($result_1);
-
-		$table = 'flights';
-		$rows = 'flights.id, flights.id_customers, customers.id, customers.short_name as customers';
-		$join = ' RIGHT OUTER JOIN customers ON flights.id_customers = customers.id';
-		$where = 'flights.id='.$id;
-		$order = '';
-
-		$result_2 = $base->select($table, $rows, $join, $where, $order);
-		// var_export($result_2);
-
-		$result = ($result_1 + $result_2);
-
+		$result = $base->select($table, $rows, $join, $where, $order);
 		// var_export($result);
+
 		return $result;
 	}
 
@@ -81,9 +69,9 @@ class Flights extends Base
 	public function getInsert($values) {
 		$table = 'flights';
 		// $values = ; соответствующий массив передается из контроллера
-		$rows = '	place_1, place_2, date_1, date_2, freight, weight,
-							volume, cost, form_of_payment, proxy,
-							request, note, id_cars, id_customers';
+		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
+							volume, cost, form_of_payment, car, id_customers, proxy,
+							request, note ';
 
 		$base = new Base();
 		$result = $base->insert($table, $values, $rows);

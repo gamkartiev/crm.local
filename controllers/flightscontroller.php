@@ -23,11 +23,12 @@ class FlightsController extends Controller
                 $volume = $_POST['volume'],
                 $cost = $_POST['cost'],
                 $form_of_payment = $_POST['form_of_payment'],
+                $car = $_POST['car'],
+                $id_customers = $_POST['customers'],
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
-                $note = $_POST['note'],
-                $id_cars = $_POST['car'],
-                $id_customers = $_POST['customers']
+                $note = $_POST['note']
+
           );
           $flights->getInsert($values);
 
@@ -45,8 +46,9 @@ class FlightsController extends Controller
     public function post($id){
       $flights = new Flights();
       $oneFlights = $flights->getOneSelect($id);
-
+        var_dump($oneFlights);
       require("views/flights/flights_one.php");
     }
+
     public function edit() {}
 }

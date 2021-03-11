@@ -35,15 +35,12 @@
   <label for="formOfPayment"> Форма оплаты: </label>
     <input type="text" name="form_of_payment" value="с НДС" id="formOfPayment"> <br />
 
-  <!-- <label for=""> Условия оплаты </label>
-    <input type="text" name="" value="" id=""> -->
-
-  <label for="state_sign_cars"> Тягач: </label>
-    <select class="" name="state_sign_cars">
+  <label for="car"> Машина: </label>
+    <select class="" name="car">
       <option disabled>Выберите машину:</option>
       <?php
       foreach($cars as $a): ?>
-        <option value="<?=$a['id']?>"> <?=$a['state_sign_cars']?></option>
+        <option value="<?=$a['state_sign_cars']?>"> <?=$a['state_sign_cars']?></option>
       <<?php endforeach; ?>
     </select>
 
@@ -59,13 +56,13 @@
   <!-- <label for=""> Логист: </label>
     <input type="text" name="" value="" id=""> <br /> -->
 
-  <label for=""> Доверенность: </label>
+  <label for="proxy"> Доверенность: </label>
     <input type="text" name="proxy" value="Доверенность №" id="proxy"> <br />
 
   <label for="request"> Заявка: </label>
     <input type="text" name="request" value="Заявка №" id="request"> <br />
 
-  <label for=""> Примечание: </label>
+  <label for="note"> Примечание: </label>
     <input type="text" name="note" value="Без примечания" id="note"> <br />
 
 <button type="submit" name="button"> Добавить </button>

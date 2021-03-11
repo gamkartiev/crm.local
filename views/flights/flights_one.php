@@ -42,24 +42,24 @@
 	</tr>
 
 		<tr class="row">
-			<td> <?=$oneFlights['date_1']?> </td>
-			<td> <?=$oneFlights['date_2']?> </td>
-			<td> <?=$oneFlights['place_1']?> </td>
-			<td> <?=$oneFlights['place_2']?> </td>
+			<td> <?=$oneFlights['0']['date_1']?> </td>
+			<td> <?=$oneFlights['0']['date_2']?> </td>
+			<td> <?=$oneFlights['0']['place_1']?> </td>
+			<td> <?=$oneFlights['0']['place_2']?> </td>
 
-			<td> <?=$oneFlights['customers']?> </td>
+			<td> <?=$oneFlights['0']['customers']?> </td>
 
-			<td> <?=$oneFlights['freight']?> </td>
-			<td> <?=$oneFlights['volume']?> </td>
-			<td> <?=$oneFlights['weight']?> </td>
-			<td> <?=$oneFlights['cost']?> </td>
-			<td> <?=$oneFlights['form_of_payment']?> </td>
+			<td> <?=$oneFlights['0']['freight']?> </td>
+			<td> <?=$oneFlights['0']['volume']?> </td>
+			<td> <?=$oneFlights['0']['weight']?> </td>
+			<td> <?=$oneFlights['0']['cost']?> </td>
+			<td> <?=$oneFlights['0']['form_of_payment']?> </td>
 
-			<td> <?=$oneFlights['state_sign_cars']?> </td>
+			<td> <?=$oneFlights['0']['car']?> </td>
 
-			<td> <?=$oneFlights['proxy']?> </td>
-			<td> <?=$oneFlights['request']?> </td>
-			<td> <?=$oneFlights['note']?> </td>
+			<td> <?=$oneFlights['0']['proxy']?> </td>
+			<td> <?=$oneFlights['0']['request']?> </td>
+			<td> <?=$oneFlights['0']['note']?> </td>
 		</tr>
 	</a>
 
