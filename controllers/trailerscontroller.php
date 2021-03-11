@@ -20,6 +20,7 @@ class TrailersController extends Controller
         $trailers = new Trailers();
 
         $values = array(
+          $brand = $_POST['brand'],
           $state_sign_trailer = $_POST['state_sign_trailer'],
           $PTS_trailer = $_POST['PTS_trailer'],
           $STS_trailer = $_POST['STS_trailer'],

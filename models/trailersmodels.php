@@ -32,7 +32,7 @@ class Trailers extends Base
 
 	public function getInsert($values) {
 		$table = 'trailers';
-		$rows = 'state_sign_trailer, PTS_trailer, STS_trailer, VIN_trailer';
+		$rows = 'brand, state_sign_trailer, PTS_trailer, STS_trailer, VIN_trailer';
 
 		$base = new Base();
 		$base->insert($table, $values, $rows);
@@ -56,7 +56,7 @@ class Trailers extends Base
 		$where = 'id='.(int)$id;
 
 		$base = new Base();
-		$base->deleteTrailers($table, $where);
+		$base->delete($table, $where);
 	}
 
 }

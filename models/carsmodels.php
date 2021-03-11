@@ -30,7 +30,7 @@ class Cars extends Base
 
 	public function getInsert($values) {
 		$table = 'cars';
-		$rows = 'state_sign_cars, PTS_cars, STS_cars, VIN_cars';
+		$rows = 'brand, state_sign_cars, PTS_cars, STS_cars, VIN_cars';
 
 		$base = new Base();
 		$base->insert($table, $values, $rows);

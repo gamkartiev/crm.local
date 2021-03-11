@@ -6,7 +6,7 @@ class Flights extends Base
 	public function getAllSelect() {
 		$table = 'flights';
 		$rows = ' flights.id as id_flights, place_1, place_2, date_1, date_2, freight, weight,
-						volume, cost, form_of_payment, proxy, request, note, car, flights.id_customers, customers.id,
+						volume, cost, form_of_payment, proxy, request, flights.note, car, flights.id_customers, customers.id,
 						customers.short_name as customers';
 		$join = ' LEFT OUTER JOIN customers ON flights.id_customers = customers.id';
 		$where = 'flights.id_customers = customers.id';
