@@ -73,7 +73,7 @@ protected $connection;
 					$row = $query->fetch_assoc();
 					$result[] = $row;
 				}
-					// var_dump($result);
+				
 			return $result;
 			}
 		}	return print_r("такая таблица не существует! models->function select");

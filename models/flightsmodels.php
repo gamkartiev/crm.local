@@ -78,5 +78,17 @@ class Flights extends Base
 
 	}
 
+	public function getEdit($id, $values) {
+		$table = 'flights';
+		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
+		"cost", "from_of_payment", "car", "id_customers", "proxy", "request", "note");
+		$where = 'id='.(int)$id;
+
+		$base = new Base();
+		$base->update($table, $rows, $where, $values);
+	}
+
+
+	//public function deleteFlight();
 
 }

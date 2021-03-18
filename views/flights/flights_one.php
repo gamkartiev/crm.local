@@ -8,7 +8,7 @@
 <body>
 
 
-<header> <!-- Сделать отдельной страничкой -->
+<header>
  <?php include ("views/header.php"); ?>
 </header>
 
@@ -16,54 +16,55 @@
 
 <a href="/flights/add"> Добавить новый рейс </a>
 
-<table border='1'>
-	<tr class="firstRow">
-		<th> Дата загрузки </th>
-		<th> Дата выгрузки </th>
-		<th> Откуда</th>
-		<th> Куда</th>
 
-		<th> Заказчик</th>
-		<!-- <th> Логист </th> -->
+<p class="table" >
+	<p class="firstRow tr">
+		<b>
+		<p class="th col_1"> Дата загрузки </p>
+		<p class="th col_2"> Дата выгрузки </p>
+		<p class="th col_3"> Откуда</p>
+		<p class="th col_4"> Куда</p>
 
-		<th> Груз</th>
-		<th> Объем </th>
-		<th> Вес</th>
-		<th> Цена </th>
-		<th> Форма оплаты </th>
+		<p class="th col_5"> Заказчик</p>
 
-		<!-- <th> Водитель</th> -->
-		<th> Машина </th>
-		<!-- <th> Полуприцеп </th> -->
+		<p class="th col_6"> Груз</p>
+		<p class="th col_7"> Объем </p>
+		<p class="th col_8"> Вес</p>
+		<p class="th col_9"> Цена </p>
+		<p class="th col_10"> Форма оплаты </p>
 
-		<th> Доверенность </th>
-		<th> Заявка </th>
-		<th> Примечание</th>
-	</tr>
+		<p class="th col_11"> Машина </p>
 
-		<tr class="row">
-			<td> <?=$oneFlights['0']['date_1']?> </td>
-			<td> <?=$oneFlights['0']['date_2']?> </td>
-			<td> <?=$oneFlights['0']['place_1']?> </td>
-			<td> <?=$oneFlights['0']['place_2']?> </td>
+		<p class="th col_12"> Доверенность </p>
+		<p class="th col_13"> Заявка </p>
+		<p class="th col_14"> Примечание</p></b>
+	</p>
+	<p class="row tr">
+		<p class="td col_1">  <?=date("j.m.Y",strtotime($oneFlights['0']['date_1']))?></p>
+		<p class="td col_2"> <?=date("j.m.Y",strtotime($oneFlights['0']['date_2']))?> </p>
+		<p class="td col_3"> <?=$oneFlights['0']['place_1']?> </p>
+		<p class="td col_4"> <?=$oneFlights['0']['place_2']?> </p>
 
-			<td> <?=$oneFlights['0']['customers']?> </td>
+		<p class="td col_5"> <?=$oneFlights['0']['customers']?> </p>
 
-			<td> <?=$oneFlights['0']['freight']?> </td>
-			<td> <?=$oneFlights['0']['volume']?> </td>
-			<td> <?=$oneFlights['0']['weight']?> </td>
-			<td> <?=$oneFlights['0']['cost']?> </td>
-			<td> <?=$oneFlights['0']['form_of_payment']?> </td>
+		<p class="td col_6"> <?=$oneFlights['0']['freight']?> </p>
+		<p class="td col_7"> <?=$oneFlights['0']['volume']?> </p>
+		<p class="td col_8"> <?=$oneFlights['0']['weight']?> </p>
+		<p class="td col_9"> <?=$oneFlights['0']['cost']?> </p>
+		<p class="td col_10"> <?=$oneFlights['0']['form_of_payment']?> </p>
 
-			<td> <?=$oneFlights['0']['car']?> </td>
+		<p class="td col_11"> <?=$oneFlights['0']['car']?> </p>
 
-			<td> <?=$oneFlights['0']['proxy']?> </td>
-			<td> <?=$oneFlights['0']['request']?> </td>
-			<td> <?=$oneFlights['0']['note']?> </td>
-		</tr>
-	</a>
+		<p class="td col_12"> <?$oneFlights['0']['proxy']?> </p>
+		<p class="td col_13"> <?=$oneFlights['0']['request']?> </p>
+		<p class="td col_14"> <?=$oneFlights['0']['note']?> </p>
+		<p class="td col_15"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
+		<p class="td col_16"> <a href="/flights/delete/<?=$id?>" class="bottom-edit"> Удалить рейс </a> </p>
+	</p>
 
-</table>
+</p>
+
+
 
 </main>
 <!-- <script src="/views/js.js"></script>
