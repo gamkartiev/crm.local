@@ -30,7 +30,6 @@ class Flights extends Base
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
-		// var_export($result);
 
 		return $result;
 	}
@@ -81,14 +80,19 @@ class Flights extends Base
 	public function getEdit($id, $values) {
 		$table = 'flights';
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
-		"cost", "from_of_payment", "car", "id_customers", "proxy", "request", "note");
+		"cost", "form_of_payment", "proxy", "request", "note", "car", "id_customers");
 		$where = 'id='.(int)$id;
-
+		// var_dump($id);
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);
 	}
 
 
-	//public function deleteFlight();
+	public function deleteFlight($id) {
+		$table = 'flights';
+		$where = 'id='.(int)$id;
 
+		$base = new Base;
+		$base->delete($table, $where);
+	}
 }

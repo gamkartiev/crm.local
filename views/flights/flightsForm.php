@@ -32,8 +32,8 @@
   <label for="cost"> Сумма: </label>
     <input type="text" name="cost" placeholder="стоимость перевозки" id="cost"> <br />
 
-  <label for="formOfPayment"> Форма оплаты: </label>
-    <input type="text" name="form_of_payment" value="с НДС" id="formOfPayment"> <br />
+  <label for="form_of_payment"> Форма оплаты: </label>
+    <input type="text" name="form_of_payment" value="с НДС" id="form_of_payment"> <br />
 
   <label for="car"> Машина: </label>
     <select class="" name="car">

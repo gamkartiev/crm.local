@@ -2,11 +2,18 @@
 /* ------------------- */
 class FlightsController extends Controller
 {
-    public function view() {
-      $flights = new Flights();
-      $allFlights = $flights->getAllSelect();
+    public function view($id) {
+      if ($id > 0) {
+        $flights = new Flights();
+        $oneFlights = $flights->getOneSelect($id);
 
-      require("views/flights/flights_all.php");
+        require("views/flights/flights_one.php");
+      } else {
+        $flights = new Flights();
+        $allFlights = $flights->getAllSelect();
+
+        require("views/flights/flights_all.php");
+      }
   }
 
     public function add() {
@@ -33,7 +40,7 @@ class FlightsController extends Controller
           $flights->getInsert($values);
 
           header("Location: /");
-          // exit();
+
         } else {
             $flights = new Flights();
             $customers = $flights->getCustomersSelect();
@@ -43,19 +50,12 @@ class FlightsController extends Controller
         }
       }
 
-    public function post($id){
-      $flights = new Flights();
-      $oneFlights = $flights->getOneSelect($id);
-        // var_dump($oneFlights);
-      require("views/flights/flights_one.php");
-    }
-
 
 //-----------редактирование-----------------//
     public function edit($id) {
       if(!empty($_POST) && $id>0){
         $flights = new Flights();
-          // var_dump($_POST);
+          // var_export($_POST['customers']);
         $values = array(
               $place_1 = $_POST['place_1'],
               $place_2 = $_POST['place_2'],
@@ -66,24 +66,23 @@ class FlightsController extends Controller
               $volume = $_POST['volume'],
               $cost = $_POST['cost'],
               $form_of_payment = $_POST['form_of_payment'],
-              $car = $_POST['car'],
-              $id_customers = $_POST['customers'],
               $proxy = $_POST['proxy'],
               $request = $_POST['request'],
-              $note = $_POST['note']
+              $note = $_POST['note'],
+              $car = $_POST['car'],
+              $id_customers = $_POST['id_customers']
         );
 
         $flights->getEdit($id, $values);
-        // header("Location: /drivers/view/".$id);
-        header("Location: /flights/post/".$id);
+        header("Location: /flights/view/".$id);
+
       } else {
+
         $flights = new Flights();
 
         $customers = $flights->getCustomersSelect();
         $cars = $flights->getCarsSelect();
         $oneFlights = $flights->getOneSelect($id);
-
-        // var_dump($oneFlights);
 
         include("views/flights/flightsFormEdit.php");
       }
@@ -91,4 +90,14 @@ class FlightsController extends Controller
 
 
     //-----------удаление-----------------//
+    public function delete($id) {
+      if($id > 0) {
+        $flights = new Flights();
+        $flights->deleteFlight($id);
+
+        header("location: /flights");
+      } else {
+        header("Location: /flights");
+      }
+    }
 }

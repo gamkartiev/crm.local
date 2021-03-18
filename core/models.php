@@ -52,7 +52,11 @@ protected $connection;
 	*/
 	public function select($table, $rows, $join, $where, $order) {
 		$mysqli = $this->getConnection();
-
+// var_dump($table);
+// var_dump($rows);
+// var_dump($join);
+// var_dump($where);
+// var_dump($order);
 		$q = 'SELECT '.$rows.' FROM '.$table;
 		if($join != null)
 			$q .= $join;
@@ -73,7 +77,7 @@ protected $connection;
 					$row = $query->fetch_assoc();
 					$result[] = $row;
 				}
-				
+
 			return $result;
 			}
 		}	return print_r("такая таблица не существует! models->function select");
@@ -116,7 +120,9 @@ protected $connection;
 
 	public function update($table, $rows, $where, $values) {
 		$mysqli = $this->getConnection();
-
+		// var_dump($table);
+		// var_dump($rows);
+		// var_dump($values);
 		if($this->tableExists($table)) {
 			$update = 'UPDATE '.$table.' SET ';
 			for ($i=0; $i < count($rows); $i++) {
@@ -130,6 +136,7 @@ protected $connection;
 				}
 			}
 			$update .= ' WHERE '.$where;
+
 			$query = $mysqli->query($update);
 			if($query) {
 				return true;
