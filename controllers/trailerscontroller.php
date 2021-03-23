@@ -30,7 +30,7 @@ class TrailersController extends Controller
         $trailers->getInsert($values);
 
         header("Location: /trailers");
-        // exit();
+        exit();
       } else {
           include("views/trailers/trailersForm.php");
       }
@@ -53,6 +53,7 @@ class TrailersController extends Controller
       $trailers->getEdit($id, $values);
 
       header("location: /trailers/view/".$id);
+      exit();
     } else {
       $trailers = new Trailers();
       $oneTrailerName = $trailers->getOneSelect($id);
@@ -70,8 +71,10 @@ class TrailersController extends Controller
       $trailers->deleteTrailer($id);
 
       header("Location: /trailers");
+      exit();
     } else {
       header("Location: /trailers");
+      exit();
     }
   }
 

@@ -50,6 +50,7 @@ class CarsController extends Controller
       $cars->getEdit($id, $values);
 
       header("location: /cars/view/".$id);
+      exit();
     } else {
       $cars = new Cars();
       $oneCarsName = $cars->getOneSelect($id);
@@ -65,8 +66,10 @@ class CarsController extends Controller
       $cars->deleteCar($id);
 
       header("Location: /cars");
+      exit();
     } else {
       header("Location: /cars");
+      exit();
     }
   }
 

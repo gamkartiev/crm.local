@@ -78,6 +78,7 @@ class CustomersController extends Controller
       $customers = new Customers();
       $customers->getEdit($id, $values);
       header("Location: /customers/view/".$id);
+      exit();
     } else {
         $customers = new Customers();
         $oneCustomerName = $customers->getOneSelect($id);
@@ -93,8 +94,10 @@ public function delete($id) {
     $customers->deleteCustomer($id);
 
     header("Location: /Customers");
+    exit();
   } else {
     header("Location: /Customers");
+    exit();
   }
 }
 }

@@ -40,7 +40,7 @@ class FlightsController extends Controller
           $flights->getInsert($values);
 
           header("Location: /");
-
+          exit();
         } else {
             $flights = new Flights();
             $customers = $flights->getCustomersSelect();
@@ -75,7 +75,7 @@ class FlightsController extends Controller
 
         $flights->getEdit($id, $values);
         header("Location: /flights/view/".$id);
-
+        exit();
       } else {
 
         $flights = new Flights();
@@ -96,8 +96,10 @@ class FlightsController extends Controller
         $flights->deleteFlight($id);
 
         header("location: /flights");
+        exit();
       } else {
         header("Location: /flights");
+        exit();
       }
     }
 }

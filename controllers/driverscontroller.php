@@ -47,6 +47,7 @@ class DriversController extends Controller
         $id = $drivers->getLastInsertId($values);
 
         header("Location: /drivers/view/".$id);
+        exit();
       } else {
           include("views/drivers/driversForm.php");
       }
@@ -75,6 +76,7 @@ class DriversController extends Controller
       $drivers->getEdit($id, $values);
 
       header("Location: /drivers/view/".$id);
+      exit();
     } else {
       $drivers = new Drivers();
       $oneDriverName = $drivers->getOneSelect($id);
@@ -90,8 +92,10 @@ class DriversController extends Controller
       $drivers->deleteDriver($id);
 
       header("Location: /drivers");
+      exit();
     } else {
       header("Location: /drivers");
+      exit();
     }
   }
 
