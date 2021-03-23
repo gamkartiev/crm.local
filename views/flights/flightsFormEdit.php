@@ -49,7 +49,7 @@
       <option disabled>Выберите Компанию:</option>
       <?php
       foreach($customers as $a): ?>
-        <option value="<?=$oneFlights['0']['customers'] ?>"> <?=$a['short_name']?></option>
+        <option value="<?=$oneFlights['0']['customers']?>"> <?=$a['short_name']?></option>
       <<?php endforeach; ?>
     </select>
 
