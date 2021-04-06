@@ -95,10 +95,10 @@ class FlightsController extends Controller
         $flights = new Flights();
         $flights->deleteFlight($id);
 
-        header("location: /flights");
+        header("location: /flights/view");
         exit();
       } else {
-        header("Location: /flights");
+        header("Location: /flights/view");
         exit();
       }
     }

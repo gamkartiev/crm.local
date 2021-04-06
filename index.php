@@ -8,10 +8,14 @@ require_once ("core/models.php"); // Тут находится базовый к
 require_once ("core/controllers.php"); //Тут находится базовый класс Контроллеров
 
 include ("core/route.php"); // Загрузка файла роутинга
-$_SESSION['login'] = "login";
+
+// $_SESSION['login'] = "Admin";
+
 //Если нет логина, то выкидывает на форму входа на сайт
-if(empty($_SESSION['login'])) {
-  header("Location: /auth/input/");
-}
+// if(!isset($_SESSION['login']) OR ) {
+//
+//  header("Location: /auth/input/");
+// }
+
 
 Route::start();

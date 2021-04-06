@@ -6,7 +6,7 @@
   </head>
   <body>
 
-<form action="/auth/input" method="post">
+<form action="/auth/view" method="post">
 
     <label for="login"> Логин: </label>
   * <input type="text" name="login" id="login" required autocomplete="off"> <br />
