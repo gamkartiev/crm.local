@@ -52,7 +52,7 @@ protected $connection;
 	*/
 	public function select($table, $rows, $join, $where, $order) {
 		$mysqli = $this->getConnection();
-// var_dump($table);
+
 		$q = 'SELECT '.$rows.' FROM '.$table;
 		if($join != null)
 			$q .= $join;
@@ -60,7 +60,7 @@ protected $connection;
 			$q .=' WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
-			// var_dump($q);
+			// var_export($q);
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 

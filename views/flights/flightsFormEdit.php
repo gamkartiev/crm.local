@@ -7,63 +7,76 @@
   <body>
 
 <form action="/flights/edit" method="post">
-  <input type="hidden" name="action" value="addNewFlight"> <!--Этот пункт можно убрать -->
-  <label for="place_1"> Откуда: </label>
-    <input type="text" name="place_1" value="<?=$oneFlights['0']['place_1']?>" placeholder="место загрузки" id="place_1"> <br />
+  <!-- <input type="hidden" name="action" value="addNewFlight"   //Этот пункт можно убрать -->
+  <label> Откуда:
+    <input type="text" name="place_1" value="<?=$oneFlights['0']['place_1']?>" placeholder="место загрузки"> <br />
+  </label>
 
-  <label for="place_2"> Куда: </label>
-    <input type="text" name="place_2" value="<?=$oneFlights['0']['place_2']?>" placeholder="место выгрузки" id="place_2"> <br />
+  <label> Куда:
+    <input type="text" name="place_2" value="<?=$oneFlights['0']['place_2']?>" placeholder="место выгрузки"> <br />
+  </label>
 
-  <label for="date_1"> Дата загрузки: </label>
-    <input type="date" name="date_1" value="<?=$oneFlights['0']['date_1']?>" id="date_1"> <br />
+  <label> Дата загрузки:
+    <input type="date" name="date_1" value="<?=$oneFlights['0']['date_1']?>"> <br />
+  </label>
 
-  <label for="date_2"> Дата выгрузки: </label>
-    <input type="date" name="date_2" value="<?=$oneFlights['0']['date_2']?>" id="date_2"> <br />
+  <label> Дата выгрузки:
+    <input type="date" name="date_2" value="<?=$oneFlights['0']['date_2']?>"> <br />
+  </label>
 
-  <label for="freight"> Название груза: </label>
-    <input type="text" name="freight" value="<?=$oneFlights['0']['freight']?>" placeholder="название груза" id="freight"> <br />
+  <label> Название груза:
+    <input type="text" name="freight" value="<?=$oneFlights['0']['freight']?>" placeholder="название груза"> <br />
+  </label>
 
-  <label for="weight"> Вес: </label>
-    <input type="number" name="weight" value="<?=$oneFlights['0']['weight']?>" placeholder="Вес" id="weight"> <br />
+  <label> Вес:
+    <input type="number" name="weight" value="<?=$oneFlights['0']['weight']?>" placeholder="Вес"> <br />
+  </label>
 
-  <label for="volume"> Объем: </label>
-    <input type="number" name="volume" value="<?=$oneFlights['0']['volume']?>" placeholder="Объем" id="volume"> <br />
+  <label> Объем:
+    <input type="number" name="volume" value="<?=$oneFlights['0']['volume']?>" placeholder="Объем" > <br />
+  </label>
 
-  <label for="cost"> Сумма: </label>
-    <input type="text" name="cost" value="<?=$oneFlights['0']['cost']?>" placeholder="стоимость перевозки" id="cost"> <br />
+  <label> Сумма:
+    <input type="text" name="cost" value="<?=$oneFlights['0']['cost']?>" placeholder="стоимость перевозки" > <br />
+  </label>
 
-  <label for="form_of_payment"> Форма оплаты: </label>
-    <input type="text" name="form_of_payment" value="<?=$oneFlights['0']['form_of_payment']?>" id="form_of_payment"> <br />
+  <label> Форма оплаты:
+    <input type="text" name="form_of_payment" value="<?=$oneFlights['0']['form_of_payment']?>" > <br />
+  </label>
 
-  <label for="car"> Машина: </label>
-    <select class="" name="car">
+  <label> Машина:
+    <select name="car">
       <option disabled>Выберите машину:</option>
       <?php
       foreach($cars as $a): ?>
         <option value="<?=$oneFlights['0']['car']?>"> <?=$a['state_sign_cars']?></option>
       <<?php endforeach; ?>
     </select>
+  </label>
 
-  <label for="customers"> Компания: </label>
-    <select class="" name="customers">
+  <label> Компания:
+    <select name="customers">
       <option disabled>Выберите Компанию:</option>
       <?php
       foreach($customers as $a): ?>
         <option value="<?=$oneFlights['0']['customers']?>"> <?=$a['short_name']?></option>
       <<?php endforeach; ?>
     </select>
+  </label>
 
+  <label> Доверенность:
+    <input type="text" name="proxy" value="<?=$oneFlights['0']['proxy']?>" > <br />
+  </label>
 
-  <label for="proxy"> Доверенность: </label>
-    <input type="text" name="proxy" value="<?=$oneFlights['0']['proxy']?>" id="proxy"> <br />
+  <label> Заявка:
+    <input type="text" name="request" value="<?=$oneFlights['0']['request']?>" > <br />
+  </label>
 
-  <label for="request"> Заявка: </label>
-    <input type="text" name="request" value="<?=$oneFlights['0']['request']?>" id="request"> <br />
+  <label> Примечание:
+    <input type="text" name="note" value="<?=$oneFlights['0']['note']?>"> <br />
+  </label>
 
-  <label for="note"> Примечание: </label>
-    <input type="text" name="note" value="<?=$oneFlights['0']['note']?>" id="note"> <br />
-
-<button type="submit" name="button"> Добавить </button>
+  <button type="submit" name="button"> Добавить </button>
 
 </form>
 

@@ -65,6 +65,19 @@ class Flights extends Base
 	}
 
 
+	public function getIdCustomers($customers) {
+		$table = 'Customers';
+		$rows = 'id, short_name';
+		$join = '';
+		$where = 'short_name='.$customers;
+		$order = '';
+
+		$base = new Base();
+		$result = $base->select($table, $rows, $join, $where, $order);
+
+		return $result;
+	}
+
 	public function getInsert($values) {
 		$table = 'flights';
 		// $values = ; соответствующий массив передается из контроллера
