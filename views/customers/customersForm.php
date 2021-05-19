@@ -15,10 +15,10 @@
   <input type="text" name="short_name" placeholder="" id="short_name" autocomplete="off"> <br />
 
   <label for="INN"> ИНН: </label>
-  <input type="text" name="INN" placeholder="" id="INN" autocomplete="off"> <br />
+  <input type="text" name="INN" placeholder="" id="INN" autocomplete="off" maxlength="12"> <br />
 
   <label for="OGRN"> ОГРН: </label>
-  <input type="text" name="OGRN" placeholder="" id="OGRN" autocomplete="off"> <br />
+  <input type="text" name="OGRN" placeholder="" id="OGRN" autocomplete="off" maxlength="13"> <br />
 
   <label for="actual_address"> Фактический адрес: </label>
   <input type="text" name="actual_address" placeholder="" id="actual_address" autocomplete="off"> <br />

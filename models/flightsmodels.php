@@ -5,26 +5,22 @@ class Flights extends Base
 
 	public function getAllSelect() {
 		$table = 'flights';
-		$rows = ' flights.id as id_flights, place_1, place_2, date_1, date_2, freight, weight,
-						volume, cost, form_of_payment, proxy, request, flights.note, car, flights.id_customers, customers.id,
-						customers.short_name as customers';
-		$join = ' LEFT OUTER JOIN customers ON flights.id_customers = customers.id';
-		$where = 'flights.id_customers = customers.id';
-		$order = 'flights.date_1 DESC';
+		$rows = '*';
+		$join = '';
+		$where = '';
+		$order = 'date_1 DESC';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
- 		// var_export($result);
+ 		var_export($result);
 
 		return $result;
 	}
 
 	public function getOneSelect($id){
 		$table = 'flights';
-		$rows = ' flights.id as id_flights, place_1, place_2, date_1, date_2, freight, weight,
-						volume, cost, form_of_payment, proxy, request, flights.note, car, flights.id_customers, customers.id,
-						customers.short_name as customers';
-		$join = ' LEFT OUTER JOIN customers ON flights.id_customers = customers.id';
+		$rows = '*';
+		$join = '';
 		$where = 'flights.id ='.$id;
 		$order = '';
 
@@ -82,7 +78,7 @@ class Flights extends Base
 		$table = 'flights';
 		// $values = ; соответствующий массив передается из контроллера
 		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
-							volume, cost, form_of_payment, car, id_customers, proxy,
+							volume, cost, form_of_payment, car, customers, proxy,
 							request, note ';
 
 		$base = new Base();
@@ -93,7 +89,7 @@ class Flights extends Base
 	public function getEdit($id, $values) {
 		$table = 'flights';
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
-		"cost", "form_of_payment", "proxy", "request", "note", "car", "id_customers");
+		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note");
 		$where = 'id='.(int)$id;
 		// var_dump($id);
 		$base = new Base();

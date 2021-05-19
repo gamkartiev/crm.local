@@ -31,7 +31,7 @@ class FlightsController extends Controller
                 $cost = $_POST['cost'],
                 $form_of_payment = $_POST['form_of_payment'],
                 $car = $_POST['car'],
-                $id_customers = $_POST['id_customers'],
+                $id_customers = $_POST['customers'],
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
                 $note = $_POST['note']
@@ -53,32 +53,26 @@ class FlightsController extends Controller
 
 //-----------редактирование-----------------//
     public function edit($id) {
-      if(!empty($_POST) && $id>0){
-
-        //Тут поставить поиск id_customers по name_short: обращение к models
+      if (!empty($_POST) && $id > 0){
         $flights = new Flights();
-        $customers = $_POST['customers'];
-        $id_customers = $flights->getIdCustomers($customers);
 
-        // var_dump($_POST);
-          $values = array(
-              $place_1 = $_POST['place_1'],
-              $place_2 = $_POST['place_2'],
-              $date_1 = $_POST['date_1'],
-              $date_2 = $_POST['date_2'],
-              $freight = $_POST['freight'],
-              $weight = $_POST['weight'],
-              $volume = $_POST['volume'],
-              $cost = $_POST['cost'],
-              $form_of_payment = $_POST['form_of_payment'],
-              $proxy = $_POST['proxy'],
-              $request = $_POST['request'],
-              $note = $_POST['note'],
-              $car = $_POST['car']
+        $values = array(
+            $place_1 = $_POST['place_1'],
+            $place_2 = $_POST['place_2'],
+            $date_1 = $_POST['date_1'],
+            $date_2 = $_POST['date_2'],
+            $freight = $_POST['freight'],
+            $weight = $_POST['weight'],
+            $volume = $_POST['volume'],
+            $cost = $_POST['cost'],
+            $form_of_payment = $_POST['form_of_payment'],
+            $car = $_POST['car'],
+            $customers = $_POST['customers'],
+            $proxy = $_POST['proxy'],
+            $request = $_POST['request'],
+            $note = $_POST['note']
         );
 
-        $values[] = $id_customers;
-        var_dump($values);
         $flights->getEdit($id, $values);
 
         header("Location: /flights/view/".$id);

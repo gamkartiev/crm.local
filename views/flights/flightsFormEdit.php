@@ -5,8 +5,12 @@
     <title> Добавление нового рейса </title>
   </head>
   <body>
-
-<form action="/flights/edit" method="post">
+<?php
+// if(!empty($_POST)){
+//   var_dump($_POST);
+// };
+ ?>
+<form action="/flights/edit/<?=$id ?>" method="post">
   <!-- <input type="hidden" name="action" value="addNewFlight"   //Этот пункт можно убрать -->
   <label> Откуда:
     <input type="text" name="place_1" value="<?=$oneFlights['0']['place_1']?>" placeholder="место загрузки"> <br />

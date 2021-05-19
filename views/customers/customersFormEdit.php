@@ -15,10 +15,10 @@
   <input type="text" name="short_name" value="<?=$oneCustomerName['0']['short_name']?>" id="short_name"> <br />
 
   <label for="INN"> ИНН: </label>
-  <input type="text" name="INN" value="<?=$oneCustomerName['0']['INN']?>" id="INN"> <br />
+  <input type="text" name="INN" value="<?=$oneCustomerName['0']['INN']?>" id="INN"  maxlength="12"> <br />
 
   <label for="OGRN"> ОГРН: </label>
-  <input type="text" name="OGRN" value="<?=$oneCustomerName['0']['OGRN']?>" id="OGRN"> <br />
+  <input type="text" name="OGRN" value="<?=$oneCustomerName['0']['OGRN']?>" id="OGRN" maxlength="13"> <br />
 
   <label for="actual_address"> Фактический адрес: </label>
   <input type="text" name="actual_address" value="<?=$oneCustomerName['0']['actual_address']?>" id="actual_address"> <br />

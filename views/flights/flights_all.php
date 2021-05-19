@@ -39,7 +39,7 @@
 	</p>
 	<?php
 	foreach($allFlights as $a): ?>
-		<a href="/flights/view/<?=$a['id_flights']?>">
+		<a href="/flights/view/<?=$a['id']?>">
 		<p class="row tr">
 			<p class="td col_1">  <?=date("j.m.Y",strtotime($a['date_1']))?></p>
 			<p class="td col_2"> <?=date("j.m.Y",strtotime($a['date_2']))?> </p>
