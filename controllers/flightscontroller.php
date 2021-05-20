@@ -85,9 +85,15 @@ class FlightsController extends Controller
         $cars = $flights->getCarsSelect();
         $oneFlights = $flights->getOneSelect($id);
 
+        //Поставить при выводе сохраненные в бд параметры:
+        $customers = $flights->getFirstItemCustomers($customers, $oneFlights);
+        $cars = $flights->getFirstItemCars($cars, $oneFlights);
+
+
         include("views/flights/flightsFormEdit.php");
       }
     }
+
 
 
     //-----------удаление-----------------//

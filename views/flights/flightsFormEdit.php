@@ -53,7 +53,9 @@
       <option disabled>Выберите машину:</option>
       <?php
       foreach($cars as $a): ?>
-        <option value="<?=$oneFlights['0']['car']?>"> <?=$a['state_sign_cars']?></option>
+      <!--  value="<?php //$oneFlights['0']['car']?> -->
+      <!-- даже если не изменять ТС и/или Клиента меняется на первый эл-т массива по умолчанию -->
+        <option> <?=$a['state_sign_cars']?></option>
       <<?php endforeach; ?>
     </select>
   </label>
@@ -63,7 +65,7 @@
       <option disabled>Выберите Компанию:</option>
       <?php
       foreach($customers as $a): ?>
-        <option value="<?=$oneFlights['0']['customers']?>"> <?=$a['short_name']?></option>
+          <option> <?=$a['short_name']?></option>
       <<?php endforeach; ?>
     </select>
   </label>

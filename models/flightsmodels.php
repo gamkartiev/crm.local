@@ -12,7 +12,7 @@ class Flights extends Base
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
- 		var_export($result);
+ 		// var_export($result);
 
 		return $result;
 	}
@@ -34,7 +34,7 @@ class Flights extends Base
 //фун-я выборки всех клиентов для Формы вставки нового рейса
 	public function getCustomersSelect() {
 		$table = 'Customers';
-		$rows = 'id, short_name';
+		$rows = 'short_name';
 		$join = '';
 		$where = '';
 		$order = 'short_name DESC';
@@ -46,10 +46,52 @@ class Flights extends Base
 	}
 
 
+//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
+	public function getFirstItemCustomers($customers, $oneFlights){
+		$count = count($customers); //кол-во эл-тов в массиве $customers
+		for ($i=0; $i<$count; $i++) {
+				if($oneFlights[0]['customers']===$customers[$i]['short_name']) {
+						// $item[] = $customers[$i]; это в принципе не нужно
+						$key = $i; //ключ нужного нам элемента в массиве customers
+				}
+			}
+
+			//скопировать нужный элемент массива
+			//удалить тот элемент массиве, что мы выбрали
+			//объединить два массива, первым поставив скопированный массив
+			$selectItem = array_slice($customers, $key, 1);
+			$deleteItemInArray=array_splice($customers, $key, 1);
+			$customers = array_merge($selectItem, $customers);
+
+			return $customers;
+	}
+
+
+	//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
+		public function getFirstItemCars($cars, $oneFlights){
+			$count = count($cars); //кол-во эл-тов в массиве $customers
+
+			for ($i=0; $i<$count; $i++) {
+					if($oneFlights[0]['car']===$cars[$i]['state_sign_cars']) {
+							// $item[] = $cars[$i]; это в принципе не нужно
+							$key = $i; //ключ нужного нам элемента в массиве customers
+					}
+				}
+
+				//скопировать нужный элемент массива
+				//удалить тот элемент массиве, что мы выбрали
+				//объединить два массива, первым поставив скопированный массив
+				$selectItem = array_slice($cars, $key, 1);
+				$deleteItemInArray=array_splice($cars, $key, 1);
+				$cars = array_merge($selectItem, $cars);
+
+				return $cars;
+		}
+
 //фун-я выборки всех тягачей для Формы вставки нового рейса
 	public function getCarsSelect() {
 		$table = 'Cars';
-		$rows = 'id, state_sign_cars';
+		$rows = 'state_sign_cars';
 		$join = '';
 		$where = '';
 		$order = 'state_sign_cars DESC';
