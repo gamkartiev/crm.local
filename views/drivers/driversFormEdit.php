@@ -41,7 +41,7 @@
   <label for="phone_3"> Телефон 3: </label>
   <input type="text" name="phone_3" value="<?=$oneDriverName['0']['phone_3']?>" placeholder="" id="phone_3"> <br />
 
-  <button type="submit" name="button"> Добавить </button>
+  <button type="submit" name="button"> Отправить </button>
 
 </form>
 

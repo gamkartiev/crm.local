@@ -40,10 +40,11 @@ class CarsController extends Controller
     if(!empty($_POST)&& $id > 0) {
 
       $values = array(
+        $brand = $_POST['brand'],
         $state_sign_cars = $_POST['state_sign_cars'],
         $PTS_cars = $_POST['PTS_cars'],
         $STS_cars = $_POST['STS_cars'],
-        $VIN_cars = $_POST['VIN_cars'],
+        $VIN_cars = $_POST['VIN_cars']
       );
 
       $cars = new Cars();

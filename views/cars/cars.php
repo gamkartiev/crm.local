@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
 	<meta charset="UTF-8">
 	<title> Машины </title>
 	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
 </head>
-<body>
 
+
+<body>
 <header>
 	<?php include ("views/header.php"); ?>
 </header>
 
 <main>
-
 <a href="/cars/add"> Добавить новую машину </a> <br /> <br />
+
 
 <section class="to_list">
 	Список ТС:
@@ -22,9 +25,10 @@
 	<?php endforeach ?>  <br />
 </section>
 
+
 <?php foreach($oneCarName as $b) : ?>
 	<section class="left_panel">
-			<a href="/car/edit/<?=$b['id']?>" class="bottom-edit"> Редактировать данные машины </a> <br />
+		<a href="/cars/edit/<?=$b['id']?>" class="bottom-edit"> Редактировать данные машины </a> <br />
 
 		<div class="car_car_model"> <span class="bold">Модель:</span> <?= $b['brand']?> <br /></div>	<br />
 		<div class="car_car_state_sign"> <span class="bold">Гос.знак:</span> <?= $b['state_sign_cars']?> <br /></div> <br />
@@ -36,14 +40,6 @@
 		<a href="/cars/delete/<?=$b['id']?>" class="bottom-delete">Удалить машину</a>
 	</section>
 <?php endforeach ?>
-
-<?php // foreach($oneTrailerName as $b) : ?>
-	<!-- <section class="left_panel_tractor">	</section> -->
-<?php //endforeach ?>
-
-<?php //foreach($oneDriverName as $b) : ?>
-	<!-- <section class="left_panel_trailer"> </section> -->
-<?php //endforeach ?>
 
 
 

@@ -8,11 +8,10 @@ class Flights extends Base
 		$rows = '*';
 		$join = '';
 		$where = '';
-		$order = 'date_1 DESC';
+		$order = 'date_1 DESC, date_2 DESC';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
- 		// var_export($result);
 
 		return $result;
 	}
@@ -34,7 +33,7 @@ class Flights extends Base
 //фун-я выборки всех клиентов для Формы вставки нового рейса
 	public function getCustomersSelect() {
 		$table = 'Customers';
-		$rows = 'short_name';
+		$rows = 'id, short_name';
 		$join = '';
 		$where = '';
 		$order = 'short_name DESC';
@@ -51,8 +50,9 @@ class Flights extends Base
 		$count = count($customers); //кол-во эл-тов в массиве $customers
 		for ($i=0; $i<$count; $i++) {
 				if($oneFlights[0]['customers']===$customers[$i]['short_name']) {
-						// $item[] = $customers[$i]; это в принципе не нужно
+						$item[] = $customers[$i]; //это в принципе не нужно
 						$key = $i; //ключ нужного нам элемента в массиве customers
+				} else{ $key = 0;
 				}
 			}
 
@@ -73,8 +73,9 @@ class Flights extends Base
 
 			for ($i=0; $i<$count; $i++) {
 					if($oneFlights[0]['car']===$cars[$i]['state_sign_cars']) {
-							// $item[] = $cars[$i]; это в принципе не нужно
+							$item[] = $cars[$i]; //это в принципе не нужно
 							$key = $i; //ключ нужного нам элемента в массиве customers
+					} else { $key = 0;
 					}
 				}
 
@@ -133,7 +134,6 @@ class Flights extends Base
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
 		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note");
 		$where = 'id='.(int)$id;
-		// var_dump($id);
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);
 	}

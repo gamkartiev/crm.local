@@ -62,7 +62,7 @@
   <label for="note"> Примечание: </label>
   <input type="text" name="note" value="<?=$oneCustomerName['0']['note']?>" id="note"> <br />
 
-  <button type="submit" name="button"> Добавить </button>
+  <button type="submit" name="button"> Отправить </button>
 
 </form>
 

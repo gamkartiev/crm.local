@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+
+
 <head>
 	<title> Все рейсы </title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
 </head>
-<body>
 
+
+<body>
 
 <header>
  <?php include ("views/header.php"); ?>
@@ -15,7 +18,6 @@
 <main>
 
 <a href="/flights/add"> Добавить новый рейс </a>
-
 
 <p class="table" >
 	<p class="firstRow tr">
@@ -55,24 +57,17 @@
 
 		<p class="td col_11"> <?=$oneFlights['0']['car']?> </p>
 
-		<p class="td col_12"> <?$oneFlights['0']['proxy']?> </p>
+		<p class="td col_12"> <?=$oneFlights['0']['proxy']?> </p>
 		<p class="td col_13"> <?=$oneFlights['0']['request']?> </p>
 		<p class="td col_14"> <?=$oneFlights['0']['note']?> </p>
 		<p class="td col_15"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
 		<p class="td col_16"> <a href="/flights/delete/<?=$id?>" class="bottom-edit"> Удалить рейс </a> </p>
 	</p>
-
 </p>
 
 
-
 </main>
-<!-- <script src="/views/js.js"></script>
-
-
-<footer></footer>
-<script> document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-код для расширения livereload - автоматического обновления страницы сайта после сохранения кода -->
-
 </body>
+
+
 </html>

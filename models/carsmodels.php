@@ -39,7 +39,7 @@ class Cars extends Base
 
 	public function getEdit($id, $values) {
 		$table = 'cars';
-		$rows = array("state_sign_cars", "PTS_cars", "STS_cars", "VIN_cars");
+		$rows = array("brand", "state_sign_cars", "PTS_cars", "STS_cars", "VIN_cars");
 		$where = 'id='.(int)$id;
 
 		$base = new Base();

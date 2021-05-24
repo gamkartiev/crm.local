@@ -42,7 +42,7 @@ class Trailers extends Base
 
 	public function getEdit($id, $values) {
 		$table = 'trailers';
-		$rows = array("state_sign_trailer", "PTS_trailer", "STS_ctrailer", "VIN_trailer");
+		$rows = array("brand", "state_sign_trailer", "PTS_trailer", "STS_ctrailer", "VIN_trailer");
 		$where = 'id='.(int)$id;
 
 		$base = new Base();

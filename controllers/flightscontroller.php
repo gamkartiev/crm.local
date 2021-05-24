@@ -6,12 +6,12 @@ class FlightsController extends Controller
       if ($id > 0) {
         $flights = new Flights();
         $oneFlights = $flights->getOneSelect($id);
-
+// var_export($oneFlights);
         require("views/flights/flights_one.php");
       } else {
         $flights = new Flights();
         $allFlights = $flights->getAllSelect();
-
+ // var_export($allFlights );
         require("views/flights/flights_all.php");
       }
   }
@@ -31,7 +31,7 @@ class FlightsController extends Controller
                 $cost = $_POST['cost'],
                 $form_of_payment = $_POST['form_of_payment'],
                 $car = $_POST['car'],
-                $id_customers = $_POST['customers'],
+                $customers = $_POST['customers'],
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
                 $note = $_POST['note']
@@ -84,11 +84,11 @@ class FlightsController extends Controller
         $customers = $flights->getCustomersSelect();
         $cars = $flights->getCarsSelect();
         $oneFlights = $flights->getOneSelect($id);
-
+  // var_export($oneFlights);
         //Поставить при выводе сохраненные в бд параметры:
         $customers = $flights->getFirstItemCustomers($customers, $oneFlights);
         $cars = $flights->getFirstItemCars($cars, $oneFlights);
-
+  // var_export($customers);
 
         include("views/flights/flightsFormEdit.php");
       }
