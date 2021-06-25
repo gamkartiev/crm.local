@@ -25,14 +25,14 @@ class DriversController extends Controller
           $surname = $_POST['surname'],
           $first_name = $_POST['first_name'],
           $patronymic = $_POST['patronymic'],
-          // $date_of_birth = $_POST['date_of_birth'],
-          // $place_of_birth = $_POST['place_of_birth'],
-          // $passport = $_POST['passport'],
-          // $registration = $_POST['registration'],
-          // $drivers_license = $_POST['drivers_license'],
-          // $phone_1 = $_POST['phone_1'],
-          // $phone_2 = $_POST['phone_2'],
-          // $phone_3 = $_POST['phone_3']
+          $date_of_birth = $_POST['date_of_birth'],
+          $place_of_birth = $_POST['place_of_birth'],
+          $passport = $_POST['passport'],
+          $registration = $_POST['registration'],
+          $drivers_license = $_POST['drivers_license'],
+          $phone_1 = $_POST['phone_1'],
+          $phone_2 = $_POST['phone_2'],
+          $phone_3 = $_POST['phone_3']
         );
 
         $drivers->getInsert($values);
@@ -44,6 +44,7 @@ class DriversController extends Controller
           $surname = $_POST['date_of_birth'],
         );
 
+        //для открытия последней добавленной строчки(водителя)
         $id = $drivers->getLastInsertId($values);
 
         header("Location: /drivers/view/".$id);
@@ -60,17 +61,17 @@ class DriversController extends Controller
       $drivers = new Drivers();
 
       $values = array(
-         $_POST['surname'],
-         $_POST['first_name'],
-         $_POST['patronymic'],
-         $_POST['date_of_birth'],
-         $_POST['place_of_birth'],
-         $_POST['passport'],
-         $_POST['registration'],
-         $_POST['drivers_license'],
-         $_POST['phone_1'],
-         $_POST['phone_2'],
-         $_POST['phone_3']
+        $surname = $_POST['surname'],
+        $first_name = $_POST['first_name'],
+        $patronymic = $_POST['patronymic'],
+        $date_of_birth = $_POST['date_of_birth'],
+        $place_of_birth = $_POST['place_of_birth'],
+        $passport = $_POST['passport'],
+        $registration = $_POST['registration'],
+        $drivers_license = $_POST['drivers_license'],
+        $phone_1 = $_POST['phone_1'],
+        $phone_2 = $_POST['phone_2'],
+        $phone_3 = $_POST['phone_3']
       );
 
       $drivers->getEdit($id, $values);

@@ -28,6 +28,7 @@ class Drivers extends Base
 		return $result;
 	}
 
+//показывает последний добавленную строчку (id, если быть точнее)
 	public function getLastInsertId($values) {
 		$table = 'drivers';
 		$rows = 'id';
@@ -58,7 +59,7 @@ class Drivers extends Base
 	public function getEdit($id, $values) {
 		$table = 'drivers';
 		// $values = ; соответствующий массив передается из контроллера
-		$rows = array("surName", "first_name", "patronymic", "date_of_birth", "place_of_birth",
+		$rows = array("surname", "first_name", "patronymic", "date_of_birth", "place_of_birth",
 						"passport", "registration", "drivers_license", "phone_1", "phone_2", "phone_3");
 		$where = 'id='.(int)$id;
 
