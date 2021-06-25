@@ -12,60 +12,74 @@
 <main>
 
 <form action="/flights/add" method="post">
-  <label for="place_1"> Откуда: </label>
-  <input type="text" name="place_1" placeholder="место загрузки" id="place_1" required> <br />
+  <label> Откуда:
+   <input type="text" name="place_1" required> <br />
+   </label>
 
-  <label for="place_2"> Куда: </label>
-  <input type="text" name="place_2" placeholder="место выгрузки" id="place_2" required> <br />
+  <label> Куда: </label>
+   <input type="text" name="place_2" required> <br />
+   </label>
 
-  <label for="date_1"> Дата загрузки: </label>
-  <input type="date" name="date_1" value="" id="date_1" required> <br />
+  <label> Дата загрузки: </label>
+   <input type="date" name="date_1" required> <br />
+   </label>
 
-  <label for="date_2"> Дата выгрузки: </label>
-  <input type="date" name="date_2" value="" id="date_2" required> <br />
+  <label> Дата выгрузки: </label>
+   <input type="date" name="date_2" required> <br />
+   </label>
 
-  <label for="freight"> Название груза: </label>
-  <input type="text" name="freight" placeholder="название груза" id="freight"> <br />
+  <label> Название груза: </label>
+   <input type="text" name="freight"> <br />
+   </label>
 
-  <label for="weight"> Вес: </label>
-  <input type="number" name="weight" placeholder="Вес" id="weight"> <br />
+  <label> Вес: </label>
+   <input type="number" name="weight"> <br />
+   </label>
 
-  <label for="volume"> Объем: </label>
-  <input type="number" name="volume" placeholder="Объем" id="volume"> <br />
+  <label> Объем: </label>
+   <input type="number" name="volume"> <br />
+   </label>
 
-  <label for="cost"> Сумма: </label>
-  <input type="text" name="cost" placeholder="стоимость перевозки" id="cost"> <br />
+  <label> Сумма: </label>
+   <input type="text" name="cost"> <br />
+   </label>
 
-  <label for="form_of_payment"> Форма оплаты: </label>
-  <input type="text" name="form_of_payment" value="с НДС" id="form_of_payment"> <br />
+  <label> Форма оплаты: </label>
+   <input type="text" name="form_of_payment" value="с НДС"> <br />
+   </label>
 
-  <label for="car"> Машина: </label>
-  <select name="car" required>
-    <option disabled>Выберите машину:</option>
-    <option>   </option>
-    <?php
-    foreach($cars as $a): ?>
-    <option value="<?=$a['state_sign_cars']?>"> <?=$a['state_sign_cars']?></option>
-    <<?php endforeach; ?>
-  </select>
+  <label> Машина:
+   <select name="car" required>
+      <option disabled>Выберите машину:</option>
+      <option>   </option>
+      <?php
+      foreach($cars as $a): ?>
+      <option value="<?=$a['state_sign_cars']?>"> <?=$a['state_sign_cars']?></option>
+      <<?php endforeach; ?>
+   </select>
+   </label>
 
-  <label for="customers"> Компания: </label>
-  <select name="customers" required>
-    <option disabled>Выберите Компанию:</option>
-    <option>    </option>
-    <?php foreach($customers as $a): ?>
-    <option> <?=$a['short_name']?></option>
-    <<?php endforeach; ?>
-  </select>
+  <label> Компания:
+   <select name="customers" required>
+      <option disabled>Выберите Компанию:</option>
+      <option>    </option>
+      <?php foreach($customers as $a): ?>
+      <option> <?=$a['short_name']?></option>
+      <<?php endforeach; ?>
+   </select>
+   </label>
 
-  <label for="proxy"> Доверенность: </label>
-  <input type="text" name="proxy" id="proxy"> <br />
+  <label> Доверенность:
+   <input type="text" name="proxy"> <br />
+   </label>
 
-  <label for="request"> Заявка: </label>
-  <input type="text" name="request" id="request"> <br />
+  <label> Заявка:
+   <input type="text" name="request"> <br />
+   </label>
 
-  <label for="note"> Примечание: </label>
-  <input type="text" name="note" id="note"> <br />
+  <label> Примечание:
+   <input type="text" name="note"> <br />
+   </label>
 
   <button type="submit" name="button"> Добавить </button>
 </form>

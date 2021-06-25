@@ -7,42 +7,51 @@
   <body>
 
 <form action="/drivers/edit/<?= $id ?>" method="post">
+  <label> Фамилия:
+   <input type="text" name="surname" value="<?=$oneDriverName['0']['surname']?>"> <br />
+   </label>
 
-  <label for="surname"> Фамилия: </label>
-  <input type="text" name="surname" value="<?=$oneDriverName['0']['surname']?>" placeholder="" id="surname"> <br />
+  <label> Имя:
+   <input type="text" name="first_name" value="<?=$oneDriverName['0']['first_name']?>"> <br />
+   </label>
 
-  <label for="first_name"> Имя: </label>
-  <input type="text" name="first_name" value="<?=$oneDriverName['0']['first_name']?>" placeholder="" id="first_name"> <br />
+  <label> Отчество:
+   <input type="text" name="patronymic" value="<?=$oneDriverName['0']['patronymic']?>"> <br />
+   </label>
 
-  <label for="patronymic"> Отчество: </label>
-  <input type="text" name="patronymic" value="<?=$oneDriverName['0']['patronymic']?>" placeholder="" id="patronymic"> <br />
+  <label> Дата рождения:
+   <input type="date" name="date_of_birth" value="<?=$oneDriverName['0']['date_of_birth']?>"> <br />
+   </label>
 
-  <label for="date_of_birth"> Дата рождения: </label>
-  <input type="date" name="date_of_birth" value="<?=$oneDriverName['0']['date_of_birth']?>" placeholder="" id="date_of_birth"> <br />
+  <label> Место рождения:
+   <input type="text" name="place_of_birth" value="<?=$oneDriverName['0']['place_of_birth']?>"> <br />
+   </label>
 
-  <label for="place_of_birth"> Место рождения: </label>
-  <input type="text" name="place_of_birth" value="<?=$oneDriverName['0']['place_of_birth']?>" placeholder="" id="place_of_birth"> <br />
+  <label> Паспорт:
+   <input type="text" name="passport" value="<?=$oneDriverName['0']['passport']?>"> <br />
+   </label>
 
-  <label for="passport"> Паспорт: </label>
-  <input type="text" name="passport" value="<?=$oneDriverName['0']['passport']?>" placeholder="" id="passport"> <br />
+  <label> Регистрация:
+   <input type="text" name="registration" value="<?=$oneDriverName['0']['registration']?>"> <br />
+   </label>
 
-  <label for="registration"> Регистрация: </label>
-  <input type="text" name="registration" value="<?=$oneDriverName['0']['registration']?>" placeholder="" id="registration"> <br />
+  <label> Водительское удостоверение:
+   <input type="text" name="drivers_license" value="<?=$oneDriverName['0']['drivers_license']?>"> <br />
+   </label>
 
-  <label for="drivers_license"> Водительское удостоверение: </label>
-  <input type="text" name="drivers_license" value="<?=$oneDriverName['0']['drivers_license']?>" placeholder="" id="drivers_license"> <br />
+  <label> Телефон 1:
+   <input type="text" name="phone_1" value="<?=$oneDriverName['0']['phone_1']?>"> <br />
+   </label>
 
-  <label for="phone_1"> Телефон 1: </label>
-  <input type="text" name="phone_1" value="<?=$oneDriverName['0']['phone_1']?>" placeholder="" id="phone_1"> <br />
+  <label> Телефон 2:
+   <input type="text" name="phone_2" value="<?=$oneDriverName['0']['phone_2']?>"> <br />
+   </label>
 
-  <label for="phone_2"> Телефон 2: </label>
-  <input type="text" name="phone_2" value="<?=$oneDriverName['0']['phone_2']?>" placeholder="" id="phone_2"> <br />
-
-  <label for="phone_3"> Телефон 3: </label>
-  <input type="text" name="phone_3" value="<?=$oneDriverName['0']['phone_3']?>" placeholder="" id="phone_3"> <br />
+  <label> Телефон 3:
+   <input type="text" name="phone_3" value="<?=$oneDriverName['0']['phone_3']?>"> <br />
+   </label>
 
   <button type="submit" name="button"> Отправить </button>
-
 </form>
 
 

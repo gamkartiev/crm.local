@@ -7,63 +7,79 @@
   <body>
 
 <form action="/customers/edit/<?=$id?>" method="post">
+  <label> Название компании:
+   * <input type="text" name="name" value="<?=$oneCustomerName['0']['name']?>" required> <br />
+   </label>
 
-  <label for="name"> Название компании: </label>
-  * <input type="text" name="name" value="<?=$oneCustomerName['0']['name']?>" id="name" required> <br />
+  <label> Короткое название:
+   <input type="text" name="short_name" value="<?=$oneCustomerName['0']['short_name']?>"> <br />
+   </label>
 
-  <label for="short_name"> Короткое название: </label>
-  <input type="text" name="short_name" value="<?=$oneCustomerName['0']['short_name']?>" id="short_name"> <br />
+  <label> ИНН:
+   <input type="text" name="INN" value="<?=$oneCustomerName['0']['INN']?>" maxlength="12"> <br />
+   </label>
 
-  <label for="INN"> ИНН: </label>
-  <input type="text" name="INN" value="<?=$oneCustomerName['0']['INN']?>" id="INN"  maxlength="12"> <br />
+  <label> ОГРН:
+   <input type="text" name="OGRN" value="<?=$oneCustomerName['0']['OGRN']?>" maxlength="13"> <br />
+   </label>
 
-  <label for="OGRN"> ОГРН: </label>
-  <input type="text" name="OGRN" value="<?=$oneCustomerName['0']['OGRN']?>" id="OGRN" maxlength="13"> <br />
+  <label> Фактический адрес:
+   <input type="text" name="actual_address" value="<?=$oneCustomerName['0']['actual_address']?>"> <br />
+   </label>
 
-  <label for="actual_address"> Фактический адрес: </label>
-  <input type="text" name="actual_address" value="<?=$oneCustomerName['0']['actual_address']?>" id="actual_address"> <br />
+  <label> Юридический адрес:
+   <input type="text" name="legal_address" value="<?=$oneCustomerName['0']['legal_address']?>"> <br />
+   </label>
 
-  <label for="legal_address"> Юридический адрес: </label>
-  <input type="text" name="legal_address" value="<?=$oneCustomerName['0']['legal_address']?>" id="legal_address"> <br />
+  <label> Почтовый адрес:
+   <input type="text" name="mailing_address" value="<?=$oneCustomerName['0']['mailing_address']?>"> <br />
+   </label>
 
-  <label for="mailing_address"> Почтовый адрес: </label>
-  <input type="text" name="mailing_address" value="<?=$oneCustomerName['0']['mailing_address']?>" id="mailing_address"> <br />
+  <label> КПП:
+   <input type="text" name="KPP" value="<?=$oneCustomerName['0']['KPP']?>"> <br />
+   </label>
 
-  <label for="KPP"> КПП: </label>
-  <input type="text" name="KPP" value="<?=$oneCustomerName['0']['KPP']?>" id="KPP"> <br />
+  <label> ОКПО:
+   <input type="text" name="OKPO_code" value="<?=$oneCustomerName['0']['OKPO_code']?>"> <br />
+   </label>
 
-  <label for="OKPO_code"> ОКПО: </label>
-  <input type="text" name="OKPO_code" value="<?=$oneCustomerName['0']['OKPO_code']?>" id="OKPO_code"> <br />
+  <label> ОКФС:
+   <input type="text" name="OKFC_code" value="<?=$oneCustomerName['0']['OKFC_code']?>">
+   </label>
 
-  <label for="OKFC_code"> ОКФС: </label>
-  <input type="text" name="OKFC_code" value="<?=$oneCustomerName['0']['OKFC_code']?>" id="OKFC_code">
+  <label> ОКОПФ:
+   <input type="text" name="OKOPF_code" value="<?=$oneCustomerName['0']['OKOPF_code']?>"> <br />
+   </label>
 
-  <label for="OKOPF_code"> ОКОПФ: </label>
-  <input type="text" name="OKOPF_code" value="<?=$oneCustomerName['0']['OKOPF_code']?>" id="OKOPF_code"> <br />
+  <label> Основной код ОКВЕД:
+   <input type="text" name="OKVED_main_code" value="<?=$oneCustomerName['0']['OKVED_main_code']?>"> <br />
+   </label>
 
-  <label for="OKVED_main_code"> Основной код ОКВЕД: </label>
-  <input type="text" name="OKVED_main_code" value="<?=$oneCustomerName['0']['OKVED_main_code']?>" id="OKVED_main_code"> <br />
+  <label> Генеральный директор:
+   <input type="text" name="CEO" value="<?=$oneCustomerName['0']['CEO']?>"> <br />
+   </label>
 
-  <label for="CEO"> Генеральный директор: </label>
-  <input type="text" name="CEO" value="<?=$oneCustomerName['0']['CEO']?>" id="CEO"> <br />
+  <label> Банк:
+   <input type="text" name="bank" value="<?=$oneCustomerName['0']['bank']?>"> <br />
+   </label>
 
-  <label for="bank"> Банк: </label>
-  <input type="text" name="bank" value="<?=$oneCustomerName['0']['bank']?>" id="bank"> <br />
+  <label> Рассчетный счет:
+   <input type="text" name="payment_account" value="<?=$oneCustomerName['0']['payment_account']?>"> <br />
+   </label>
 
-  <label for="payment_account"> Рассчетный счет: </label>
-  <input type="text" name="payment_account" value="<?=$oneCustomerName['0']['payment_account']?>" id="payment_account"> <br />
+  <label> Корреспондентский счет:
+   <input type="text" name="correspondent_account" value="<?=$oneCustomerName['0']['correspondent_account']?>"> <br />
+   </label>
 
-  <label for="correspondent_account"> Корреспондентский счет: </label>
-  <input type="text" name="correspondent_account" value="<?=$oneCustomerName['0']['correspondent_account']?>" id="correspondent_account"> <br />
+  <label> БИК:
+   <input type="text" name="BIK" value="<?=$oneCustomerName['0']['BIK']?>"> <br />
+   </label>
 
-  <label for="BIK"> БИК: </label>
-  <input type="text" name="BIK" value="<?=$oneCustomerName['0']['BIK']?>" id="BIK"> <br />
-
-  <label for="note"> Примечание: </label>
-  <input type="text" name="note" value="<?=$oneCustomerName['0']['note']?>" id="note"> <br />
+  <label> Примечание:
+   <input type="text" name="note" value="<?=$oneCustomerName['0']['note']?>"> <br />
+   </label>
 
   <button type="submit" name="button"> Отправить </button>
-
 </form>
 
 

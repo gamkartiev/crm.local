@@ -11,59 +11,77 @@
 <body>
 
 <form action="/customers/add" method="post">
-  <label for="name"> Название компании: </label>
-  * <input type="text" name="name" id="name" required autocomplete="off"> <br />
+  <label> Название компании:
+   *<input type="text" name="name" required autocomplete="off"> <br />
+    </label>
 
-  <label for="short_name"> Короткое название: </label>
-  <input type="text" name="short_name" id="short_name" autocomplete="off"> <br />
+  <label> Короткое название:
+   <input type="text" name="short_name" autocomplete="off"> <br />
+   </label>
 
-  <label for="INN"> ИНН: </label>
-  <input type="text" name="INN" id="INN" autocomplete="off" maxlength="12"> <br />
+  <label> ИНН:
+   <input type="text" name="INN" autocomplete="off" maxlength="12"> <br />
+   </label>
 
-  <label for="OGRN"> ОГРН: </label>
-  <input type="text" name="OGRN" id="OGRN" autocomplete="off" maxlength="13"> <br />
+  <label> ОГРН:
+   <input type="text" name="OGRN" autocomplete="off" maxlength="13"> <br />
+   </label>
 
-  <label for="actual_address"> Фактический адрес: </label>
-  <input type="text" name="actual_address" id="actual_address" autocomplete="off"> <br />
+  <label> Фактический адрес:
+   <input type="text" name="actual_address" autocomplete="off"> <br />
+   </label>
 
-  <label for="legal_address"> Юридический адрес: </label>
-  <input type="text" name="legal_address" id="legal_address" autocomplete="off"> <br />
+  <label> Юридический адрес:
+   <input type="text" name="legal_address" autocomplete="off"> <br />
+   </label>
 
-  <label for="mailing_address"> Почтовый адрес: </label>
-  <input type="text" name="mailing_address" id="mailing_address" autocomplete="off"> <br />
+  <label> Почтовый адрес:
+   <input type="text" name="mailing_address" autocomplete="off"> <br />
+   </label>
 
-  <label for="KPP"> КПП: </label>
-  <input type="text" name="KPP" id="KPP" autocomplete="off"> <br />
+  <label> КПП:
+   <input type="text" name="KPP" autocomplete="off"> <br />
+   </label>
 
-  <label for="OKPO_code"> ОКПО: </label>
-  <input type="text" name="OKPO_code" id="OKPO_code" autocomplete="off"> <br />
+  <label> ОКПО:
+   <input type="text" name="OKPO_code" autocomplete="off"> <br />
+   </label>
 
-  <label for="OKFC_code"> ОКФС: </label>
-  <input type="text" name="OKFC_code" id="OKFC_code" autocomplete="off">
+  <label> ОКФС:
+   <input type="text" name="OKFC_code" autocomplete="off">
+   </label>
 
-  <label for="OKOPF_code"> ОКОПФ: </label>
-  <input type="text" name="OKOPF_code" id="OKOPF_code" autocomplete="off"> <br />
+  <label> ОКОПФ:
+   <input type="text" name="OKOPF_code" autocomplete="off"> <br />
+   </label>
 
-  <label for="OKVED_main_code"> Основной код ОКВЕД: </label>
-  <input type="text" name="OKVED_main_code" id="OKVED_main_code" autocomplete="off"> <br />
+  <label> Основной код ОКВЕД:
+   <input type="text" name="OKVED_main_code" autocomplete="off"> <br />
+   </label>
 
-  <label for="CEO"> Генеральный директор: </label>
-  <input type="text" name="CEO" id="CEO" autocomplete="off"> <br />
+  <label> Генеральный директор:
+   <input type="text" name="CEO" autocomplete="off"> <br />
+   </label>
 
-  <label for="bank"> Банк: </label>
-  <input type="text" name="bank" id="bank" autocomplete="off"> <br />
+  <label> Банк:
+   <input type="text" name="bank" autocomplete="off"> <br />
+   </label>
 
-  <label for="payment_account"> Рассчетный счет: </label>
-  <input type="text" name="payment_account" id="payment_account" autocomplete="off"> <br />
+  <label> Рассчетный счет:
+   <input type="text" name="payment_account" autocomplete="off"> <br />
+   </label>
 
-  <label for="correspondent_account"> Корреспондентский счет: </label>
-  <input type="text" name="correspondent_account" id="correspondent_account" autocomplete="off"> <br />
+  <label> Корреспондентский счет:
+   <input type="text" name="correspondent_account" autocomplete="off"> <br />
+   </label>
 
-  <label for="BIK"> БИК: </label>
-  <input type="text" name="BIK" id="BIK" autocomplete="off"> <br />
+  <label> БИК:
+   <input type="text" name="BIK" autocomplete="off"> <br />
+   </label>
 
-  <label for="note"> Примечание: </label>
-  <input type="text" name="note" id="note" autocomplete="off"> <br />
+  <label> Примечание:
+   <input type="text" name="note" autocomplete="off"> <br />
+   </label>
 
   <button type="submit" name="button"> Добавить </button>
 </form>

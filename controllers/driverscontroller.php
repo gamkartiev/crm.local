@@ -25,14 +25,14 @@ class DriversController extends Controller
           $surname = $_POST['surname'],
           $first_name = $_POST['first_name'],
           $patronymic = $_POST['patronymic'],
-          $surname = $_POST['date_of_birth'],
-          $first_name = $_POST['place_of_birth'],
-          $patronymic = $_POST['passport'],
-          $surname = $_POST['registration'],
-          $first_name = $_POST['drivers_license'],
-          $patronymic = $_POST['phone_1'],
-          $surname = $_POST['phone_2'],
-          $first_name = $_POST['phone_3']
+          // $date_of_birth = $_POST['date_of_birth'],
+          // $place_of_birth = $_POST['place_of_birth'],
+          // $passport = $_POST['passport'],
+          // $registration = $_POST['registration'],
+          // $drivers_license = $_POST['drivers_license'],
+          // $phone_1 = $_POST['phone_1'],
+          // $phone_2 = $_POST['phone_2'],
+          // $phone_3 = $_POST['phone_3']
         );
 
         $drivers->getInsert($values);
