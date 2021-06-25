@@ -48,6 +48,14 @@ class CarsController extends Controller
       );
 
       $cars = new Cars();
+
+      //проверка существование строки в бд (может удалили за то время пока ты смотрел)
+      // if($chekString = $cars->chekString($id)){
+      //   echo "Истина";
+      // }
+      // var_export($chekString);
+
+
       $cars->getEdit($id, $values);
 
       header("location: /cars/view/".$id);

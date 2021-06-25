@@ -31,7 +31,6 @@ protected $connection;
 	private function tableExists($table) {
 		$mysqli = $this->getConnection();
 		$tablesInDb = $mysqli->query('SHOW TABLES FROM '.$this->db_name.' LIKE "'.$table.'"');
-		// var_dump($tablesInDb);
 		if($tablesInDb) {
 			if($tablesInDb->num_rows == 1) {
 				return true; // если таблица существует, то вернет true
@@ -60,7 +59,7 @@ protected $connection;
 			$q .=' WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
-			// var_export($q);
+
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 
@@ -116,7 +115,7 @@ protected $connection;
 
 	public function update($table, $rows, $where, $values) {
 		$mysqli = $this->getConnection();
-		// var_dump($table);
+
 		if($this->tableExists($table)) {
 			$update = 'UPDATE '.$table.' SET ';
 			for ($i=0; $i < count($rows); $i++) {
@@ -130,7 +129,7 @@ protected $connection;
 				}
 			}
 			$update .= ' WHERE '.$where;
-    // var_dump($update);
+
 			$query = $mysqli->query($update);
 			if($query) {
 				return true;

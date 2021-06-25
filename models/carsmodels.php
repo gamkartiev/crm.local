@@ -36,6 +36,17 @@ class Cars extends Base
 		$base->insert($table, $values, $rows);
 	}
 
+	//проверка на существование строки
+	// public function chekString($id) {
+	// 	$table = 'cars';
+	// 	$rows = '*';
+	// 	$where = 'id='.(int)$id 'LIMIT 1';
+	//
+	// 	$base = new Base();
+	// 	$result = $base->select($table, $rows, $join, $where, $order);
+	//
+	// 	return $result;
+	// }
 
 	public function getEdit($id, $values) {
 		$table = 'cars';
