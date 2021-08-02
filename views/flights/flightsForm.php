@@ -81,6 +81,10 @@
    <input type="text" name="note"> <br />
    </label>
 
+ <label> Оплата водителю:
+  <input type="text" name="drivers_payment"> <br />
+  </label>
+
   <button type="submit" name="button"> Добавить </button>
 </form>
 

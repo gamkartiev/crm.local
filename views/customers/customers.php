@@ -16,6 +16,7 @@
 <a href="/customers/add"> Добавить нового контрагента </a> <br /> <br />
 
 <section class="to_list">
+	Контрагенты:
 	<?php foreach($allCustomers as $a): ?>
 		<a href="/customers/view/<?=$a['id']?>"> <?php echo $a['short_name']; ?> </a>
 	<?php endforeach ?>

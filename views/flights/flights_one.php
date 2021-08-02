@@ -40,6 +40,8 @@
 		<p class="th col_12"> Доверенность </p>
 		<p class="th col_13"> Заявка </p>
 		<p class="th col_14"> Примечание</p></b>
+
+		<p class="th col_15"> Оплата водителю </p>
 	</p>
 	<p class="row tr">
 		<p class="td col_1">  <?=date("j.m.Y",strtotime($oneFlights['0']['date_1']))?></p>
@@ -60,8 +62,11 @@
 		<p class="td col_12"> <?=$oneFlights['0']['proxy']?> </p>
 		<p class="td col_13"> <?=$oneFlights['0']['request']?> </p>
 		<p class="td col_14"> <?=$oneFlights['0']['note']?> </p>
-		<p class="td col_15"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
-		<p class="td col_16"> <a href="/flights/delete/<?=$id?>" class="bottom-edit"> Удалить рейс </a> </p>
+
+		<p class="td col_15"> <?=$oneFlights['0']['drivers_payment']?> </p>
+
+		<p class="td col_16"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
+		<p class="td col_17"> <a href="/flights/delete/<?=$id?>" class="bottom-edit"> Удалить рейс </a> </p>
 	</p>
 </p>
 

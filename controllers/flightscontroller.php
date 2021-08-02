@@ -34,8 +34,8 @@ class FlightsController extends Controller
                 $customers = $_POST['customers'],
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
-                $note = $_POST['note']
-
+                $note = $_POST['note'],
+                $drivers_payment = $_POST['drivers_payment']
           );
           $flights->getInsert($values);
 
@@ -70,7 +70,8 @@ class FlightsController extends Controller
             $customers = $_POST['customers'],
             $proxy = $_POST['proxy'],
             $request = $_POST['request'],
-            $note = $_POST['note']
+            $note = $_POST['note'],
+            $drivers_payment = $_POST['drivers_payment']
         );
 
         $flights->getEdit($id, $values);

@@ -1,0 +1,53 @@
+.firstRow {
+	width: 100%;
+	display: table-row;
+	float: left;
+	margin: 0;
+}
+
+.th	{
+	float: left;
+	display: table-cell;
+	padding: 2px 5px;
+	text-align: center;
+	height: 36px;
+}
+
+.row {
+	width: 100%;
+	display: table-row;
+	float: left;
+	margin: 0;
+}
+
+.td{
+	float: left;
+	text-align: center;
+	display: table-cell;
+	padding: 2px 5px;
+	height: 36px;
+}
+
+
+.col_1 {width: 80px;}
+.col_2 {width: 80px;}
+.col_3 {width: 130px;}
+.col_4 {width: 130px;}
+.col_5 {width: 125px;}
+.col_6 {width: 80px;}
+.col_7 {width: 50px;}
+.col_8 {width: 30px;}
+.col_9 {width: 45px;}
+.col_10 {width: 48px;}
+.col_11 {width: 150px;}
+.col_12 {width: 100px;}
+.col_13 {width: 85px;}
+.col_14 {width: 270px;}
+.col_15 {width: 40px;}
+.col_16 {width: 40px;}
+.col_17 {width: 60px;}
+
+.col_16 a:hover, .col_15 a:hover{
+	background: rgba(255,255,255,0.4);
+	color: black;
+}

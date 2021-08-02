@@ -81,6 +81,10 @@
    <input type="text" name="note" value="<?=$oneFlights['0']['note']?>"> <br />
    </label>
 
+ <label> Оплата водителю:
+  <input type="text" name="drivers_payment" value="<?=$oneFlights['0']['drivers_payment']?>"> <br />
+  </label>
+
   <button type="submit" name="button"> Отправить </button>
 </form>
 

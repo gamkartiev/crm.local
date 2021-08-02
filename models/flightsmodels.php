@@ -118,7 +118,7 @@ class Flights extends Base
 		// $values = ; соответствующий массив передается из контроллера
 		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
 							volume, cost, form_of_payment, car, customers, proxy,
-							request, note ';
+							request, note, drivers_payment ';
 
 		$base = new Base();
 		$result = $base->insert($table, $values, $rows);
@@ -128,7 +128,7 @@ class Flights extends Base
 	public function getEdit($id, $values) {
 		$table = 'flights';
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
-		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note");
+		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note", "drivers_payment");
 		$where = 'id='.(int)$id;
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);

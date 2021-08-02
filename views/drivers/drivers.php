@@ -16,6 +16,7 @@
 <a href="/drivers/add" class="bottom-new"> Добавить нового водителя </a> <br /> <br />
 
 <section class="to_list">
+	Водители:
 	 <?php foreach($allDriversName as $a): ?>
 		 <a href="/drivers/view/<?=$a['id']?>"> <?php echo $a['surname'].' '.$a['first_name'].' '.$a['patronymic']; ?> </a>
 	 <?php endforeach ?>

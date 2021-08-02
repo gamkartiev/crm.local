@@ -7,6 +7,8 @@
     <li><a href="/cars"> Машины </a></li>
     <li><a href="/trailers"> Прицепы </a></li>
     <li><a href="/customers"> Клиенты </a></li>
+    <li><a href="/salary"> Зарплата</a></li>
+    <li><a href="/PRR"> ПРР </a></li>
     <li><a href="/financePlan"> Финансовый план на месяц</a></li>
 
     <!-- <?php // if(!empty($_SESSION['login'])): ?>
