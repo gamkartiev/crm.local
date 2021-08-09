@@ -81,6 +81,18 @@
    <input type="text" name="note"> <br />
    </label>
 
+
+<label> Компания:
+ <select name="drivers" required>
+    <option disabled>Выберите водителя:</option>
+    <option>    </option>
+    <?php foreach($drivers as $a): ?>
+    <option> <?=$a['driver']?></option>
+    <<?php endforeach; ?>
+ </select>
+ </label>
+
+
  <label> Оплата водителю:
   <input type="text" name="drivers_payment"> <br />
   </label>

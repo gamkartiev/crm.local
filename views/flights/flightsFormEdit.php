@@ -81,6 +81,16 @@
    <input type="text" name="note" value="<?=$oneFlights['0']['note']?>"> <br />
    </label>
 
+ <label> Водитель:
+  <select name="driver" required>
+     <option disabled>Выберите водителя:</option>
+     <?php
+     foreach($drivers as $a): ?>
+     <option> <?= $a['surname'] ?></option>
+     <<?php endforeach; ?>
+  </select>
+  </label>
+
  <label> Оплата водителю:
   <input type="text" name="drivers_payment" value="<?=$oneFlights['0']['drivers_payment']?>"> <br />
   </label>

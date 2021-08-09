@@ -37,7 +37,8 @@
 		<p class="th col_13"> Заявка </p>
 		<p class="th col_14"> Примечание</p>
 
-		<p class="th col_15"> Оплата водителю </p>
+		<p class="th col_15"> Водитель </p>
+		<p class="th col_16"> Оплата водителю </p>
 	</p>
 	<?php
 	foreach($allFlights as $a): ?>
@@ -62,6 +63,7 @@
 			<p class="td col_13"> <?=$a['request']?> </p>
 			<p class="td col_14"> <?=$a['note']?> </p>
 
+			<p class="td col_14"> <?=$a['driver']?> </p>
 			<p class="td col_15"> <?=$a['drivers_payment']?> </p>
 		</p>
 		</a>

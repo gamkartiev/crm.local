@@ -13,33 +13,111 @@
 </header>
 
 <main>
-<p class="table_salary" >
-	<p class="firstRow tr">
-		<p class="th drivers"> Водители </p>
-		<p class="th payment"> Расчет оплаты за рейс </p>
-		<p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-    <p class="th PRR"> ПРР </p>
-	</p>
-	<p class="row tr">
-		<p class="td col_1">  <?=date("j.m.Y",strtotime($a['date_1']))?></p>
-		<p class="td col_2"> <?=date("j.m.Y",strtotime($a['date_2']))?> </p>
-		<p class="td col_3"> <?=$a['place_1']?> </p>
-		<p class="td col_4"> <?=$a['place_2']?> </p>
-	</p>
-</p>
 
-
+<table width="100%" border="1">
+		<tr>
+			<td colspan="21"> Июль </td>
+		</tr>
+		<tr>
+			<td rowspan="2"> Водители </td>
+			<td colspan="3"> Расчет оплаты за рейс </td>
+			<td colspan="4"> ПРР </td>
+			<td colspan="4"> Прочие работы </td>
+			<td rowspan="2"> Моб. связь</td>
+			<td colspan="3"> Штрафы </td>
+			<td colspan="2"> Чеки </td>
+			<td rowspan="2"> ИТОГО к доплате (чеки не учитываются) </td>
+			<td rowspan="2"> Итоговый доход (чеки не учит-ся и не учит-ся выплач-е ПРР) </td>
+			<td rowspan="2"> ИТОГО к доплате (чеки учит-ся) </td>
+		</tr>
+		<tr>
+			<td> Зар. плата </td>
+			<td> Премия </td>
+			<td> Премия + ЗП </td>
+			<td> ПРР </td>
+			<td> ПРР, выпл-е </td>
+			<td> Даты выплат ПРР </td>
+			<td> Расчет доплаты/ вычета ПРР </td>
+			<td> Прочие работы </td>
+			<td> Прочие работы, выпл-е </td>
+			<td> Расчет доплаты за проч. работы </td>
+			<td> Прим-е </td>
+			<td> Штрафы ГИБДД </td>
+			<td> Проч. штрафы </td>
+			<td> Прим-е </td>
+			<td> Комп. чеков </td>
+			<td> Прим-е </td>
+		</tr>
+		<tr>
+			<td> Иванов </td>
+			<td> 35000 </td>
+			<td> 0% </td>
+			<td> 35 000 </td>
+			<td> 19600 </td>
+			<td> 19600 </td>
+			<td> 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021 </td>
+			<td> 0 </td>
+			<td> - </td>
+			<td> 4500 </td>
+			<td> 3 дня ремонт </td>
+			<td> - </td>
+			<td> 600 </td>
+			<td> 2000 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 0 </td>
+			<td> - </td>
+			<td> 47400 </td>
+			<td> 68000 </td>
+			<td> 47400 </td>
+		</tr>
+		<tr>
+			<td> Акушеров </td>
+			<td> 35000 </td>
+			<td> 0% </td>
+			<td> 35 000 </td>
+			<td> 19600 </td>
+			<td> 19600 </td>
+			<td> 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021 </td>
+			<td> 0 </td>
+			<td> - </td>
+			<td> 4500 </td>
+			<td> 3 дня ремонт </td>
+			<td> - </td>
+			<td> 600 </td>
+			<td> 2000 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 0 </td>
+			<td> - </td>
+			<td> 47400 </td>
+			<td> 68000 </td>
+			<td> 47400 </td>
+		</tr>
+		<tr>
+			<td> Кочерыжкин </td>
+			<td> 35000 </td>
+			<td> 0% </td>
+			<td> 35 000 </td>
+			<td> 19600 </td>
+			<td> 19600 </td>
+			<td> 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021 </td>
+			<td> 0 </td>
+			<td> - </td>
+			<td> 4500 </td>
+			<td> 3 дня ремонт </td>
+			<td> - </td>
+			<td> 600 </td>
+			<td> 2000 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 0 </td>
+			<td> - </td>
+			<td> 47400 </td>
+			<td> 68000 </td>
+			<td> 47400 </td>
+		</tr>
+</table>
 
 </main>
 

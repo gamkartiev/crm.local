@@ -45,6 +45,37 @@ class Flights extends Base
 	}
 
 
+	//фун-я выборки всех тягачей для Формы вставки нового рейса
+		public function getCarsSelect() {
+			$table = 'Cars';
+			$rows = 'state_sign_cars';
+			$join = '';
+			$where = '';
+			$order = 'state_sign_cars DESC';
+
+			$base = new Base();
+			$result = $base->select($table, $rows, $join, $where, $order);
+
+			return $result;
+		}
+
+
+
+	//фун-я выборки всех водителей для Формы вставки нового рейса
+		public function getDriversSelect() {
+			$table = 'drivers';
+			$rows = 'id, surname, first_name, patronymic';
+			$join = '';
+			$where = '';
+			$order = 'surname DESC';
+
+			$base = new Base();
+			$result = $base->select($table, $rows, $join, $where, $order);
+// var_export($result);
+			return $result;
+		}
+
+
 //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
 	public function getFirstItemCustomers($customers, $oneFlights){
 		$count = count($customers); //кол-во эл-тов в массиве $customers
@@ -58,7 +89,7 @@ class Flights extends Base
 			//удалить тот элемент массиве, что мы выбрали
 			//объединить два массива, первым поставив скопированный массив
 			$selectItem = array_slice($customers, $key, 1);
-			$deleteItemInArray=array_splice($customers, $key, 1);
+			$deleteItemInArray = array_splice($customers, $key, 1);
 			$customers = array_merge($selectItem, $customers);
 
 			return $customers;
@@ -79,25 +110,35 @@ class Flights extends Base
 				//удалить тот элемент массиве, что мы выбрали
 				//объединить два массива, первым поставив скопированный массив
 				$selectItem = array_slice($cars, $key, 1);
-				$deleteItemInArray=array_splice($cars, $key, 1);
+				$deleteItemInArray = array_splice($cars, $key, 1);
 				$cars = array_merge($selectItem, $cars);
 
 				return $cars;
 		}
 
-//фун-я выборки всех тягачей для Формы вставки нового рейса
-	public function getCarsSelect() {
-		$table = 'Cars';
-		$rows = 'state_sign_cars';
-		$join = '';
-		$where = '';
-		$order = 'state_sign_cars DESC';
 
-		$base = new Base();
-		$result = $base->select($table, $rows, $join, $where, $order);
+	//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
+		public function getFirstItemDrivers($drivers, $oneFlights){
+			$count = count($drivers); //кол-во эл-тов в массиве $customers
+			$key = 0;
+			// var_export($drivers);
+			for ($i=0; $i<$count; $i++) {
+					if($oneFlights[0]['driver']===$drivers[$i]['surname']) {
+							$item[] = $drivers[$i]; //это в принципе не нужно
+							$key = $i; //ключ нужного нам элемента в массиве drivers
+					}
+				}
+				//скопировать нужный элемент массива
+				//удалить тот элемент массиве, что мы выбрали
+				//объединить два массива, первым поставив скопированный массив
+				$selectItem = array_slice($drivers, $key, 1);
+				$deleteItemInArray = array_splice($drivers, $key, 1);
+				$drivers = array_merge($selectItem, $drivers);
 
-		return $result;
-	}
+				return $drivers;
+		}
+
+
 
 
 	public function getIdCustomers($customers) {
@@ -118,7 +159,7 @@ class Flights extends Base
 		// $values = ; соответствующий массив передается из контроллера
 		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
 							volume, cost, form_of_payment, car, customers, proxy,
-							request, note, drivers_payment ';
+							request, note, driver, drivers_payment ';
 
 		$base = new Base();
 		$result = $base->insert($table, $values, $rows);
@@ -128,7 +169,7 @@ class Flights extends Base
 	public function getEdit($id, $values) {
 		$table = 'flights';
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
-		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note", "drivers_payment");
+		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note", "driver", "drivers_payment");
 		$where = 'id='.(int)$id;
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);

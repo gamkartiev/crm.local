@@ -35,6 +35,7 @@ class FlightsController extends Controller
                 $proxy = $_POST['proxy'],
                 $request = $_POST['request'],
                 $note = $_POST['note'],
+                $driver = $_POST['driver'],
                 $drivers_payment = $_POST['drivers_payment']
           );
           $flights->getInsert($values);
@@ -45,6 +46,7 @@ class FlightsController extends Controller
             $flights = new Flights();
             $customers = $flights->getCustomersSelect();
             $cars = $flights->getCarsSelect();
+            $driver = $flights->getDriversSelect();
 
             include("views/flights/flightsForm.php");
         }
@@ -71,6 +73,7 @@ class FlightsController extends Controller
             $proxy = $_POST['proxy'],
             $request = $_POST['request'],
             $note = $_POST['note'],
+            $driver = $_POST['driver'],
             $drivers_payment = $_POST['drivers_payment']
         );
 
@@ -84,13 +87,14 @@ class FlightsController extends Controller
 
         $customers = $flights->getCustomersSelect();
         $cars = $flights->getCarsSelect();
+        $drivers = $flights->getDriversSelect();
         $oneFlights = $flights->getOneSelect($id);
 
         //Поставить при выводе сохраненные в бд
-        //клиента и машину в списке формы первыми:
+        //клиента, машину и водителя в списке формы первыми:
         $customers = $flights->getFirstItemCustomers($customers, $oneFlights);
         $cars = $flights->getFirstItemCars($cars, $oneFlights);
-
+        $drivers = $flights->getFirstItemDrivers($drivers, $oneFlights);
 
         include("views/flights/flightsFormEdit.php");
       }

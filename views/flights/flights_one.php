@@ -41,7 +41,8 @@
 		<p class="th col_13"> Заявка </p>
 		<p class="th col_14"> Примечание</p></b>
 
-		<p class="th col_15"> Оплата водителю </p>
+		<p class="th col_15"> Водитель </p>
+		<p class="th col_16"> Оплата водителю </p>
 	</p>
 	<p class="row tr">
 		<p class="td col_1">  <?=date("j.m.Y",strtotime($oneFlights['0']['date_1']))?></p>
@@ -63,6 +64,7 @@
 		<p class="td col_13"> <?=$oneFlights['0']['request']?> </p>
 		<p class="td col_14"> <?=$oneFlights['0']['note']?> </p>
 
+		<p class="td col_15"> <?=$oneFlights['0']['driver']?> </p>
 		<p class="td col_15"> <?=$oneFlights['0']['drivers_payment']?> </p>
 
 		<p class="td col_16"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
