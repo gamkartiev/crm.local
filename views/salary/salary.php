@@ -14,39 +14,56 @@
 
 <main>
 
-<table width="100%" border="1">
+	<section class="to_list">
+		Год:
+		<?php foreach($allSalaryMonth as $a): ?>
+			 <a href="/salary/view/<?=$a?>"> <?php echo $a ?> </a>
+		<?php endforeach ?>
+
+		<?php
+		// $echo = strtotime($a);
+		// $echo_2 = strtotime($a[1]);
+		// var_export($echo_2);
+		// echo ("/n");
+		// $date = date("d:m:y", $echo_2);
+		// var_export($date);
+		?>
+
+	</section>
+
+<table width="95%" border="1">
 		<tr>
 			<td colspan="21"> Июль </td>
 		</tr>
 		<tr>
-			<td rowspan="2"> Водители </td>
-			<td colspan="3"> Расчет оплаты за рейс </td>
-			<td colspan="4"> ПРР </td>
-			<td colspan="4"> Прочие работы </td>
-			<td rowspan="2"> Моб. связь</td>
-			<td colspan="3"> Штрафы </td>
-			<td colspan="2"> Чеки </td>
-			<td rowspan="2"> ИТОГО к доплате (чеки не учитываются) </td>
-			<td rowspan="2"> Итоговый доход (чеки не учит-ся и не учит-ся выплач-е ПРР) </td>
-			<td rowspan="2"> ИТОГО к доплате (чеки учит-ся) </td>
+			<td rowspan="2"> <b> Водители </b> </td>
+			<td colspan="3"> <b> Расчет оплаты за рейс </b> </td>
+			<td colspan="4"> <b> ПРР </b> </td>
+			<td colspan="4"> <b> Прочие работы </b> </td>
+			<td rowspan="2"> <b> Моб. связь </b> </td>
+			<td colspan="3"> <b> Штрафы </b> </td>
+			<td colspan="2"> <b> Чеки </b> </td>
+			<td rowspan="2"> <b> ИТОГО к доплате (чеки не учитываются) </b> </td>
+			<td rowspan="2"> <b> Итоговый доход (чеки не учит-ся и не учит-ся выплач-е ПРР) </b> </td>
+			<td rowspan="2"> <b> ИТОГО к доплате (чеки учит-ся) </b> </td>
 		</tr>
 		<tr>
-			<td> Зар. плата </td>
-			<td> Премия </td>
-			<td> Премия + ЗП </td>
-			<td> ПРР </td>
-			<td> ПРР, выпл-е </td>
-			<td> Даты выплат ПРР </td>
-			<td> Расчет доплаты/ вычета ПРР </td>
-			<td> Прочие работы </td>
-			<td> Прочие работы, выпл-е </td>
-			<td> Расчет доплаты за проч. работы </td>
-			<td> Прим-е </td>
-			<td> Штрафы ГИБДД </td>
-			<td> Проч. штрафы </td>
-			<td> Прим-е </td>
-			<td> Комп. чеков </td>
-			<td> Прим-е </td>
+			<td> <b> Зар. плата </b> </td>
+			<td> <b> Премия </b> </td>
+			<td> <b> Премия + ЗП </b> </td>
+			<td> <b> ПРР </b> </td>
+			<td> <b> ПРР, выпл-е </b> </td>
+			<td> <b> Даты выплат ПРР </b> </td>
+			<td> <b> Расчет доплаты/ вычета ПРР </b> </td>
+			<td> <b> Прочие работы </b> </td>
+			<td> <b> Прочие работы, выпл-е </b> </td>
+			<td> <b> Расчет доплаты за проч. работы </b> </td>
+			<td> <b> Прим-е </b> </td>
+			<td> <b> Штрафы ГИБДД </b> </td>
+			<td> <b> Проч. штрафы </b> </td>
+			<td> <b> Прим-е </b> </td>
+			<td> <b> Комп. чеков </b> </td>
+			<td> <b> Прим-е </b> </td>
 		</tr>
 		<tr>
 			<td> Иванов </td>

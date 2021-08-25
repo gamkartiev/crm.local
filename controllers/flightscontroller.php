@@ -46,7 +46,7 @@ class FlightsController extends Controller
             $flights = new Flights();
             $customers = $flights->getCustomersSelect();
             $cars = $flights->getCarsSelect();
-            $driver = $flights->getDriversSelect();
+            $drivers = $flights->getDriversSelect();
 
             include("views/flights/flightsForm.php");
         }

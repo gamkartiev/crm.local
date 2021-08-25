@@ -82,12 +82,12 @@
    </label>
 
 
-<label> Компания:
- <select name="drivers" required>
+<label> Водитель:
+ <select name="driver" required>
     <option disabled>Выберите водителя:</option>
     <option>    </option>
     <?php foreach($drivers as $a): ?>
-    <option> <?=$a['driver']?></option>
+    <option> <?=$a['surname']?></option>
     <<?php endforeach; ?>
  </select>
  </label>

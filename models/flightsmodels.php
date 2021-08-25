@@ -159,7 +159,7 @@ class Flights extends Base
 		// $values = ; соответствующий массив передается из контроллера
 		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
 							volume, cost, form_of_payment, car, customers, proxy,
-							request, note, driver, drivers_payment ';
+							request, note, driver, drivers_payment';
 
 		$base = new Base();
 		$result = $base->insert($table, $values, $rows);
