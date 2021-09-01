@@ -20,18 +20,10 @@
 			 <a href="/salary/view/<?=$a?>"> <?php echo $a ?> </a>
 		<?php endforeach ?>
 
-		<?php
-		// $echo = strtotime($a);
-		// $echo_2 = strtotime($a[1]);
-		// var_export($echo_2);
-		// echo ("/n");
-		// $date = date("d:m:y", $echo_2);
-		// var_export($date);
-		?>
 
 	</section>
 
-<table width="95%" border="1">
+<table width="90%" border="1">
 		<tr>
 			<td colspan="21"> Июль </td>
 		</tr>

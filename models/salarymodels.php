@@ -32,11 +32,33 @@ class Salary extends Base
   }
 
   public function getOneMonth($id) {
-    $getUnixTimestamp = strtotime($id);
-    var_export($id);
-    var_export($getUnixTimestamp);
-    $getNormalTimeFormat = date("m:y", $getUnixTimestamp);
-    var_export($getNormalTimeFormat);
+    $getOnlyMonth = substr($id, 0, 3);
+    $getOnlyYear = substr($id, -4);
+    $getUnixTimestamp = strtotime($getOnlyMonth);
+
+    $getNormalFormatMonth = date('m', $getUnixTimestamp); //переводим метку времени в цифру месяца
+
+    // объединяем месяц и год и получаем время в формате unix (метка времени)
+    $getStartMonthUnixTimestamp = strtotime ($getOnlyYear . "-" . $getNormalFormatMonth . "-" . "01");
+    $getEndMonthUnixTimestamp = strtotime ($getOnlyYear . "-" . $getNormalFormatMonth . "-" . "31");
+
+    //получаем нужный формат месяца, как 01, так и 31 числа
+    $getNormalFormatStartMonth = date('Y-m-d', $getStartMonthUnixTimestamp);
+    $getNormalFormatEndMonth = date('Y-m-d', $getEndMonthUnixTimestamp);
+    // var_export($getNormalFormatEndMonth);
+
+    $table = 'flights';
+    $rows = '*';
+    $join =	'';
+    $where = 'date_2 >= ' . '"' . "$getNormalFormatStartMonth" . '"' . " AND "  . 'date_2 <=' . '"' . "$getNormalFormatEndMonth". '"';
+    $order = '';
+
+    $base = new Base();
+    $result = $base->select($table, $rows, $join, $where, $order);
+
+    // var_export($result);
+    return $result;
+
   }
 
 }
