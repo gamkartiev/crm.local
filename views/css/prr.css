@@ -1,0 +1,21 @@
+.tablePrr{
+	float: left;
+	width: 45%;
+}
+
+
+.tablePrr td{
+	padding: 0;
+	margin: 0;
+}
+
+.dayPrr{
+	width: 20px;
+	height: 20px;
+	text-align: center;
+}
+
+.right_panel{
+	width: 25%;
+	float: right;
+}

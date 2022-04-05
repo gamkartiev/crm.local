@@ -60,6 +60,7 @@ protected $connection;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
 // var_export($q);
+
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);
 
@@ -98,12 +99,14 @@ protected $connection;
 				$insert .=' ('.$rows.')';
 			}
 			for($i=0; $i < count($values); $i++) {
-				if(is_string($values[$i]))
+				//if(is_string($values[$i]))
 					$values[$i] = '"'.$values[$i].'"';
 			}
 			$values = implode(',', $values);
 			$insert .= ' VALUES ('.$values.')';
+// var_export($insert);
 			$ins = $mysqli->query($insert);
+
 			if($ins) {
 				return true;
 			} else {
@@ -115,7 +118,10 @@ protected $connection;
 
 	public function update($table, $rows, $where, $values) {
 		$mysqli = $this->getConnection();
-
+		// var_export($values);
+		// var_export($table);
+		// var_export($rows);
+		// var_export($where);
 		if($this->tableExists($table)) {
 			$update = 'UPDATE '.$table.' SET ';
 			for ($i=0; $i < count($rows); $i++) {
@@ -129,7 +135,7 @@ protected $connection;
 				}
 			}
 			$update .= ' WHERE '.$where;
-
+// var_export($update);
 			$query = $mysqli->query($update);
 			if($query) {
 				return true;

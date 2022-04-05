@@ -23,7 +23,7 @@
 
 	</section>
 
-<table width="90%" border="1">
+<table width="95%" border="1">
 		<tr>
 			<td colspan="21"> Июль </td>
 		</tr>
@@ -57,75 +57,33 @@
 			<td> <b> Комп. чеков </b> </td>
 			<td> <b> Прим-е </b> </td>
 		</tr>
+
+		<?php foreach ($oneMonth as $a): ?>
 		<tr>
-			<td> Иванов </td>
-			<td> 35000 </td>
-			<td> 0% </td>
-			<td> 35 000 </td>
-			<td> 19600 </td>
-			<td> 19600 </td>
-			<td> 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021 </td>
-			<td> 0 </td>
-			<td> - </td>
-			<td> 4500 </td>
-			<td> 3 дня ремонт </td>
-			<td> - </td>
-			<td> 600 </td>
-			<td> 2000 </td>
+			<td><b> <?= $a['driver'] ?> </b></td>
+			<td><b> <?= $a['cost'] ?> </b></td>
+			<td> <?= $a['percent'] ?> % </td>
+			<td> <?= $a['cost_and_percent'] ?> </td>
+			<td> <!--19600--> </td>
+			<td> <!--19600--> </td>
+			<td> <!-- 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021--> </td>
 			<td> - </td>
 			<td> - </td>
-			<td> 0 </td>
 			<td> - </td>
-			<td> 47400 </td>
-			<td> 68000 </td>
-			<td> 47400 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
+			<td> <b> <?= $a['fines'] ?> </b> </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
 		</tr>
-		<tr>
-			<td> Акушеров </td>
-			<td> 35000 </td>
-			<td> 0% </td>
-			<td> 35 000 </td>
-			<td> 19600 </td>
-			<td> 19600 </td>
-			<td> 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021 </td>
-			<td> 0 </td>
-			<td> - </td>
-			<td> 4500 </td>
-			<td> 3 дня ремонт </td>
-			<td> - </td>
-			<td> 600 </td>
-			<td> 2000 </td>
-			<td> - </td>
-			<td> - </td>
-			<td> 0 </td>
-			<td> - </td>
-			<td> 47400 </td>
-			<td> 68000 </td>
-			<td> 47400 </td>
-		</tr>
-		<tr>
-			<td> Кочерыжкин </td>
-			<td> 35000 </td>
-			<td> 0% </td>
-			<td> 35 000 </td>
-			<td> 19600 </td>
-			<td> 19600 </td>
-			<td> 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021 </td>
-			<td> 0 </td>
-			<td> - </td>
-			<td> 4500 </td>
-			<td> 3 дня ремонт </td>
-			<td> - </td>
-			<td> 600 </td>
-			<td> 2000 </td>
-			<td> - </td>
-			<td> - </td>
-			<td> 0 </td>
-			<td> - </td>
-			<td> 47400 </td>
-			<td> 68000 </td>
-			<td> 47400 </td>
-		</tr>
+		<?php endforeach; ?>
+
 </table>
 
 </main>

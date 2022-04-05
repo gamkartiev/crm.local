@@ -5,8 +5,9 @@ class Flights extends Base
 
 	public function getAllSelect() {
 		$table = 'flights';
-		$rows = '*';
-		$join = '';
+		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight, volume, cost,
+						form_of_payment, car, customers.short_name, proxy, request, flights.note, driver, drivers_payment';
+		$join = ' LEFT OUTER JOIN customers ON flights.id_customers=customers.id';
 		$where = '';
 		$order = 'date_1 DESC, date_2 DESC';
 
@@ -18,8 +19,9 @@ class Flights extends Base
 
 	public function getOneSelect($id){
 		$table = 'flights';
-		$rows = '*';
-		$join = '';
+		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight, volume, cost,
+						form_of_payment, car, customers.short_name, proxy, request, flights.note, driver, drivers_payment';
+		$join = ' LEFT OUTER JOIN customers ON flights.id_customers=customers.id';
 		$where = 'flights.id ='.$id;
 		$order = '';
 
@@ -46,101 +48,86 @@ class Flights extends Base
 
 
 	//фун-я выборки всех тягачей для Формы вставки нового рейса
-		public function getCarsSelect() {
-			$table = 'Cars';
-			$rows = 'state_sign_cars';
-			$join = '';
-			$where = '';
-			$order = 'state_sign_cars DESC';
+	public function getCarsSelect() {
+		$table = 'Cars';
+		$rows = 'state_sign_cars';
+		$join = '';
+		$where = '';
+		$order = 'state_sign_cars DESC';
 
-			$base = new Base();
-			$result = $base->select($table, $rows, $join, $where, $order);
+		$base = new Base();
+		$result = $base->select($table, $rows, $join, $where, $order);
 
-			return $result;
-		}
+		return $result;
+	}
 
 
 
 	//фун-я выборки всех водителей для Формы вставки нового рейса
-		public function getDriversSelect() {
-			$table = 'drivers';
-			$rows = 'id, surname, first_name, patronymic';
-			$join = '';
-			$where = '';
-			$order = 'surname DESC';
+	public function getDriversSelect() {
+		$table = 'drivers';
+		$rows = 'id, driver';
+		$join = '';
+		$where = '';
+		$order = 'driver DESC';
 
-			$base = new Base();
-			$result = $base->select($table, $rows, $join, $where, $order);
-// var_export($result);
-			return $result;
-		}
+		$base = new Base();
+		$result = $base->select($table, $rows, $join, $where, $order);
+
+		return $result;
+	}
 
 
 //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
 	public function getFirstItemCustomers($customers, $oneFlights){
 		$count = count($customers); //кол-во эл-тов в массиве $customers
+
 		for ($i=0; $i<$count; $i++) {
-				if($oneFlights[0]['customers']===$customers[$i]['short_name']) {
-						$item[] = $customers[$i]; //это в принципе не нужно
-						$key = $i; //ключ нужного нам элемента в массиве customers
+			if($oneFlights[0]['short_name']===$customers[$i]['short_name']) {
+				$selectItem = array_slice($customers, $i, 1);          //скопировать нужный элемент массива
+				$deleteItemInArray = array_splice($customers, $i, 1); //удалить тот элемент массиве, что мы выбрали
+				$customers = array_merge($selectItem, $customers);		//объед-ть 2 массива, 1-м поставив скопированный массив
 				}
 			}
-			//скопировать нужный элемент массива
-			//удалить тот элемент массиве, что мы выбрали
-			//объединить два массива, первым поставив скопированный массив
-			$selectItem = array_slice($customers, $key, 1);
-			$deleteItemInArray = array_splice($customers, $key, 1);
-			$customers = array_merge($selectItem, $customers);
 
 			return $customers;
 	}
 
 
 	//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
-		public function getFirstItemCars($cars, $oneFlights){
-			$count = count($cars); //кол-во эл-тов в массиве $customers
+	public function getFirstItemCars($cars, $oneFlights){
+		$count = count($cars); //кол-во эл-тов в массиве $customers
 
-			for ($i=0; $i<$count; $i++) {
-					if($oneFlights[0]['car']===$cars[$i]['state_sign_cars']) {
-							$item[] = $cars[$i]; //это в принципе не нужно
-							$key = $i; //ключ нужного нам элемента в массиве customers
-					}
+		for ($i=0; $i<$count; $i++) {
+			if($oneFlights[0]['car']===$cars[$i]['state_sign_cars']) {
+				$selectItem = array_slice($cars, $i, 1);					//скопировать нужный элемент массива
+				$deleteItemInArray = array_splice($cars, $i, 1);	//удалить тот элемент массиве, что мы выбрали
+				$cars = array_merge($selectItem, $cars);					//объед-ть 2 массива, 1-м поставив скопированный массив
 				}
-				//скопировать нужный элемент массива
-				//удалить тот элемент массиве, что мы выбрали
-				//объединить два массива, первым поставив скопированный массив
-				$selectItem = array_slice($cars, $key, 1);
-				$deleteItemInArray = array_splice($cars, $key, 1);
-				$cars = array_merge($selectItem, $cars);
-
-				return $cars;
-		}
+			}
+			return $cars;
+	}
 
 
 	//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
-		public function getFirstItemDrivers($drivers, $oneFlights){
-			$count = count($drivers); //кол-во эл-тов в массиве $customers
-			$key = 0;
-			// var_export($drivers);
-			for ($i=0; $i<$count; $i++) {
-					if($oneFlights[0]['driver']===$drivers[$i]['surname']) {
-							$item[] = $drivers[$i]; //это в принципе не нужно
-							$key = $i; //ключ нужного нам элемента в массиве drivers
-					}
+	public function getFirstItemDrivers($drivers, $oneFlights){
+		$count = count($drivers); //кол-во эл-тов в массиве $customers
+
+		for ($i=0; $i<$count; $i++) {
+			if($oneFlights[0]['driver']===$drivers[$i]['driver']) {
+				$selectItem = array_slice($drivers, $i, 1);					//скопировать нужный элемент массива
+				$deleteItemInArray = array_splice($drivers, $i, 1);	//удалить тот элемент массиве, что мы выбрали
+				$drivers = array_merge($selectItem, $drivers);			//объед-ть 2 массива, 1-м поставив скопированный массив
 				}
-				//скопировать нужный элемент массива
-				//удалить тот элемент массиве, что мы выбрали
-				//объединить два массива, первым поставив скопированный массив
-				$selectItem = array_slice($drivers, $key, 1);
-				$deleteItemInArray = array_splice($drivers, $key, 1);
-				$drivers = array_merge($selectItem, $drivers);
+			}
 
-				return $drivers;
-		}
+			return $drivers;
+	}
 
 
 
-
+//??? зачем нужен был этот блок??? - использовался при создании выпадающего спика и поиска id на соотв-ее
+//название компании///
 	public function getIdCustomers($customers) {
 		$table = 'Customers';
 		$rows = 'id, short_name';
@@ -154,22 +141,23 @@ class Flights extends Base
 		return $result;
 	}
 
+
 	public function getInsert($values) {
 		$table = 'flights';
 		// $values = ; соответствующий массив передается из контроллера
 		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
-							volume, cost, form_of_payment, car, customers, proxy,
+							volume, cost, form_of_payment, car, id_customers, proxy,
 							request, note, driver, drivers_payment';
-
+		$join = '';
 		$base = new Base();
 		$result = $base->insert($table, $values, $rows);
-
 	}
+
 
 	public function getEdit($id, $values) {
 		$table = 'flights';
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
-		"cost", "form_of_payment", "car", "customers", "proxy", "request", "note", "driver", "drivers_payment");
+				"cost", "form_of_payment", "car", "id_customers", "proxy", "request", "note", "driver", "drivers_payment");
 		$where = 'id='.(int)$id;
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);
@@ -180,7 +168,7 @@ class Flights extends Base
 		$table = 'flights';
 		$where = 'id='.(int)$id;
 
-		$base = new Base;
+		$base = new Base();
 		$base->delete($table, $where);
 	}
 }

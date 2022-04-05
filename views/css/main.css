@@ -135,7 +135,7 @@ main{
 .col_12 {width: 100px;}
 .col_13 {width: 85px;}
 .col_14 {width: 140px;}
-.col_15 {width: 50px;}
+.col_15 {width: 80px;}
 .col_16 {width: auto;}
 .col_17 {width: 50px; margin-left: 15px;}
 
@@ -201,4 +201,19 @@ main{
 	width: 35%;
 	float: left;
 	margin: 5px;
+}
+
+input[type=checkbox]{
+
+}
+
+.tablePrr td{
+	padding: 0;
+	margin: 0;
+}
+
+.dayPrr{
+	width: 20px;
+	height: 20px;
+	text-align: center;
 }

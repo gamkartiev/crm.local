@@ -22,9 +22,9 @@ class DriversController extends Controller
         $drivers = new Drivers();
 
         $values = array(
-          $surname = $_POST['surname'],
-          $first_name = $_POST['first_name'],
-          $patronymic = $_POST['patronymic'],
+          $driver = $_POST['driver'],
+          // $first_name = $_POST['first_name'],
+          // $patronymic = $_POST['patronymic'],
           $date_of_birth = $_POST['date_of_birth'],
           $place_of_birth = $_POST['place_of_birth'],
           $passport = $_POST['passport'],
@@ -38,10 +38,10 @@ class DriversController extends Controller
         $drivers->getInsert($values);
 
         $values = array(
-          $surname = $_POST['surname'],
-          $first_name = $_POST['first_name'],
-          $patronymic = $_POST['patronymic'],
-          $surname = $_POST['date_of_birth'],
+          $driver = $_POST['driver'],
+          // $first_name = $_POST['first_name'],
+          // $patronymic = $_POST['patronymic'],
+          $driver = $_POST['date_of_birth'],
         );
 
         //для открытия последней добавленной строчки(водителя)
@@ -61,9 +61,9 @@ class DriversController extends Controller
       $drivers = new Drivers();
 
       $values = array(
-        $surname = $_POST['surname'],
-        $first_name = $_POST['first_name'],
-        $patronymic = $_POST['patronymic'],
+        $driver = $_POST['driver'],
+        // $first_name = $_POST['first_name'],
+        // $patronymic = $_POST['patronymic'],
         $date_of_birth = $_POST['date_of_birth'],
         $place_of_birth = $_POST['place_of_birth'],
         $passport = $_POST['passport'],

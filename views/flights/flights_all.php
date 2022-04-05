@@ -49,7 +49,7 @@
 			<p class="td col_3"> <?=$a['place_1']?> </p>
 			<p class="td col_4"> <?=$a['place_2']?> </p>
 
-			<p class="td col_5"> <?=$a['customers']?> </p>
+			<p class="td col_5"> <?=$a['short_name']?> </p>
 
 			<p class="td col_6"> <?=$a['freight']?> </p>
 			<p class="td col_7"> <?=$a['volume']?> </p>

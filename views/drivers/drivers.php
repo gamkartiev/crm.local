@@ -18,7 +18,7 @@
 <section class="to_list">
 	Водители:
 	 <?php foreach($allDriversName as $a): ?>
-		 <a href="/drivers/view/<?=$a['id']?>"> <?php echo $a['surname'].' '.$a['first_name'].' '.$a['patronymic']; ?> </a>
+		 <a href="/drivers/view/<?=$a['id']?>"> <?php echo $a['driver']; ?> </a>
 	 <?php endforeach ?>
 </section>
 
@@ -27,9 +27,9 @@
 	<a href="/drivers/edit/<?=$b['id']?>" class="bottom-edit">Редактировать водителя</a> <br />
 
 
-	<div class="surName"> <span class="bold"> Фамилия:</span> <?=$b['surname']?> <br /></div>
-	<div class="firstName"> <span class="bold"> Имя:</span> <?=$b['first_name']?> <br /></div>
-	<div class="middleName"> <span class="bold"> Отчество:</span> <?=$b['patronymic']?> <br /><br /></div>
+	<div class="surName"> <span class="bold"> ФИО:</span> <?=$b['driver'];?> <br /></div>
+	<!-- <div class="firstName"> <span class="bold"> Имя:</span>  <br /></div> -->
+	<!-- <div class="middleName"> <span class="bold"> Отчество:</span> <br /><br /></div> -->
 
 	<div class="data_of_birth"> <span class="bold"> Дата рождения:</span> <?=date("j.m.Y", strtotime($b['date_of_birth']))?><br /></div>
 	<div class="place_of_birth"> <span class="bold"> Место рождения:</span> <?=$b['place_of_birth']?><br /><br /></div>

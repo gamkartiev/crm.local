@@ -29,15 +29,15 @@
    </label>
 
   <label> Название груза: </label>
-   <input type="text" name="freight"> <br />
+   <input type="text" name="freight" value="груз"> <br />
    </label>
 
   <label> Вес: </label>
-   <input type="number" name="weight"> <br />
+   <input type="number" name="weight" value="20"> <br />
    </label>
 
   <label> Объем: </label>
-   <input type="number" name="volume"> <br />
+   <input type="number" name="volume" value="76"> <br />
    </label>
 
   <label> Сумма: </label>
@@ -64,21 +64,21 @@
       <option disabled>Выберите Компанию:</option>
       <option>    </option>
       <?php foreach($customers as $a): ?>
-      <option> <?=$a['short_name']?></option>
+      <option value="<?=$a['id']?>"> <?=$a['short_name']?></option>
       <<?php endforeach; ?>
    </select>
    </label>
 
   <label> Доверенность:
-   <input type="text" name="proxy"> <br />
+   <input type="text" name="proxy" value="1"> <br />
    </label>
 
   <label> Заявка:
-   <input type="text" name="request"> <br />
+   <input type="text" name="request" value="1"> <br />
    </label>
 
   <label> Примечание:
-   <input type="text" name="note"> <br />
+   <input type="text" name="note" value="--"> <br />
    </label>
 
 
@@ -87,14 +87,14 @@
     <option disabled>Выберите водителя:</option>
     <option>    </option>
     <?php foreach($drivers as $a): ?>
-    <option> <?=$a['surname']?></option>
+    <option> <?=$a['driver']?></option>
     <<?php endforeach; ?>
  </select>
  </label>
 
 
  <label> Оплата водителю:
-  <input type="text" name="drivers_payment"> <br />
+  <input type="text" name="drivers_payment" value="2000"> <br />
   </label>
 
   <button type="submit" name="button"> Добавить </button>

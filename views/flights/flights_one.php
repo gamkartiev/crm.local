@@ -50,7 +50,8 @@
 		<p class="td col_3"> <?=$oneFlights['0']['place_1']?> </p>
 		<p class="td col_4"> <?=$oneFlights['0']['place_2']?> </p>
 
-		<p class="td col_5"> <?=$oneFlights['0']['customers']?> </p>
+
+		<p class="td col_5"> <?=$oneFlights['0']['short_name']?> </p>
 
 		<p class="td col_6"> <?=$oneFlights['0']['freight']?> </p>
 		<p class="td col_7"> <?=$oneFlights['0']['volume']?> </p>

@@ -8,15 +8,7 @@
 
 <form action="/drivers/edit/<?= $id ?>" method="post">
   <label> Фамилия:
-   <input type="text" name="surname" value="<?=$oneDriverName['0']['surname']?>"> <br />
-   </label>
-
-  <label> Имя:
-   <input type="text" name="first_name" value="<?=$oneDriverName['0']['first_name']?>"> <br />
-   </label>
-
-  <label> Отчество:
-   <input type="text" name="patronymic" value="<?=$oneDriverName['0']['patronymic']?>"> <br />
+   <input type="text" name="driver" value="<?=$oneDriverName['0']['driver']?>"> <br />
    </label>
 
   <label> Дата рождения:

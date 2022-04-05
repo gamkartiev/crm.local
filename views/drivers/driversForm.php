@@ -7,17 +7,17 @@
   <body>
 
 <form action="/drivers/add" method="post">
-  *<label> Фамилия:
-    <input type="text" name="surname" required> <br />
+  *<label> ФИО:
+    <input type="text" name="driver" required> <br />
     </label>
 
-  *<label> Имя:
+  <!-- *<label> Имя:
     <input type="text" name="first_name" required> <br />
     </label>
 
   <label> Отчество:
    <input type="text" name="patronymic"> <br />
-   </label>
+   </label> -->
 
   *<label> Дата рождения:
     <input type="date" name="date_of_birth" required> <br />

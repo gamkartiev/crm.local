@@ -64,7 +64,7 @@
       <option disabled>Выберите Компанию:</option>
       <?php
       foreach($customers as $a): ?>
-      <option> <?= $a['short_name'] ?></option>
+      <option value="<?= $a['id']?>"> <?= $a['short_name'] ?> </option>
       <<?php endforeach; ?>
    </select>
    </label>
@@ -86,8 +86,8 @@
      <option disabled>Выберите водителя:</option>
      <?php
      foreach($drivers as $a): ?>
-     <option> <?= $a['surname'] ?></option>
-     <<?php endforeach; ?>
+     <option> <?= $a['driver'] ?></option>
+     <?php endforeach; ?>
   </select>
   </label>
 

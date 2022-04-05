@@ -4,10 +4,10 @@ class Drivers extends Base
 {
 	public function getAllSelect() {
 		$table = 'drivers';
-		$rows = 'id, surname, first_name, patronymic';
+		$rows = 'id, driver';
 		$join =	'';
 		$where = '';
-		$order = 'surname';
+		$order = 'driver';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
@@ -33,7 +33,7 @@ class Drivers extends Base
 		$table = 'drivers';
 		$rows = 'id';
 		$join =	'';
-		$where = 'surname='.'"'.$values[0].'"';
+		$where = 'driver='.'"'.$values[0].'"';
 
 		$order = '';
 
@@ -48,7 +48,7 @@ class Drivers extends Base
 	public function getInsert($values) {
 		$table = 'drivers';
 		// $values = ; соответствующий массив передается из контроллера
-		$rows = 'surname, first_name, patronymic, date_of_birth, place_of_birth,
+		$rows = 'driver, date_of_birth, place_of_birth,
 						passport, registration, drivers_license, phone_1, phone_2, phone_3';
 
 		$base = new Base();
@@ -59,7 +59,7 @@ class Drivers extends Base
 	public function getEdit($id, $values) {
 		$table = 'drivers';
 		// $values = ; соответствующий массив передается из контроллера
-		$rows = array("surname", "first_name", "patronymic", "date_of_birth", "place_of_birth",
+		$rows = array("driver", "date_of_birth", "place_of_birth",
 						"passport", "registration", "drivers_license", "phone_1", "phone_2", "phone_3");
 		$where = 'id='.(int)$id;
 

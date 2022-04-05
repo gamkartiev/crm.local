@@ -26,7 +26,7 @@
 </section>
 
 
-<?php foreach($oneCarName as $b) : ?>
+<?php foreach($oneCarName as $b): ?>
 	<section class="left_panel">
 		<a href="/cars/edit/<?=$b['id']?>" class="bottom-edit"> Редактировать данные машины </a> <br />
 
@@ -35,6 +35,9 @@
 		<div class="car_car_PTS"> <span class="bold">ПТС:</span> <?= $b['PTS_cars']?> <br /></div>
 		<div class="car_car_STS"> <span class="bold">СТС:</span> <?= $b['STS_cars']?>  <br /></div>
 		<div class="car_car_VIN"> <span class="bold">VIN:</span> <?= $b['VIN_cars']?> <br /></div>
+		<br /> <br />
+		<div class="car_car_driver"> <span class="bold">Привязанный водитель:</span> <?= $b['driver']?> <br /></div>
+		<div class="car_car_start"> <span class="bold">Дата начала вахты:</span> <?= $b['start']?> <br /></div>
 
 		<br /> <br />
 		<a href="/cars/delete/<?=$b['id']?>" class="bottom-delete">Удалить машину</a>
