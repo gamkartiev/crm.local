@@ -111,10 +111,8 @@ class FlightsController extends Controller
       $flights->deleteFlight($id);
 
       header("location: /flights/view");
-      exit();
     } else {
       header("Location: /flights/view");
-      exit();
     }
   }
 }

@@ -18,7 +18,7 @@ class SalaryController extends controller
     //информация с зп об одном месяце
     $oneMonth = $salary->getOneMonth($id); //за один месяц зп
     // var_export($oneMonth);
-    $prr = $salary->getPrr($id, $oneMonth); //суточные
+  //  $prr = $salary->getPrr($id, $oneMonth); //суточные
     $premium = $salary->getPremium(); //премия
     $fines = $salary->getFines($id); //штрафы
 

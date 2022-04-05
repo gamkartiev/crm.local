@@ -6,9 +6,10 @@ class PrrController extends controller
 
 //-------выведение всех строк------//
 public function view($id) {
-  // echo "выходе есть всегда";
   $prr = new Prr();
-  $allPrrMonth = $prr->getAllSelect();
+  // $allPrrMonth = $prr->getAllSelect();
+  $allEvents = $prr->getAllEventsSelect();
+// var_export($allEvents);
 
   $drivers = $prr->getDriversSelect();
 
@@ -16,22 +17,37 @@ public function view($id) {
   }
 
 
-  public function add() {
-    if(!empty($_POST)){
+public function add() {
+  if(!empty($_POST)){
 
-      $values = array(
-        $id_drivers = $_POST['id_drivers'],
-        $event = $_POST['event'],
-        $start = $_POST['start'],
-        $the_end = $_POST['the_end']
-      );
+    $values = array(
+      $id_drivers = $_POST['id_drivers'],
+      $event = $_POST['event'],
+      $start = $_POST['start'],
+      $the_end = $_POST['the_end']
+    );
 
-    $prr = new Prr();
-    $prr->getInsert($values);
-    header("Location: /prr");
-    }
+  $prr = new Prr();
+  $prr->getInsert($values);
+  header("Location: /prr");
   }
+}
 
+//убираю пункт редактирования
+// public function edit($id){
+//   if($_POST)
+// }
+
+public function delete($id){
+  if($id>0){
+    $prr = new Prr();
+    $prr->deleteEvent($id);
+
+    header("Location: /prr/view");
+  } else {
+    header("Location: /prr/view");
+  }
+}
 
 
 
