@@ -7,9 +7,12 @@ class PrrController extends controller
 //-------выведение всех строк------//
 public function view($id) {
   $prr = new Prr();
-  // $allPrrMonth = $prr->getAllSelect();
+  $allPrrMonth = $prr->getAllMonthSelect();
   $allEvents = $prr->getAllEventsSelect();
-// var_export($allEvents);
+  $oneMonth = $prr->getOneMonth($id);
+
+  $dayPrr = $prr->getDailyDays($id, $oneMonth);
+var_export($dayPrr);
 
   $drivers = $prr->getDriversSelect();
 

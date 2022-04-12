@@ -2,7 +2,7 @@
 
 class Salary extends Base
 {
-  public function getAllSelect() {
+  public function getAllMonthSelect() {
     $table = 'flights';
     $rows = 'date_2';
     $join =	'';

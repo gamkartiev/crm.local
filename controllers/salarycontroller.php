@@ -6,7 +6,7 @@ class SalaryController extends controller
   //-------выведение всех строк------//
   public function view($id) {
     $salary = new Salary();
-    $allSalaryMonth = $salary->getAllSelect(); // боковая панель-список из годов + месяцев
+    $allSalaryMonth = $salary->getAllMonthSelect(); // боковая панель-список из годов + месяцев
     $lastMonth = $salary->getLastMonth();
 
 // Создать отдельную функцию для получения нормального id

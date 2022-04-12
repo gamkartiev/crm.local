@@ -19,8 +19,6 @@
 		<?php foreach($allSalaryMonth as $a): ?>
 			 <a href="/salary/view/<?=$a?>"> <?php echo $a ?> </a>
 		<?php endforeach ?>
-
-
 	</section>
 
 <table width="95%" border="1">

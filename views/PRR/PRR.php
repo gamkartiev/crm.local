@@ -21,7 +21,7 @@
 		<?php
 		  // for ($i=0; $i < 32; $i++) {
 			//   echo "<td class='dayPrr'>".$i."</td>";
-		  // }
+		  //}
 		?>
 	</tr>
 	<tr>
@@ -32,7 +32,7 @@
 		  // }
 		?>
 	</tr>
-</table> -->
+</table> <br /><br /> <br /><br /> <br /><br /> -->
 
 <table class="tablePrr">
 	<tr>
@@ -40,7 +40,6 @@
 		<td> <b> Событие </b> </td>
 		<td> <b> Дата начала </b> </td>
 		<td> <b> Дата оканчания </b> </td>
-
 	</tr>
 	<?php foreach($allEvents as $a): ?>
 	<tr>
@@ -52,6 +51,14 @@
 	</tr>
 <?php endforeach; ?>
 </table>
+
+
+<section class="to_list">
+	Год:
+	<?php foreach($allPrrMonth as $a): ?>
+		 <a href="/prr/view/<?=$a?>"> <?php echo $a ?> </a>
+	<?php endforeach ?>
+</section>
 
 
 <form class="right_panel" action="/prr/add" method="post">

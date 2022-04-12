@@ -19,3 +19,8 @@
 	width: 25%;
 	float: right;
 }
+
+.to_list {
+	/* width: 20%; */
+	min-width: 4%;
+}
