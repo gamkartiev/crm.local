@@ -56,7 +56,9 @@
 <section class="to_list">
 	Год:
 	<?php foreach($allPrrMonth as $a): ?>
-		 <a href="/prr/view/<?=$a?>"> <?php echo $a ?> </a>
+		<!-- $a[0] - передается числовое значение месяца из многомер массива -->
+		<!-- $a[1] - выводится строкое значение месяца из многомер массива -->
+		 <a href="/prr/view/<?=$a[0]?>"> <?php echo $a[1] ?> </a>
 	<?php endforeach ?>
 </section>
 
@@ -82,8 +84,8 @@
 		</select>
 	</label>
 
-	<p> Дата начала: <input type="date" name="start" value="<?= date("Y-m-d") ?>"> </p>
-	<p> Дата окончания: <input type="date" name="the_end" value="<?= date("Y-m-d") ?>"> </p>
+	<p> Дата начала события: <input type="date" name="start" value="<?= date("Y-m-d") ?>"> </p>
+	<p> Дата окончания события (включительно): <input type="date" name="the_end" value="<?= date("Y-m-d") ?>"> </p>
 
 	<button type="submit" name="button"> Добавить </button>
 </form>

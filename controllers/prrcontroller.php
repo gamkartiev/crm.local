@@ -7,12 +7,17 @@ class PrrController extends controller
 //-------выведение всех строк------//
 public function view($id) {
   $prr = new Prr();
-  $allPrrMonth = $prr->getAllMonthSelect();
+  $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде чисел
+  $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
+
+// var_dump($id);
+
   $allEvents = $prr->getAllEventsSelect();
   $oneMonth = $prr->getOneMonth($id);
+  // $gettype = gettype($id);
+  // echo $gettype;
 
   $dayPrr = $prr->getDailyDays($id, $oneMonth);
-var_export($dayPrr);
 
   $drivers = $prr->getDriversSelect();
 
@@ -36,10 +41,6 @@ public function add() {
   }
 }
 
-//убираю пункт редактирования
-// public function edit($id){
-//   if($_POST)
-// }
 
 public function delete($id){
   if($id>0){
