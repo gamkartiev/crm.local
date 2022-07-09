@@ -70,7 +70,7 @@ class FinesController extends Controller
       $oneFine = $fines->getOneSelect($id);
       $cars = $fines->getCarsSelect();
       $drivers = $fines->getDriversSelect();
-
+// var_dump($cars);
       //Поставить при выводе сохраненные в бд
       //клиента, машину и водителя в списке формы первыми:
       $cars = $fines->getFirstItemCars($cars, $oneFine);

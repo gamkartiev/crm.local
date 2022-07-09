@@ -73,18 +73,18 @@ class Prr extends Base
 
    //количество рабочих дней в месяце.
    $numberOfDaysInMonth = cal_days_in_month(CAL_GREGORIAN, $getOnlyMonth, $getOnlyYear);
-   // $numberOfDaysInMonth = date('t', mktime(0, 0, 0, $getOnlyMonth, 1, $getOnlyYear));
+
    $dayPrr = array();
-var_export($numberOfDaysInMonth);
 
-$table = 'working_days_drivers';
-$rows = 'working_days_drivers.id, id_drivers, drivers.driver, event, start, the_end';
-$join =	' INNER JOIN drivers ON id_drivers = drivers.id';
-$where = ''; // тут добавить условия месяца, который нам нужен
-$order = '';
 
-$base = new Base();
-$result = $base->select($table, $rows, $join, $where, $order);
+    $table = 'working_days_drivers';
+    $rows = 'working_days_drivers.id, id_drivers, drivers.driver, event, start, the_end';
+    $join =	' INNER JOIN drivers ON id_drivers = drivers.id';
+    $where = ''; // тут добавить условия месяца, который нам нужен
+    $order = '';
+
+    $base = new Base();
+    $result = $base->select($table, $rows, $join, $where, $order);
 
 var_export($result);
 
@@ -198,6 +198,3 @@ public function getCostDailyDays($dayPrr, $costDaily){
   }
 
 }
-
-
- ?>

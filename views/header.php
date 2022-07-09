@@ -9,7 +9,7 @@
     <li><a href="/customers"> Клиенты </a></li>
     <li><a href="/fines"> Штрафы </a></li>
     <li><a href="/salary"> Зарплата </a></li>
-    <li><a href="/PRR"> ПРР </a></li>
+    <li><a href="/prr"> ПРР </a></li>
     <li><a href="/financePlan"> Финансовый план на месяц </a></li>
     <li><a href="/parameters"> Параметры </a></li>
 

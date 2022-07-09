@@ -2,9 +2,9 @@
 class Base
 {
 private $db_host = "localhost";
-private $db_user = "root";
-private $db_pass = "root";
-private $db_name = "crmTransport";
+private $db_user = "test";
+private $db_pass = "test";
+private $db_name = "crmtransport";
 protected $connection;
 	/*
 	*	Содиеняемся с бд. Разрешено только одно соединение
