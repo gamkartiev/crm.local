@@ -1,0 +1,68 @@
+.table {
+	display: table;
+	width: 100%;
+	box-sizing: border-box;
+	border-collapse: collapse;
+	border: 1px solid #555;
+	empty-cells: show;
+}
+
+.table-tbody{
+	padding: 0;
+}
+.table-tr {
+	display: table-row;
+	width: 100%;
+	padding: 0;
+	position: relative;
+	text-decoration: none;
+}
+.table-th {
+	display: table-cell;
+	padding: 10px 5px;
+	border: 1px solid transparent;
+	font-weight: bold;
+	text-align: left;
+}
+.table-td {
+	display: table-cell;
+	/* width: 100%; */
+	padding: 10px;
+	border: 1px solid transparent;
+
+}
+.table-thead .table-th, .table-thead .table-td {
+	background: #f9f9f9;
+}
+.table-tbody .table-th, .table-tbody .table-td {
+	background: #f2f2f2;
+}
+.table-tfoot .table-th, .table-tfoot .table-td {
+	background: #f2f2f2;
+}
+
+.col_1 {min-width: 70px;}
+.col_2 {min-width: 70px;}
+.col_3 {min-width: 130px;}
+.col_4 {min-width: 130px;}
+
+.col_5 {min-width: 125px;}
+.col_6 {min-width: 80px;}
+.col_7 {min-width: 50px;}
+.col_8 {min-width: 30px;}
+
+.col_9 {min-width: 45px;}
+.col_10 {min-width: 48px;}
+.col_11 {min-width: 100px;}
+.col_12 {min-width: 100px;}
+
+.col_13 {min-width: 50px;}
+.col_14 {min-width: 140px;}
+.col_15 {min-width: 80px;}
+.col_16 {min-width: 80px;}
+.col_17 {min-width: 50px; margin-left: 15px;}
+
+.col_17 a:hover, .col_15 a:hover{
+	background: rgba(255,255,255,0.4);
+	color: black;
+}

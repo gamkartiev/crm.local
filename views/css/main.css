@@ -89,6 +89,9 @@ main{
 	color: red;
 }
 
+.table{
+
+}
 .firstRow {
 	width: 100%;
 	display: table-row;
@@ -110,6 +113,7 @@ main{
 	float: left;
 	margin: 0;
 	text-decoration: none;
+
 }
 
 .td{
@@ -118,8 +122,14 @@ main{
 	display: table-cell;
 	padding: 2px 5px;
 	height: 36px;
+
 }
 
+.th, .td{
+	margin: 1px;
+	background: #fff;
+	color: black;
+}
 
 .col_1 {width: 70px;}
 .col_2 {width: 70px;}
@@ -134,9 +144,9 @@ main{
 .col_11 {width: 100px;}
 .col_12 {width: 100px;}
 .col_13 {width: 85px;}
-.col_14 {width: 140px;}
-.col_15 {width: 80px;}
-.col_16 {width: auto;}
+.col_14 {width: 100px;}
+.col_15 {width: 160px;}
+.col_16 {width: 100px;}
 .col_17 {width: 50px; margin-left: 15px;}
 
 .col_17 a:hover, .col_15 a:hover{

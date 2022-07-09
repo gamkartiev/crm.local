@@ -63,8 +63,8 @@
 			<p class="td col_13"> <?=$a['request']?> </p>
 			<p class="td col_14"> <?=$a['note']?> </p>
 
-			<p class="td col_14"> <?=$a['driver']?> </p>
-			<p class="td col_15"> <?=$a['drivers_payment']?> </p>
+			<p class="td col_15"> <?=$a['driver']?> </p>
+			<p class="td col_16"> <?=$a['drivers_payment']?> </p>
 		</p>
 		</a>
 

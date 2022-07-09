@@ -64,7 +64,7 @@ class Fines extends Base
 
   //фун-я выборки всех тягачей для Формы вставки нового рейса
 	public function getCarsSelect() {
-		$table = 'Cars';
+		$table = 'cars';
 		$rows = 'state_sign_cars';
 		$join = '';
 		$where = '';

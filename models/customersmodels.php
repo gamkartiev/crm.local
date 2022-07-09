@@ -3,7 +3,7 @@
 class Customers extends Base
 {
 	public function getAllSelect() {
-		$table = 'Customers';
+		$table = 'customers';
 		$rows = 'id, short_name';
 		$join = '';
 		$where = '';

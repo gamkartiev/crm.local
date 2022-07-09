@@ -66,10 +66,10 @@
 		<p class="td col_14"> <?=$oneFlights['0']['note']?> </p>
 
 		<p class="td col_15"> <?=$oneFlights['0']['driver']?> </p>
-		<p class="td col_15"> <?=$oneFlights['0']['drivers_payment']?> </p>
+		<p class="td col_16"> <?=$oneFlights['0']['drivers_payment']?> </p>
 
-		<p class="td col_16"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
-		<p class="td col_17"> <a href="/flights/delete/<?=$id?>" class="bottom-edit"> Удалить рейс </a> </p>
+		<p class="td col_15"> <a href="/flights/edit/<?=$id?>" class="bottom-edit"> Редактировать рейс </a> </p>
+		<p class="td col_15"> <a href="/flights/delete/<?=$id?>" class="bottom-edit"> Удалить рейс </a> </p>
 	</p>
 </p>
 

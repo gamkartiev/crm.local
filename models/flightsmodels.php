@@ -34,7 +34,7 @@ class Flights extends Base
 
 //фун-я выборки всех клиентов для Формы вставки нового рейса
 	public function getCustomersSelect() {
-		$table = 'Customers';
+		$table = 'customers';
 		$rows = 'id, short_name';
 		$join = '';
 		$where = '';
@@ -49,7 +49,7 @@ class Flights extends Base
 
 	//фун-я выборки всех тягачей для Формы вставки нового рейса
 	public function getCarsSelect() {
-		$table = 'Cars';
+		$table = 'cars';
 		$rows = 'state_sign_cars';
 		$join = '';
 		$where = '';
@@ -129,7 +129,7 @@ class Flights extends Base
 //??? зачем нужен был этот блок??? - использовался при создании выпадающего спика и поиска id на соотв-ее
 //название компании///
 	public function getIdCustomers($customers) {
-		$table = 'Customers';
+		$table = 'customers';
 		$rows = 'id, short_name';
 		$join = '';
 		$where = 'short_name='.$customers;
