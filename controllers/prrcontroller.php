@@ -10,19 +10,32 @@ public function view($id) {
   $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде чисел
   $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
 
-var_dump($id);
 
   $allEvents = $prr->getAllEventsSelect();
-  $oneMonth = $prr->getOneMonth($id);
-  // $gettype = gettype($id);
-  // echo $gettype;
 
-  $dayPrr = $prr->getDailyDays($id, $oneMonth);
+
+  //вызвать последний месяц, если id не назначено
+  if(empty($id)){
+    $id = $prr->getLastMonth();
+  }
+;
+// var_dump($id);
+
+  //количество дней в месяце
+  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+  $oneMonth = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
+var_export($oneMonth);
+
+
+  // $dayPrr = $prr->getDailyDays($id, $oneMonth);
 
   $drivers = $prr->getDriversSelect();
 
   include("views/prr/prr.php");
-  }
+
+
+
+}
 
 
 public function add() {

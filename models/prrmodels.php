@@ -45,111 +45,65 @@ class Prr extends Base
     return $result;
   }
 
-
-  public function getOneMonth($id) {
-    $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
-    $getOnlyYear = (int)$getOnlyYear = substr($id, 0);
-
-    $endMonth = cal_days_in_month(CAL_GREGORIAN, $getOnlyMonth, $getOnlyYear);
-
-    $table = 'flights';
-    $rows = 'id, date_1, date_2, driver';
-    $join =	'';
-    $where = 'date_2 >= '.'"'."$id-01".'"'." AND " .'date_2 <='.'"'.$id.'-'."$endMonth".'"';
-    $order = '';
-
-    $base = new Base();
-    $result = $base->select($table, $rows, $join, $where, $order);
-
-    return $result;
- }
-
-
-// возврат дней, в котором работал водитель
- public function getDailyDays($id, $oneMonth){
-   //узнаем год и месяц из этого id
-   $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
-   $getOnlyYear = (int)$getOnlyYear = substr($id, 0);
-
-   //количество рабочих дней в месяце.
-   $numberOfDaysInMonth = cal_days_in_month(CAL_GREGORIAN, $getOnlyMonth, $getOnlyYear);
-
-   $dayPrr = array();
-
-
-    $table = 'working_days_drivers';
-    $rows = 'working_days_drivers.id, id_drivers, drivers.driver, event, start, the_end';
-    $join =	' INNER JOIN drivers ON id_drivers = drivers.id';
-    $where = ''; // тут добавить условия месяца, который нам нужен
-    $order = '';
-
-    $base = new Base();
-    $result = $base->select($table, $rows, $join, $where, $order);
-
-var_export($result);
-
-// 1. сначала вычисляем в какие дни водитель не работал
-// сводим события по каждому водителю в одну строку (один водитель = один подмассив)
-// for ($i=0; $i < count($result); $i++) {
-//   for ($j=0; $j < count($result)+1; $j++) {
-//     if($result[$i]['id_drivers'] == $result[$j]['id_drivers']) {
-//       // создать новый массив
-//       $res = $result[]
-//     }
-//   }
-// }
-
-
-// 2. потом вычсиляем в какие дни водитель работал
-// 3. добавляем к этому массиву стоимость суточных в этот день
-  // for ($i=0; $i < count($result); $i++) {
-  //   for ($j=0; $j < ; $j++) {
-  //     // code...
-  //   }
-  // }
-
-
-// делаем запросы в бд в События и получаем eventDate[day.month.year]  - даты,
-// в которых происходили события "выходной"
-// for ($i=0; $i < $numberOfDaysInMonth; $i++) {
-//    for ($j=0; $j < eventDate[day]; $j++) {
-//       if (numberOfDayInMonth[$i] != eventDate[$j]) {
-//            $result = numberOfDayInMonth[$i]; // это дни, и это должен быть ряд/массив, с перечислением
-//                                              // цифер, чтобы туда добавить в конце месяц и год
-//        }
-//    }
-
-//Мы должны получить водителя и дни в которых он работал.
-
-   // return $result;
- }
-
-//возврат функции с учетом стоимости каждого дня работы (сумма суточных)
-// должны получить водителя, дни в которых он работал и сумма суточных в эти дни и результатирующая
-// сумма суточных за этот месяц (?)
-public function getCostDailyDays($dayPrr, $costDaily){
-
-}
-
-  public function getAllSelect() {
-    $table = 'flights';
-    $rows = 'id, date_1, date_2, driver';
-    $join =	'';
-    $where = '';
-    $order = 'driver, date_1';
-
-    $base = new Base();
-    $result = $base->select($table, $rows, $join, $where, $order);
+  public function getLastMonth(){
+    $result = date("Y-m");
 
     return $result;
   }
 
+  //функция количество дней в месяце (для таблицы ПРР)
+   public function numberOfDaysInMonth($id){
+    $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
+    $getOnlyYear = (int)$getOnlyYear = substr($id, 0);
+
+    //количество рабочих дней в месяце.
+    $result = cal_days_in_month(CAL_GREGORIAN, $getOnlyMonth, $getOnlyYear);
+
+    return $result;
+   }
+
+//функция на удаление//
+//выдает все данные по одному выделенному месяцу
+  public function getOneMonth($id, $numberOfDaysInMonth) {
+    $table = 'flights';
+    $rows = 'id, date_1, date_2, driver';
+    $join =	'';
+    //запрос включает: те рейсы, что загружались в прошлом месяце и выгружались в запрашиваемом месяцев
+    // а также, те рейсы, что загружались в этом месяце и выгружались в запрашиваемом
+    $where = 'date_2 >= '.'"'."$id-01".'"'." AND " .'date_2 <='.'"'.$id.'-'."$numberOfDaysInMonth".'"';
+    $order = 'driver ASC, date_1 ASC';
+
+    $base = new Base();
+    $result_1 = $base->select($table, $rows, $join, $where, $order);
+
+    //--- эта вставка, чтобы выбрать месяц следующий за запрашиваемом ---//
+    $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
+    $getOnlyYear = (int)$getOnlyYear = substr($id, 0, 4);
+    $getOnlyMonth = $getOnlyMonth+1;
+    if($getOnlyMonth <= 10){
+      $getOnlyMonth = '0'.$getOnlyMonth;
+    }
+    // var_dump($getOnlyMonth);
+    // var_dump($getOnlyMonth);
+    $date = $getOnlyYear.'-'.$getOnlyMonth;
+    // var_dump($date);
+    //--- тут уже сформировалась дата со следующим месяцем ---//
+
+    //запрос включает те рейсы, что начинались в запрашиваемом, а выгружались в следующем месяце
+    $where = 'date_1 < '.'"'."$date-01".'"'." AND " .'date_2 >= '.'"'."$date-01".'"';
+    $base = new Base();
+    $result_2 = $base->select($table, $rows, $join, $where, $order);
+
+    $result = array_merge($result_1, $result_2);
+
+    return $result;
+ }
+
+
+
+
+
 //--------------------------------------------------///
-
-
-
-
-
   public function getAlleventsSelect() {
     $table = 'working_days_drivers';
     $rows = 'working_days_drivers.id as id, id_drivers,

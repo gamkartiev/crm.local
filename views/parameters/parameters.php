@@ -26,6 +26,13 @@
 	<p> Дата начала применения суточных: <?php echo $parameters['start_premium'] ?> </p>
 
 </section>
+<br /> <br />
+
+<section>
+	<p> День месяца, до которой высчитывается параметры за этот месяц: </p>
+	<p> До 15 числа следующего месяца </p>
+
+</section>
 
 	<p><a href="/parameters/edit" class="bottom-new"> Изменить параметры </a></p>
 
