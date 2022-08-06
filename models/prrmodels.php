@@ -83,7 +83,7 @@ class Prr extends Base
     if($getOnlyMonth <= 10){
       $getOnlyMonth = '0'.$getOnlyMonth;
     }
-    // var_dump($getOnlyMonth);
+    // var_dump($getOn2022-01-lyMonth);
     // var_dump($getOnlyMonth);
     $date = $getOnlyYear.'-'.$getOnlyMonth;
     // var_dump($date);
@@ -99,7 +99,58 @@ class Prr extends Base
     return $result;
  }
 
+   //получить уникальный список водителей, что вообще работал в тот месяц
+ public function getPrrMonth($id,$numberOfDaysInMonth, $oneMonth) {
+   //получить уникальный список водителей, что вообще работал в тот месяц
+   $prrMonth = array();
+   for ($i=0; $i < count($oneMonth); $i++) {
+     $prrMonth[] = $oneMonth[$i]['driver'];
+   }
+   $result = array_unique($prrMonth);
+   $result = array_values($result);
 
+   //создать двумерный массив с первым ключом drive => (водитель имя)
+   // и вторым массивом с ключом days => (1=>true, 2=>false), где
+   //перебирая массив oneMonth смотрим каждый рейс и смотрим работал ли водитель такого-то числа
+   //если работал, то true, если нет, то false.
+   //взять каждого уникального водителя
+
+   $newOneMonth = array();
+   for ($i=0; $i < count($result); $i++) {
+     $newOneMonth[$i]['driver'] = $result[$i];
+   }
+   // var_export($newOneMonth);
+   // for ($i=0; $i < count($newOneMonth); $i++) {
+   //   for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
+   //     $newOneMonth[$i][$j] = "true";
+   //   }
+   // }
+
+   for ($i=0; $i < count($newOneMonth); $i++) {
+   for ($k=0; $k < count($oneMonth); $k++) {
+     if($newOneMonth[$i]['driver'] == $oneMonth[$k]['driver']){
+       for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
+         $dateOfLoading = strtotime($oneMonth[$k]['date_1']);
+         $dateOfUnLoading = strtotime($oneMonth[$k]['date_2']);
+
+         $date = strtotime($id.'-'.$j);
+         // var_export($id.'-'.$j.' ');
+         // $date_1 = substr($oneMonth[$k]['date_1'],8,2); //только дни от даты - без месяца и года
+         // $date_2 = substr($oneMonth[$k]['date_2'],8,2);   //только дни от даты - без месяца и года
+
+         if ($date >= $dateOfLoading AND $date <= $dateOfUnLoading){
+           $newOneMonth[$i][$j] = "true";
+         } else{
+           $newOneMonth[$i][$j] = "false";
+         }
+       }
+     }
+   }
+   }
+
+   var_export($newOneMonth);
+   return $result;
+ }
 
 
 
