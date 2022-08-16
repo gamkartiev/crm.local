@@ -5,6 +5,11 @@
 	<title> Водители </title>
 	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
 	<link rel="stylesheet" type="text/css" href="/views/css/prr.css">
+	<style type="text/css">
+   TABLE td, th{
+    border: 1px solid black; /* Рамка вокруг таблицы */
+   }
+	 </style>
 </head>
 <body>
 
@@ -14,36 +19,10 @@
 
 <main>
 
-<!-- // псевдокод // -->
-<?php
-//if($prrMonth['day']=="true"){?>
-	<!-- <style .td="geen"></style> -->
-<?php// } elseif($prrMonth['day']=="false"){?>
-	<!-- <style .td="red"></style> -->
-<?php//} ?>
-<?php //if($prrMonth['day']=="false"){$prrMonth['costDailyDays']=0}?>
-
-<!-- //------------//
-//----------// -->
-<!-- Здесь мы должны получить массив  с выборкой данных из рейсов
-		по водителям и датам: prrMonth(1=>['driver'], 2=>['date'],
-		3=>['false/true'], 4=>['costDailyDays'])
-		где false/true означает работал ли в этот день водитель,
-		costDailyDays - сумма суточных на этот день (берется, делая
-		отдельный цикличный запрос, а, возможно, один раз делается запрос
-		и потом сравнивается день и сумма суточных на этот день, чтобы не
-		нагружать бд)
-		Все это выводится в виде таблице на странице. -->
-
-<!-- Получаю я многомерный массив, где в первом столбце td будут Водители
- 		во-втором столбце и далее будет перечисление - работал ли водитель в этот
-		день и какая сумма суточных на этот день. -->
-
+<form action="/prr/view" method="post">
 <table>
-
   <tr>
-		<td> Водители </td>
-
+		<th> Водители </th>
 		<!-- <td> - столбцы с датами месяца -->
 		<?php
 		for ($i=1; $i <= $numberOfDaysInMonth; $i++) {
@@ -52,20 +31,24 @@
 		<!-- </td> -->
   </tr>
 
+	<?php for ($i=0; $i < count($driversTest); $i++) { ?>
 	<tr>
-		<!-- <td> - перечисление водителей -->
-		<?php foreach ($variable as $key => $value) {
-			echo "<td> $drivers </td>";
-		} ?>
-		<!-- </td> -->
+		<th> <?php echo $driversTest[$i] ?> </th>
 
-		<td>
-		</td>
+		<?php for ($j=1; $j <= $numberOfDaysInMonth; $j++) {?>
+			<td> <input type="text" size="1" name="<?= $driversTest[$i].$j?>"> </td>
+		<?php } ?>
+
 	</tr>
+	<?php } ?>
+
 </table>
+<button type="submit" name="button">Отправить </button>
+</form>
 
-
-
+<?php //for ($i=1; $i <= $numberOfDaysInMonth; $i++) { ?>
+	<!-- <td border="2" bordercolor="red"> <?php// echo $i; ?></td> -->
+<?php //} ?>
 
 <br />
 <br />

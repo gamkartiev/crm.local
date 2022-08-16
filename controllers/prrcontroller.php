@@ -10,7 +10,7 @@ public function view($id) {
   $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде чисел
   $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
 
-
+var_export($_POST);
   $allEvents = $prr->getAllEventsSelect();
 
 
@@ -24,12 +24,15 @@ public function view($id) {
   //количество дней в месяце
   $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
   $oneMonth = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
-var_export($oneMonth);
+// var_export($oneMonth);
 
 
   // $dayPrr = $prr->getDailyDays($id, $oneMonth);
 
   $drivers = $prr->getDriversSelect();
+
+  $driversTest = $prr->getTestSelectDrivers();
+  // var_export($driversTest);
 
   include("views/prr/prr.php");
 

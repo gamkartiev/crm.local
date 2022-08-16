@@ -100,6 +100,11 @@ class Prr extends Base
  }
 
 
+public function getTestSelectDrivers(){
+  $result = array("Кочерыжкин", "Иванов", "Алексеев");
+
+  return $result;
+}
 
 
 
