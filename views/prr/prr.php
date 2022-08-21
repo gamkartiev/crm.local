@@ -14,54 +14,53 @@
 
 <main>
 
-<!-- // псевдокод // -->
 <?php
-//if($prrMonth['day']=="true"){?>
-	<!-- <style .td="geen"></style> -->
-<?php// } elseif($prrMonth['day']=="false"){?>
-	<!-- <style .td="red"></style> -->
-<?php//} ?>
-<?php //if($prrMonth['day']=="false"){$prrMonth['costDailyDays']=0}?>
+	for ($i=0; $i < count($getPrrMonth); $i++) {
+	for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
+		// echo $getPrrMonth[$i][$j];
+// $style = "background: red";
+		if ($getPrrMonth[$i][$j] == "true") {
+			$style[$i][$j] = "background: green";
+			// var_export($style);
+		}
+		if($getPrrMonth[$i][$j] == "false") {
+			$style[$i][$j] = "background: red";
+		}
+	}
 
-<!-- //------------//
-//----------// -->
-<!-- Здесь мы должны получить массив  с выборкой данных из рейсов
-		по водителям и датам: prrMonth(1=>['driver'], 2=>['date'],
-		3=>['false/true'], 4=>['costDailyDays'])
-		где false/true означает работал ли в этот день водитель,
-		costDailyDays - сумма суточных на этот день (берется, делая
-		отдельный цикличный запрос, а, возможно, один раз делается запрос
-		и потом сравнивается день и сумма суточных на этот день, чтобы не
-		нагружать бд)
-		Все это выводится в виде таблице на странице. -->
+	}
 
-<!-- Получаю я многомерный массив, где в первом столбце td будут Водители
- 		во-втором столбце и далее будет перечисление - работал ли водитель в этот
-		день и какая сумма суточных на этот день. -->
+ ?>
 
 <table>
-
-  <tr>
-		<td> Водители </td>
-
-		<!-- <td> - столбцы с датами месяца -->
-		<?php
+<tr>
+	<td> Водители </td>
+	<?php
 		for ($i=1; $i <= $numberOfDaysInMonth; $i++) {
-		echo "<td> $i </td>";
-		}?>
-		<!-- </td> -->
-  </tr>
 
-	<tr>
-		<!-- <td> - перечисление водителей -->
-		<?php foreach ($variable as $key => $value) {
-			echo "<td> $drivers </td>";
-		} ?>
-		<!-- </td> -->
+			echo "<td> $i </td>";
+		}
+	?>
+</tr>
 
-		<td>
-		</td>
-	</tr>
+<tr>
+<?php
+for ($i=0; $i < count($getPrrMonth); $i++) { ?>
+<tr>
+	<td> <?php echo $getPrrMonth[$i]['driver'];?> </td>
+
+	<?php for ($j=1; $j <= $numberOfDaysInMonth; $j++) {	?>
+			<td style="<?= $style[$i][$j] ?>"> <?php echo $getPrrMonth[$i][$j];?> 			</td>
+
+	<?php } ?>
+</tr>
+<?php } ?>
+
+	<!-- </td> -->
+
+	<td>
+	</td>
+</tr>
 </table>
 
 

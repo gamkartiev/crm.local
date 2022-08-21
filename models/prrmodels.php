@@ -119,37 +119,29 @@ class Prr extends Base
    for ($i=0; $i < count($result); $i++) {
      $newOneMonth[$i]['driver'] = $result[$i];
    }
-   // var_export($newOneMonth);
-   // for ($i=0; $i < count($newOneMonth); $i++) {
-   //   for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
-   //     $newOneMonth[$i][$j] = "true";
-   //   }
-   // }
+
 
    for ($i=0; $i < count($newOneMonth); $i++) {
    for ($k=0; $k < count($oneMonth); $k++) {
      if($newOneMonth[$i]['driver'] == $oneMonth[$k]['driver']){
-       for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
-         $dateOfLoading = strtotime($oneMonth[$k]['date_1']);
-         $dateOfUnLoading = strtotime($oneMonth[$k]['date_2']);
+           for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
+                 $dateOfLoading = strtotime($oneMonth[$k]['date_1']);
+                 $dateOfUnLoading = strtotime($oneMonth[$k]['date_2']);
+                 $date = strtotime($id.'-'.$j);
 
-         $date = strtotime($id.'-'.$j);
-         // var_export($id.'-'.$j.' ');
-         // $date_1 = substr($oneMonth[$k]['date_1'],8,2); //только дни от даты - без месяца и года
-         // $date_2 = substr($oneMonth[$k]['date_2'],8,2);   //только дни от даты - без месяца и года
-
-         if ($date >= $dateOfLoading AND $date <= $dateOfUnLoading){
-           $newOneMonth[$i][$j] = "true";
-         } else{
-           $newOneMonth[$i][$j] = "false";
-         }
-       }
+                 if ($date >= $dateOfLoading AND $date <= $dateOfUnLoading){
+                   $newOneMonth[$i][$j] = "true";
+                 } else{
+                    $newOneMonth[$i][$j] = "false"; //почему если тут убрать комментирование,
+                   // то сразу неправильно начинает работать - узнать позже
+                 }
+           }
      }
    }
    }
 
-   var_export($newOneMonth);
-   return $result;
+   // var_export($newOneMonth);
+   return $newOneMonth;
  }
 
 

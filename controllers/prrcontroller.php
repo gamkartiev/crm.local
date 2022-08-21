@@ -23,10 +23,10 @@ public function view($id) {
   //количество дней в месяце
   $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
   $oneMonth = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
-var_export($oneMonth);
+// var_export($oneMonth);
 
   $getPrrMonth = $prr->getPrrMonth($id, $numberOfDaysInMonth, $oneMonth);
-// var_export($getPrrMonth);
+var_export($getPrrMonth);
   // $dayPrr = $prr->getDailyDays($id, $oneMonth);
 
   $drivers = $prr->getDriversSelect();
