@@ -10,7 +10,7 @@ public function view($id) {
   $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде чисел
   $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
 
-var_export($_POST);
+var_export($_POST['array']);
   $allEvents = $prr->getAllEventsSelect();
 
 

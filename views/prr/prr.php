@@ -35,15 +35,26 @@
 	<tr>
 		<th> <?php echo $driversTest[$i] ?> </th>
 
-		<?php for ($j=1; $j <= $numberOfDaysInMonth; $j++) {?>
-			<td> <input type="text" size="1" name="<?= $driversTest[$i].$j?>"> </td>
-		<?php } ?>
+		<?php
+		$array[$i]['0'] = $driversTest[$i];
+		// var_export($array);
+		for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
+
+			?>
+			<td> <input type="text" size="1" name="array[<?=$i?>][<?=$j?>]"> </td>
+		<?php }
+			$_POST['array'[$i]['0']] = $driversTest[$i];
+		 	?>
 
 	</tr>
-	<?php } ?>
+	<?php }
+	var_export($_POST['array']);
+var_export($array);
+	?>
+
 
 </table>
-<button type="submit" name="button">Отправить </button>
+<button type="submit" name="button"> Добавить </button>
 </form>
 
 <?php //for ($i=1; $i <= $numberOfDaysInMonth; $i++) { ?>
