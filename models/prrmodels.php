@@ -96,18 +96,39 @@ class Prr extends Base
 
     $result = array_merge($result_1, $result_2);
 
+//получить уникальный список водителей за этот месяц
+    $prrMonth = array();
+    for ($i=0; $i < count($result); $i++) {
+      $prrMonth[] = $result[$i]['driver'];
+    }
+    $result = array_unique($prrMonth);
+    $result = array_values($result);
+
     return $result;
  }
 
 
-public function getTestSelectDrivers(){
-  $result = array("Кочерыжкин", "Иванов", "Алексеев");
+// public function getTestSelectDrivers(){
+//   $result = array("Кочерыжкин", "Иванов", "Алексеев");
+//
+//   return $result;
+// }
+//
+// public function getPrrMonth($id,$numberOfDaysInMonth) {
+//   $oneMonth -> $this getOneMonth($id, $numberOfDaysInMonth)
+//   //получить уникальный список водителей, что вообще работал в тот месяц
+//   $prrMonth = array();
+//   for ($i=0; $i < count($oneMonth); $i++) {
+//     $prrMonth[] = $oneMonth[$i]['driver'];
+//   }
+//   $result = array_unique($prrMonth);
+//   $result = array_values($result);
+//
+// return $result;
+// }
 
-  return $result;
-}
 
-
-
+//**************
 //--------------------------------------------------///
   public function getAlleventsSelect() {
     $table = 'working_days_drivers';
@@ -122,8 +143,9 @@ public function getTestSelectDrivers(){
 
     return $result;
   }
+//*****************
 
-
+//**************
   //добаление нового события (например, выходного для водителя)
   public function getInsert($values){
     $table = 'working_days_drivers';
@@ -132,8 +154,9 @@ public function getTestSelectDrivers(){
     $base = new Base();
     $base->insert($table, $values, $rows);
   }
+//**************
 
-
+//**************
   public function getDriversSelect() {
   	$table = 'drivers';
   	$rows = 'id, driver';
@@ -146,8 +169,9 @@ public function getTestSelectDrivers(){
 
   	return $result;
   }
+//**********
 
-
+//*************
   public function deleteEvent($id){
     $table = 'working_days_drivers';
     $where = 'id='.(int)$id;
@@ -155,5 +179,5 @@ public function getTestSelectDrivers(){
     $base = new Base();
     $base->delete($table, $where);
   }
-
+//**************
 }

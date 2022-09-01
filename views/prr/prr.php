@@ -21,7 +21,7 @@
 
 <form action="/prr/view" method="post">
 <table>
-  <tr>
+	<tr>
 		<th> Водители </th>
 		<!-- <td> - столбцы с датами месяца -->
 		<?php
@@ -29,37 +29,23 @@
 		echo "<td> $i </td>";
 		}?>
 		<!-- </td> -->
-  </tr>
+	</tr>
 
 	<?php for ($i=0; $i < count($driversTest); $i++) { ?>
 	<tr>
 		<th> <?php echo $driversTest[$i] ?> </th>
 
-		<?php
-		$array[$i]['0'] = $driversTest[$i];
-		// var_export($array);
-		for ($j=1; $j <= $numberOfDaysInMonth; $j++) {
-
-			?>
-			<td> <input type="text" size="1" name="array[<?=$i?>][<?=$j?>]"> </td>
-		<?php }
-			$_POST['array'[$i]['0']] = $driversTest[$i];
-		 	?>
-
+		<input type="hidden" name="array[<?=$i?>][<?=0?>]" value="<?= $driversTest[$i] ?>">
+		<?php	for ($j=1; $j <= $numberOfDaysInMonth; $j++) {	?>
+			<td> <input type="text" size="1" name="array[<?=$i?>][<?=$j?>]" value="0"> </td>
+		<?php }	?>
 	</tr>
-	<?php }
-	var_export($_POST['array']);
-var_export($array);
-	?>
-
+	<?php }	?>
 
 </table>
 <button type="submit" name="button"> Добавить </button>
 </form>
 
-<?php //for ($i=1; $i <= $numberOfDaysInMonth; $i++) { ?>
-	<!-- <td border="2" bordercolor="red"> <?php// echo $i; ?></td> -->
-<?php //} ?>
 
 <br />
 <br />

@@ -19,20 +19,26 @@ var_export($_POST['array']);
     $id = $prr->getLastMonth();
   }
 ;
-// var_dump($id);
+
 
   //количество дней в месяце
   $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-  $oneMonth = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
-// var_export($oneMonth);
+  $driversTest = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
 
 
-  // $dayPrr = $prr->getDailyDays($id, $oneMonth);
+# берем последний месяц и делаем запрос в бд по этому
+# месяцу на ПРР (есть отдельная таблица в БД).
+# если там есть месяц, то выдаем в value в прр view input
+# те данные, что мы получили.
+#
+// или сделать другой вариант
+# сделать таблицы по месяцам в бд
+# и сделать отдельное добавление и отдельное редактирование
+# в view ПРР. При заходе с нуля выдаются по последнему месяцу
+# уже затем можно будет добавлять остальные месяцы
+#
 
   $drivers = $prr->getDriversSelect();
-
-  $driversTest = $prr->getTestSelectDrivers();
-  // var_export($driversTest);
 
   include("views/prr/prr.php");
 
