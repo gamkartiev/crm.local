@@ -130,10 +130,10 @@ class Prr extends Base
 
 //**************
 //--------------------------------------------------///
-  public function getAlleventsSelect() {
-    $table = 'working_days_drivers';
-    $rows = 'working_days_drivers.id as id, id_drivers,
-            event, start, the_end, drivers.id as drivers_id, drivers.driver';
+  public function getOneMonthPrr() {
+    $table = 'prr';
+    $rows = 'prr.id as id, id_drivers, start, the_end,
+              drivers.id as drivers_id, drivers.driver';
     $join =	' LEFT JOIN drivers ON id_drivers = drivers.id';
     $where = '';
     $order = 'the_end DESC';
@@ -147,9 +147,9 @@ class Prr extends Base
 
 //**************
   //добаление нового события (например, выходного для водителя)
-  public function getInsert($values){
-    $table = 'working_days_drivers';
-    $rows = 'id_drivers, event, start, the_end';
+  public function setOneMonthPrr($values){
+    $table = 'prr';
+    $rows = 'id_drivers, start, the_end';
 
     $base = new Base();
     $base->insert($table, $values, $rows);

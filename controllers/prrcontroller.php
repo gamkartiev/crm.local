@@ -11,16 +11,14 @@ public function view($id) {
   $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
 
 var_export($_POST['array']);
-  $allEvents = $prr->getAllEventsSelect();
 
 
   //вызвать последний месяц, если id не назначено
   if(empty($id)){
     $id = $prr->getLastMonth();
   }
-;
 
-
+  $oneMonthPrr = $prr->getOneMonthPrr($id);
   //количество дней в месяце
   $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
   $driversTest = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
@@ -50,16 +48,24 @@ var_export($_POST['array']);
 public function add() {
   if(!empty($_POST)){
 
+# сначала тут нужно входящий POST в виде водителй-дата-суточный за этот день
+# разбить на отдельные элементы id_drivers, start и the_end
+# где разделятями являются нули или NULL в POST['day']['любое число'];
     $values = array(
       $id_drivers = $_POST['id_drivers'],
-      $event = $_POST['event'],
       $start = $_POST['start'],
       $the_end = $_POST['the_end']
     );
 
   $prr = new Prr();
-  $prr->getInsert($values);
+  $prr->setOneMonthPrr($values);
   header("Location: /prr");
+  } else {
+      $prr = new Prr();
+# тут поменять вместо последнего месяца на месяц по выбору
+      $id = $prr-> getLastMonth();
+      $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+      include("views/prr/prrForm.php");
   }
 }
 
