@@ -47,7 +47,6 @@ class Prr extends Base
 
   public function getLastMonth(){
     $result = date("Y-m");
-
     return $result;
   }
 
@@ -62,7 +61,6 @@ class Prr extends Base
     return $result;
    }
 
-//функция на удаление//
 //выдает все данные по одному выделенному месяцу
   public function getOneMonth($id, $numberOfDaysInMonth) {
     $table = 'flights';
@@ -96,13 +94,15 @@ class Prr extends Base
 
     $result = array_merge($result_1, $result_2);
 
-//получить уникальный список водителей за этот месяц
+    //получить уникальный список водителей за этот месяц
     $prrMonth = array();
     for ($i=0; $i < count($result); $i++) {
       $prrMonth[] = $result[$i]['driver'];
     }
     $result = array_unique($prrMonth);
     $result = array_values($result);
+
+    var_export($result);
 
     return $result;
  }
@@ -145,16 +145,6 @@ class Prr extends Base
   }
 //*****************
 
-//**************
-  //добаление нового события (например, выходного для водителя)
-  public function setOneMonthPrr($values){
-    $table = 'prr';
-    $rows = 'id_drivers, start, the_end';
-
-    $base = new Base();
-    $base->insert($table, $values, $rows);
-  }
-//**************
 
 //**************
   public function getDriversSelect() {
