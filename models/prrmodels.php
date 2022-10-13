@@ -45,7 +45,7 @@ class Prr extends Base
     return $result;
   }
 
-  public function getLastMonth(){
+  public function getTheDateOfTheLastMonth(){
     $result = date("Y-m");
     return $result;
   }
@@ -62,7 +62,7 @@ class Prr extends Base
    }
 
 //выдает все данные по одному выделенному месяцу
-  public function getOneMonth($id, $numberOfDaysInMonth) {
+  public function getLastMonthData($id, $numberOfDaysInMonth) {
     $table = 'flights';
     $rows = 'id, date_1, date_2, driver';
     $join =	'';
@@ -81,10 +81,8 @@ class Prr extends Base
     if($getOnlyMonth <= 10){
       $getOnlyMonth = '0'.$getOnlyMonth;
     }
-    // var_dump($getOnlyMonth);
-    // var_dump($getOnlyMonth);
+
     $date = $getOnlyYear.'-'.$getOnlyMonth;
-    // var_dump($date);
     //--- тут уже сформировалась дата со следующим месяцем ---//
 
     //запрос включает те рейсы, что начинались в запрашиваемом, а выгружались в следующем месяце
@@ -108,41 +106,21 @@ class Prr extends Base
  }
 
 
-// public function getTestSelectDrivers(){
-//   $result = array("Кочерыжкин", "Иванов", "Алексеев");
-//
-//   return $result;
-// }
-//
-// public function getPrrMonth($id,$numberOfDaysInMonth) {
-//   $oneMonth -> $this getOneMonth($id, $numberOfDaysInMonth)
-//   //получить уникальный список водителей, что вообще работал в тот месяц
-//   $prrMonth = array();
-//   for ($i=0; $i < count($oneMonth); $i++) {
-//     $prrMonth[] = $oneMonth[$i]['driver'];
-//   }
-//   $result = array_unique($prrMonth);
-//   $result = array_values($result);
-//
-// return $result;
-// }
-
-
 //**************
 //--------------------------------------------------///
-  public function getOneMonthPrr() {
-    $table = 'prr';
-    $rows = 'prr.id as id, id_drivers, start, the_end,
-              drivers.id as drivers_id, drivers.driver';
-    $join =	' LEFT JOIN drivers ON id_drivers = drivers.id';
-    $where = '';
-    $order = 'the_end DESC';
-
-    $base = new Base();
-    $result = $base->select($table, $rows, $join, $where, $order);
-
-    return $result;
-  }
+  // public function getOneMonthPrr() {
+  //   $table = 'prr';
+  //   $rows = 'prr.id as id, id_drivers, start, the_end,
+  //             drivers.id as drivers_id, drivers.driver';
+  //   $join =	' LEFT JOIN drivers ON id_drivers = drivers.id';
+  //   $where = '';
+  //   $order = 'the_end DESC';
+  //
+  //   $base = new Base();
+  //   $result = $base->select($table, $rows, $join, $where, $order);
+  //
+  //   return $result;
+  // }
 //*****************
 
 

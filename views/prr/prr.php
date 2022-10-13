@@ -35,11 +35,11 @@
 		<!-- </td> -->
 	</tr>
 
-	<?php for ($i=0; $i < count($driversTest); $i++) { ?>
+	<?php for ($i=0; $i < count($oneMonthPrr); $i++) { ?>
 	<tr>
-		<th> <?php echo $driversTest[$i] ?> </th>
+		<th> <?php echo $oneMonthPrr[$i] ?> </th>
 
-		<input type="hidden" name="array[<?=$i?>][<?=0?>]" value="<?= $driversTest[$i] ?>">
+		<input type="hidden" name="array[<?=$i?>][<?=0?>]" value="<?= $oneMonthPrr[$i] ?>">
 		<?php	for ($j=1; $j <= $numberOfDaysInMonth; $j++) {	?>
 			<td> <input type="text" size="1" name="array[<?=$i?>][<?=$j?>]" value="0"> </td>
 		<?php }	?>
