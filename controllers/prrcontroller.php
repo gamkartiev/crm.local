@@ -13,40 +13,39 @@ public function view($id) {
   $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
  // ---> правая панель с месяцами
 
-  //вызвать последний месяц, если id не назначено
-  if(!empty($id)){
-    $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-    //вызвать данные одного месяца из prr_drivers
-    $oneMonthPrr = getOneMonthData($id, )
-  } else {
-    $id = $prr->getTheDateOfTheLastMonth();
-    $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-    //вызвать данные по последнему месяцу из flights
-    $LastOneMonthPrr = $prr->getLastMonthData($id, $numberOfDaysInMonth); //вызвать один месяц
-
-    //МОЖНО: если нет данных про этот месяц в prr_drivers, то дабавить туда данные
-    //  взяв их из flights. Следующее обновление prr_drivers будет только при нажатии
-    //  кнопки редактировать - тогда автоматом пройдет сравнение двух таблиц(prr_drivers и
-    //  flights) и добавление всех не записанных водителей из flights в prr_drivers
-    //вызвать данные одного месяца из prr_drivers
-    //сравнить каждого водителя из данных месяца взятых с flights с данными
-    // взятыми из prr_drivers. Если водитель из flights отсутсвтует в prr_drivers
-    //  то надо добавить туда этого водителя.
-  }
-  // if(empty($id)){
-  //   $id = $prr->getLastMonth();
-  // }
-
-  // $oneMonthPrr = $prr->getOneMonthPrr($id);
-
-  // $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-  //$driversTest = $prr->getOneMonth($id, $numberOfDaysInMonth); //вызвать один месяц
-
-  // $drivers = $prr->getDriversSelect();
+ if(empty($id)){
+   $id = $prr->getLastMonth();
+ }
+ var_export($id);
+ $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+ $prr-> getLastMonthData($id, $numberOfDaysInMonth);
 
   include("views/prr/prr.php");
 }
 
+
+public function update(){
+  $prr = new Prr();
+
+  //список месяцев, в котором вообще работали:
+  $uniqueValuesMonth = getUniqueValuesMonth();
+  //сипок месяцев и водителей в каждом месяце, в котором работали:
+  !!!!!$listDriversFromFlights = $prr->listDriversFromFlights($uniqueValuesMonth);
+  $listDriversFromPrr = $prr->listDriversFromPrr();
+
+  $listComparison = $prr->getListComparison($listDriversFromFlights, $listDriversFromPrr);
+  $updatePrrTable = $prr->setListComparison($listComparison);
+include("views/prr/prr.php");
+  # 1. Берем список из месяц-водители, что работали в этот месяц за все время
+  #    из flights. Список водителей приводим к уникальным значениям (список_1)
+  # 2. Берем список из месяц-водители, что есть в prr_drivers (он вроде и также
+  #    уникальный) (список_2)
+  # 3. Сравниваем каждый месяц из списка_1 со списком_2:
+  #      -если месяц из списка_1 отсутствует в списке_2, то добавить и месяц и
+  #       водители из этого месяца
+  #      -если месяц есть, но отсутствует какой-либо водитель, то добавить
+  # 4. Вывести последний месяц из prr_drivers
+}
 
 public function edit($id){
   if(!empty($_POST) && $id > 0){
@@ -57,33 +56,31 @@ public function edit($id){
     $prr->getEdit($id, $values);
   } else {
     $prr = new Prr();
-
     $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
     include("views/prr/prrFormEdit.php");
   }
-
 }
 
 
-public function add() {
-  if(!empty($_POST)){
-    $values = array(
-      $id_drivers = $_POST['id_drivers'],
-      $start = $_POST['start'],
-      $the_end = $_POST['the_end']
-    );
-
-  $prr = new Prr();
-  $prr->setOneMonthPrr($values);
-  header("Location: /prr");
-  } else {
-      $prr = new Prr();
-# тут поменять вместо последнего месяца на месяц по выбору
-      $id = $prr-> getLastMonth();
-      $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-      include("views/prr/prrForm.php");
-  }
-}
+// public function add() {
+//   if(!empty($_POST)){
+//     $values = array(
+//       $id_drivers = $_POST['id_drivers'],
+//       $start = $_POST['start'],
+//       $the_end = $_POST['the_end']
+//     );
+//
+//   $prr = new Prr();
+//   $prr->setOneMonthPrr($values);
+//   header("Location: /prr");
+//   } else {
+//       $prr = new Prr();
+// # тут поменять вместо последнего месяца на месяц по выбору
+//       $id = $prr-> getLastMonth();
+//       $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+//       include("views/prr/prrForm.php");
+//   }
+// }
 
 
 public function delete($id){

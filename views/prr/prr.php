@@ -19,9 +19,9 @@
 
 <main>
 
-<a href="/prr/edit/<?= $id ?>"> Изменить данные </a> <br /> <br />
+<a href="/prr/edit/<?= $id ?>"> Изменить данные </a><br /><br />
 
-
+<a href="prr/update/"> Обновить данные </a><br />
 
 <form action="/prr/view" method="post">
 <table>

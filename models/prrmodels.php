@@ -50,6 +50,25 @@ class Prr extends Base
     return $result;
   }
 
+// последний месяц, где работали водители
+  public function getLastMonth(){
+    $table = 'prr_drivers';
+    $rows = 'month_and_years';
+    $join =	'';
+    //запрос включает: те рейсы, что загружались в прошлом месяце и выгружались в запрашиваемом месяцев
+    // а также, те рейсы, что загружались в этом месяце и выгружались в запрашиваемом
+    $where = '';
+    $order = 'month_and_years DESC limit 1';
+
+    $base = new Base();
+    $result = $base->select($table, $rows, $join, $where, $order);
+
+    $result = $result[0]['month_and_years'];
+    $result = substr($result, 0, 7); //убираем день месяца
+
+    return $result;
+  }
+
   //функция количество дней в месяце (для таблицы ПРР)
    public function numberOfDaysInMonth($id){
     $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
@@ -61,7 +80,7 @@ class Prr extends Base
     return $result;
    }
 
-//выдает все данные по одному выделенному месяцу
+//список водителей, что работали в этот месяц
   public function getLastMonthData($id, $numberOfDaysInMonth) {
     $table = 'flights';
     $rows = 'id, date_1, date_2, driver';
@@ -91,7 +110,7 @@ class Prr extends Base
     $result_2 = $base->select($table, $rows, $join, $where, $order);
 
     $result = array_merge($result_1, $result_2);
-
+    // var_export($result);
     //получить уникальный список водителей за этот месяц
     $prrMonth = array();
     for ($i=0; $i < count($result); $i++) {
@@ -122,6 +141,66 @@ class Prr extends Base
   //   return $result;
   // }
 //*****************
+
+####################### update ###############################
+public function getUniqueValuesMonth(){
+  # 1. Какие месяцы вообще были - запрос
+  # 2. В каждом месяце какие водители через функцию getLastMonthData
+
+  $table = 'flights';
+  $rows = 'date_1, date_2';
+  $join =	'';
+  $where = '';
+  $order = 'date_1, date_2 ASC';
+
+  $base = new Base();
+  $result = $base->select($table, $rows, $join, $where, $order);
+
+  # сравнить как date_1 с date_1, date_2 c date_2, date_1 с date_2 - не сделал
+  # //сравнил date_1 с date_2//
+  # и получить уникальные значения месяцам
+
+  $uniqueValuesMonth = array();
+  for ($i=0; $i < count($result); $i++) {
+      $date_1 = $result[$i]['date_1'];
+      $date_2 = $result[$i]['date_2'];
+        $date_1 = substr($date_1, 0, 7); //убираем дни из месяца
+        $date_2 = substr($date_2, 0, 7); //убираем дни из месяца
+      $uniqueValuesMonth[] = $date_1;
+
+      if ($date_1 != $date_2) {
+        $uniqueValuesMonth[] = $date_2;
+      }
+  }
+  $result = array_unique($uniqueValuesMonth);
+  $result = array_values($result);
+
+  // var_export($result);
+  return $result;
+}
+
+
+
+//Тут надо делать полноценный запрос, с датой и водителями, что в эти даты работали
+public function listDriversFromPrr($uniqueValuesMonth){
+  for ($i=0; $i < count($uniqueValuesMonth); $i++) {
+    // $id = $uniqueValuesMonth[$i];
+    $numberOfDaysInMonth = $this->numberOfDaysInMonth($uniqueValuesMonth[$i]);
+    $getMonthWork = $this-> getLastMonthData($uniqueValuesMonth[$i], $numberOfDaysInMonth);
+  }
+
+}
+
+
+
+public function getListComparison($listDriversFromFlights, $listDriversFromPrr){}
+
+
+
+public function setListComparison($listComparison){}
+##############################################################
+
+
 
 
 //**************
