@@ -51,7 +51,7 @@ class Prr extends Base
   }
 
 // последний месяц, где работали водители
-  public function getLastMonth(){
+  public function getLastMonthDriversWork(){
     $table = 'prr_drivers';
     $rows = 'month_and_years';
     $join =	'';
@@ -69,7 +69,7 @@ class Prr extends Base
     return $result;
   }
 
-  //функция количество дней в месяце (для таблицы ПРР)
+  //возвращает количество дней в месяце (для таблицы ПРР)
    public function numberOfDaysInMonth($id){
     $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
     $getOnlyYear = (int)$getOnlyYear = substr($id, 0);
@@ -123,6 +123,27 @@ class Prr extends Base
 
     return $result;
  }
+
+
+  public function getLastMonthPrr($id){
+    $table = 'prr_drivers';
+    $rows = 'drivers.driver AS drivers, prr_drivers.id, prr_drivers.month_and_years,
+              prr_drivers.1,prr_drivers.2,prr_drivers.3,prr_drivers.4,prr_drivers.5,
+              prr_drivers.6,prr_drivers.7,prr_drivers.8,prr_drivers.9,prr_drivers.10,
+              prr_drivers.11,prr_drivers.12,prr_drivers.13,prr_drivers.14,prr_drivers.15,
+              prr_drivers.16,prr_drivers.17,prr_drivers.18,prr_drivers.19,prr_drivers.20,
+              prr_drivers.21,prr_drivers.22,prr_drivers.23,prr_drivers.24,prr_drivers.25,
+              prr_drivers.26,prr_drivers.27,prr_drivers.28,prr_drivers.29,prr_drivers.30,prr_drivers.31,
+              drivers.id';
+    $join =	' INNER JOIN drivers ON prr_drivers.drivers = drivers.id';
+    $where = 'month_and_years ='.'"'.$id.'-01'.'"';
+    $order = '';
+
+    $base = new Base();
+    $result = $base->select($table, $rows, $join, $where, $order);
+
+    return $result;
+  }
 
 
 //**************

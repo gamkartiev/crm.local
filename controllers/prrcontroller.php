@@ -14,12 +14,13 @@ public function view($id) {
  // ---> правая панель с месяцами
 
  if(empty($id)){
-   $id = $prr->getLastMonth();
+   $id = $prr->getLastMonthDriversWork();
  }
- var_export($id);
+ // var_export($id);
  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
- $prr-> getLastMonthData($id, $numberOfDaysInMonth);
-
+$getLastMonthPrr = $prr->getLastMonthPrr($id);
+var_export($getLastMonthPrr);
+// var_export($numberOfDaysInMonth);
   include("views/prr/prr.php");
 }
 
@@ -56,7 +57,11 @@ public function edit($id){
     $prr->getEdit($id, $values);
   } else {
     $prr = new Prr();
+
     $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+    $getLastMonthPrr = $prr->getLastMonthPrr($id);
+   // var_export($getLastMonthPrr);
+
     include("views/prr/prrFormEdit.php");
   }
 }

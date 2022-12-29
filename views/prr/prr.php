@@ -26,7 +26,7 @@
 <form action="/prr/view" method="post">
 <table>
 	<tr>
-		<th> Водители </th>
+		<th> Водители	 </th>
 		<!-- <td> - столбцы с датами месяца -->
 		<?php
 		for ($i=1; $i <= $numberOfDaysInMonth; $i++) {
@@ -35,19 +35,16 @@
 		<!-- </td> -->
 	</tr>
 
-	<?php for ($i=0; $i < count($oneMonthPrr); $i++) { ?>
+	<?php for ($i=0; $i < count($getLastMonthPrr); $i++) { ?>
 	<tr>
-		<th> <?php echo $oneMonthPrr[$i] ?> </th>
-
-		<input type="hidden" name="array[<?=$i?>][<?=0?>]" value="<?= $oneMonthPrr[$i] ?>">
-		<?php	for ($j=1; $j <= $numberOfDaysInMonth; $j++) {	?>
-			<td> <input type="text" size="1" name="array[<?=$i?>][<?=$j?>]" value="0"> </td>
+		<th> <?php echo $getLastMonthPrr[$i]['drivers']; ?> </th>
+		<?php	for ($j=1; $j <= $numberOfDaysInMonth; $j++){	?>
+			<td> <?php echo $getLastMonthPrr[$i][$j]; ?></td>
 		<?php }	?>
-	</tr>s
+	</tr>
 	<?php }	?>
 
 </table>
-<button type="submit" name="button"> Отправить </button>
 </form>
 
 
