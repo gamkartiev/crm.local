@@ -19,58 +19,30 @@
 
 <main>
 
-<form class="prrFormEdit" action="/prr/add" method="post">
-<?php
-	$massive = array(array ("drivers" => "Вершинников Алексей", "month_and_years"=>"2022-02-01", "1"=>"700", "2"=>"0", "3"=>"700"),
-									 array ("drivers" => "Иванов", "month_and_years"=>"2022-02-01", "1"=>"700", "2"=>"700", "3"=>"700"),
-									 array ("drivers" => "Акушеров", "month_and_years"=>"2022-02-01", "1"=>"0", "2"=>"0", "3"=>"700"));
+<form class="prrFormEdit" action="/prr/edit/<?=$id?>" method="post">
+<table>
 
+<tr>
+	<th> Водители </th>
+	<?php	for ($k=1; $k <= $numberOfDaysInMonth; $k++) { ?>
+	<td> <!-- столбцы с датами месяца -->
+		<?php echo $k;
+		} ?>
+	</td>
+</tr>
 
-	for ($k=1; $k <= 4; $k++) {
-		echo "<td> $k </td>";
-	}
-	for ($j=0; $j < count($massive); $j++) { ?>
+<?php for ($j=0; $j < count($getLastMonthPrr); $j++) { ?>
+<tr>
+	<th> <? echo $getLastMonthPrr[$j]['drivers']; ?> </th> <!-- список водителей -->
+	<?php for ($i=1; $i <= $numberOfDaysInMonth; $i++) {	?>
+		<td> <input type="text" name="<?=$getLastMonthPrr[$j]['id']."_".$i ?>" value="<?=$getLastMonthPrr[$j][$i] ?>">	</td>
+	<?php } ?>
+</tr>
+<?php } ?>
 
-
-		<div class="input">
-			<div class="driversPrrFormEdit">
-				<? echo $massive[$j]['drivers']; ?>
-			</div>
-		<?php for ($i=1; $i < 4; $i++) {	?>
-			<input type="text" name="<?=$massive[$j]['drivers']."_".$i ?>" value="<?=$massive[$j][$i] ?>"> <br />
-		<?php	} ?>
-		</div>
-<?php	}	?>
-
+</table><br />
 <button type="submit" name="button"> Добавить </button>
-
 </form>
-
-
-
-<!-- <table>
-	<tr>
-		<th> Водители </th>
-<td> - столбцы с датами месяца -->
-		<!-- <php
-		for ($i=1; $i <= $numberOfDaysInMonth; $i++) {
-		echo "<td> $i </td>";
-		}>
-</td> -->
-	<!-- </tr>
-
-	<php for ($i=0; $i < count($oneMonthPrr); $i++) { ?>
-	<tr>
-		<th> <php echo $oneMonthPrr[$i] ?> </th>
-
-		<input type="hidden" name="array[<=$i?>][<=0?>]" value="<= $oneMonthPrr[$i] ?>">
-		<php	for ($j=1; $j <= $numberOfDaysInMonth; $j++) {	?>
-			<td> <input type="text" size="1" name="array[<=$i?>][<=$j?>]" value="0"> </td>
-		<php }	?>
-	</tr>
-	<php }	?>
-
-</table> -->
 
 </main>
 

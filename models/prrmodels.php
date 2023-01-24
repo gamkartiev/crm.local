@@ -80,8 +80,9 @@ class Prr extends Base
     return $result;
    }
 
-//список водителей, что работали в этот месяц
-  public function getLastMonthData($id, $numberOfDaysInMonth) {
+//список водителей, что работали в этот месяц. Название изменено с getLastMonthData
+  public function getListDriversWorked($id, $numberOfDaysInMonth) {
+
     $table = 'flights';
     $rows = 'id, date_1, date_2, driver';
     $join =	'';
@@ -119,7 +120,7 @@ class Prr extends Base
     $result = array_unique($prrMonth);
     $result = array_values($result);
 
-    var_export($result);
+    // var_export($result);
 
     return $result;
  }
@@ -145,99 +146,58 @@ class Prr extends Base
     return $result;
   }
 
-
-//**************
-//--------------------------------------------------///
-  // public function getOneMonthPrr() {
-  //   $table = 'prr';
-  //   $rows = 'prr.id as id, id_drivers, start, the_end,
-  //             drivers.id as drivers_id, drivers.driver';
-  //   $join =	' LEFT JOIN drivers ON id_drivers = drivers.id';
-  //   $where = '';
-  //   $order = 'the_end DESC';
-  //
-  //   $base = new Base();
-  //   $result = $base->select($table, $rows, $join, $where, $order);
-  //
-  //   return $result;
-  // }
-//*****************
-
-####################### update ###############################
-public function getUniqueValuesMonth(){
-  # 1. Какие месяцы вообще были - запрос
-  # 2. В каждом месяце какие водители через функцию getLastMonthData
-
-  $table = 'flights';
-  $rows = 'date_1, date_2';
-  $join =	'';
-  $where = '';
-  $order = 'date_1, date_2 ASC';
-
-  $base = new Base();
-  $result = $base->select($table, $rows, $join, $where, $order);
-
-  # сравнить как date_1 с date_1, date_2 c date_2, date_1 с date_2 - не сделал
-  # //сравнил date_1 с date_2//
-  # и получить уникальные значения месяцам
-
-  $uniqueValuesMonth = array();
-  for ($i=0; $i < count($result); $i++) {
-      $date_1 = $result[$i]['date_1'];
-      $date_2 = $result[$i]['date_2'];
-        $date_1 = substr($date_1, 0, 7); //убираем дни из месяца
-        $date_2 = substr($date_2, 0, 7); //убираем дни из месяца
-      $uniqueValuesMonth[] = $date_1;
-
-      if ($date_1 != $date_2) {
-        $uniqueValuesMonth[] = $date_2;
+//Сравнение списка из flights со списком из prr_drivers
+public function getListComparison($listDriversWorked, $getLastMonthPrr){
+  // 1. сравниваем список $listDriversWorked со списком $getLastMonthPrr
+  //  если элемент $i из $listDriversWorked не сравнивается ни с одним эл-м из $getLastMonthPr,
+  //  то добавляем этот элемент, как массив в новый массив $result со вторым значием массива - add.
+  //  Если этого элемента нет в списке $listDriversWorked, но есть в списке $getLastMonthPrr,
+  //  то добавляем его как новый массив, со вторым значением массива - delete
+  for ($i=0; $i <= count($listDriversWorked); $i++) {
+    for ($k=0; $k <= count($getLastMonthPrr); $k++) {
+      if ($listDriversWorked[$i] == $getLastMonthPrr[$k]['drivers']) {
+        $task[$i] = $listDriversWorked[$i];
       }
+    }
+    var_export($task);
+    if(empty($task[$i])){
+      $result[$i] = array("0"=>$listDriversWorked[$i], "1"=>"add");
+    }
   }
-  $result = array_unique($uniqueValuesMonth);
-  $result = array_values($result);
-
-  // var_export($result);
-  return $result;
+return $result;
 }
 
-
-
-//Тут надо делать полноценный запрос, с датой и водителями, что в эти даты работали
-public function listDriversFromPrr($uniqueValuesMonth){
-  for ($i=0; $i < count($uniqueValuesMonth); $i++) {
-    // $id = $uniqueValuesMonth[$i];
-    $numberOfDaysInMonth = $this->numberOfDaysInMonth($uniqueValuesMonth[$i]);
-    $getMonthWork = $this-> getLastMonthData($uniqueValuesMonth[$i], $numberOfDaysInMonth);
-  }
+//обновление списка ПРР в prr_drivers
+public function setUpdatePrrTable($listComparison){
 
 }
-
-
-
-public function getListComparison($listDriversFromFlights, $listDriversFromPrr){}
-
-
-
-public function setListComparison($listComparison){}
 ##############################################################
 
 
 
+//***********
+ public function getEdit($id, $numberOfDaysInMonth, $drivers_id, $values){
+   $table = 'prr_drivers';
+   if($numberOfDaysInMonth >= 31){
+     $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
+     "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
+     "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`", "`29`", "`30`", "`31`");
+   } elseif ($numberOfDaysInMonth >= 30 AND $numberOfDaysInMonth < 31) {
+     $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
+     "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
+     "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`", "`29`", "`30`");
+   } else {
+     $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
+     "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
+     "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`");
+   }
 
-//**************
-  public function getDriversSelect() {
-  	$table = 'drivers';
-  	$rows = 'id, driver';
-  	$join = '';
-  	$where = '';
-  	$order = 'driver DESC';
+   $where = 'drivers='.(int)$drivers_id;
 
-  	$base = new Base();
-  	$result = $base->select($table, $rows, $join, $where, $order);
-
-  	return $result;
-  }
-//**********
+   $base = new Base();
+   $base->update($table, $rows, $where, $values);
+ }
+//***********
 
 //*************
   public function deleteEvent($id){
