@@ -74,14 +74,14 @@ public function getOneMonth($id) {
   $getNormalFormatEndMonth = date('Y-m-d', $getEndMonthUnixTimestamp);
 
   $table = 'flights';
-  $rows = 'id, date_2, driver, drivers_payment';
-  $join =	'';
+  $rows = 'flights.id, flights.date_2, flights.id_drivers, flights.drivers_payment, drivers.driver AS driver';
+  $join =	' LEFT OUTER JOIN drivers ON flights.id_drivers = drivers.id';
   $where = 'date_2 >= ' . '"' . "$getNormalFormatStartMonth" . '"' . " AND "  . 'date_2 <=' . '"' . "$getNormalFormatEndMonth". '"';
   $order = '';
 
   $base = new Base();
   $result = $base->select($table, $rows, $join, $where, $order);
-
+// var_export($result);
   $res = [];
 
   // дальше слишком длинный код - исправить/сократить

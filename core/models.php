@@ -59,7 +59,7 @@ protected $connection;
 			$q .=' WHERE '.$where;
 		if($order !=null)
 			$q .= ' ORDER BY '.$order;
-// var_export($q);
+var_export($q);
 
 		if($this->tableExists($table)) {
 			$query = $mysqli->query($q);

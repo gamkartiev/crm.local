@@ -18,39 +18,47 @@ public function view($id) {
  }
  // var_export($id);
  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-$getLastMonthPrr = $prr->getLastMonthPrr($id); //список водителей из табл.бд prr_drivers
-$listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
+ $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
+ $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked); //список водителей из табл.бд prr_drivers
 // var_export($listDriversWorked);
-// var_export($getLastMonthPrr;)
+// var_export($getLastMonthPrr);
 // var_export($numberOfDaysInMonth);
   include("views/prr/prr.php");
 }
 
 
 
-public function update($id){
-  $prr = new Prr();
-
-  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-  // $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //из табл flights
-  // $getLastMonthPrr = $prr->getLastMonthPrr($id); //список водителей из табл.бд prr_drivers
-
-  $listDriversWorked = array ("0"=>"Вершинников", "1"=>"Иванов", "2"=>'Бадиев' );
-  $getLastMonthPrr = array("0" => array('drivers'=>'Акушеров'),
-  												 "1"=>array('drivers'=>'Степанов'),
-  												 "2"=>array('drivers'=>'Иванов'));
-
-// var_export($listDriversWorked);
-var_export($getLastMonthPrr);
-  //Сравнение списка из flights со списком из prr_drivers
-  $listComparison = $prr->getListComparison($listDriversWorked, $getLastMonthPrr);
-
-var_export($listComparison);
-  //сравнение и обновление списка водителей в ПРР в prr_drivers
-  // $updatePrrTable = $prr->setUpdatePrrTable($listDriversWorked, $getLastMonthPrr);
-
-  header("Location: /prr");
-}
+// public function update($id){
+  //   $prr = new Prr();
+  //
+  //   $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+    // $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //из табл flights
+    // $getLastMonthPrr = $prr->getLastMonthPrr($id); //список водителей из табл.бд prr_drivers
+  // var_export($id);
+  // var_export($listDriversWorked);
+  // var_export($getLastMonthPrr);
+    // Сравнение списка из flights со списком из prr_drivers
+    // $listComparison = $prr->getListComparison($listDriversWorked, $getLastMonthPrr);
+  //Нужно поменять flight столбец Drivers вместо ФИО водителей - ссылку на таблицу drivers
+  // if(!empty($listComparison)){
+  //   for ($i=0; $i < count($listComparison); $i++) {
+  //     $month_and_years = $id."-01";
+  //     $drivers = $listComparison[$i]['0'];
+  //
+  //     $values = array($month_and_years, $drivers);
+  //
+  //     if($listComparison[$i]['1'] == 'add'){
+  //       $prr->setInsert($month_and_years, $values);
+  //     } else{
+  //       $id = $listComparison[$i]['2']; //это положение элемента с id строки в таблице ПРР
+  //       $prr->setDelete($id);
+  //     }
+  //   }
+  // }
+  // // var_export($listComparison);
+  //
+  //   header("Location: /prr");
+// }
 
 
 
@@ -58,7 +66,8 @@ public function edit($id){
   if(!empty($_POST) && $id > 0){
     $prr = new Prr();
     $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-    $getLastMonthPrr = $prr->getLastMonthPrr($id);
+    $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
+    $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked);
 
     //высчитываем сколько массивов должно быть ()водители с суточными)
     $removed = array_pop($_POST); //убираем button из вх-го массива на всякий случай
@@ -80,13 +89,14 @@ public function edit($id){
       array_unshift($values, $month_and_years, $drivers_id); //объединяем в один массив
 
       $prr->getEdit($id, $numberOfDaysInMonth, $drivers_id, $values);
-      header("Location: /prr/edit/$id");
+      header("Location: /prr/view/$id");
     }
   } else {
     $prr = new Prr();
 
     $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
-    $getLastMonthPrr = $prr->getLastMonthPrr($id);
+    $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
+    $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked);
 
     include("views/prr/prrFormEdit.php");
   }

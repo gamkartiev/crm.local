@@ -4,7 +4,7 @@ class Cars extends Base
 {
 	public function getAllSelect() { //левая колонка при выводе данных на странице tractors
 		$table = 'cars';
-		$rows = 'id, brand, state_sign_cars';
+		$rows = 'id, state_sign_cars, brand';
 		$join = '';
 		$where = '';
 		$order = 'brand, state_sign_cars';
@@ -31,7 +31,7 @@ class Cars extends Base
 
 	public function getInsert($values) {
 		$table = 'cars';
-		$rows = 'brand, state_sign_cars, PTS_cars, STS_cars, VIN_cars';
+		$rows = 'state_sign_cars, brand, PTS_cars, STS_cars, VIN_cars';
 
 		$base = new Base();
 		$base->insert($table, $values, $rows);
@@ -81,7 +81,7 @@ class Cars extends Base
 
 	public function getEdit($id, $values) {
 		$table = 'cars';
-		$rows = array("brand", "state_sign_cars", "PTS_cars", "STS_cars", "VIN_cars");
+		$rows = array("state_sign_cars", "brand", "PTS_cars", "STS_cars", "VIN_cars");
 		$where = 'id='.(int)$id;
 
 		$base = new Base();

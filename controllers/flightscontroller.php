@@ -31,12 +31,12 @@ class FlightsController extends Controller
               $volume = $_POST['volume'],
               $cost = $_POST['cost'],
               $form_of_payment = $_POST['form_of_payment'],
-              $car = $_POST['car'],
+              $id_cars = $_POST['car'],
               $id_customers = $_POST['customers'],
               $proxy = $_POST['proxy'],
               $request = $_POST['request'],
               $note = $_POST['note'],
-              $driver = $_POST['driver'],
+              $id_drivers = $_POST['driver'],
               $drivers_payment = $_POST['drivers_payment']
         );
 // var_export($values);
@@ -70,12 +70,12 @@ class FlightsController extends Controller
           $volume = $_POST['volume'],
           $cost = $_POST['cost'],
           $form_of_payment = $_POST['form_of_payment'],
-          $car = $_POST['car'],
+          $id_cars = $_POST['car'],
           $customers = $_POST['customers'],
           $proxy = $_POST['proxy'],
           $request = $_POST['request'],
           $note = $_POST['note'],
-          $driver = $_POST['driver'],
+          $id_drivers = $_POST['driver'],
           $drivers_payment = $_POST['drivers_payment']
       );
 // var_export($values);

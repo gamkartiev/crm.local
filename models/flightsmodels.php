@@ -5,9 +5,13 @@ class Flights extends Base
 
 	public function getAllSelect() {
 		$table = 'flights';
-		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight, volume, cost,
-						form_of_payment, car, customers.short_name, proxy, request, flights.note, driver, drivers_payment';
-		$join = ' LEFT OUTER JOIN customers ON flights.id_customers=customers.id';
+		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight,
+							volume, cost, form_of_payment, flights.id_cars, cars.state_sign_cars AS car, customers.short_name,
+							proxy, request, flights.note, drivers.driver AS driver, flights.id_drivers,
+							drivers_payment';
+		$join = ' LEFT OUTER JOIN customers ON flights.id_customers=customers.id
+							LEFT OUTER JOIN drivers ON flights.id_drivers = drivers.id
+							LEFT OUTER JOIN cars ON flights.id_cars = cars.id	';
 		$where = '';
 		$order = 'date_1 DESC, date_2 DESC';
 
@@ -19,9 +23,13 @@ class Flights extends Base
 
 	public function getOneSelect($id){
 		$table = 'flights';
-		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight, volume, cost,
-						form_of_payment, car, customers.short_name, proxy, request, flights.note, driver, drivers_payment';
-		$join = ' LEFT OUTER JOIN customers ON flights.id_customers=customers.id';
+		$rows = 'flights.id, place_1, place_2, date_1, date_2, freight, weight,
+							volume, cost, form_of_payment, flights.id_cars, cars.state_sign_cars AS car, customers.short_name,
+							proxy, request, flights.note, drivers.driver AS driver, flights.id_drivers,
+							drivers_payment';
+		$join = ' LEFT OUTER JOIN customers ON flights.id_customers=customers.id
+							LEFT OUTER JOIN drivers ON flights.id_drivers = drivers.id
+							LEFT OUTER JOIN cars ON flights.id_cars = cars.id';
 		$where = 'flights.id ='.$id;
 		$order = '';
 
@@ -50,7 +58,7 @@ class Flights extends Base
 	//фун-я выборки всех тягачей для Формы вставки нового рейса
 	public function getCarsSelect() {
 		$table = 'cars';
-		$rows = 'state_sign_cars';
+		$rows = 'id, state_sign_cars';
 		$join = '';
 		$where = '';
 		$order = 'state_sign_cars DESC';
@@ -146,8 +154,8 @@ class Flights extends Base
 		$table = 'flights';
 		// $values = ; соответствующий массив передается из контроллера
 		$rows = 'place_1, place_2, date_1, date_2, freight, weight,
-							volume, cost, form_of_payment, car, id_customers, proxy,
-							request, note, driver, drivers_payment';
+							volume, cost, form_of_payment, id_cars, id_customers, proxy,
+							request, note, id_drivers, drivers_payment';
 		$join = '';
 		$base = new Base();
 		$result = $base->insert($table, $values, $rows);
@@ -157,7 +165,7 @@ class Flights extends Base
 	public function getEdit($id, $values) {
 		$table = 'flights';
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
-				"cost", "form_of_payment", "car", "id_customers", "proxy", "request", "note", "driver", "drivers_payment");
+				"cost", "form_of_payment", "id_cars", "id_customers", "proxy", "request", "note", "id_drivers", "drivers_payment");
 		$where = 'id='.(int)$id;
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);

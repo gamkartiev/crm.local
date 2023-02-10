@@ -54,7 +54,7 @@
       <option disabled>Выберите машину:</option>
       <?php
       foreach($cars as $a): ?>
-      <option> <?= $a['state_sign_cars'] ?></option>
+      <option value="<?= $a['id']?>"> <?= $a['state_sign_cars'] ?></option>
       <<?php endforeach; ?>
    </select>
    </label>
@@ -86,7 +86,7 @@
      <option disabled>Выберите водителя:</option>
      <?php
      foreach($drivers as $a): ?>
-     <option> <?= $a['driver'] ?></option>
+     <option value="<?= $a['id']?>"> <?= $a['driver'] ?></option>
      <?php endforeach; ?>
   </select>
   </label>

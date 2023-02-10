@@ -16,11 +16,11 @@ class FinesController extends Controller
     $fines = new Fines();
 
     $values = array(
-      $driver = $_POST['driver'],
+      $drivers = $_POST['id_drivers'],
       $decree = $_POST['decree'],
       $date_of_violation = $_POST['date_of_violation'],
       $time_of_violation = $_POST['time_of_violation'],
-      $cars = $_POST['car'],
+      $cars = $_POST['id_cars'],
       $hold_date = $_POST['hold_date'],
       $withheld = $_POST['withheld'],
       $to_pay = $_POST['to_pay'],
@@ -47,11 +47,11 @@ class FinesController extends Controller
       $fines = new Fines();
 
       $values = array(
-        $driver = $_POST['driver'],
+        $drivers = $_POST['id_drivers'],
         $decree = $_POST['decree'],
         $date_of_violation = $_POST['date_of_violation'],
         $time_of_violation = $_POST['time_of_violation'],
-        $cars = $_POST['car'],
+        $cars = $_POST['id_cars'],
         $hold_date = $_POST['hold_date'],
         $withheld = $_POST['withheld'],
         $to_pay = $_POST['to_pay'],
@@ -70,11 +70,13 @@ class FinesController extends Controller
       $oneFine = $fines->getOneSelect($id);
       $cars = $fines->getCarsSelect();
       $drivers = $fines->getDriversSelect();
-// var_dump($cars);
+
       //Поставить при выводе сохраненные в бд
       //клиента, машину и водителя в списке формы первыми:
       $cars = $fines->getFirstItemCars($cars, $oneFine);
       $drivers = $fines->getFirstItemDrivers($drivers, $oneFine);
+
+      var_export($drivers);
       include ("views/fines/finesFormEdit.php");
 
     }

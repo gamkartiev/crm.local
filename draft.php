@@ -34,3 +34,10 @@
 
 
 <input type="hidden" name="<?="drivers ".$j?>" value="<?=$getLastMonthPrr[$j]['id']?>">
+
+
+// $listDriversWorked = array ("0"=>"Вершинников", "1"=>"Бадиев", "2"=>"Иванов", "3"=>"Степанов");
+// $getLastMonthPrr = array("0" => array('drivers'=>'Акушеров'),
+// 												 "1"=>array('drivers'=>'Степанов'),
+// 												 "2"=>array('drivers'=>'Иванов'),
+//                          "3"=>array('drivers'=>'Санихин'),);

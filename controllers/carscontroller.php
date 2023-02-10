@@ -27,8 +27,8 @@ class CarsController extends Controller
         $cars = new Cars();
 
         $values = array(
-          $brand = $_POST['brand'],
           $state_sign_cars = $_POST['state_sign_cars'],
+          $brand = $_POST['brand'],
           $PTS_cars = $_POST['PTS_cars'],
           $STS_cars = $_POST['STS_cars'],
           $VIN_cars = $_POST['VIN_cars'],
@@ -48,8 +48,8 @@ class CarsController extends Controller
     if(!empty($_POST['state_sign_cars'])&& $id > 0) {
 
       $values = array(
-        $brand = $_POST['brand'],
         $state_sign_cars = $_POST['state_sign_cars'],
+        $brand = $_POST['brand'],
         $PTS_cars = $_POST['PTS_cars'],
         $STS_cars = $_POST['STS_cars'],
         $VIN_cars = $_POST['VIN_cars']

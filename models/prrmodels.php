@@ -33,6 +33,8 @@ class Prr extends Base
   }
 
 
+
+
 //функция, что должна вызываться в контроллере и
 //что должна конвертировать числовой формат даты в текстовый
 //для боковой панели страницы
@@ -49,6 +51,8 @@ class Prr extends Base
     $result = date("Y-m");
     return $result;
   }
+
+
 
 // последний месяц, где работали водители
   public function getLastMonthDriversWork(){
@@ -69,6 +73,8 @@ class Prr extends Base
     return $result;
   }
 
+
+
   //возвращает количество дней в месяце (для таблицы ПРР)
    public function numberOfDaysInMonth($id){
     $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
@@ -80,20 +86,23 @@ class Prr extends Base
     return $result;
    }
 
+
+//************* относится к function update($id) **************//
 //список водителей, что работали в этот месяц. Название изменено с getLastMonthData
   public function getListDriversWorked($id, $numberOfDaysInMonth) {
-
+// !!! - в этой функции можно испольщовать SELECT DISTINCT поле FROM имя_таблицы WHERE условие
+// чтобы убрать приведение полученных данных к уникальному значению - попробовать позже
     $table = 'flights';
-    $rows = 'id, date_1, date_2, driver';
-    $join =	'';
+    $rows = 'flights.id, flights.date_1, flights.date_2, flights.id_drivers, drivers.driver AS driver';
+    $join =	' LEFT JOIN drivers ON flights.id_drivers = drivers.id';
     //запрос включает: те рейсы, что загружались в прошлом месяце и выгружались в запрашиваемом месяцев
     // а также, те рейсы, что загружались в этом месяце и выгружались в запрашиваемом
     $where = 'date_2 >= '.'"'."$id-01".'"'." AND " .'date_2 <='.'"'.$id.'-'."$numberOfDaysInMonth".'"';
-    $order = 'driver ASC, date_1 ASC';
+    $order = 'drivers.driver ASC, date_1 ASC';
 
     $base = new Base();
-    $result_1 = $base->select($table, $rows, $join, $where, $order);
-
+    $result = $base->select($table, $rows, $join, $where, $order);
+// var_dump($result_1);
     //--- эта вставка, чтобы выбрать месяц следующий за запрашиваемом ---//
     $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
     $getOnlyYear = (int)$getOnlyYear = substr($id, 0, 4);
@@ -103,74 +112,152 @@ class Prr extends Base
     }
 
     $date = $getOnlyYear.'-'.$getOnlyMonth;
-    //--- тут уже сформировалась дата со следующим месяцем ---//
-
+    //--- все водители, что хоть как-то работали в этом месяце (грузились или выгружались ) - учитываются
     //запрос включает те рейсы, что начинались в запрашиваемом, а выгружались в следующем месяце
     $where = 'date_1 < '.'"'."$date-01".'"'." AND " .'date_2 >= '.'"'."$date-01".'"';
     $base = new Base();
-    $result_2 = $base->select($table, $rows, $join, $where, $order);
+    $result_1 = $base->select($table, $rows, $join, $where, $order);
+    // var_export($result_1);
 
-    $result = array_merge($result_1, $result_2);
+    if(!empty($result_1)){
+      $result = array_merge($result, $result_1);
+    }
+
     // var_export($result);
     //получить уникальный список водителей за этот месяц
     $prrMonth = array();
     for ($i=0; $i < count($result); $i++) {
-      $prrMonth[] = $result[$i]['driver'];
+      $prrMonth[] = $result[$i]['id_drivers'];
     }
     $result = array_unique($prrMonth);
     $result = array_values($result);
-
+//возврщает id водителей, что работали в этом месяце по информации таблицы flights
     // var_export($result);
 
     return $result;
  }
+//************* относится к function update($id) **************//
 
 
-  public function getLastMonthPrr($id){
+
+  public function getLastMonthPrr($id, $listDriversWorked){
     $table = 'prr_drivers';
-    $rows = 'drivers.driver AS drivers, prr_drivers.id, prr_drivers.month_and_years,
-              prr_drivers.1,prr_drivers.2,prr_drivers.3,prr_drivers.4,prr_drivers.5,
-              prr_drivers.6,prr_drivers.7,prr_drivers.8,prr_drivers.9,prr_drivers.10,
-              prr_drivers.11,prr_drivers.12,prr_drivers.13,prr_drivers.14,prr_drivers.15,
-              prr_drivers.16,prr_drivers.17,prr_drivers.18,prr_drivers.19,prr_drivers.20,
-              prr_drivers.21,prr_drivers.22,prr_drivers.23,prr_drivers.24,prr_drivers.25,
-              prr_drivers.26,prr_drivers.27,prr_drivers.28,prr_drivers.29,prr_drivers.30,prr_drivers.31,
-              drivers.id';
+    $rows = 'prr_drivers.id AS prr_drivers_id,
+              prr_drivers.drivers AS id_drivers,
+              prr_drivers.month_and_years,
+              prr_drivers.1, prr_drivers.2, prr_drivers.3, prr_drivers.4, prr_drivers.5,
+              prr_drivers.6, prr_drivers.7, prr_drivers.8, prr_drivers.9, prr_drivers.10,
+              prr_drivers.11, prr_drivers.12, prr_drivers.13, prr_drivers.14, prr_drivers.15,
+              prr_drivers.16, prr_drivers.17, prr_drivers.18, prr_drivers.19, prr_drivers.20,
+              prr_drivers.21, prr_drivers.22, prr_drivers.23, prr_drivers.24, prr_drivers.25,
+              prr_drivers.26, prr_drivers.27, prr_drivers.28, prr_drivers.29, prr_drivers.30,
+              prr_drivers.31,
+              drivers.id, drivers.driver AS drivers';
     $join =	' INNER JOIN drivers ON prr_drivers.drivers = drivers.id';
-    $where = 'month_and_years ='.'"'.$id.'-01'.'"';
     $order = '';
 
-    $base = new Base();
-    $result = $base->select($table, $rows, $join, $where, $order);
+    for ($i=0; $i < count($listDriversWorked); $i++) {
+      $where = 'month_and_years ='.'"'.$id.'-01'.'"'. " AND ".'prr_drivers.drivers ='.$listDriversWorked[$i];
+      $base = new Base();
+      $result_1 = $base->select($table, $rows, $join, $where, $order);
 
+      if(empty($result_1)){
+        $values = array(
+          $month_and_years = $id.'-01',
+          $drivers = $listDriversWorked[$i],
+        );
+        $rows_2 = 'month_and_years, drivers';
+
+        $result_2 = $base->insert($table, $values, $rows_2);
+        $result_1 = $base->select($table, $rows, $join, $where, $order);
+      }
+
+      $result[$i] = $result_1['0'];
+    }
     return $result;
   }
 
+
+//************* относится к function update($id) **************//
 //Сравнение списка из flights со списком из prr_drivers
-public function getListComparison($listDriversWorked, $getLastMonthPrr){
-  // 1. сравниваем список $listDriversWorked со списком $getLastMonthPrr
-  //  если элемент $i из $listDriversWorked не сравнивается ни с одним эл-м из $getLastMonthPr,
-  //  то добавляем этот элемент, как массив в новый массив $result со вторым значием массива - add.
-  //  Если этого элемента нет в списке $listDriversWorked, но есть в списке $getLastMonthPrr,
-  //  то добавляем его как новый массив, со вторым значением массива - delete
-  for ($i=0; $i <= count($listDriversWorked); $i++) {
-    for ($k=0; $k <= count($getLastMonthPrr); $k++) {
-      if ($listDriversWorked[$i] == $getLastMonthPrr[$k]['drivers']) {
-        $task[$i] = $listDriversWorked[$i];
-      }
-    }
-    var_export($task);
-    if(empty($task[$i])){
-      $result[$i] = array("0"=>$listDriversWorked[$i], "1"=>"add");
-    }
+//   public function getListComparison($, $getLastMonthPrr){
+//     // 1. сравниваем список $listDriversWorked со списком $getLastMonthPrr
+//     //  если элемент $i из $listDriversWorked не сравнивается ни с одним эл-м из $getLastMonthPr,
+//     //  то добавляем этот элемент, как массив в новый массив $result со вторым значием массива - add.
+//     //  Если этого элемента нет в списке $listDriversWorked, но есть в списке $getLastMonthPrr,
+//     //  то добавляем его как новый массив, со вторым значением массива - delete
+//     for ($i=0; $i < count($listDriversWorked); $i++) {
+//       for ($k=0; $k < count($getLastMonthPrr); $k++) {
+//         if ($listDriversWorked[$i] == $getLastMonthPrr[$k]['drivers']) {
+//           $task_1[$i] = $listDriversWorked[$i]; //если в ПРР есть этот водитель, то отмечаем
+//         }
+//       }
+//       if(empty($task_1[$i])){ //если в ПРР нет этого водителя, то ставим на добавление в ПРР
+//         $result[$i] = array("0"=>$listDriversWorked[$i], "1"=>"add");
+//       }
+//     }
+//
+//     for ($i=0; $i < count($getLastMonthPrr); $i++) {
+//       for ($k=0; $k < count($listDriversWorked); $k++) {
+//         if ($getLastMonthPrr[$i]['drivers'] == $listDriversWorked[$k]) {
+//           $task_2[$i] = $getLastMonthPrr[$i]['drivers'];  //если водитель есть в ПРР и нет в рейсах, то добавляем в массив task
+//         }
+//       }
+//
+//       if(empty($task_2[$i])){  //всех водителей, что есть массиве task - ставим на удаление (те, что нет среди работавших)
+//         $result_2[$i] = array("0"=>$getLastMonthPrr[$i]['drivers'], "1"=>"delete", "2"=>$getLastMonthPrr[$i]['prr_drivers_id']);
+//       }
+//       // var_export($result_2);
+//     }
+//     if(!empty($result_2)){
+//       $result = array_merge($result_1, $result_2);
+//     }
+//
+//     var_export($result);
+//
+//   return $result;
+// }
+
+//************** ***************//
+
+  public function setInsert($month_and_years, $values) {
+    $table = 'prr_drivers';
+    // $values = ; соответствующий массив передается из контроллера
+    $rows = 'month_and_years, drivers';
+
+    $base = new Base();
+    $base->insert($table, $values, $rows);
   }
-return $result;
-}
+
+  public function setDelete($id){
+    $table = 'prr_drivers';
+    $where = 'id='.(int)$id;
+
+    $base = new Base();
+    $base->delete($table, $where);
+  }
+
 
 //обновление списка ПРР в prr_drivers
-public function setUpdatePrrTable($listComparison){
-
-}
+  // public function setUpdatePrrTable($id, $listComparison){
+  //
+  //   $month_and_years = $id."-01";
+  //   $table = 'prr_drivers';
+  //
+  //   for ($i=0; $i < count($listComparison); $i++) {
+  //     if($listComparison[$i]['1'] == 'add'){
+  //       $rows = "date";
+  //     }
+  //
+  //   }
+  //
+  //   $table = 'prr_drivers';
+  //   $rows =
+  //   $where = 'drivers='.(int)$drivers_id;
+  //
+  //   $base = new Base();
+  //   $base->update($table, $rows, $where, $values);
+  // }
 ##############################################################
 
 
