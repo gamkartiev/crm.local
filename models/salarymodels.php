@@ -2,81 +2,85 @@
 
 class Salary extends Base
 {
-  public function getAllMonthSelect() {
-    $table = 'flights';
-    $rows = 'date_2';
-    $join =	'';
-    $where = '';
-    $order = 'date_2 DESC';
 
-    $base = new Base();
-    $result = $base->select($table, $rows, $join, $where, $order);
-
-    //Получить весь список месяцев
-    for ($i=0; $i < count($result); $i++) {
-        $res[] = $result[$i]['date_2'];
-    }
-
-    //разделить этот список по месяцам и годам, убрав даты
-    for($i=0; $i < count($res); $i++) {
-      $res[$i] = date('M Y', strtotime($res[$i]));
-    }
-
-    //убираем повторяющиеся данные в массиве и обновляем список ключей
-    $res = array_unique($res);
-    $result = array_values($res);
-
-    return $result;
-  }
-
-
-//Эта функция сделана для вывода последнего месяца с зарплатой при первом открытии страницы salary
-//Тут нужно сделать повторный запрос к бд с новыми вводными, сначала изменив день на от 01 до 31. Также,
-// было бы желательно сделать одну функцию, которая выводит основные данные для функций lastMonth, oneMonth и
-// allSalaryMonth, а уже эти три функции преобразуют их в необходимый формат и сокращают столько, скольо нужно.
-public function getlastMonth() {
+public function getAllMonthSelect() {
   $table = 'flights';
   $rows = 'date_2';
   $join =	'';
   $where = '';
-  $order = 'date_2 DESC limit 1';
+  $order = 'date_2 DESC';
 
   $base = new Base();
   $result = $base->select($table, $rows, $join, $where, $order);
 
-  //Переделываем числовой формат в нужный текстовый
-  $getOnlyMonth = substr($result['0']['date_2'], 5, 2);
-  $getOnlyYear = substr($result['0']['date_2'], 0, 4);
+  //Получить весь список месяцев
+  for ($i=0; $i < count($result); $i++) {
+      $res[] = $result[$i]['date_2'];
+  }
 
-  $getUnixTimestamp = strtotime($getOnlyYear."-".$getOnlyMonth);
-  $result = date('M Y', $getUnixTimestamp);
+  //разделить этот список по месяцам и годам, убрав даты
+  for($i=0; $i < count($res); $i++) {
+    $res[$i] = date('M Y', strtotime($res[$i]));
+  }
 
-  // var_export($getNormalFormat);
-  // var_export($getOnlyYear);
+  //убираем повторяющиеся данные в массиве и обновляем список ключей
+  $res = array_unique($res);
+  $result = array_values($res);
 
   return $result;
 }
 
 
-public function getOneMonth($id) {
-  $getOnlyMonth = substr($id, 0, 3);
-  $getOnlyYear = substr($id, -4);
-  $getUnixTimestamp = strtotime($getOnlyMonth);
+//функция, что должна вызываться в контроллере и
+//что должна конвертировать числовой формат даты в текстовый
+//для боковой панели страницы
+public function getStringFormatDate($allPrrMonth){
+  for($i=0; $i < count($allPrrMonth); $i++) {
+    $res[$i] = date('Y-m', strtotime($allPrrMonth[$i]));
+    $result[$i] = [$res[$i], $allPrrMonth[$i]];
+  }
 
-  $getNormalFormatMonth = date('m', $getUnixTimestamp); //переводим метку времени в цифру месяца
+  return $result;
+}
 
-  // объединяем месяц и год и получаем время в формате unix (метка времени)
-  $getStartMonthUnixTimestamp = strtotime ($getOnlyYear . "-" . $getNormalFormatMonth . "-" . "01");
-  $getEndMonthUnixTimestamp = strtotime ($getOnlyYear . "-" . $getNormalFormatMonth . "-" . "31");
 
-  //получаем нужный формат месяца, как 01, так и 31 числа
-  $getNormalFormatStartMonth = date('Y-m-d', $getStartMonthUnixTimestamp);
-  $getNormalFormatEndMonth = date('Y-m-d', $getEndMonthUnixTimestamp);
+//возвращает количество дней в месяце (для таблицы ПРР)
+ public function numberOfDaysInMonth($id){
+  $getOnlyMonth=(int)$getOnlyMonth = substr($id, 5, 2);
+  $getOnlyYear = (int)$getOnlyYear = substr($id, 0);
 
+  //количество рабочих дней в месяце.
+  $result = cal_days_in_month(CAL_GREGORIAN, $getOnlyMonth, $getOnlyYear);
+
+  return $result;
+ }
+
+
+ // последний месяц, где работали водители
+public function getLastMonthDriversWork(){
+ $table = 'prr_drivers';
+ $rows = 'month_and_years';
+ $join =	'';
+ //запрос включает: те рейсы, что загружались в прошлом месяце и выгружались в запрашиваемом месяцев
+ // а также, те рейсы, что загружались в этом месяце и выгружались в запрашиваемом
+ $where = '';
+ $order = 'month_and_years DESC limit 1';
+
+ $base = new Base();
+ $result = $base->select($table, $rows, $join, $where, $order);
+
+ $result = $result[0]['month_and_years'];
+ $result = substr($result, 0, 7); //убираем день месяца
+
+ return $result;
+}
+
+
+public function getOneMonth($id, $numberOfDaysInMonth) {
   $table = 'flights';
   $rows = 'flights.id, flights.date_2, flights.id_drivers, flights.drivers_payment, drivers.driver AS driver';
   $join =	' LEFT OUTER JOIN drivers ON flights.id_drivers = drivers.id';
-  $where = 'date_2 >= ' . '"' . "$getNormalFormatStartMonth" . '"' . " AND "  . 'date_2 <=' . '"' . "$getNormalFormatEndMonth". '"';
+  $where = 'date_2 >= '. '"'."$id-01".'"' ." AND " . 'date_2 <='. '"'."$id".'-'."$numberOfDaysInMonth".'"';
   $order = '';
 
   $base = new Base();
@@ -139,25 +143,11 @@ public function getMonthWithPremium($premium, $oneMonth){
 
 
 //---------------------------------------------//
-public function getFines($id){
-  $getOnlyMonth = substr($id, 0, 3);
-  $getOnlyYear = substr($id, -4);
-  $getUnixTimestamp = strtotime($getOnlyMonth);
-
-  $getNormalFormatMonth = date('m', $getUnixTimestamp); //переводим метку времени в цифру месяца
-
-  // объединяем месяц и год и получаем время в формате unix (метка времени)
-  $getStartMonthUnixTimestamp = strtotime ($getOnlyYear . "-" . $getNormalFormatMonth . "-" . "01");
-  $getEndMonthUnixTimestamp = strtotime ($getOnlyYear . "-" . $getNormalFormatMonth . "-" . "31");
-
-  //получаем нужный формат месяца, как 01, так и 31 числа
-  $getNormalFormatStartMonth = date('Y-m-d', $getStartMonthUnixTimestamp);
-  $getNormalFormatEndMonth = date('Y-m-d', $getEndMonthUnixTimestamp);
-
+public function getFines($id, $numberOfDaysInMonth){
   $table = 'fines';
-  $rows = 'id, driver, hold_date, to_pay, due_date';
-  $join = '';
-  $where = 'hold_date >= ' . '"' . "$getNormalFormatStartMonth" . '"' . " AND "  . 'hold_date <=' . '"' . "$getNormalFormatEndMonth". '"';
+  $rows = 'fines.id, fines.drivers, hold_date, to_pay, due_date, drivers.driver';
+  $join = ' LEFT OUTER JOIN drivers ON fines.drivers = drivers.id';
+  $where = 'hold_date >= '. '"'."$id-01".'"' ." AND ". 'hold_date <='. '"'."$id".'-'."$numberOfDaysInMonth".'"';
   $order = 'due_date ASC';
 
   $base = new Base();
@@ -195,12 +185,12 @@ public function excessFinesNextMonth($fines, $oneMonth){
           // функцию update, а можно не заморачиваться и ред-ть из этой фун-ии
           $id = $fines[$i]['id'];
           $date = $fines[$i]['hold_date'];
-  var_export($date);
+  // var_export($date);
           $dateAt = strtotime("+1 month", strtotime($date));
 
 
           $values[$i] = date('Y-m-d', $dateAt);
-var_export($values);
+// var_export($values);
           $table = 'fines';
           $rows = array("hold_date");
           $where = 'id='.(int)$id;
@@ -213,11 +203,6 @@ var_export($values);
       }
     }
 
-// public function getPrr($id, $oneMonth){
-//   for ($i=0; $i < $oneMonth; $i++) {
-//     // code...
-//   }
-// }
 
 
 

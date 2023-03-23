@@ -9,20 +9,19 @@ public function view($id) {
   $prr = new Prr();
 
   //<--- правая панель с месяцами
-  $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде чисел
-  $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде строки
+  $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде строки
+  // var_export($allPrrMonth);
+  $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде чисел
  // ---> правая панель с месяцами
 
  if(empty($id)){
    $id = $prr->getLastMonthDriversWork();
  }
- // var_export($id);
- $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id);
+
+ $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id); // кол-во дней в месяце
  $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
  $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked); //список водителей из табл.бд prr_drivers
-// var_export($listDriversWorked);
-// var_export($getLastMonthPrr);
-// var_export($numberOfDaysInMonth);
+
   include("views/prr/prr.php");
 }
 

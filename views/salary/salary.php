@@ -17,7 +17,7 @@
 	<section class="to_list">
 		Год:
 		<?php foreach($allSalaryMonth as $a): ?>
-			 <a href="/salary/view/<?=$a?>"> <?php echo $a ?> </a>
+			 <a href="/salary/view/<?=$a[0]?>"> <?php echo $a[1] ?> </a>
 		<?php endforeach ?>
 	</section>
 
