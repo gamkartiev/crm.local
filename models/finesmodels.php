@@ -4,12 +4,12 @@ class Fines extends Base
 {
   public function getAllSelect(){
     $table = 'fines';
-    $rows = 'fines.id, fines.drivers, fines.decree, fines.date_of_violation, fines.time_of_violation,
+    $rows = 'fines.id, fines.id_drivers, fines.decree, fines.date_of_violation, fines.time_of_violation,
              fines.id_cars, fines.hold_date, fines.withheld, fines.to_pay, fines.due_date,
              fines.after_the_due_date, fines.date_of_application, fines.note, fines.status,
              drivers.id AS id_drivers, drivers.driver, drivers.id,
              cars.state_sign_cars AS car, cars.id AS id_cars';
-    $join = ' LEFT OUTER JOIN drivers ON fines.drivers = drivers.id
+    $join = ' LEFT OUTER JOIN drivers ON fines.id_drivers = drivers.id
               LEFT OUTER JOIN cars ON fines.id_cars = cars.id';
     $where = '';
     $order = 'due_date DESC';
@@ -24,12 +24,12 @@ class Fines extends Base
 
   public function getOneSelect($id) {
     $table = 'fines';
-    $rows = 'fines.id, fines.drivers, fines.decree, fines.date_of_violation, fines.time_of_violation,
+    $rows = 'fines.id, fines.id_drivers, fines.decree, fines.date_of_violation, fines.time_of_violation,
              fines.id_cars, fines.hold_date, fines.withheld, fines.to_pay, fines.due_date,
              fines.after_the_due_date, fines.date_of_application, fines.note, fines.status,
-             drivers.id AS id_drivers, drivers.driver, drivers.id,
-             cars.state_sign_cars AS car, cars.id AS id_cars';
-    $join = ' LEFT OUTER JOIN drivers ON fines.drivers = drivers.id
+             drivers.id AS id_drivers, drivers.driver, cars.state_sign_cars AS car,
+             cars.id AS id_cars';
+    $join = ' LEFT OUTER JOIN drivers ON fines.id_drivers = drivers.id
               LEFT OUTER JOIN cars ON fines.id_cars = cars.id';
     $where = 'id='.(int)$id;
     $order = '';
@@ -43,7 +43,7 @@ class Fines extends Base
 
   public function getInsert($values) {
     $table = 'fines';
-    $rows = 'drivers, decree, date_of_violation, time_of_violation,
+    $rows = 'id_drivers, decree, date_of_violation, time_of_violation,
       id_cars, hold_date, withheld, to_pay, due_date, after_the_due_date,
       date_of_application, note, status';
 
@@ -54,7 +54,7 @@ class Fines extends Base
 
   public function getEdit($id, $values) {
     $table = 'fines';
-    $rows = array("drivers", "decree", "date_of_violation", "time_of_violation",
+    $rows = array("id_drivers", "decree", "date_of_violation", "time_of_violation",
       "id_cars", "hold_date", "withheld", "to_pay", "due_date", "after_the_due_date",
       "date_of_application", "note", "status");
     $where = 'id='.(int)$id;
@@ -75,7 +75,7 @@ class Fines extends Base
   //фун-я выборки всех тягачей для Формы вставки нового рейса
 	public function getCarsSelect() {
 		$table = 'cars';
-		$rows = 'id AS id_cars, state_sign_cars';
+		$rows = 'id, state_sign_cars';
 		$join = '';
 		$where = '';
 		$order = 'state_sign_cars DESC';
@@ -91,7 +91,7 @@ class Fines extends Base
   //фун-я выборки всех водителей для Формы вставки нового рейса
 	public function getDriversSelect() {
 		$table = 'drivers';
-		$rows = 'id AS id_drivers, driver';
+		$rows = 'id, driver';
 		$join = '';
 		$where = '';
 		$order = 'driver DESC';

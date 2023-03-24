@@ -78,39 +78,54 @@ public function getLastMonthDriversWork(){
 
 public function getOneMonth($id, $numberOfDaysInMonth) {
   $table = 'flights';
-  $rows = 'flights.id, flights.date_2, flights.id_drivers, flights.drivers_payment, drivers.driver AS driver';
+  $rows = 'flights.id, flights.date_2, flights.id_drivers, SUM(flights.drivers_payment) AS cost, drivers.driver';
   $join =	' LEFT OUTER JOIN drivers ON flights.id_drivers = drivers.id';
-  $where = 'date_2 >= '. '"'."$id-01".'"' ." AND " . 'date_2 <='. '"'."$id".'-'."$numberOfDaysInMonth".'"';
+  $where = 'date_2 >= '. '"'."$id-01".'"' ." AND " . 'date_2 <='. '"'."$id".'-'.
+            "$numberOfDaysInMonth".'"'.' GROUP BY drivers.driver';
   $order = '';
 
   $base = new Base();
   $result = $base->select($table, $rows, $join, $where, $order);
 // var_export($result);
-  $res = [];
 
-  // дальше слишком длинный код - исправить/сократить
-  foreach ($result as $value) {
-    $driver = $value['driver'];
-    $cost = $value['drivers_payment'];
-
-    if(!isset($res[$driver])) {
-      $res[$driver] = 0;
-      }
-
-    $res[$driver] += $cost;
-   }
-
-    foreach ($res as $driver => $cost) {
-      $result_1[] = [
-        'driver' => $driver,
-        'cost' => $cost,
-      ];
-    }
-
-    return $result_1;
+  return $result;
   }
 
+public function getPrr($id, $numberOfDaysInMonth){
+  $table = 'prr_drivers';
+  $rows = 'prr_drivers.drivers AS id_drivers,
+            prr_drivers.month_and_years,
+            (prr_drivers.1 + prr_drivers.2 + prr_drivers.3 + prr_drivers.4 + prr_drivers.5 +
+            prr_drivers.6 + prr_drivers.7 + prr_drivers.8 + prr_drivers.9 + prr_drivers.10 +
+            prr_drivers.11 + prr_drivers.12 + prr_drivers.13 + prr_drivers.14 + prr_drivers.15 +
+            prr_drivers.16 + prr_drivers.17 + prr_drivers.18 + prr_drivers.19 + prr_drivers.20 +
+            prr_drivers.21 + prr_drivers.22 + prr_drivers.23 + prr_drivers.24 + prr_drivers.25 +
+            prr_drivers.26 + prr_drivers.27 + prr_drivers.28 + prr_drivers.29 + prr_drivers.30 +
+            prr_drivers.31) AS prr,
+            drivers.driver';
+  $join =	' INNER JOIN drivers ON prr_drivers.drivers = drivers.id';
+  $where = ' month_and_years = '.'"'."$id-01".'"'.' GROUP BY driver, month_and_years';
+  $order = '';
 
+  $base = new Base();
+  $result = $base->select($table, $rows, $join, $where, $order);
+
+  return $result;
+}
+
+public function getMonthWithPrr($prr, $oneMonth){
+  for ($i=0; $i < count($oneMonth); $i++) {
+    $oneMonth[$i] += ['prr' => '0'];
+    for ($j=0; $j < count($prr); $j++) {
+        if($oneMonth[$i]['id_drivers'] == $prr[$j]['id_drivers']){
+          $oneMonth[$i]['prr'] += $prr[$j]['prr'];
+          }
+       }
+      }
+  // var_export($oneMonth);
+
+  return $oneMonth;
+}
 
 //--------------------------------------------//
 public function getPremium(){
@@ -145,8 +160,8 @@ public function getMonthWithPremium($premium, $oneMonth){
 //---------------------------------------------//
 public function getFines($id, $numberOfDaysInMonth){
   $table = 'fines';
-  $rows = 'fines.id, fines.drivers, hold_date, to_pay, due_date, drivers.driver';
-  $join = ' LEFT OUTER JOIN drivers ON fines.drivers = drivers.id';
+  $rows = 'fines.id, fines.id_drivers, hold_date, to_pay, due_date, drivers.driver';
+  $join = ' LEFT OUTER JOIN drivers ON fines.id_drivers = drivers.id';
   $where = 'hold_date >= '. '"'."$id-01".'"' ." AND ". 'hold_date <='. '"'."$id".'-'."$numberOfDaysInMonth".'"';
   $order = 'due_date ASC';
 
@@ -162,7 +177,7 @@ public function getMonthWithFines($fines, $oneMonth){
   for ($i=0; $i < count($oneMonth); $i++) {
     $oneMonth[$i] += ['fines'=> '0'];
     for ($j=0; $j < count($fines); $j++) {
-        if($oneMonth[$i]['driver'] == $fines[$j]['driver']){
+        if($oneMonth[$i]['id_drivers'] == $fines[$j]['id_drivers']){
           $oneMonth[$i]['fines'] += $fines[$j]['to_pay'];
           }
        }

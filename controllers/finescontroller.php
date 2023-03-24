@@ -6,7 +6,7 @@ class FinesController extends Controller
     $fines = new Fines();
     $allFines = $fines->getAllSelect();
     $oneFine = $fines->getOneSelect($id);
-
+var_export($allFines);
     require("views/fines/fines.php");
   }
 
@@ -16,11 +16,11 @@ class FinesController extends Controller
     $fines = new Fines();
 
     $values = array(
-      $drivers = $_POST['id_drivers'],
+      $id_drivers = $_POST['id_drivers'],
       $decree = $_POST['decree'],
       $date_of_violation = $_POST['date_of_violation'],
       $time_of_violation = $_POST['time_of_violation'],
-      $cars = $_POST['id_cars'],
+      $id_cars = $_POST['id_cars'],
       $hold_date = $_POST['hold_date'],
       $withheld = $_POST['withheld'],
       $to_pay = $_POST['to_pay'],
@@ -37,6 +37,7 @@ class FinesController extends Controller
       $fines = new Fines();
       $cars = $fines->getCarsSelect();
       $drivers = $fines->getDriversSelect();
+    // var_export($cars);
       include("views/fines/finesForm.php");
     }
   }
@@ -47,11 +48,11 @@ class FinesController extends Controller
       $fines = new Fines();
 
       $values = array(
-        $drivers = $_POST['id_drivers'],
+        $id_drivers = $_POST['id_drivers'],
         $decree = $_POST['decree'],
         $date_of_violation = $_POST['date_of_violation'],
         $time_of_violation = $_POST['time_of_violation'],
-        $cars = $_POST['id_cars'],
+        $id_cars = $_POST['id_cars'],
         $hold_date = $_POST['hold_date'],
         $withheld = $_POST['withheld'],
         $to_pay = $_POST['to_pay'],

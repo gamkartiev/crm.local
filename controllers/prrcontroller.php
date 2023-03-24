@@ -21,6 +21,7 @@ public function view($id) {
  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id); // кол-во дней в месяце
  $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
  $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked); //список водителей из табл.бд prr_drivers
+var_export($listDriversWorked);
 
   include("views/prr/prr.php");
 }

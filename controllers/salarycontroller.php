@@ -14,23 +14,24 @@ class SalaryController extends controller
     }
 
     $numberOfDaysInMonth = $salary->numberOfDaysInMonth($id);
-    //информация с зп об одном месяце
+
     $oneMonth = $salary->getOneMonth($id, $numberOfDaysInMonth); //за один месяц зп
+// var_export($oneMonth);
 
-    // $prr = $salary->getPrr($id, $oneMonth); //суточные
     $premium = $salary->getPremium(); //премия
-    $fines = $salary->getFines($id, $numberOfDaysInMonth); //штрафы
+    $oneMonth = $salary->getMonthWithPremium($premium, $oneMonth); //месяц с учетом премий
 
-    // месяц с учетом премий:
-    $oneMonth = $salary->getMonthWithPremium($premium, $oneMonth);
+    $fines = $salary->getFines($id, $numberOfDaysInMonth); //штрафы
+    $oneMonth = $salary->getMonthWithFines($fines, $oneMonth); //месяц с учетом штрафов
+
+    $prr = $salary->getPrr($id, $numberOfDaysInMonth);
+    $oneMonth = $salary->getMonthWithPrr($prr, $oneMonth); //месяц с учетом ПРР
 
     // выкидываем те штрафы, водители которых не получают зп на этом месяцев
     // в следующий месяц, т.е. меняем у них hold_date
     // нужно менять только единомоментно
     // $excessFinesNextMonth = $salary->excessFinesNextMonth($fines, $oneMonth);
 
-    // месяц с учетом штрафы и премий:
-    $oneMonth = $salary->getMonthWithFines($fines, $oneMonth);
 
     include("views/salary/salary.php");
   }
