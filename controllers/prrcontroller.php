@@ -9,19 +9,19 @@ public function view($id) {
   $prr = new Prr();
 
   //<--- правая панель с месяцами
+  //объединить в одну фунуцию показа боковой панели
   $allPrrMonth = $prr->getAllMonthSelect(); //месяцы в виде строки
-  // var_export($allPrrMonth);
   $allPrrMonth = $prr->getStringFormatDate($allPrrMonth); //месяцы в виде чисел
  // ---> правая панель с месяцами
 
  if(empty($id)){
    $id = $prr->getLastMonthDriversWork();
  }
-
+// var_export($id);
  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id); // кол-во дней в месяце
  $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
  $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked); //список водителей из табл.бд prr_drivers
-var_export($listDriversWorked);
+// var_export($listDriversWorked);
 
   include("views/prr/prr.php");
 }
@@ -86,7 +86,7 @@ public function edit($id){
       $keys = range(1, $numberOfDaysInMonth);
       $values = array_combine($keys, $value[$i]);
 
-      array_unshift($values, $month_and_years, $drivers_id); //объединяем в один массив
+      array_unshift($values, $month_and_years, $drivers_id); //объединяем в один массив $values
 
       $prr->getEdit($id, $numberOfDaysInMonth, $drivers_id, $values);
       header("Location: /prr/view/$id");

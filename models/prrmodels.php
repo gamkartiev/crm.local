@@ -132,7 +132,7 @@ class Prr extends Base
     $result = array_unique($prrMonth);
     $result = array_values($result);
 //возврщает id водителей, что работали в этом месяце по информации таблицы flights
-    // var_export($result);
+    var_export($result);
 
     return $result;
  }
@@ -265,18 +265,26 @@ class Prr extends Base
 //***********
  public function getEdit($id, $numberOfDaysInMonth, $drivers_id, $values){
    $table = 'prr_drivers';
+
    if($numberOfDaysInMonth >= 31){
      $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
      "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
      "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`", "`29`", "`30`", "`31`");
-   } elseif ($numberOfDaysInMonth >= 30 AND $numberOfDaysInMonth < 31) {
+   }
+   if ($numberOfDaysInMonth >= 30 AND $numberOfDaysInMonth < 31) {
      $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
      "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
      "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`", "`29`", "`30`");
-   } else {
+   }
+   if ($numberOfDaysInMonth >= 28 AND $numberOfDaysInMonth < 29){
      $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
      "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
      "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`");
+   }
+   if ($numberOfDaysInMonth >= 29 AND $numberOfDaysInMonth < 30){
+     $rows = array("`month_and_years`", "`drivers`", "`1`", "`2`", "`3`", "`4`", "`5`", "`6`",
+     "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`",
+     "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`", "`29`");
    }
 
    $where = 'drivers='.(int)$drivers_id;
