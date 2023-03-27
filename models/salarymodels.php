@@ -91,6 +91,8 @@ public function getOneMonth($id, $numberOfDaysInMonth) {
   return $result;
   }
 
+
+//--------------- ПРР -----------------//
 public function getPrr($id, $numberOfDaysInMonth){
   $table = 'prr_drivers';
   $rows = 'prr_drivers.drivers AS id_drivers,
@@ -126,8 +128,11 @@ public function getMonthWithPrr($prr, $oneMonth){
 
   return $oneMonth;
 }
+//--------------- End ПРР -----------------//
 
-//--------------------------------------------//
+
+
+//-------------------- Премия ----------------------//
 public function getPremium(){
   $table = 'drivers_premium';
   $rows = '*';
@@ -139,7 +144,6 @@ public function getPremium(){
   $result = $base->select($table, $rows, $join, $where, $order);
   return $result;
 }
-
 
 //Учет премии, если она водителям должна начисляться
 public function getMonthWithPremium($premium, $oneMonth){
@@ -154,10 +158,11 @@ public function getMonthWithPremium($premium, $oneMonth){
      }
  return $oneMonth;
 }
-//-------------------------------------------------//
+//--------------- End премия -----------------//
 
 
-//---------------------------------------------//
+
+//------------------ Штрафы -----------------------//
 public function getFines($id, $numberOfDaysInMonth){
   $table = 'fines';
   $rows = 'fines.id, fines.id_drivers, hold_date, to_pay, due_date, drivers.driver';
@@ -171,8 +176,6 @@ public function getFines($id, $numberOfDaysInMonth){
   return $result;
 }
 
-
-//-----------------Добавить штрафы в месяц в зарплату----------------------------//
 public function getMonthWithFines($fines, $oneMonth){
   for ($i=0; $i < count($oneMonth); $i++) {
     $oneMonth[$i] += ['fines'=> '0'];
@@ -185,7 +188,7 @@ public function getMonthWithFines($fines, $oneMonth){
   // var_export($oneMonth);
   return $oneMonth;
 }
-//---------------------------------------------//
+//--------------- End штрафы -----------------//
 
 
 //-------- Лишние штрафы в следующий месяц -----------//

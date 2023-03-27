@@ -70,8 +70,13 @@
     </label>
 
     <label> Оплата
-      <input type="text" name="status" value="не оплачено">  <br /><br />
-    </label>
+     <select name="status" required>
+       <?php
+       foreach($status as $a): ?>
+        <option value="<?= $a['id'] ?>"> <?= $a['status'] ?></option>
+       <?php endforeach; ?>
+     </select>
+    </label> <br /><br />
 
     <button type="submit" name="button"> Добавить </button>
   </form>

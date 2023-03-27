@@ -10,10 +10,10 @@
 
   <form class="" action="/fines/edit/<?= $id ?>" method="post">
     <label> ФИО водителя
-      <select name="driver" required>
+      <select name="id_drivers" required>
         <option disabled>Выберите водителя: </option>
         <?php foreach($drivers as $a): ?>
-        <option value="<? $a['id_drivers'] ?>"> <?=$a['driver']?> </option>
+        <option value="<?= $a['id'] ?>"> <?=$a['driver']?> </option>
         <?php endforeach; ?>
       </select>  <br /><br />
     </label>
@@ -31,11 +31,11 @@
     </label>
 
     <label> Машина:
-     <select name="car" required>
+     <select name="id_cars" required>
         <option disabled>Выберите машину:</option>
         <?php
         foreach($cars as $a): ?>
-        <option value="<? $a['id_cars'] ?>"> <?= $a['state_sign_cars'] ?></option>
+        <option value="<?= $a['id'] ?>"> <?= $a['state_sign_cars'] ?></option>
         <<?php endforeach; ?>
      </select>
      </label> <br /><br />
@@ -69,9 +69,22 @@
       <input type="text" name="note" value="<?=$oneFine['0']['note']?>"> <br /><br />
     </label>
 
+    <!-- <label> Оплата
+      <input type="text" name="status" value="<$oneFine['0']['status']?>"> <br /><br />
+    </label> -->
+
     <label> Оплата
-      <input type="text" name="status" value="<?=$oneFine['0']['status']?>"> <br /><br />
-    </label>
+     <select name="status" required>
+       <?php
+       foreach($status as $a): ?>
+        <option value="<?= $a['id'] ?>"> <?= $a['status'] ?></option>
+       <?php endforeach; ?>
+        <!-- <option> Оплачено </option>
+        <option> Не оплачено </option> -->
+     </select>
+    </label> <br /><br />
+
+
 
     <button type="submit" name="button"> Добавить </button>
   </form>

@@ -6,7 +6,7 @@ class FinesController extends Controller
     $fines = new Fines();
     $allFines = $fines->getAllSelect();
     $oneFine = $fines->getOneSelect($id);
-var_export($allFines);
+// var_export($allFines);
     require("views/fines/fines.php");
   }
 
@@ -37,6 +37,7 @@ var_export($allFines);
       $fines = new Fines();
       $cars = $fines->getCarsSelect();
       $drivers = $fines->getDriversSelect();
+      $status = $fines->getStatusSelect();
     // var_export($cars);
       include("views/fines/finesForm.php");
     }
@@ -60,7 +61,7 @@ var_export($allFines);
         $after_the_due_date = $_POST['after_the_due_date'],
         $date_of_application = $_POST['date_of_application'],
         $note = $_POST['note'],
-        $status = $_POST['status']
+        $id_status = $_POST['status']
       );
 
       $fines->getEdit($id, $values);
@@ -71,13 +72,15 @@ var_export($allFines);
       $oneFine = $fines->getOneSelect($id);
       $cars = $fines->getCarsSelect();
       $drivers = $fines->getDriversSelect();
-
+      $status = $fines->getStatusSelect();
+var_export($oneFine);
       //Поставить при выводе сохраненные в бд
       //клиента, машину и водителя в списке формы первыми:
       $cars = $fines->getFirstItemCars($cars, $oneFine);
       $drivers = $fines->getFirstItemDrivers($drivers, $oneFine);
+      $status = $fines->getFirsItemStatus($status, $oneFine);
+var_export($status);
 
-      var_export($drivers);
       include ("views/fines/finesFormEdit.php");
 
     }

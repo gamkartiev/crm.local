@@ -6,11 +6,13 @@ class Fines extends Base
     $table = 'fines';
     $rows = 'fines.id, fines.id_drivers, fines.decree, fines.date_of_violation, fines.time_of_violation,
              fines.id_cars, fines.hold_date, fines.withheld, fines.to_pay, fines.due_date,
-             fines.after_the_due_date, fines.date_of_application, fines.note, fines.status,
-             drivers.id AS id_drivers, drivers.driver, drivers.id,
+             fines.after_the_due_date, fines.date_of_application, fines.note,
+             fines.id_status, fines_status.status,
+             drivers.id AS id_drivers, drivers.driver, drivers.id AS id_drivers,
              cars.state_sign_cars AS car, cars.id AS id_cars';
     $join = ' LEFT OUTER JOIN drivers ON fines.id_drivers = drivers.id
-              LEFT OUTER JOIN cars ON fines.id_cars = cars.id';
+              LEFT OUTER JOIN cars ON fines.id_cars = cars.id
+              LEFT OUTER JOIN fines_status ON fines.id_status = fines_status.id';
     $where = '';
     $order = 'due_date DESC';
 
@@ -26,12 +28,14 @@ class Fines extends Base
     $table = 'fines';
     $rows = 'fines.id, fines.id_drivers, fines.decree, fines.date_of_violation, fines.time_of_violation,
              fines.id_cars, fines.hold_date, fines.withheld, fines.to_pay, fines.due_date,
-             fines.after_the_due_date, fines.date_of_application, fines.note, fines.status,
+             fines.after_the_due_date, fines.date_of_application, fines.note,
+             fines.id_status, fines_status.status,
              drivers.id AS id_drivers, drivers.driver, cars.state_sign_cars AS car,
              cars.id AS id_cars';
     $join = ' LEFT OUTER JOIN drivers ON fines.id_drivers = drivers.id
-              LEFT OUTER JOIN cars ON fines.id_cars = cars.id';
-    $where = 'id='.(int)$id;
+              LEFT OUTER JOIN cars ON fines.id_cars = cars.id
+              LEFT OUTER JOIN fines_status ON fines.id_status = fines_status.id';
+    $where = 'fines.id='.(int)$id;
     $order = '';
 
     $base = new Base();
@@ -45,7 +49,7 @@ class Fines extends Base
     $table = 'fines';
     $rows = 'id_drivers, decree, date_of_violation, time_of_violation,
       id_cars, hold_date, withheld, to_pay, due_date, after_the_due_date,
-      date_of_application, note, status';
+      date_of_application, note, id_status';
 
     $base = new Base();
     $base->insert($table, $values, $rows);
@@ -56,8 +60,8 @@ class Fines extends Base
     $table = 'fines';
     $rows = array("id_drivers", "decree", "date_of_violation", "time_of_violation",
       "id_cars", "hold_date", "withheld", "to_pay", "due_date", "after_the_due_date",
-      "date_of_application", "note", "status");
-    $where = 'id='.(int)$id;
+      "date_of_application", "note", "id_status");
+    $where = 'fines.id='.(int)$id;
 
     $base = new Base();
     $base->update($table, $rows, $where, $values);
@@ -103,12 +107,26 @@ class Fines extends Base
 	}
 
 
+  //фун-я выборки статусов (оплачено или нет)
+	public function getStatusSelect() {
+		$table = 'fines_status';
+		$rows = 'id, status';
+		$join = '';
+		$where = '';
+		$order = 'id DESC';
+
+		$base = new Base();
+		$result = $base->select($table, $rows, $join, $where, $order);
+
+		return $result;
+	}
+
   //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
   public function getFirstItemCars($cars, $oneFine){
-  	$count = count($cars); //кол-во эл-тов в массиве $customers
+  	$count = count($cars); //кол-во эл-тов в массиве $cars
 
   	for ($i=0; $i<$count; $i++) {
-  		if($oneFine[0]['id_cars']===$cars[$i]['id_cars']) {
+  		if($oneFine[0]['id_cars']===$cars[$i]['id']) {
         $selectItem = array_slice($cars, $i, 1);          //скопировать нужный элемент массива
         $deleteItemInArray = array_splice($cars, $i, 1);  //удалить тот элемент массиве, что мы выбрали
         $cars = array_merge($selectItem, $cars);          //объед-ть 2 массива, 1-м поставив скопированный массив
@@ -120,10 +138,10 @@ class Fines extends Base
 
   //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
   public function getFirstItemDrivers($drivers, $oneFine){
-  	$count = count($drivers); //кол-во эл-тов в массиве $customers
+  	$count = count($drivers); //кол-во эл-тов в массиве $drivers
 
   	for ($i=0; $i<$count; $i++) {
-  		if( $oneFine[0]['id_drivers']===$drivers[$i]['id_drivers']) {
+  		if( $oneFine[0]['id_drivers']===$drivers[$i]['id']) {
         $selectItem = array_slice($drivers, $i, 1);         //скопировать нужный элемент массива
     		$deleteItemInArray = array_splice($drivers, $i, 1);  //удалить тот элемент массиве, что мы выбрали
     		$drivers = array_merge($selectItem, $drivers);        //объед-ть 2 массива, 1-м поставив скопированный массив
@@ -131,4 +149,20 @@ class Fines extends Base
   		}
   	return $drivers;
   }
+
+  public function getFirsItemStatus($status, $oneFine){
+      $count = count($status); //кол-во эл-тов в массиве $status
+
+      for ($i=0; $i<$count; $i++) {
+      if($oneFine[0]['id_status']===$status[$i]['id']){
+        $selectItem = array_slice($status, $i, 1);    //скопировать нужный элемент массива
+        $deleteItem = array_splice($status, $i, 1);    //удалить тот элемент массиве, что мы выбрали
+        $status = array_merge($selectItem, $status);  //объед-ть 2 массива, 1-м поставив скопированный массив
+      }
+    }
+    return $status;
+  }
+
+
+
 }
