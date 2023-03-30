@@ -75,22 +75,23 @@ public function edit($id){
     //делим POST на столько элементов, сколько и водителей в этом месяце
     $value = array_chunk($_POST, $numberOfDaysInMonth, true);
 
-    for ($i=0; $i < count($value); $i++) {
-      $month_and_years = $id."-01"; // месяц работы водителя
-      // выделяем drivers_id из первого ключа массива:
-      $firstKey = array_key_first($value[$i]); //выбираем первый ключ
-      $sharedKey = explode('_', $firstKey); //разделяем его по "_"
-      $drivers_id = $sharedKey[0]; //выбираем drivers_id из разделенного
+        for ($i=0; $i < count($value); $i++) {
+          $month_and_years = $id."-01"; // месяц работы водителя
+          // выделяем drivers_id из первого ключа массива:
+          $firstKey = array_key_first($value[$i]); //выбираем первый ключ
+          $sharedKey = explode('_', $firstKey); //разделяем его по "_"
+          $drivers_id = $sharedKey[0]; //выбираем drivers_id из разделенного
 
-      //индексируем массив заново начиная с 1 до конечной даты месяца:
-      $keys = range(1, $numberOfDaysInMonth);
-      $values = array_combine($keys, $value[$i]);
+          //индексируем массив заново начиная с 1 до конечной даты месяца:
+          $keys = range(1, $numberOfDaysInMonth);
+          $values = array_combine($keys, $value[$i]);
 
-      array_unshift($values, $month_and_years, $drivers_id); //объединяем в один массив $values
+          array_unshift($values, $month_and_years, $drivers_id); //объединяем в один массив $values
+    // var_export($id);
+          $prr->getEdit($id, $numberOfDaysInMonth, $drivers_id, $values, $month_and_years);
+          }
+      header("Location: /prr/view/".$id);
 
-      $prr->getEdit($id, $numberOfDaysInMonth, $drivers_id, $values);
-      header("Location: /prr/view/$id");
-    }
   } else {
     $prr = new Prr();
 
@@ -101,6 +102,5 @@ public function edit($id){
     include("views/prr/prrFormEdit.php");
   }
 }
-
 
 }

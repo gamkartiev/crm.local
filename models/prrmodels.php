@@ -132,7 +132,7 @@ class Prr extends Base
     $result = array_unique($prrMonth);
     $result = array_values($result);
 //возврщает id водителей, что работали в этом месяце по информации таблицы flights
-    var_export($result);
+    // var_export($result);
 
     return $result;
  }
@@ -263,7 +263,7 @@ class Prr extends Base
 
 
 //***********
- public function getEdit($id, $numberOfDaysInMonth, $drivers_id, $values){
+ public function getEdit($id, $numberOfDaysInMonth, $drivers_id, $values, $month_and_years){
    $table = 'prr_drivers';
 
    if($numberOfDaysInMonth >= 31){
@@ -287,7 +287,7 @@ class Prr extends Base
      "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`", "`27`", "`28`", "`29`");
    }
 
-   $where = 'drivers='.(int)$drivers_id;
+   $where = 'drivers='.(int)$drivers_id . " AND " . ' month_and_years='. "'" .$month_and_years. "'";
 
    $base = new Base();
    $base->update($table, $rows, $where, $values);

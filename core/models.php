@@ -104,7 +104,7 @@ protected $connection;
 			}
 			$values = implode(',', $values);
 			$insert .= ' VALUES ('.$values.')';
-var_export($insert);
+// var_export($insert);
 			$ins = $mysqli->query($insert);
 
 			if($ins) {
