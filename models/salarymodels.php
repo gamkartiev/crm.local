@@ -198,7 +198,7 @@ public function getMonthWithFines($fines, $oneMonth){
 public function excessFinesNextMonth($fines, $oneMonth){
   for ($i=0; $i < count($fines); $i++) {
     for ($j=0; $j < count($oneMonth); $j++) {
-        if($fines[$i]['driver'] != $oneMonth[$j]['driver']){
+        if($fines[$i]['driver'] != $oneMonth[$j]['driver']){ //тут поменять на id водителя
           //дальше можно возвратить просто массив, чтобы потом вызвать
           // функцию update, а можно не заморачиваться и ред-ть из этой фун-ии
           $id = $fines[$i]['id'];
@@ -222,6 +222,21 @@ public function excessFinesNextMonth($fines, $oneMonth){
     }
 
 
+    //////--------------Все связанное с add_prr_paid------------///////
+    //проверка - есть ли связанные с этим водителем и этим месяцем ПРР(суточные) в бд
+    public function checkPaidPrr($id, $id_drivers){
+      $table = 'prr_paid';
+      $rows = 'prr_paid.id, prr_paid.id_drivers, prr_paid.month_and_years,
+                prr_paid.date_prr_paid, prr_paid.sum_prr_paid';
+      $join = ' LEFT OUTER JOIN drivers ON drivers.id = prr_paid.id_drivers';
+      $where = ' id_drivers='.$id_drivers. " AND " . 'month_and_years='. "'" .$id.'-01'. "'";
+      $order = '';
+
+      $base = new Base;
+      $result = $base->select($table, $rows, $join, $where, $order);
+
+      return $result;
+    }
 
 
 }

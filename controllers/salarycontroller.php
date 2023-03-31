@@ -36,6 +36,35 @@ class SalaryController extends controller
     include("views/salary/salary.php");
   }
 
+  // добавление фактически оплаченных суточных
+  public function add_prr_paid($id){
+
+    $salary = new Salary();
+
+    $numberOfDaysInMonth = $salary->numberOfDaysInMonth($id);
+    $oneMonth = $salary->getOneMonth($id, $numberOfDaysInMonth); //за один месяц зп
+
+    for ($i=0; $i < count($oneMonth); $i++) {
+      $id_drivers = $oneMonth[$i]['id_drivers'];
+      $checkPaid = $salary->checkPaidPrr($id, $id_drivers);
+      // если на этих водителей и на этот месяц нет выплаченных суточных в бд.
+      // то создаем нулевую строку на каждого водителя с суммой выплаченных
+      // суточных равным нулю и на первое число этого месяца
+      // if(empty($checkPaid)){
+      //
+      // }
+      var_export($checkPaid);
+    }
+
+  var_export($checkPaid);
+  // var_export($oneMonth);
+    include("views/salary/prrPaidFormEdit.php");
+    // include("/salary/prrPaidFormEdit.php/$id");
+  }
+
+  // добавление Прочих работ выполненных в течении месяца
+  public function add_other_works($id){}
+
 
 
 

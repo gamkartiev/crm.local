@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Водители </title>
+	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/views/css/prr.css">
+	<style type="text/css">
+   TABLE td, th{
+    border: 1px solid black; /* Рамка вокруг таблицы */
+   }
+	 </style>
+</head>
+<body>
+
+<header> <!-- Сделать отдельной страничкой -->
+  <?php include ("views/header.php"); ?>
+</header>
+
+<main>
+
+<form class="prrFormEdit" action="/salary/add_prr_paid/<?=$id?>" method="post">
+<table>
+
+<tr>
+	<th> Водители </th>
+	<?php	for ($k=1; $k <= $numberOfDaysInMonth; $k++) { ?>
+	<td> <!-- столбцы с датами месяца -->
+		<?php echo $k;
+		} ?>
+	</td>
+</tr>
+
+<?php for ($j=0; $j < count($getLastMonthPrr); $j++) { ?>
+<tr>
+	<th> <? echo $getLastMonthPrr[$j]['drivers']; ?> </th> <!-- список водителей -->
+	<?php for ($i=1; $i <= $numberOfDaysInMonth; $i++) {	?>
+		<td> <input type="text" name="<?=$getLastMonthPrr[$j]['id']."_".$i ?>" value="<?=$getLastMonthPrr[$j][$i] ?>">	</td>
+	<?php } ?>
+</tr>
+<?php } ?>
+
+</table><br />
+<button type="submit" name="button"> Добавить </button>
+</form>
+
+</main>
+
+</body>
+</html>

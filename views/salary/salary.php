@@ -21,6 +21,9 @@
 		<?php endforeach ?>
 	</section>
 
+<a href="/salary/add_prr_paid/<?=$id?>"> Изменить выплаченные суточные </a> <br /> <br />
+<a href="/salary/add_other_works"> Изменить выполненные работы </a> <br /> <br />
+
 <table width="95%" border="1">
 		<tr>
 			<td colspan="21"> Июль </td>
