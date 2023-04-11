@@ -223,19 +223,78 @@ public function excessFinesNextMonth($fines, $oneMonth){
 
 
     //////--------------Все связанное с add_prr_paid------------///////
+    // выборка всех выплаченных ПРР за N-ый месяц
+    public function getPrrPaid($id){
+      $table = 'prr_paid';
+      $rows = 'prr_paid.id AS id_prr_paid, prr_paid.id_drivers, prr_paid.month_and_years,
+               prr_paid.date_prr_paid, prr_paid.sum_prr_paid';
+      $join = '';
+      $where = ' month_and_years='."'".$id.'-01'."'";
+      $order = '';
+
+      $base = new Base();
+      $result = $base->select($table, $rows, $join, $where, $order);
+
+      return $result;
+    }
+
+
     //проверка - есть ли связанные с этим водителем и этим месяцем ПРР(суточные) в бд
     public function checkPaidPrr($id, $id_drivers){
       $table = 'prr_paid';
       $rows = 'prr_paid.id, prr_paid.id_drivers, prr_paid.month_and_years,
                 prr_paid.date_prr_paid, prr_paid.sum_prr_paid';
-      $join = ' LEFT OUTER JOIN drivers ON drivers.id = prr_paid.id_drivers';
+      $join = '';
       $where = ' id_drivers='.$id_drivers. " AND " . 'month_and_years='. "'" .$id.'-01'. "'";
       $order = '';
 
-      $base = new Base;
+      $base = new Base();
       $result = $base->select($table, $rows, $join, $where, $order);
 
       return $result;
+    }
+
+
+    //////---------Добавить нулевое ПРР если раньше там было пусто---------------////////
+    public function setZeroPaidPrr($values){
+     $table = 'prr_paid';
+     $rows = 'id_drivers, month_and_years, date_prr_paid, sum_prr_paid';
+
+     $base = new Base();
+     $result = $base->insert($table, $values, $rows);
+
+     return $result;
+    }
+
+
+    // добавить/изменить ПРР выплаченные
+    public function setEditPrrPaid($id_prr_paid, $values){
+      $table = 'prr_paid';
+      $rows = array("month_and_years", "date_prr_paid", "sum_prr_paid");
+      $where = ' id='.(int)$id_prr_paid;
+
+      $base = new Base();
+      $base->update($table, $rows, $where, $values);
+      // var_export($base);
+    }
+
+
+    public function getMonthWithPaidPrr($prr_paid, $oneMonth){
+      for ($i=0; $i < count($oneMonth); $i++) {
+        $oneMonth[$i] += ['sum_prr_paid'=>' ', 'date_prr_paid'=>' '];
+        $oneMonth[$i] += ['id_prr_paid'=> ''];
+        for ($j=0; $j < count($prr_paid); $j++) {
+            if($oneMonth[$i]['id_drivers'] == $prr_paid[$j]['id_drivers']){
+              $oneMonth[$i]['id_prr_paid'] .= $prr_paid[$j]['id_prr_paid'];
+              $oneMonth[$i]['sum_prr_paid'] .= $prr_paid[$j]['sum_prr_paid'];
+              $oneMonth[$i]['date_prr_paid'] .= $prr_paid[$j]['date_prr_paid']; // тут добавление точкой
+              // так как иначе возникает ошибка Notice: A non well formed numeric value encountered in
+              // т.к. += - это сложение
+              }
+           }
+          }
+      // var_export($oneMonth);
+      return $oneMonth;
     }
 
 

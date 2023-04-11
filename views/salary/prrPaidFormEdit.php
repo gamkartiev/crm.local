@@ -19,29 +19,30 @@
 
 <main>
 
-<form class="prrFormEdit" action="/salary/add_prr_paid/<?=$id?>" method="post">
-<table>
+<form class="prrFormEdit" action="/salary/add_paid_prr/<?=$id?>" method="post">
+	<table>
 
-<tr>
-	<th> Водители </th>
-	<?php	for ($k=1; $k <= $numberOfDaysInMonth; $k++) { ?>
-	<td> <!-- столбцы с датами месяца -->
-		<?php echo $k;
-		} ?>
-	</td>
-</tr>
+	<tr>
+		<td colspan="4"> <?php $prr_paid['0']['month_and_years'] ?> </td>
+	</tr>
+	<tr>
+		<th> Водители </th>
+		<th> ПРР, выплаченные </th>
+		<th> Дата выплат ПРР </th>
+	</tr>
+	<?php for ($i=0; $i<count($oneMonth) ; $i++) { ?>
+	<tr>
 
-<?php for ($j=0; $j < count($getLastMonthPrr); $j++) { ?>
-<tr>
-	<th> <? echo $getLastMonthPrr[$j]['drivers']; ?> </th> <!-- список водителей -->
-	<?php for ($i=1; $i <= $numberOfDaysInMonth; $i++) {	?>
-		<td> <input type="text" name="<?=$getLastMonthPrr[$j]['id']."_".$i ?>" value="<?=$getLastMonthPrr[$j][$i] ?>">	</td>
-	<?php } ?>
-</tr>
+		<input type="hidden" name="id_prr_paid_<?=$i?>" value="<?=$oneMonth[$i]['id_prr_paid']?>">
+		<!-- <input type="hidden" name="numberOfDrivers" value="<?= ++$j ?>">  количество водителей -->
+		<td> <?php echo $oneMonth[$i]['driver'] ?> </td> <!-- ПРР, выплаченные -->
+		<td> <input type="text" class="inputPaidPrr" name="sum_prr_paid_<?=$i?>" value="<?=$oneMonth[$i]['sum_prr_paid']?>"> </td> <!-- ПРР, выплаченные -->
+		<td> <input type="text" class="inputPaidPrr" name="date_prr_paid_<?=$i?>" value="<?=$oneMonth[$i]['date_prr_paid']?>"> </td> <!-- Дата выплат ПРР -->
+	</tr>
 <?php } ?>
+	</table><br />
 
-</table><br />
-<button type="submit" name="button"> Добавить </button>
+	<button type="submit" name="button"> Изменить </button>
 </form>
 
 </main>

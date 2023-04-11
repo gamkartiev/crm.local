@@ -21,12 +21,12 @@
 		<?php endforeach ?>
 	</section>
 
-<a href="/salary/add_prr_paid/<?=$id?>"> Изменить выплаченные суточные </a> <br /> <br />
-<a href="/salary/add_other_works"> Изменить выполненные работы </a> <br /> <br />
+<a href="/salary/add_paid_prr/<?=$id?>"> Добавить / изменить ПРР, выплаченные </a> <br /> <br />
+<a href="/salary/add_other_works"> Изменить Прочие работы </a> <br /> <br />
 
 <table width="95%" border="1">
 		<tr>
-			<td colspan="21"> Июль </td>
+			<td colspan="21"> <?php echo $id ?> </td>
 		</tr>
 		<tr>
 			<td rowspan="2"> <b> Водители </b> </td>
@@ -66,8 +66,8 @@
 			<td> <?= $a['percent'] ?> % </td>
 			<td> <?= $a['cost_and_percent'] ?> </td>
 			<td> <?= $a['prr'] ?> </td>
-			<td> <!--19600--> </td>
-			<td> <!-- 07.07.2021, 14.07.2021, 21.07.2021, 28.07.2021--> </td>
+			<td> <?= $a['sum_prr_paid'] ?>  </td>
+			<td> <?= $a['date_prr_paid'] ?>  </td>
 			<td> - </td>
 			<td> - </td>
 			<td> - </td>

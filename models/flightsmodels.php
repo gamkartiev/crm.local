@@ -167,6 +167,7 @@ class Flights extends Base
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
 				"cost", "form_of_payment", "id_cars", "id_customers", "proxy", "request", "note", "id_drivers", "drivers_payment");
 		$where = 'id='.(int)$id;
+		
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);
 	}

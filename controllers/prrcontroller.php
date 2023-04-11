@@ -17,11 +17,10 @@ public function view($id) {
  if(empty($id)){
    $id = $prr->getLastMonthDriversWork();
  }
-// var_export($id);
+
  $numberOfDaysInMonth = $prr->numberOfDaysInMonth($id); // кол-во дней в месяце
  $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
  $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked); //список водителей из табл.бд prr_drivers
-// var_export($listDriversWorked);
 
   include("views/prr/prr.php");
 }
@@ -69,7 +68,7 @@ public function edit($id){
     $listDriversWorked = $prr->getListDriversWorked($id, $numberOfDaysInMonth); //список водителей из табл.бд flights
     $getLastMonthPrr = $prr->getLastMonthPrr($id, $listDriversWorked);
 
-    //высчитываем сколько массивов должно быть ()водители с суточными)
+    //высчитываем сколько массивов должно быть (водители с суточными)
     $removed = array_pop($_POST); //убираем button из вх-го массива на всякий случай
 
     //делим POST на столько элементов, сколько и водителей в этом месяце

@@ -78,7 +78,7 @@ class FlightsController extends Controller
           $id_drivers = $_POST['driver'],
           $drivers_payment = $_POST['drivers_payment']
       );
-// var_export($values);
+var_export($values);
       $flights->getEdit($id, $values);
 
       header("Location: /flights/view/".$id);
