@@ -22,7 +22,7 @@
 	</section>
 
 <a href="/salary/add_paid_prr/<?=$id?>"> Добавить / изменить ПРР, выплаченные </a> <br /> <br />
-<a href="/salary/add_other_works"> Изменить Прочие работы </a> <br /> <br />
+<a href="/salary/driversOtherWorks"> Прочие работы </a> <br /> <br />
 
 <table width="95%" border="1">
 		<tr>

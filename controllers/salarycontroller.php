@@ -46,7 +46,7 @@ class SalaryController extends controller
 
     $prr_paid = $salary->getPrrPaid($id);
     $oneMonth = $salary->getMonthWithPaidPrr($prr_paid, $oneMonth);
-var_export($oneMonth);
+// var_export($oneMonth);
     // выкидываем те штрафы, водители которых не получают зп на этом месяцев
     // в следующий месяц, т.е. меняем у них hold_date
     // нужно менять только единомоментно
@@ -59,15 +59,13 @@ var_export($oneMonth);
   public function add_paid_prr($id){
     if(!empty($_POST) && $id > 0){
     $salary = new Salary();
-    // $numberOfDaysInMonth = $salary->numberOfDaysInMonth($id);
-    // $oneMonth = $salary->getOneMonth($id, $numberOfDaysInMonth); //за один месяц зп
 
     //высчитываем сколько массивов должно быть (водители с суточными)
     $removed = array_pop($_POST); //убираем button из вх-го массива на всякий случай
     $date = $id; //чтобы дальше в for id и month_and_years не пересекались
     //делим POST на столько элементов, сколько и водителей в этом месяце
     $value = array_chunk($_POST, 3, true);
-// var_export($id);
+
     for ($i=0; $i < count($value); $i++) {
       $massive[$i] = array(
         "id_prr_paid" => $value[$i]['id_prr_paid_'.$i],
@@ -77,25 +75,16 @@ var_export($oneMonth);
       );
 
       $id_prr_paid = $massive[$i]['id_prr_paid'];
-      // var_export($id);
 
-// var_export($massive);
-//trim() - обрезать пробелы по краям строки
+      //trim() - обрезать пробелы по краям строки
       $values = array(
         $month_and_years = trim($massive[$i]['month_and_years']),
         $date_prr_paid = trim($massive[$i]['date_prr_paid']),
         $sum_prr_paid = trim((int)$massive[$i]['sum_prr_paid'])
       );
-      // var_export($values);
+
       $salary->setEditPrrPaid($id_prr_paid, $values);
     }
-// var_export($values);
-// for ($i=0; $i < count($values); $i++) {
-  // $values = $values['0'];
-  // var_export($values);
-  // $salary->setEditPrrPaid($id, $values);
-// }
-
 
     header("Location: /salary/view/".$id);
   } else {
@@ -103,18 +92,27 @@ var_export($oneMonth);
        $numberOfDaysInMonth = $salary->numberOfDaysInMonth($id);
        $oneMonth = $salary->getOneMonth($id, $numberOfDaysInMonth); //за один месяц зп
        $prr_paid = $salary->getPrrPaid($id);
-  // var_export($prr_paid);
-  // var_export($oneMonth);
+
        $oneMonth = $salary->getMonthWithPaidPrr($prr_paid, $oneMonth);
-// var_export($oneMonth);
+
       include("views/salary/prrPaidFormEdit.php");
     }
   }
 
 
   // добавление Прочих работ выполненных в течении месяца
-  public function add_other_works($id){}
+  public function add_other_works($id){
+    if(!empty($_POST) && $id > 0){
+      // if !empty(POST), то сначала проверяем, есть ли Прочие работы на этого водителя
+      // в этот месяц. Если есть - загружаем его и отправляем на редактирование
+      // Если нет записи, то добавляем нулевые значения в бд
+      // и только потом делаем изменения
+    } else {
+      include("views/salary/prrOtherWorksFormEdit")
+    }
 
+
+  }
 
 
 
