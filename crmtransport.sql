@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 27 2023 г., 18:47
+-- Время создания: Апр 19 2023 г., 01:06
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -47,6 +47,25 @@ INSERT INTO `cars` (`id`, `state_sign_cars`, `brand`, `PTS_cars`, `STS_cars`, `V
 (9, '11223344', 'Маз', '223311ааафффааа', '33ываывмсывпы', '33333333333333333'),
 (10, 'Е123УХ21', 'Камаз', '321', '123', '321'),
 (11, '123', 'Маз', '321', '123', '321');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `configuration`
+--
+
+CREATE TABLE `configuration` (
+  `id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `configuration`
+--
+
+INSERT INTO `configuration` (`id`, `status`) VALUES
+(1, 'Оплачено'),
+(2, 'Не оплачено');
 
 -- --------------------------------------------------------
 
@@ -147,6 +166,21 @@ INSERT INTO `drivers` (`id`, `driver`, `date_of_birth`, `place_of_birth`, `passp
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `driversotherworks`
+--
+
+CREATE TABLE `driversotherworks` (
+  `id` int(11) NOT NULL,
+  `id_drivers` int(11) NOT NULL,
+  `sum` int(11) NOT NULL,
+  `date_of_work` date NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `note` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `drivers_premium`
 --
 
@@ -238,25 +272,6 @@ INSERT INTO `fines` (`id`, `id_drivers`, `decree`, `date_of_violation`, `time_of
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `fines_status`
---
-
-CREATE TABLE `fines_status` (
-  `id` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `fines_status`
---
-
-INSERT INTO `fines_status` (`id`, `status`) VALUES
-(1, 'Оплачено'),
-(2, 'Не оплачено');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `flights`
 --
 
@@ -292,7 +307,8 @@ INSERT INTO `flights` (`id`, `place_1`, `place_2`, `date_1`, `date_2`, `freight`
 (72, 'Москва', 'Череповец', '2023-02-04', '2023-02-05', 'груз', '20', '76', '', 'с НДС', 6, 1, '1', '1', '--', 46, 2000),
 (73, 'Сантк-Петербург', 'Москва', '2023-02-03', '2023-02-06', 'груз', '20', '76', '50000', 'с НДС', 10, 3, '1', '1', '--', 1, 2000),
 (74, 'Москва', 'Санкт-Петербург', '2023-01-10', '2023-01-13', 'груз', '20', '76', '50000', 'с НДС', 10, 2, '1', '1', '--', 1, 2000),
-(75, 'Москва', 'Санкт-Петербург', '2023-01-10', '2023-01-13', 'груз', '20', '76', '33000', 'с НДС', 2, 3, '1', '1', '--', 47, 2000);
+(75, 'Москва', 'Санкт-Петербург', '2023-01-10', '2023-01-13', 'груз', '20', '76', '33000', 'с НДС', 2, 3, '1', '1', '--', 47, 2000),
+(76, 'Москва', 'Питер', '2023-02-22', '2023-02-25', 'груз', '20', '76', '50000', 'с НДС', 2, 5, '1', '1', '--', 47, 2000);
 
 -- --------------------------------------------------------
 
@@ -342,16 +358,37 @@ CREATE TABLE `prr_drivers` (
 --
 
 INSERT INTO `prr_drivers` (`id`, `month_and_years`, `drivers`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`) VALUES
-(6, '2023-01-01', 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, '2023-01-01', 47, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (10, '2022-01-01', 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (26, '2023-02-01', 46, 700, 700, 700, 700, 100, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(40, '2023-01-01', 1, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(45, '2023-01-01', 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(46, '2023-01-01', 1, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(47, '2023-01-01', 1, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(48, '2023-01-01', 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(49, '2023-02-01', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(50, '2023-02-01', 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(40, '2023-01-01', 1, 700, 700, 700, 700, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(59, '2023-02-01', 1, 700, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(61, '2023-02-01', 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `prr_paid`
+--
+
+CREATE TABLE `prr_paid` (
+  `id` int(11) NOT NULL,
+  `id_drivers` int(11) NOT NULL,
+  `month_and_years` date NOT NULL,
+  `date_prr_paid` varchar(255) NOT NULL COMMENT 'Дата выплат суточных',
+  `sum_prr_paid` int(11) NOT NULL COMMENT 'Сумма выплаченных суточных'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `prr_paid`
+--
+
+INSERT INTO `prr_paid` (`id`, `id_drivers`, `month_and_years`, `date_prr_paid`, `sum_prr_paid`) VALUES
+(2, 47, '2023-02-01', '07.03.2023', 800),
+(12, 47, '2023-01-01', '0', 0),
+(15, 1, '2023-01-01', '0', 0),
+(18, 1, '2023-02-01', '07.01.2023', 400),
+(19, 46, '2023-02-01', '22.01.2023', 300);
 
 -- --------------------------------------------------------
 
@@ -431,6 +468,12 @@ ALTER TABLE `cars`
   ADD KEY `id_2` (`id`);
 
 --
+-- Индексы таблицы `configuration`
+--
+ALTER TABLE `configuration`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `customers`
 --
 ALTER TABLE `customers`
@@ -449,6 +492,13 @@ ALTER TABLE `daily_allowance`
 ALTER TABLE `drivers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id` (`id`);
+
+--
+-- Индексы таблицы `driversotherworks`
+--
+ALTER TABLE `driversotherworks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_drivers` (`id_drivers`);
 
 --
 -- Индексы таблицы `drivers_premium`
@@ -474,12 +524,6 @@ ALTER TABLE `fines`
   ADD KEY `id_status` (`id_status`);
 
 --
--- Индексы таблицы `fines_status`
---
-ALTER TABLE `fines_status`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `flights`
 --
 ALTER TABLE `flights`
@@ -494,6 +538,13 @@ ALTER TABLE `flights`
 ALTER TABLE `prr_drivers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `drivers` (`drivers`);
+
+--
+-- Индексы таблицы `prr_paid`
+--
+ALTER TABLE `prr_paid`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_drivers` (`id_drivers`);
 
 --
 -- Индексы таблицы `trailers`
@@ -526,6 +577,12 @@ ALTER TABLE `cars`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT для таблицы `configuration`
+--
+ALTER TABLE `configuration`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `customers`
 --
 ALTER TABLE `customers`
@@ -542,6 +599,12 @@ ALTER TABLE `daily_allowance`
 --
 ALTER TABLE `drivers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT для таблицы `driversotherworks`
+--
+ALTER TABLE `driversotherworks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `drivers_premium`
@@ -562,22 +625,22 @@ ALTER TABLE `fines`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT для таблицы `fines_status`
---
-ALTER TABLE `fines_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT для таблицы `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT для таблицы `prr_drivers`
 --
 ALTER TABLE `prr_drivers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT для таблицы `prr_paid`
+--
+ALTER TABLE `prr_paid`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `trailers`
@@ -602,6 +665,12 @@ ALTER TABLE `working_days_drivers`
 --
 
 --
+-- Ограничения внешнего ключа таблицы `driversotherworks`
+--
+ALTER TABLE `driversotherworks`
+  ADD CONSTRAINT `driversotherworks_ibfk_1` FOREIGN KEY (`id_drivers`) REFERENCES `drivers` (`id`);
+
+--
 -- Ограничения внешнего ключа таблицы `drivers_work_shedule`
 --
 ALTER TABLE `drivers_work_shedule`
@@ -614,7 +683,7 @@ ALTER TABLE `drivers_work_shedule`
 ALTER TABLE `fines`
   ADD CONSTRAINT `fines_ibfk_1` FOREIGN KEY (`id_drivers`) REFERENCES `drivers` (`id`),
   ADD CONSTRAINT `fines_ibfk_2` FOREIGN KEY (`id_cars`) REFERENCES `cars` (`id`),
-  ADD CONSTRAINT `fines_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `fines_status` (`id`);
+  ADD CONSTRAINT `fines_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `configuration` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `flights`
@@ -629,6 +698,12 @@ ALTER TABLE `flights`
 --
 ALTER TABLE `prr_drivers`
   ADD CONSTRAINT `prr_drivers_ibfk_1` FOREIGN KEY (`drivers`) REFERENCES `drivers` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `prr_paid`
+--
+ALTER TABLE `prr_paid`
+  ADD CONSTRAINT `prr_paid_ibfk_1` FOREIGN KEY (`id_drivers`) REFERENCES `drivers` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `working_days_drivers`
