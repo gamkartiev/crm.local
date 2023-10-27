@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title> Водители </title>
+	<title> Суточные </title>
 	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
 	<link rel="stylesheet" type="text/css" href="/views/css/prr.css">
 	<style type="text/css">

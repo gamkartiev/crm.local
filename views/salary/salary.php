@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title> Водители </title>
+	<title> Зарплата </title>
 	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
   <link rel="stylesheet" type="text/css" href="/views/css/salary.css">
 </head>
@@ -21,8 +21,9 @@
 		<?php endforeach ?>
 	</section>
 
-<a href="/salary/add_paid_prr/<?=$id?>"> Добавить / изменить ПРР, выплаченные </a> <br /> <br />
-<a href="/salary/driversOtherWorks"> Прочие работы </a> <br /> <br />
+<!-- <a href="/salary/edit_paid_prr/<?=$id?>"> Изменить "Выплаченные ПРР" </a> <br /> <br /> -->
+<a href="/driversOtherWorks/view/<?= $id?>"> Изменить Прочие работы </a> <br /> <br />
+<!-- <a href="/salary/edit_other_works/<?=$id?>"> Изменить Прочие работы </a> <br /> <br /> -->
 
 <table width="95%" border="1">
 		<tr>
@@ -45,11 +46,11 @@
 			<td> <b> Премия </b> </td>
 			<td> <b> Премия + ЗП </b> </td>
 			<td> <b> ПРР </b> </td>
-			<td> <b> ПРР, выпл-е </b> </td>
+			<td> <b> Выплачено ПРР </b> </td>
 			<td> <b> Даты выплат ПРР </b> </td>
 			<td> <b> Расчет доплаты/ вычета ПРР </b> </td>
 			<td> <b> Прочие работы </b> </td>
-			<td> <b> Прочие работы, выпл-е </b> </td>
+			<td> <b> Выплаченно за Прочие работы </b> </td>
 			<td> <b> Расчет доплаты за проч. работы </b> </td>
 			<td> <b> Прим-е </b> </td>
 			<td> <b> Штрафы ГИБДД </b> </td>
@@ -66,22 +67,22 @@
 			<td> <?= $a['percent'] ?> % </td>
 			<td> <?= $a['cost_and_percent'] ?> </td>
 			<td> <?= $a['prr'] ?> </td>
-			<td> <?= $a['sum_prr_paid'] ?>  </td>
-			<td> <?= $a['date_prr_paid'] ?>  </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> <b> <?= $a['fines'] ?> </b> </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
-			<td> - </td>
+			<td> <a href="/salary/edit_paid_prr/<?=$id?>"> <?=$a['sum_prr_paid'] ?>  </a> </td>
+			<td> <a href="/salary/edit_paid_prr/<?=$id?>"> <?=$a['date_prr_paid'] ?> </a> </td>
+			<td> <?= $a['autoCalcPrr'] ?> </td>
+			<td> <?= $a['sum_not_paid_driversOtherWorks'] ?></td>
+			<td> <?= $a['sum_paid_driversOtherWorks'] ?> </td>
+			<td> <?= $a['autoCalcSumNotPaid'] ?> </td>
+			<td> <?= $a['note_driversOtherWorks'] ?> </td>
+			<td> <?= $a['mobile'] ?> </td>
+			<td> <?= $a['fines'] ?>  </td>
+			<td> <a href="/salary/edit_other_fines/<?=$a['id_otherFines']?>"> <?= $a['otherFines'] ?></td>
+			<td> <a href="/salary/edit_other_fines/<?=$a['id_otherFines']?>"> <?= $a['note_otherFines'] ?></td>
+			<td> <?= $a['checks'] ?> </td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
 		</tr>
 		<?php endforeach; ?>
 

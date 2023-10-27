@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title> Другие работы водителей </title>
+  <title> Другие штрафы водителей </title>
   <link rel="stylesheet" type="text/css" href="/views/css/main.css">
 </head>
 
@@ -13,10 +13,9 @@
 
 <main>
 <div class="">
-  Работы выполненные водителями в своей деятельности и, которые, нужно учитывать
-  в зарплатную ведомость.
+  Штрафы, начисленные на водителей
 </div>
-<a href="/driversOtherWorks/add"> Добавить новые работы </a> <br /> <br />
+<a href="/driversOtherWorks/add"> Добавить новый штрафы </a> <br /> <br />
 
 <table width="95%" border="1">
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title> Машины </title>
+	<title> Прицепы </title>
 	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
 </head>
 <body>

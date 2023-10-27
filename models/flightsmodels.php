@@ -88,9 +88,7 @@ class Flights extends Base
 
 //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
 	public function getFirstItemCustomers($customers, $oneFlights){
-		$count = count($customers); //кол-во эл-тов в массиве $customers
-
-		for ($i=0; $i<$count; $i++) {
+		for ($i=0; $i < count($customers); $i++) {
 			if($oneFlights[0]['short_name']===$customers[$i]['short_name']) {
 				$selectItem = array_slice($customers, $i, 1);          //скопировать нужный элемент массива
 				$deleteItemInArray = array_splice($customers, $i, 1); //удалить тот элемент массиве, что мы выбрали
@@ -104,9 +102,7 @@ class Flights extends Base
 
 	//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
 	public function getFirstItemCars($cars, $oneFlights){
-		$count = count($cars); //кол-во эл-тов в массиве $customers
-
-		for ($i=0; $i<$count; $i++) {
+		for ($i=0; $i < count($cars); $i++) {
 			if($oneFlights[0]['car']===$cars[$i]['state_sign_cars']) {
 				$selectItem = array_slice($cars, $i, 1);					//скопировать нужный элемент массива
 				$deleteItemInArray = array_splice($cars, $i, 1);	//удалить тот элемент массиве, что мы выбрали
@@ -119,9 +115,7 @@ class Flights extends Base
 
 	//поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
 	public function getFirstItemDrivers($drivers, $oneFlights){
-		$count = count($drivers); //кол-во эл-тов в массиве $customers
-
-		for ($i=0; $i<$count; $i++) {
+		for ($i=0; $i < count($drivers); $i++) {
 			if($oneFlights[0]['driver']===$drivers[$i]['driver']) {
 				$selectItem = array_slice($drivers, $i, 1);					//скопировать нужный элемент массива
 				$deleteItemInArray = array_splice($drivers, $i, 1);	//удалить тот элемент массиве, что мы выбрали
@@ -167,7 +161,7 @@ class Flights extends Base
 		$rows = array("place_1", "place_2", "date_1", "date_2", "freight", "weight", "volume",
 				"cost", "form_of_payment", "id_cars", "id_customers", "proxy", "request", "note", "id_drivers", "drivers_payment");
 		$where = 'id='.(int)$id;
-		
+
 		$base = new Base();
 		$base->update($table, $rows, $where, $values);
 	}

@@ -2,13 +2,14 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title> Добавление чека </title>
 </head>
 
 <body>
 </main>
 
-  <form action="/driversOtherWorks/add" method="post">
+  <form action="/checks/add" method="post">
+
     <label> ФИО водителя
       <select name="id_drivers" required>
         <option disabled> Выберите водителя: </option>
@@ -18,16 +19,20 @@
       </select>  <br /><br />
     </label>
 
-    <label> Сумма за прочие работы
-      <input type="text" name="sum" value=""> <br /><br />
+    <label> Сумма чека
+      <input type="text" name="sum" required>  <br /><br />
     </label>
 
-    <label> Дата прочих работ
-      <input type="date" name="date_of_work" value="">  <br /><br />
+    <label> Дата чека
+      <input type="date" name="date" required>  <br /><br />
     </label>
 
-    <label> Статус оплаты
-     <select name="status" required>
+    <label> Пояснение
+      <input type="text" name="note">  <br /><br />
+    </label>
+
+    <label> Оплата (компенсировано до ЗП или нет)
+     <select name="id_status">
        <?php
        foreach($status as $a): ?>
         <option value="<?= $a['id'] ?>"> <?= $a['status'] ?></option>
@@ -35,9 +40,14 @@
      </select>
     </label> <br /><br />
 
-    <label> Примечаение
-      <input type="text" name="note" value="---">  <br /><br />
-    </label>
+    <label> Наличие чека
+     <select name="availability_of_a_check" required>
+       <?php
+       foreach($status_of_a_check as $a): ?>
+        <option> <?= $a['status'] ?></option>
+       <?php endforeach; ?>
+     </select>
+    </label> <br /><br />
 
 
     <button type="submit" name="button"> Добавить </button>

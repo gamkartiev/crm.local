@@ -83,7 +83,7 @@
 
  <label> Водитель:
   <select name="driver" required>
-     <option disabled>Выберите водителя:</option>
+     <option disabled> Выберите водителя:</option>
      <?php
      foreach($drivers as $a): ?>
      <option value="<?= $a['id']?>"> <?= $a['driver'] ?></option>

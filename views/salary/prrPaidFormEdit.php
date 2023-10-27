@@ -19,11 +19,11 @@
 
 <main>
 
-<form class="prrFormEdit" action="/salary/add_paid_prr/<?=$id?>" method="post">
+<form class="prrFormEdit" action="/salary/edit_paid_prr/<?=$id?>" method="post">
 	<table>
 
 	<tr>
-		<td colspan="4"> <?php $prr_paid['0']['month_and_years'] ?> </td>
+		<td colspan="4"> <?php echo $monthAndYears; ?> </td>
 	</tr>
 	<tr>
 		<th> Водители </th>
@@ -39,7 +39,7 @@
 		<td> <input type="text" class="inputPaidPrr" name="sum_prr_paid_<?=$i?>" value="<?=$oneMonth[$i]['sum_prr_paid']?>"> </td> <!-- ПРР, выплаченные -->
 		<td> <input type="text" class="inputPaidPrr" name="date_prr_paid_<?=$i?>" value="<?=$oneMonth[$i]['date_prr_paid']?>"> </td> <!-- Дата выплат ПРР -->
 	</tr>
-<?php } ?>
+	<?php } ?>
 	</table><br />
 
 	<button type="submit" name="button"> Изменить </button>

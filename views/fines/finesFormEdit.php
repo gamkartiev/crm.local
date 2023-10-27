@@ -2,16 +2,16 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title> Редактировать штраф </title>
 </head>
 
 <body>
 </main>
 
-  <form class="" action="/fines/edit/<?= $id ?>" method="post">
+  <form action="/fines/edit/<?= $id ?>" method="post">
     <label> ФИО водителя
       <select name="id_drivers" required>
-        <option disabled>Выберите водителя: </option>
+        <option disabled> Выберите водителя: </option>
         <?php foreach($drivers as $a): ?>
         <option value="<?= $a['id'] ?>"> <?=$a['driver']?> </option>
         <?php endforeach; ?>

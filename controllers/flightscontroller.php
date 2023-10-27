@@ -8,12 +8,12 @@ class FlightsController extends Controller
       $oneFlights = $flights->getOneSelect($id);
 // var_export($oneFlights);
 
-      require("views/flights/flights_one.php");
+      include("views/flights/flights_one.php");
     } else {
       $flights = new Flights();
       $allFlights = $flights->getAllSelect();
 
-      require("views/flights/flights_all.php");
+      include("views/flights/flights_all.php");
     }
 }
 

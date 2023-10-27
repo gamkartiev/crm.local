@@ -8,32 +8,24 @@
 <body>
 </main>
 
-<form action="/driversOtherWorks/edit/<?= $id ?>" method="post">
+<form action="/salary/edit_other_fines/<?=$id?>" method="post">
+
   <label> ФИО водителя
-    <select name="id_drivers" required>
+  <select name="id_drivers" required>
       <option disabled> Выберите водителя: </option>
       <?php foreach($drivers as $a): ?>
       <option value="<?= $a['id'] ?>"> <?=$a['driver']?> </option>
       <?php endforeach; ?>
-    </select>  <br /><br />
+  </select>  <br /><br />
   </label>
 
-  <label> Сумма за прочие работы
+  <label> Сумма штрафа
     <input type="text" name="sum" value="<?=$oneSelect['0']['sum'] ?>"> <br /><br />
   </label>
 
   <label> Дата прочих работ
-    <input type="date" name="date_of_work" value="<?=$oneSelect['0']['date_of_work'] ?>">  <br /><br />
+    <input type="date" name="date" value="<?=$oneSelect['0']['date'] ?>">  <br /><br />
   </label>
-
-  <label> Статус оплаты
-   <select name="status" required>
-     <?php
-     foreach($status as $a): ?>
-      <option value="<?= $a['id'] ?>"> <?= $a['status'] ?></option>
-     <?php endforeach; ?>
-   </select>
-  </label> <br /><br />
 
   <label> Примечаение
     <input type="text" name="note" value="<?=$oneSelect['0']['note'] ?>">  <br /><br />

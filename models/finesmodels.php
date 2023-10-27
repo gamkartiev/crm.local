@@ -8,7 +8,7 @@ class Fines extends Base
              fines.id_cars, fines.hold_date, fines.withheld, fines.to_pay, fines.due_date,
              fines.after_the_due_date, fines.date_of_application, fines.note,
              fines.id_status, configuration.status,
-             drivers.id AS id_drivers, drivers.driver, drivers.id AS id_drivers,
+             drivers.driver, drivers.id AS id_drivers,
              cars.state_sign_cars AS car, cars.id AS id_cars';
     $join = ' LEFT OUTER JOIN drivers ON fines.id_drivers = drivers.id
               LEFT OUTER JOIN cars ON fines.id_cars = cars.id
@@ -113,7 +113,7 @@ class Fines extends Base
 		$rows = 'id, status';
 		$join = '';
 		$where = '';
-		$order = 'id DESC';
+		$order = 'id ASC LIMIT 2';
 
 		$base = new Base();
 		$result = $base->select($table, $rows, $join, $where, $order);
@@ -123,9 +123,7 @@ class Fines extends Base
 
   //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
   public function getFirstItemCars($cars, $oneFine){
-  	$count = count($cars); //кол-во эл-тов в массиве $cars
-
-  	for ($i=0; $i<$count; $i++) {
+  	for ($i=0; $i < count($cars); $i++) {
   		if($oneFine[0]['id_cars']===$cars[$i]['id']) {
         $selectItem = array_slice($cars, $i, 1);          //скопировать нужный элемент массива
         $deleteItemInArray = array_splice($cars, $i, 1);  //удалить тот элемент массиве, что мы выбрали
@@ -138,9 +136,7 @@ class Fines extends Base
 
   //поставить первым в массиве тот элемент, что находиться в бд (чтобы по умолчанию выскакивал он)
   public function getFirstItemDrivers($drivers, $oneFine){
-  	$count = count($drivers); //кол-во эл-тов в массиве $drivers
-
-  	for ($i=0; $i<$count; $i++) {
+  	for ($i=0; $i < count($drivers); $i++) {
   		if( $oneFine[0]['id_drivers']===$drivers[$i]['id']) {
         $selectItem = array_slice($drivers, $i, 1);         //скопировать нужный элемент массива
     		$deleteItemInArray = array_splice($drivers, $i, 1);  //удалить тот элемент массиве, что мы выбрали
@@ -151,9 +147,7 @@ class Fines extends Base
   }
 
   public function getFirsItemStatus($status, $oneFine){
-      $count = count($status); //кол-во эл-тов в массиве $status
-
-      for ($i=0; $i<$count; $i++) {
+    for ($i=0; $i < count($status); $i++) {
       if($oneFine[0]['id_status']===$status[$i]['id']){
         $selectItem = array_slice($status, $i, 1);    //скопировать нужный элемент массива
         $deleteItem = array_splice($status, $i, 1);    //удалить тот элемент массиве, что мы выбрали

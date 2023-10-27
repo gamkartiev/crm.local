@@ -1,43 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Водители </title>
+	<link rel="stylesheet" type="text/css" href="/views/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/views/css/salary.css">
+</head>
+<body>
 
-<form class="prrFormEdit" action="/prr/edit/<?=$id?>" method="post">
-<?php
-	$massive = array(array ("drivers" => "Вершинников", "id" => "1", "month_and_years"=>"2022-02-01", "1"=>"700", "2"=>"0", "3"=>"700"),
-									 array ("drivers" => "Иванов", "id" => "2","month_and_years"=>"2022-02-01", "1"=>"700", "2"=>"700", "3"=>"700"),
-									 array ("drivers" => "Акушеров", "id" => "3","month_and_years"=>"2022-02-01", "1"=>"0", "2"=>"0", "3"=>"700"));
-?>
+<header> <!-- Сделать отдельной страничкой -->
+  <?php include ("views/header.php"); ?>
+</header>
 
-<table>
-<tr>
-	<th> Водители </th>
-	<?php	for ($k=1; $k <= 3; $k++) { ?>
-	<td> <!-- столбцы с датами месяца -->
-		<?php echo $k;
-		} ?>
-	</td>
-</tr>
+<main>
 
-<?php for ($j=0; $j < count($massive); $j++) { ?>
-<tr>
-	<th> <? echo $massive[$j]['drivers']; ?> </th> <!-- список водителей -->
-			<input type="hidden" name="<?="drivers ".$j?>" value="<?=$massive[$j]['id']?>">
-	<?php for ($i=1; $i <= 3; $i++) {	?>
-	<td> <input type="text" name="<?=$massive[$j]['id']."_".$i ?>" value="<?=$massive[$j][$i] ?>">	</td>
-	<?php } ?>
-</tr>
+	<section class="to_list">
+		Год:
+		<?php foreach($allSalaryMonth as $a): ?>
+			 <a href="/salary/view/<?=$a[0]?>"> <?php echo $a[1] ?> </a>
+		<?php endforeach ?>
+	</section>
 
-<?php } ?>
-</table>						<br />
+<a href="/salary/edit_paid_prr/<?=$id?>"> Изменить "Выплаченные ПРР" </a> <br /> <br />
+<a href="/driversOtherWorks/view/<?= $id?>"> Изменить Прочие работы </a> <br /> <br />
+<a href="/salary/edit_other_fines/<?=$id?>"> Изменить Прочие штрафы </a> <br /> <br />
 
-<button type="submit" name="button"> Добавить </button>
+<table width="95%" border="1">
+		<tr>
+			<td colspan="21"> <?php echo $id ?> </td>
+		</tr>
+		<tr>
+			<td rowspan="2"> <b> Водители </b> </td>
+			<td colspan="3"> <b> Расчет оплаты за рейс </b> </td>
+			<td colspan="4"> <b> ПРР </b> </td>
+			<td colspan="4"> <b> Прочие работы </b> </td>
+			<td rowspan="2"> <b> Моб. связь </b> </td>
+			<td colspan="3"> <b> Штрафы </b> </td>
+			<td colspan="2"> <b> Чеки </b> </td>
+			<td rowspan="2"> <b> ИТОГО к доплате (чеки не учитываются) </b> </td>
+			<td rowspan="2"> <b> Итоговый доход (чеки не учит-ся и не учит-ся выплач-е ПРР) </b> </td>
+			<td rowspan="2"> <b> ИТОГО к доплате (чеки учит-ся) </b> </td>
+		</tr>
+		<tr>
+			<td> <b> Зар. плата </b> </td>
+			<td> <b> Премия </b> </td>
+			<td> <b> Премия + ЗП </b> </td>
+			<td> <b> ПРР </b> </td>
+			<td> <b> Выплачено ПРР </b> </td>
+			<td> <b> Даты выплат ПРР </b> </td>
+			<td> <b> Расчет доплаты/ вычета ПРР </b> </td>
+			<td> <b> Прочие работы </b> </td>
+			<td> <b> Выплаченно за Прочие работы </b> </td>
+			<td> <b> Расчет доплаты за проч. работы </b> </td>
+			<td> <b> Прим-е </b> </td>
+			<td> <b> Штрафы ГИБДД </b> </td>
+			<td> <b> Проч. штрафы </b> </td>
+			<td> <b> Прим-е </b> </td>
+			<td> <b> Комп. чеков </b> </td>
+			<td> <b> Прим-е </b> </td>
+		</tr>
 
-</form>
+		<?php foreach ($oneMonth as $a): ?>
+		<tr>
+			<td><b> <?= $a['driver'] ?> </b></td>
+			<td><b> <?= $a['cost'] ?> </b></td>
+			<td> <?= $a['percent'] ?> % </td>
+			<td> <?= $a['cost_and_percent'] ?> </td>
+			<td> <?= $a['prr'] ?> </td>
+			<td> <a href="/salary/edit_paid_prr/<?=$id?>"> <?=$a['sum_prr_paid'] ?>  </a> </td>
+			<td> <a href="/salary/edit_paid_prr/<?=$id?>"> <?=$a['date_prr_paid'] ?> </a> </td>
+			<td> авт-е высч-м </td>
+			<td> <a href="/driversOtherWorks/edit/<?=$a['id_otherOtherWorks']?>"> <?= $a['sum_not_paid_driversOtherWorks'] ?></td>
+			<td> <a href="/driversOtherWorks/edit/<?=$a['id_otherOtherWorks']?>"> <?= $a['sum_paid_driversOtherWorks'] ?> </td>
+			<td> авт. высч </td>
+			<td> <?= $a['note_driversOtherWorks'] ?> </td>
+			<td> <?= $a['mobile'] ?> </td>
+			<td> <?= $a['fines'] ?>  </td>
+			<td> <a href="/salary/edit_other_fines/<?=$a['id_otherFines']?>"> <?= $a['otherFines'] ?></td>
+			<td> <a href="/salary/edit_other_fines/<?=$a['id_otherFines']?>"> <?= $a['note_otherFines'] ?></td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+		</tr>
+		<?php endforeach; ?>
 
+</table>
 
-<input type="hidden" name="<?="drivers ".$j?>" value="<?=$getLastMonthPrr[$j]['id']?>">
+</main>
 
-
-// $listDriversWorked = array ("0"=>"Вершинников", "1"=>"Бадиев", "2"=>"Иванов", "3"=>"Степанов");
-// $getLastMonthPrr = array("0" => array('drivers'=>'Акушеров'),
-// 												 "1"=>array('drivers'=>'Степанов'),
-// 												 "2"=>array('drivers'=>'Иванов'),
-//                          "3"=>array('drivers'=>'Санихин'),);
+</body>
+</html>

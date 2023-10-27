@@ -5,9 +5,9 @@ class FinesController extends Controller
   public function view($id){
     $fines = new Fines();
     $allFines = $fines->getAllSelect();
-    $oneFine = $fines->getOneSelect($id);
+    // $oneFine = $fines->getOneSelect($id); - можно удалить
 // var_export($allFines);
-    require("views/fines/fines.php");
+    include("views/fines/fines.php");
   }
 
 
@@ -73,13 +73,13 @@ class FinesController extends Controller
       $cars = $fines->getCarsSelect();
       $drivers = $fines->getDriversSelect();
       $status = $fines->getStatusSelect();
-var_export($oneFine);
+// var_export($oneFine);
       //Поставить при выводе сохраненные в бд
       //клиента, машину и водителя в списке формы первыми:
       $cars = $fines->getFirstItemCars($cars, $oneFine);
       $drivers = $fines->getFirstItemDrivers($drivers, $oneFine);
       $status = $fines->getFirsItemStatus($status, $oneFine);
-var_export($status);
+// var_export($status);
 
       include ("views/fines/finesFormEdit.php");
 
